@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C0B84D98-8285-4A46-BA15-911597172A9A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIGames.BlockBattle.Kubisme</RootNamespace>
+    <AssemblyName>Kubisme</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bits.cs" />
+    <Compile Include="Communication\ActionType.cs" />
+    <Compile Include="Communication\IBot.cs" />
+    <Compile Include="Communication\Instruction.cs" />
+    <Compile Include="Communication\IInstruction.cs" />
+    <Compile Include="Communication\Instruction.Move.Request.cs" />
+    <Compile Include="Communication\Instruction.Settings.cs" />
+    <Compile Include="Communication\Instruction.Settings.YourBot.cs" />
+    <Compile Include="Communication\Instruction.Update.cs" />
+    <Compile Include="Communication\Instruction.Update.Player.Combo.cs" />
+    <Compile Include="Communication\Instruction.Update.Player.Field.cs" />
+    <Compile Include="Communication\Instruction.Update.Player.RowPoints.cs" />
+    <Compile Include="Communication\Instruction.Update.Player.cs" />
+    <Compile Include="Communication\Instruction.Update.Game.cs" />
+    <Compile Include="Communication\Instruction.Update.Game.ThisPiece.cs" />
+    <Compile Include="Communication\Instruction.Update.Game.Round.cs" />
+    <Compile Include="Communication\Instruction.Move.cs" />
+    <Compile Include="Communication\PieceType.cs" />
+    <Compile Include="Communication\PlayerName.cs" />
+    <Compile Include="Communication\GameState.cs" />
+    <Compile Include="Communication\Settings.cs" />
+    <Compile Include="Communication\ConsolePlatform.cs" />
+    <Compile Include="DecisionMaking\DecisionMaker.cs" />
+    <Compile Include="Evaluation\IEvaluator.cs" />
+    <Compile Include="Evaluation\SimpleEvaluator.cs" />
+    <Compile Include="Models\Block.cs" />
+    <Compile Include="KubismeBot.cs" />
+    <Compile Include="Models\Move.cs" />
+    <Compile Include="Models\MoveCandiate.cs" />
+    <Compile Include="Models\MoveGenerator.cs" />
+    <Compile Include="Models\MovePath.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Field.cs" />
+    <Compile Include="Models\Row.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RowCount.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Communication\Instruction.Update.Game.NextPiece.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Communication\Instruction.Update.Game.ThisPiecePosition.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -11,7 +11,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 		{
 			var collectDir = new DirectoryInfo(@"..\..\..\AIGames.BlockBattle.Kubisme");
 			var full = collectDir.FullName;
-			Deployer.Run(collectDir, "Kubisme", "0002", false);
+			Deployer.Run(collectDir, "Kubisme", "0003", false);
 		}
 	}
 }

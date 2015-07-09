@@ -6,7 +6,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 	{
 		public static void Main(string[] args)
 		{
-			var simulator = new Simulator(new MT19937Generator());
+			var simulator = new Simulator(new MT19937Generator())
+			{
+				LogIndividualSimulations = false,
+			};
 			simulator.Run();
 		}
 	}

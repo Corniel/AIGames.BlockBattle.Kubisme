@@ -5,7 +5,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 {
 	public struct Row
 	{
-		private static readonly ushort[] Flag = new ushort[]{
+		public static readonly ushort[] Flag = new ushort[]{
 			0x0001,
 			0x0002,
 			0x0004,

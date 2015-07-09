@@ -147,13 +147,14 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		public static Field Create(GameState state, PlayerName name)
 		{
 			var rows = new Row[state[name].Field.GetLength(0)];
-			for (var r = 0; r < rows.GetLength(0); r++)
+			
+			// Ignore the first row, as there is put in the current block.
+			for (var r = 1; r < rows.GetLength(0); r++)
 			{
 				rows[r] = Row.Create(state, name, r);
 			}
 			var field = new Field((short)state[name].RowPoints, (byte)state[name].Combo, rows);
 
-			field = field.Remove(Block.Select(state.ThisPiece), state.Position);
 			return field;
 		}
 

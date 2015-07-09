@@ -23,26 +23,26 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Properties[typeof(T)] = props;
 			}
 
-			for(var c = 0; c < count; c++)
+			for (var c = 0; c < count; c++)
 			{
 				var target = Activator.CreateInstance<T>();
 
-				foreach(var prop in props)
+				foreach (var prop in props)
 				{
 					if (prop.PropertyType == typeof(int))
 					{
 						int val = (int)prop.GetValue(org);
-						val+= Rnd.Next(-100, 100);
+						val += Rnd.Next(-19, 20);
 						prop.SetValue(target, val);
-					
+
 					}
 					else if (prop.PropertyType == typeof(int[]))
 					{
 						int[] vals = (int[])prop.GetValue(org);
 						var copy = vals.ToArray();
-						for(var i = 0; i < copy.Length; i++)
+						for (var i = 0; i < copy.Length; i++)
 						{
-							copy[i] = vals[i]+Rnd.Next(-100, 100);
+							copy[i] = vals[i] + Rnd.Next(-19, 20);
 						}
 						prop.SetValue(target, copy);
 					}

@@ -1,5 +1,4 @@
 ﻿using Microsoft.CSharp;
-using NUnit.Framework;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -9,20 +8,8 @@ using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 
-namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployment
+namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 {
-	[TestFixture]
-	public class DeployerTest
-	{
-		[Test]
-		public void Deploy_Cubism()
-		{
-			var collectDir = new DirectoryInfo(@"..\..\..\AIGames.BlockBattle.Kubisme");
-			var full = collectDir.FullName;
-			Deployer.Run(collectDir, "Kubisme", "0001", false);
-		}
-	}
-
 	/// <summary>The bot deployment program.</summary>
 	public class Deployer
 	{

@@ -25,9 +25,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			};
 
 			Threshold = 1024;
-			ResultCount = 16;
+			ResultCount = 32;
 			GenerateCount = 3;
-			Runs = 23;
+			RunsTest = 7;
+			RunsRetry = 71;
 			MaximumTurns = 1000;
 			Results = new List<SimulationResult<SimpleEvaluator.Parameters>>();
 #if DEBUG
@@ -45,7 +46,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public int MaximumScore { get; protected set; }
 		public int Simulations { get; protected set; }
-		public int Runs { get; protected set; }
+		protected int LastId { get; set; }
+		public int RunsTest { get; set; }
+		public int RunsRetry { get; set; }
 
 		public MT19937Generator Rnd { get; protected set; }
 		public ParameterRandomizer Randomizer { get; protected set; }
@@ -78,14 +81,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					var pars = queue.Dequeue();
 
-					double scores = Simulate(pars, Runs, 0);
-					var score = scores / Runs;
+					double scores = Simulate(pars, RunsTest, 0);
+					var score = scores / RunsTest;
 					if (score >= BestResult.Score)
 					{
+						scores += Simulate(pars, RunsRetry, -1);
 						var result = new SimulationResult<SimpleEvaluator.Parameters>()
 						{
+							Id = ++LastId,
 							Scores = (int)scores,
-							Simulations = Runs,
+							Simulations = RunsTest + RunsRetry,
 							Pars = pars,
 						};
 						Results.Insert(1, result);
@@ -98,27 +103,29 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private void FitResults()
 		{
-			var best = BestResult.Score;
+			var best = BestResult.Id;
 			Results.Sort();
 			if (Results.Count > ResultCount)
 			{
 				Results.RemoveRange(ResultCount, Results.Count - ResultCount);
 			}
 
-			var runs = Math.Min(Threshold, Results.Max(r => r.Simulations)) - BestResult.Simulations;
-			BestResult.Scores += Simulate(Results[0].Pars, runs, -1);
-			BestResult.Simulations += runs;
+			BestResult.Scores += Simulate(Results[0].Pars, RunsTest, -1);
+			BestResult.Simulations += RunsTest;
 			Results.Sort();
 
-			LogStatus(BestResult.Score != best);
+			LogStatus(BestResult.Id != best);
 		}
 
 		private void LogStatus(bool newLine)
 		{
-			var line = String.Format("\r{0:#,#00}  {1} {2:#,##0.00}, Max: {3}   ",
+			var line = String.Format("\r{0:#,#00}  {1:#,##0}:{2:00} {3,5} ({4,5}), ID: {5,6}, Max: {6}   ",
 				Simulations,
-				sw.Elapsed,
-				BestResult.Score,
+				sw.Elapsed.TotalMinutes,
+				sw.Elapsed.Seconds,
+				BestResult.Score.ToString("#,##0.00"),
+				BestResult.Simulations.ToString("#,##0"),
+				BestResult.Id,
 				MaximumScore);
 
 			Console.Write(line);
@@ -128,7 +135,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					writer.Write("// ");
 					writer.WriteLine(line.Trim());
-					writer.WriteLine(BestResult.ToString());
+					writer.WriteLine(BestResult);
+					foreach (var result in Results.Skip(1).Take(7))
+					{
+						writer.WriteLine("// {0:#,##0.00} ({1}), ID {2}", result.Score, result.Simulations, result.Id);
+						writer.WriteLine(result);
+					}
 				}
 
 				Console.WriteLine();

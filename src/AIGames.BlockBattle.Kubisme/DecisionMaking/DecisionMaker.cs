@@ -28,7 +28,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 				foreach (var test in tests)
 				{
 					var score = Evaluator.GetScore(test.Field);
-					score += GetAverageScore(test, position);
+					//var score = GetAverageScore(test, position);
 
 					if (score > bestScore)
 					{

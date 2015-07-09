@@ -44,6 +44,7 @@
     <Compile Include="Communication\ConsolePlatformTest.cs" />
     <Compile Include="Communication\InstructionTest.cs" />
     <Compile Include="Deployoment\Deployer.cs" />
+    <Compile Include="Deployoment\DeployerTest.cs" />
     <Compile Include="Models\BlockTest.cs" />
     <Compile Include="Models\DecisionMakerTest.cs" />
     <Compile Include="Models\FieldTest.cs" />

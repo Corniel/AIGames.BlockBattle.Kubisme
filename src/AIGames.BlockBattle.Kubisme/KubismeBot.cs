@@ -38,7 +38,9 @@ namespace AIGames.BlockBattle.Kubisme
 		public MoveInstruction GetMove(TimeSpan time)
 		{
 			var path = DecisionMaker.GetMove(Field, State.Position, Current, Next);
-			return MoveInstruction.Create(State.Position, path);
+			var nw = Field.Apply(Current[path.Option], path.Target);
+			var move = MoveInstruction.Create(Current[path.Option], State.Position, path.Target);
+			return move;
 		}
 	}
 }

@@ -53,13 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EmbeddedResource Include="Communication\input.simple.txt">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Communication\input.simple.txt" />
     <Compile Include="Communication\ConsolePlatformTester.cs" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AIGames.BlockBattle.Kubisme\AIGames.BlockBattle.Kubisme.csproj">

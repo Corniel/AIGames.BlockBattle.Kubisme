@@ -19,17 +19,17 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 			return String.Join(",", Actions).ToLowerInvariant();
 		}
 
-		public static MoveInstruction Create(Position source, MovePath path)
+		public static MoveInstruction Create(Block block, Position source, Position target)
 		{
 			var actions = new List<ActionType>();
 
-			switch (path.Option)
+			switch (block.Rotation)
 			{
-				case Block.RotationType.Right: actions.Add(ActionType.TurnRight); break;
-				case Block.RotationType.Uturn: actions.Add(ActionType.TurnLeft); actions.Add(ActionType.TurnLeft); break;
 				case Block.RotationType.Left: actions.Add(ActionType.TurnLeft); break;
+				case Block.RotationType.Uturn: actions.Add(ActionType.TurnLeft); actions.Add(ActionType.TurnLeft); break;
+				case Block.RotationType.Right: actions.Add(ActionType.Right); break;
 			}
-			var delta = source.Col - path.Target.Col;
+			var delta = source.Col - target.Col;
 			if (delta >= 0)
 			{
 				for (var i = 0; i < delta; i++)
@@ -44,7 +44,8 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 					actions.Add(ActionType.Right);
 				}
 			}
-			for (var i = 0; i < path.Target.Row - source.Row; i++)
+			var drop = target.Row - source.Row - block.Bottom;
+			for (var i = 0; i < drop; i++)
 			{
 				actions.Add(ActionType.Drop);
 			}

@@ -6,7 +6,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 	public class ConsolePlatformTest
 	{
 		[Test]
-		public void DoRun_KubismeSimple_()
+		public void DoRun_KubismeSimple_NoExceptions()
 		{
 			using(var platform = new ConsolePlatformTester("input.simple.txt"))
 			{

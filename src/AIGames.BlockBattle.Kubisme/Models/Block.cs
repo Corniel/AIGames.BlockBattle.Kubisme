@@ -39,7 +39,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				1, 2,
 				0, 0,
 				2, 2, 2, 2,
-				RotationType.Right));
+				RotationType.Left));
 
 		/// <summary>Gets the S block.</summary>
 		/// <remarks>
@@ -59,7 +59,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				0, 2,
 				0, 1,
 				1, 3, 2, 0,
-				RotationType.Right));
+				RotationType.Left));
 
 		/// <summary>Gets the Z block.</summary>
 		/// <remarks>
@@ -79,7 +79,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				0, 2,
 				0, 1,
 				2, 3, 1, 0,
-				RotationType.Right));
+				RotationType.Left));
 
 		/// <summary>Gets the J block.</summary>
 		/// <remarks>
@@ -99,7 +99,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				0, 2,
 				0, 1,
 				2, 2, 3, 0,
-				RotationType.Right),
+				RotationType.Left),
 			new Block(
 				2, 3,
 				0, 1,
@@ -111,7 +111,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				1, 1,
 				0, 1,
 				6, 2, 2, 0,
-				RotationType.Left));
+				RotationType.Right));
 
 		/// <summary>Gets the L block.</summary>
 		/// <remarks>
@@ -131,7 +131,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				1, 1,
 				0, 1,
 				2, 2, 6, 0,
-				RotationType.Right),
+				RotationType.Left),
 			new Block(
 				2, 3,
 				0, 1,
@@ -143,7 +143,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				0, 2,
 				0, 1,
 				3, 2, 2, 0,
-				RotationType.Left));
+				RotationType.Right));
 
 		/// <summary>Gets the T block.</summary>
 		/// <remarks>
@@ -163,7 +163,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				0, 2,
 				0, 1,
 				2, 3, 2, 0,
-				RotationType.Right),
+				RotationType.Left),
 			new Block(
 				2, 3,
 				0, 1,
@@ -175,7 +175,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				1, 1,
 				0, 1,
 				2, 6, 2, 0,
-				RotationType.Left));
+				RotationType.Right));
 
 		public static Block Select(PieceType piece)
 		{
@@ -232,9 +232,9 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		public enum RotationType
 		{
 			None = 0,
-			Right = 1,
+			Left = 1,
 			Uturn = 2,
-			Left = 3,
+			Right = 3,
 		}
 
 		/// <summary>Gets a line based on the index.</summary>

@@ -8,6 +8,9 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 {
 	public struct FieldInstruction : IInstruction
 	{
+		public const int FixedBlock = 2;
+
+
 		public FieldInstruction(PlayerName name, int[,] field) 
 		{
 			m_Name = name;
@@ -46,7 +49,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 			foreach(var row in splited[3].Split(';'))
 			{
 				var cells = row.Split(',');
-				if (!cells.All(c => c == "0" || c == "1")) { return null; }
+				if (!cells.All(c => c == "0" || c == "1" || c == "2")) { return null; }
 
 				rows.Add(cells.Select(c => Int32.Parse(c)).ToArray());
 			}

@@ -72,7 +72,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 
 			for (var c = 0; c < 10; c++)
 			{
-				if (state[name].Field[r, c] == 1)
+				if (state[name].Field[r, c] == FieldInstruction.FixedBlock)
 				{
 					row |= Flag[c];
 				}

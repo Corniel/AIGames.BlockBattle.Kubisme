@@ -65,7 +65,6 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 			{
 				file.CopyTo(Path.Combine(target.FullName, file.Name));
 			}
-			
 		}
 
 		/// <summary>Compiles the bot.</summary>

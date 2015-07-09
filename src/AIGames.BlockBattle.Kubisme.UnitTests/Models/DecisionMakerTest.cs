@@ -42,7 +42,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 XXX.XXXXXX");
 			var path = dm.GetMove(field, new Position(4, -1), Block.Z, Block.O);
 
-			Assert.AreEqual(Block.RotationType.Right, path.Option);
+			Assert.AreEqual(Block.RotationType.Left, path.Option);
 			Assert.AreEqual(new Position(3, 3), path.Target);
 		}
 	}

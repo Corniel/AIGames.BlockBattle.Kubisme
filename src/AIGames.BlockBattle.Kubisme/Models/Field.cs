@@ -148,8 +148,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		{
 			var rows = new Row[state[name].Field.GetLength(0)];
 			
-			// Ignore the first row, as there is put in the current block.
-			for (var r = 1; r < rows.GetLength(0); r++)
+			for (var r = 0; r < rows.GetLength(0); r++)
 			{
 				rows[r] = Row.Create(state, name, r);
 			}

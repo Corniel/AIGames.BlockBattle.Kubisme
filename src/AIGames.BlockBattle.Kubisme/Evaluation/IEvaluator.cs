@@ -4,6 +4,6 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 {
 	public interface IEvaluator
 	{
-		double GetScore(Field field);
+		int GetScore(Field field);
 	}
 }

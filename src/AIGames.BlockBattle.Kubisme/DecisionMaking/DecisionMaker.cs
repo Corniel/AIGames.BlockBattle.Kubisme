@@ -19,7 +19,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 		private MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
 			var bestPath = new MovePath(0, position);
-			var bestScore = double.MinValue;
+			var bestScore = int.MinValue;
 
 			foreach (var candidate in candidates)
 			{
@@ -40,14 +40,14 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 			return bestPath;
 		}
 
-		private double GetAverageScore(MoveCandiate test, Position position)
+		private int GetAverageScore(MoveCandiate test, Position position)
 		{
-			var score = 0.0;
+			var score = 0;
 
 			// Get the best result for all random options.
 			foreach (var rnd in Block.All)
 			{
-				double rndScore = short.MinValue;
+				int rndScore = short.MinValue;
 				var rndTests = Generator.GetMoves(test.Field, rnd, position);
 				foreach (var rndTest in rndTests)
 				{

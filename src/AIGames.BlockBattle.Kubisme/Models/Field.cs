@@ -25,7 +25,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			{
 				for (var r = 0; r < rows.Length; r++)
 				{
-					if (rows[r] != Row.Empty) { return r; }
+					if (rows[r].row != Row.Empty.row) { return r; }
 				}
 				return rows.Length;
 			}
@@ -96,7 +96,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			}
 			for (var r = RowCount - 1; r >= 0; r--)
 			{
-				if (rs[r] == Row.Filled)
+				if (rs[r].row == Row.Filled.row)
 				{
 					rs[r] = Row.Empty;
 					cleared++;

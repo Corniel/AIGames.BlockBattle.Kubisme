@@ -31,7 +31,18 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 		public SimpleEvaluator()
 		{
 			pars = Parameters.GetDefault();
+
+			for (var count = 1; count <= 10; count++)
+			{
+				for (var row = 0; row <= 20; row++)
+				{
+					RowWeights[count, row] = count * pars.RowWeights[row];
+				}
+			}
+
 		}
+
+		private int[,] RowWeights = new int[11, 21];
 
 		public class Parameters
 		{
@@ -61,23 +72,23 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 161,878  206:33 150.88 (  246), ID:   1491, Max: 538
+				// 157,344  182:00 160.46 (  344), ID:   1449, Max: 537
 				{
-					RowWeights = new int[] { -2080, -1897, -1665, -1766, -1769, -1372, -1387, -1067, -1273, -1068, -1110, -824, -728, -647, -600, -494, -301, -304, -218, -34, -160 },
-					Points = 8446,
-					Combo = -196,
-					Holes = -59,
-					Blockades = -312,
-					Walls = 1124,
-					Floor = 502,
-					Neighbors = 522,
+					RowWeights = new int[] { -2064, -1807, -1783, -1764, -1763, -1433, -1456, -1149, -1334, -1118, -1092, -927, -741, -593, -509, -460, -325, -419, -266, -57, -91 },
+					Points = 8461,
+					Combo = -209,
+					Holes = -29,
+					Blockades = -159,
+					Walls = 1062,
+					Floor = 474,
+					Neighbors = 570,
 				};
 			}
 		}
 
 		public Parameters pars { get; set; }
 
-		public double GetScore(Field field)
+		public int GetScore(Field field)
 		{
 			var rMin = field.FirstNoneEmptyRow;
 
@@ -98,7 +109,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			{
 				var row = field[r].row;
 
-				score += RowCount.Get(row) * pars.RowWeights[r];
+				score += RowWeights[RowCount.Get(row), r];
 
 				if ((row & MaskWallLeft) != 0) { walls++; }
 				if ((row & MaskWallRight) != 0) { walls++; }

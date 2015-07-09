@@ -44,6 +44,10 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 					actions.Add(ActionType.Right);
 				}
 			}
+			for (var i = 0; i < path.Target.Row - source.Row; i++)
+			{
+				actions.Add(ActionType.Drop);
+			}
 			return new MoveInstruction(actions.ToArray());
 		}
 	}

@@ -102,7 +102,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 				typeof(ThisPieceInstruction), (instruction, state) => { state.ThisPiece = ((ThisPieceInstruction)instruction).Piece; }
 			},
 			{ 
-				typeof(NextPieceInstruction), (instruction, state) => { state.ThisPiece = ((NextPieceInstruction)instruction).Piece; }
+				typeof(NextPieceInstruction), (instruction, state) => { state.NextPiece = ((NextPieceInstruction)instruction).Piece; }
 			},
 		};
 

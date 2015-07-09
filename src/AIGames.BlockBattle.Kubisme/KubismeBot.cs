@@ -21,6 +21,9 @@ namespace AIGames.BlockBattle.Kubisme
 		public GameState State { get; set; }
 		public Field Field { get; set; }
 
+		public Block Current { get { return Block.Select(State.ThisPiece); } }
+		public Block Next { get { return Block.Select(State.NextPiece); } }
+
 		public void ApplySettings(Settings settings)
 		{
 			Settings = settings;
@@ -34,7 +37,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public MoveInstruction GetMove(TimeSpan time)
 		{
-			var path = DecisionMaker.GetMove(Field, State.Position, Block.Select(State.ThisPiece), Block.Select(State.NextPiece));
+			var path = DecisionMaker.GetMove(Field, State.Position, Current, Next);
 			return MoveInstruction.Create(State.Position, path);
 		}
 	}

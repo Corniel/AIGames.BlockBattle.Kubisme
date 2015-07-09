@@ -129,12 +129,13 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			var rs = new Row[rows.Length];
 			Array.Copy(rows, rs, RowCount);
 
-			for (var line = 0; line < 4; line++)
+			for (var i = 0; i < 4; i++)
 			{
-				var l = pos.Row + line;
+				var l = pos.Row + i;
 				if (l >= 0)
 				{
-					rs[l] = rs[l].RemoveBlock(block[line], pos.Col);
+					var line = block[i];
+					rs[l] = rs[l].RemoveBlock(line, pos.Col);
 				}
 			}
 			return new Field(Points, Combo, rs);

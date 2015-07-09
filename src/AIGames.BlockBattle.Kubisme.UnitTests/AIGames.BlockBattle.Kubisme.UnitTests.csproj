@@ -41,6 +41,7 @@
     <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communication\ConsolePlatformTest.cs" />
     <Compile Include="Communication\InstructionTest.cs" />
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Models\BlockTest.cs" />
@@ -51,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Communication\input.simple.txt">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Communication\ConsolePlatformTester.cs" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

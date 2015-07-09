@@ -43,18 +43,16 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 184  00:14:04.8166790 76.13, Max: 238
+				// 5,865  07:46:59.4413994 101.96, Max: 269
 				{
-					FreeRows = new int[] { -161, 251, 240, 143, -30, 557, -67, 359, -20, 166, 173, 292, 53, 48, 440, 242, 67, -11, 322, 169, 485 },
-					Points = 8325,
-					Combo = -115,
-					Holes = -583,
-					Blockades = -367,
-					Walls = 513,
-					Floor = 364,
+					FreeRows = new int[] { -64, -523, -180, -135, -137, -504, -283, 543, -80, 369, 141, 341, 2, 198, 575, 497, 147, 94, 143, -141, 447 },
+					Points = 8445,
+					Combo = -285,
+					Holes = -477,
+					Blockades = -608,
+					Walls = 690,
+					Floor = 532,
 				};
-
-
 			}
 		}
 

@@ -8,7 +8,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 		public const ushort MaskWallLeft = 0X0001;
 		public const ushort MaskWallRight = 0X0200;
 
-		private static readonly byte[] Neighbors = new byte[Row.Locked + 1];
+		private static readonly byte[] NeighborsVertical = new byte[Row.Locked + 1];
 		static SimpleEvaluator()
 		{
 			for (ushort i = Row.Empty; i <= Row.Filled; i++)
@@ -24,7 +24,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 					}
 					prev = cur;
 				}
-				Neighbors[i] = (byte)count;
+				NeighborsVertical[i] = (byte)count;
 			}
 		}
 
@@ -59,21 +59,23 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public int Blockades { get; set; }
 			public int Walls { get; set; }
 			public int Floor { get; set; }
-			public int Neighbors { get; set; }
+			public int NeighborsHorizontal { get; set; }
+			public int NeighborsVertical { get; set; }
 
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 615.647  524:53 169,72 (45.648), ID:    366, Max: 613
+				// 54,955  51:00 177.21 (11,733), ID:      7, Max: 562
 				{
-					RowWeights = new int[] { -92, -32, -68, -178, -54, -114, -146, -56, -74, -67, -49, -64, -67, -52, -61, -48, -49, -48, -38, 67, 64 },
-					Points = 75,
-					Combo = -9,
-					Holes = -11,
-					Blockades = -13,
-					Walls = 59,
-					Floor = -55,
-					Neighbors = 28,
+					RowWeights = new int[] { -84, -14, -60, -176, -73, -103, -133, -60, -57, -78, -68, -76, -65, -59, -65, -37, -45, -57, -51, 74, 79 },
+					Points = 65,
+					Combo = 10,
+					Holes = -10,
+					Blockades = -9,
+					Walls = 54,
+					Floor = -61,
+					NeighborsHorizontal = 25,
+					NeighborsVertical = 25,
 				};
 			}
 		}
@@ -94,7 +96,8 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			var holes = 0;
 			var walls = 0;
 			var blokades = 0;
-			var neighbors = 0;
+			var neighborsH = 0;
+			var neighborsV = 0;
 			ushort previous = 0;
 
 			for (var r = rMin; r < field.RowCount; r++)
@@ -114,15 +117,16 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				filterBlocades |= holesMask;
 				filterTopColomns |= row;
 
-				neighbors += Neighbors[row];
-				neighbors += Row.Count[row & previous];
+				neighborsV += NeighborsVertical[row];
+				neighborsH += Row.Count[row & previous];
 				previous = row;
 			}
 			score += Row.Count[field[field.RowCount - 1].row] * pars.Floor;
 			score += walls * pars.Walls;
 			score += holes * pars.Holes;
 			score += blokades * pars.Blockades;
-			score += neighbors * pars.Neighbors;
+			score += neighborsH * pars.NeighborsHorizontal;
+			score += neighborsV * pars.NeighborsVertical;
 
 			return score;
 		}

@@ -5,6 +5,17 @@ namespace AIGames.BlockBattle.Kubisme.Models
 {
 	public struct Row
 	{
+		static Row()
+		{
+			Count = new byte[Row.Locked + 1];
+			for (ushort r = Row.Empty; r <= Row.Filled; r++)
+			{
+				Count[r] = (byte)Bits.Count(r);
+			}
+			Count[Row.Locked] = 10;
+		}
+		public static readonly byte[] Count;
+		
 		public static readonly ushort[] Flag = new ushort[]{
 			0x0001,
 			0x0002,
@@ -19,10 +30,11 @@ namespace AIGames.BlockBattle.Kubisme.Models
 
 			0, 0, 0, 0, 0, 0
 		};
-		public static readonly Row Empty = default(Row);
-		public static readonly Row Filled = new Row(0X03FF);
-		public static readonly Row Invalid = new Row(UInt16.MaxValue);
-		public static readonly Row Blocked = new Row(UInt16.MaxValue);
+		public const ushort Empty = 0;
+		public const ushort Filled = 0X03FF;
+		public const ushort Locked = 0X07FF;
+		public const ushort Invalid = 0XFFFF;
+		
 
 		internal UInt16 row;
 
@@ -30,8 +42,6 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		{
 			row = r;
 		}
-
-		public int Count { get { return RowCount.Get(row); } }
 
 		public bool IsFilled(int c)
 		{
@@ -56,6 +66,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 
 		public override string ToString()
 		{
+			if (row == Row.Locked) { return "##########"; }
 			var chars = new char[10];
 
 			for (var i = 0; i < 10; i++)
@@ -76,12 +87,17 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				{
 					row |= Flag[c];
 				}
+				else if (state[name].Field[r, c] == FieldInstruction.LockedBlock)
+				{
+					return new Row(Row.Locked);
+				}
 			}
 			return new Row(row);
 		}
 
 		public static Row Create(string line)
 		{
+			if (line == "##########") { return new Row(Row.Locked); }
 			ushort row = 0;
 			for (var i = 0; i < 10; i++)
 			{

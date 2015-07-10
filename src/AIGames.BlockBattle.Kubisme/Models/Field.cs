@@ -25,13 +25,13 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			{
 				for (var r = 0; r < rows.Length; r++)
 				{
-					if (rows[r].row != Row.Empty.row) { return r; }
+					if (rows[r].row != Row.Empty) { return r; }
 				}
 				return rows.Length;
 			}
 		}
 
-		public int Count { get { return rows.Sum(r => r.Count); } }
+		public int Count { get { return rows.Sum(r => Row.Count[r.row]); } }
 
 		public int RowCount { get { return rows.Length; } }
 
@@ -96,14 +96,14 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			}
 			for (var r = RowCount - 1; r >= 0; r--)
 			{
-				if (rs[r].row == Row.Filled.row)
+				if (rs[r].row == Row.Filled)
 				{
-					rs[r] = Row.Empty;
+					rs[r] = new Row(Row.Empty);
 					cleared++;
 				}
 				else if (r < cleared)
 				{
-					rs[r] = Row.Empty;
+					rs[r] = new Row(Row.Empty);
 				}
 				else if (cleared > 0)
 				{

@@ -87,12 +87,12 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 		[Test]
 		public void Parse_FieldInstruction_Player2Array()
 		{
-			var act = Instruction.Parse("update player2 field 0,1,2,2;0,0,0,2;0,0,2,2");
+			var act = Instruction.Parse("update player2 field 0,1,2,2;0,0,0,2;3,3,3,3");
 			var exp = new FieldInstruction(PlayerName.Player2, new int[,]
 			{
 				{0, 1, 2, 2},
 				{0, 0, 0, 2},
-				{0, 0, 2, 2},
+				{3, 3, 3, 3},
 			});
 
 			Assert.AreEqual(exp.ToString(), act.ToString());

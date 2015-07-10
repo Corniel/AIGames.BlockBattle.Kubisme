@@ -8,10 +8,10 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 		public const ushort MaskWallLeft = 0X0001;
 		public const ushort MaskWallRight = 0X0200;
 
-		private static readonly byte[] Neighbors = new byte[1024];
+		private static readonly byte[] Neighbors = new byte[Row.Locked + 1];
 		static SimpleEvaluator()
 		{
-			for (short i = 1; i < 1024; i++)
+			for (ushort i = Row.Empty; i <= Row.Filled; i++)
 			{
 				int count = 0;
 				int prev = i & 1;
@@ -49,14 +49,6 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public Parameters()
 			{
 				RowWeights = new int[21];
-
-				for (var i = 0; i < 21; i++)
-				{
-					RowWeights[i] = (20 - i) * -1000;
-				}
-				Points = 10000;
-				Holes = -1000;
-				Blockades = -500;
 			}
 
 			public int[] RowWeights { get; set; }
@@ -72,16 +64,16 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 157,344  182:00 160.46 (  344), ID:   1449, Max: 537
+				// 615.647  524:53 169,72 (45.648), ID:    366, Max: 613
 				{
-					RowWeights = new int[] { -2064, -1807, -1783, -1764, -1763, -1433, -1456, -1149, -1334, -1118, -1092, -927, -741, -593, -509, -460, -325, -419, -266, -57, -91 },
-					Points = 8461,
-					Combo = -209,
-					Holes = -29,
-					Blockades = -159,
-					Walls = 1062,
-					Floor = 474,
-					Neighbors = 570,
+					RowWeights = new int[] { -92, -32, -68, -178, -54, -114, -146, -56, -74, -67, -49, -64, -67, -52, -61, -48, -49, -48, -38, 67, 64 },
+					Points = 75,
+					Combo = -9,
+					Holes = -11,
+					Blockades = -13,
+					Walls = 59,
+					Floor = -55,
+					Neighbors = 28,
 				};
 			}
 		}
@@ -109,24 +101,24 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			{
 				var row = field[r].row;
 
-				score += RowWeights[RowCount.Get(row), r];
+				score += RowWeights[Row.Count[row], r];
 
 				if ((row & MaskWallLeft) != 0) { walls++; }
 				if ((row & MaskWallRight) != 0) { walls++; }
 
 				var holesMask = filterTopColomns & (1023 ^ row);
 
-				holes += RowCount.Get(holesMask);
-				blokades += RowCount.Get(filterBlocades & row);
+				holes += Row.Count[holesMask];
+				blokades += Row.Count[filterBlocades & row];
 
 				filterBlocades |= holesMask;
 				filterTopColomns |= row;
 
 				neighbors += Neighbors[row];
-				neighbors += RowCount.Get(row & previous);
+				neighbors += Row.Count[row & previous];
 				previous = row;
 			}
-			score += field[field.RowCount - 1].Count * pars.Floor;
+			score += Row.Count[field[field.RowCount - 1].row] * pars.Floor;
 			score += walls * pars.Walls;
 			score += holes * pars.Holes;
 			score += blokades * pars.Blockades;

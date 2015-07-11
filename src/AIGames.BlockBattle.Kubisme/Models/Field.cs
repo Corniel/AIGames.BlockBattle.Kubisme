@@ -124,6 +124,22 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			return new Field(pt, combo, rs);
 		}
 
+		/// <summary>Returns a field, with locked rows.</summary>
+		public Field LockRows(int count)
+		{
+			for(var i = 0; i < count; i++)
+			{
+				if (rows[i].row != Row.Empty)
+				{
+					// A lock will lead to death.
+					return new Field(Points, 0, new Row[0]);
+				}
+			}
+			var rs = new Row[rows.Length - count];
+			Array.Copy(rows, count, rs, 0, rs.Length);
+			return new Field(Points, Combo, rs);
+		}
+
 		public override string ToString() { return String.Join("|", rows); }
 
 		public static Field Create(GameState state, PlayerName name)

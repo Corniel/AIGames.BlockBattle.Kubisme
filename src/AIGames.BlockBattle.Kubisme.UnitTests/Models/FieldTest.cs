@@ -21,6 +21,39 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		}
 
 		[Test]
+		public void LockRows_2_FieldWithLessRows()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+........X.
+.......XX.
+");
+			var act = field.LockRows(2);
+			var exp = Field.Create(0, 0, @"
+........X.
+.......XX.
+"); 
+			Assert.AreEqual(exp.ToString(), act.ToString());
+		}
+
+		[Test]
+		public void LockRows_3_EndOfGame()
+		{
+			var field = Field.Create(12, 3, @"
+..........
+..........
+........X.
+.......XX.
+");
+			var act = field.LockRows(3);
+			
+			Assert.AreEqual(0, act.RowCount, "RowCount");
+			Assert.AreEqual(12, act.Points, "Points");
+			Assert.AreEqual(0, act.Combo, "Combo");
+		}
+
+		[Test]
 		public void Apply_S_Added()
 		{
 			var field = Field.Create(0, 0, @"

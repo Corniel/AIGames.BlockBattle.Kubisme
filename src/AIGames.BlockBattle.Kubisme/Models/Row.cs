@@ -33,7 +33,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		public const ushort Filled = 0X03FF;
 		public const ushort Locked = 0X07FF;
 
-		internal UInt16 row;
+		public readonly UInt16 row;
 
 		public Row(ushort r)
 		{

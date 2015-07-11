@@ -1,5 +1,6 @@
 ﻿using AIGames.BlockBattle.Kubisme.Models;
 using NUnit.Framework;
+using System;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 {
@@ -84,6 +85,30 @@ XXXXXX.XX.
 			Assert.AreEqual(exp, act.ToString());
 			Assert.AreEqual(14, act.Points);
 			Assert.AreEqual(1, act.Combo);
+		}
+
+
+		[Test]
+		public void Apply_WithNegativeColumnPosition_Successful()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+......X..X
+.XXXXXXXXX
+XX.XXXXXXX");
+
+			var block = Block.T[Block.RotationType.Right];
+			var act = field.Apply(block, new Position(-1, 1));
+			var exp = Field.Create(1, 1, @"
+..........
+..........
+X.........
+XX....X..X
+XX.XXXXXXX");
+			Console.WriteLine(act);
+			Assert.AreEqual(exp.ToString(), act.ToString());
+
 		}
 	}
 }

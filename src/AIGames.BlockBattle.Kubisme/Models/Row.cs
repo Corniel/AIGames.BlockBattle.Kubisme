@@ -52,14 +52,12 @@ namespace AIGames.BlockBattle.Kubisme.Models
 
 		internal Row AddBlock(ushort line, int left)
 		{
+			if (left < 0)
+			{
+				return new Row((ushort)(row | (line >> -left)));
+			}
 			return new Row((ushort)(row | (line << left)));
 		}
-
-		internal Row RemoveBlock(ushort line, int left)
-		{
-			return new Row((ushort)(row ^ (line << left)));
-		}
-
 
 		public override string ToString()
 		{

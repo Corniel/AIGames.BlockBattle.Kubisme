@@ -49,12 +49,6 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public Parameters()
 			{
 				RowWeights = new int[21];
-
-				for(var i = 0; i < 21; i++)
-				{
-					RowWeights[i] = -30000 + 100 * i;
-				}
-				Holes = -387002;
 			}
 
 			public int[] RowWeights { get; set; }
@@ -71,16 +65,17 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 196,015  484:45 204.12 (  113), ID:   1446, Max: 601
+				// 815,073  247:26 61.27 (2,185), ID:   3506, Max: 134
 				{
-					//RowWeights = new int[] { -3001, -2845, -3922, -1558, -1231, -1790, -1839, -1346, -1874, -1810, -1324, -1204, -1423, -30336, 30584, -6707, -8516, -536, -1474, -1326, -1438 },
-					//Points = 54501,
-					//Combo = -3229,
-					//Holes = -38782,
-					//Blockades = -23291,
-					//Walls = 50496,
-					//NeighborsHorizontal = -33413,
-					//NeighborsVertical = 33037,
+					RowWeights = new int[] { 16, -127, -182, -143, 3, 32, 121, 55, 59, 46, -50, 36, 35, -87, -29, -31, 16, -38, 16, 36, 111 },
+					Points = 136,
+					Combo = 57,
+					Holes = -203,
+					Blockades = -64,
+					Walls = 195,
+					FLoor = -143,
+					NeighborsHorizontal = -149,
+					NeighborsVertical = 151,
 				};
 			}
 		}

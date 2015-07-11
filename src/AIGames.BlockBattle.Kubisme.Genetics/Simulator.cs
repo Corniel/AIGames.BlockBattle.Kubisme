@@ -29,7 +29,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			GenerateCount = 3;
 			RunsTest = 7;
 			RunsRetry = 71;
-			MaximumTurns = 1000;
 			Results = new List<SimulationResult<SimpleEvaluator.Parameters>>();
 #if DEBUG
 			LogIndividualSimulations = true;
@@ -47,8 +46,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public int Threshold { get; set; }
 		public int GenerateCount { get; set; }
 		public int ResultCount { get; set; }
-		public int MaximumTurns { get; set; }
-
+		
 		public int MaximumScore { get; protected set; }
 		public int Simulations { get; protected set; }
 		protected int LastId { get; set; }
@@ -163,12 +161,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			for (var i = 0; i < simulations; i++)
 			{
 				var field = Field.Empty;
-				
 				var sx = Stopwatch.StartNew();
 				var t = 0;
-				while (t++ < MaximumTurns)
+				var running = true;
+				var blocks = 0;
+				var points = 0;
+				var combo = 0;
+				while (running)
 				{
-
+					t++;
+					
 					var path = DecisionMaker.GetMove(field, Position.Start, current, next);
 					if (LogIndividualSimulations)
 					{
@@ -184,28 +186,46 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					}
 					if (path.Target.Equals(Position.Start))
 					{
-						var s = field.Points;
-
-						if (s < minscore) 
-						{
-							Simulations += i;
-							return int.MinValue;
-						}
-						if (s > MaximumScore)
-						{
-							MaximumScore = s;
-							if (LogIndividualSimulations)
-							{
-								Console.ReadLine();
-							}
-						}
-						score += s;
-						break;
+						running = false;
 					}
+					var old = field;
 					field = field.Apply(current[path.Option], path.Target);
+					var blocksTest = field.Count;
+					var pointsTest = field.Points;
+					var rows = Math.Min(4, pointsTest - points);
+					if (rows > 0) { rows -= combo; } 
+					var blocksExp = blocks + 4 - 10 * rows;
+					if (blocksExp != blocksTest)
+					{
+					}
+					points = pointsTest;
+					blocks = blocksTest;
+					combo = field.Combo;
+
 					current = next;
 					next = Block.All[Rnd.Next(7)];
+					if (t % 10 == 0)
+					{
+						field = field.LockRows(1);
+						running &= field.RowCount > 0;
+					}
 				}
+				var s = field.Points;
+
+				if (s < minscore) 
+				{
+					Simulations += i;
+					return int.MinValue;
+				}
+				if (s > MaximumScore)
+				{
+					MaximumScore = s;
+					if (LogIndividualSimulations)
+					{
+						Console.ReadLine();
+					}
+				}
+				score += s;
 			}
 			Simulations += simulations;
 			return score;

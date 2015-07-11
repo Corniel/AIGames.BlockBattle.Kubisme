@@ -85,8 +85,9 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			short pt = Points;
 			byte combo = Combo;
 			short cleared = 0;
+			var lineMax = 4 - block.Bottom;
 
-			for (var line = 0; line < 4; line++)
+			for (var line = 0; line < lineMax; line++)
 			{
 				var l = pos.Row + line;
 				if (l >= 0 && l < RowCount)
@@ -101,13 +102,16 @@ namespace AIGames.BlockBattle.Kubisme.Models
 					rs[r] = new Row(Row.Empty);
 					cleared++;
 				}
-				else if (r < cleared)
+				else
 				{
-					rs[r] = new Row(Row.Empty);
-				}
-				else if (cleared > 0)
-				{
-					rs[r + cleared] = rs[r];
+					if (r < cleared)
+					{
+						rs[r] = new Row(Row.Empty);
+					}
+					if (cleared > 0)
+					{
+						rs[r + cleared] = rs[r];
+					}
 				}
 			}
 			if (cleared == 4)

@@ -7,6 +7,20 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 	public class FieldTest
 	{
 		[Test]
+		public void Create_WithLockedRow_RowCount4()
+		{
+			var act = Field.Create(0, 0, @"
+..........
+..........
+..........
+.......XX.
+##########
+");
+			var exp = 4;
+			Assert.AreEqual(exp, act.RowCount);
+		}
+
+		[Test]
 		public void Apply_S_Added()
 		{
 			var field = Field.Create(0, 0, @"
@@ -37,20 +51,6 @@ XXXXXX.XX.
 			Assert.AreEqual(exp, act.ToString());
 			Assert.AreEqual(14, act.Points);
 			Assert.AreEqual(1, act.Combo);
-		}
-
-		[Test]
-		public void RemoveBlock_StartingPosition_ClearedField()
-		{
-			var field = Field.Create(0, 0, @"
-....XX....
-..........
-..........
-");
-
-			var act = field.Remove(Block.O, new Position(4, -1));
-			var exp = "..........|..........|..........";
-			Assert.AreEqual(exp, act.ToString());
 		}
 	}
 }

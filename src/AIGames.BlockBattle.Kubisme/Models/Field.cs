@@ -124,24 +124,6 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			return new Field(pt, combo, rs);
 		}
 
-		public Field Remove(Block block, Position pos)
-		{
-			var rs = new Row[rows.Length];
-			Array.Copy(rows, rs, RowCount);
-
-			for (var i = 0; i < 4; i++)
-			{
-				var l = pos.Row + i;
-				if (l >= 0)
-				{
-					var line = block[i];
-					rs[l] = rs[l].RemoveBlock(line, pos.Col);
-				}
-			}
-			return new Field(Points, Combo, rs);
-		}
-
-
 		public override string ToString() { return String.Join("|", rows); }
 
 		public static Field Create(GameState state, PlayerName name)
@@ -150,7 +132,13 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			
 			for (var r = 0; r < rows.GetLength(0); r++)
 			{
-				rows[r] = Row.Create(state, name, r);
+				var row = Row.Create(state, name, r);
+				if (row.row == Row.Locked)
+				{
+					Array.Resize(ref rows, r);
+					break;
+				}
+				rows[r] = row;
 			}
 			var field = new Field((short)state[name].RowPoints, (byte)state[name].Combo, rows);
 
@@ -162,10 +150,15 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			var lines = str.Split(new String[] { "|", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 			var rows = new Row[lines.Length];
 
-			for (var i = 0; i < rows.Length; i++)
+			for (var r = 0; r < rows.Length; r++)
 			{
-				var line = lines[i];
-				rows[i] = Row.Create(line.Trim());
+				var row = Row.Create(lines[r].Trim());
+				if (row.row == Row.Locked)
+				{
+					Array.Resize(ref rows, r);
+					break;
+				}
+				rows[r] = row;
 			}
 			return new Field((short)pt, (byte)combo, rows);
 		}

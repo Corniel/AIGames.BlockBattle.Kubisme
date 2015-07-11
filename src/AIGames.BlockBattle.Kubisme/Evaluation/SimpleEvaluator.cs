@@ -49,6 +49,12 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public Parameters()
 			{
 				RowWeights = new int[21];
+
+				for(var i = 0; i < 21; i++)
+				{
+					RowWeights[i] = -30000 + 100 * i;
+				}
+				Holes = -387002;
 			}
 
 			public int[] RowWeights { get; set; }
@@ -58,24 +64,23 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public int Holes { get; set; }
 			public int Blockades { get; set; }
 			public int Walls { get; set; }
-			public int Floor { get; set; }
+			public int FLoor { get; set; }
 			public int NeighborsHorizontal { get; set; }
 			public int NeighborsVertical { get; set; }
 
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 54,955  51:00 177.21 (11,733), ID:      7, Max: 562
+				// 196,015  484:45 204.12 (  113), ID:   1446, Max: 601
 				{
-					RowWeights = new int[] { -84, -14, -60, -176, -73, -103, -133, -60, -57, -78, -68, -76, -65, -59, -65, -37, -45, -57, -51, 74, 79 },
-					Points = 65,
-					Combo = 10,
-					Holes = -10,
-					Blockades = -9,
-					Walls = 54,
-					Floor = -61,
-					NeighborsHorizontal = 25,
-					NeighborsVertical = 25,
+					//RowWeights = new int[] { -3001, -2845, -3922, -1558, -1231, -1790, -1839, -1346, -1874, -1810, -1324, -1204, -1423, -30336, 30584, -6707, -8516, -536, -1474, -1326, -1438 },
+					//Points = 54501,
+					//Combo = -3229,
+					//Holes = -38782,
+					//Blockades = -23291,
+					//Walls = 50496,
+					//NeighborsHorizontal = -33413,
+					//NeighborsVertical = 33037,
 				};
 			}
 		}
@@ -109,7 +114,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				if ((row & MaskWallLeft) != 0) { walls++; }
 				if ((row & MaskWallRight) != 0) { walls++; }
 
-				var holesMask = filterTopColomns & (1023 ^ row);
+				var holesMask = filterTopColomns & (Row.Filled ^ row);
 
 				holes += Row.Count[holesMask];
 				blokades += Row.Count[filterBlocades & row];
@@ -121,12 +126,12 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				neighborsH += Row.Count[row & previous];
 				previous = row;
 			}
-			score += Row.Count[field[field.RowCount - 1].row] * pars.Floor;
 			score += walls * pars.Walls;
 			score += holes * pars.Holes;
 			score += blokades * pars.Blockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
+			score += Row.Count[previous] * pars.FLoor;
 
 			return score;
 		}

@@ -8,6 +8,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class ParameterRandomizer
 	{
+		private enum ScaleType
+		{
+			None = 0,
+			DivideBy2 = 1,
+			MultiplyBy2 = 2,
+		}
+
 		public ParameterRandomizer(MT19937Generator rnd)
 		{
 			Rnd = rnd;
@@ -25,16 +32,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			for (var c = 0; c < count; c++)
 			{
+				var scaling = ScaleType.None;// (ScaleType)Rnd.Next(0, 4);
+
 				var target = Activator.CreateInstance<T>();
 
 				foreach (var prop in props)
 				{
 					if (prop.PropertyType == typeof(int))
 					{
-						int val = (int)prop.GetValue(org);
-						val += Rnd.Next(-19, 20);
+						int val = Randomize((int)prop.GetValue(org), scaling);
 						prop.SetValue(target, val);
-
 					}
 					else if (prop.PropertyType == typeof(int[]))
 					{
@@ -42,7 +49,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						var copy = vals.ToArray();
 						for (var i = 0; i < copy.Length; i++)
 						{
-							copy[i] = vals[i] + Rnd.Next(-19, 20);
+							copy[i] = Randomize(vals[i], scaling);
 						}
 						prop.SetValue(target, copy);
 					}
@@ -50,6 +57,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				queue.Enqueue(target);
 			}
 		}
+		private int Randomize(int value, ScaleType scaling)
+		{
+			var val = value;
+			switch (scaling)
+			{
+				case ScaleType.DivideBy2: val >>= 1; break;
+				case ScaleType.MultiplyBy2: val <<= 1; break;
+				default: break;
+			}
+			val += Rnd.Next(-20, 21);
+			return val;
+		}
+
 		Dictionary<Type, PropertyInfo[]> Properties = new Dictionary<Type, PropertyInfo[]>();
 	}
 }

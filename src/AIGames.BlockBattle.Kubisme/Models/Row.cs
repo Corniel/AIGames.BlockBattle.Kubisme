@@ -7,12 +7,11 @@ namespace AIGames.BlockBattle.Kubisme.Models
 	{
 		static Row()
 		{
-			Count = new byte[Row.Locked + 1];
+			Count = new byte[Row.Filled + 1];
 			for (ushort r = Row.Empty; r <= Row.Filled; r++)
 			{
 				Count[r] = (byte)Bits.Count(r);
 			}
-			Count[Row.Locked] = 10;
 		}
 		public static readonly byte[] Count;
 		
@@ -33,8 +32,6 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		public const ushort Empty = 0;
 		public const ushort Filled = 0X03FF;
 		public const ushort Locked = 0X07FF;
-		public const ushort Invalid = 0XFFFF;
-		
 
 		internal UInt16 row;
 

@@ -33,12 +33,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			Results = new List<SimulationResult<SimpleEvaluator.Parameters>>();
 #if DEBUG
 			LogIndividualSimulations = true;
+			LogDir = new DirectoryInfo(@"D:\Code\AIGames.BlockBattle.Kubisme\img");
+			ImageLogger = new FieldVisualizer(16);
 #else
 			//LogIndividualSimulations = true;
 #endif
 		}
 
 		public bool LogIndividualSimulations { get; set; }
+		public DirectoryInfo LogDir { get; set; }
+		public FieldVisualizer ImageLogger { get; set; }
+		
 		public int Threshold { get; set; }
 		public int GenerateCount { get; set; }
 		public int ResultCount { get; set; }
@@ -174,6 +179,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 							field.Combo, 
 							sx.Elapsed.TotalMilliseconds / t,
 							field.FirstNoneEmptyRow);
+
+						ImageLogger.Draw(field, LogDir, t - 1);
 					}
 					if (path.Target.Equals(Position.Start))
 					{
@@ -187,6 +194,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						if (s > MaximumScore)
 						{
 							MaximumScore = s;
+							if (LogIndividualSimulations)
+							{
+								Console.ReadLine();
+							}
 						}
 						score += s;
 						break;
@@ -205,6 +216,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 ..........
 ..........
 ..........
-..........");
+..........");	
 	}
 }

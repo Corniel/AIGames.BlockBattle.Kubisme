@@ -50,6 +50,7 @@
     <Compile Include="ParameterRandomizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimScore.cs" />
     <Compile Include="SimulationResult.cs" />
     <Compile Include="Simulator.cs" />
   </ItemGroup>

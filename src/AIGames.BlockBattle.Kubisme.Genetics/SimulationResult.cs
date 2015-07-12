@@ -1,6 +1,8 @@
 ﻿using AIGames.BlockBattle.Kubisme.Evaluation;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -9,21 +11,41 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	public class SimulationResult<T> : IComparable, IComparable<SimulationResult<T>>
 	{
+		public SimulationResult()
+		{
+			Scores = new List<SimScore>();
+		}
 		private static readonly PropertyInfo[] Props = typeof(SimpleEvaluator.Parameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 		public int Id { get; set; }
+
+		public List<SimScore> Scores { get; protected set; }
 
 		public double Score 
 		{
 			get
 			{
-				if (Simulations == 0) { return 0; }
-				return (double)Scores / (double)Simulations; 
-		
+				if (Scores.Count == 0) { return 0; }
+				return (double)Scores.Sum((sc)=> sc.Result)/ (double)(Scores.Count << 1);
 			}
 		}
+		public double WinningLength
+		{
+			get
+			{
+				if (Score == 0) { return 0; }
+				return Scores.Where(sc => sc.Result == 2).Average(sc => sc.Turns);
+			}
+		}
+		public double LosingLength
+		{
+			get
+			{
+				if (!Scores.Any(sc => sc.Result == 0)) { return 0; }
+				return Scores.Where(sc => sc.Result == 0).Average(sc => sc.Turns);
+			}
+		}
+		public int Simulations { get { return Scores.Count; } }
 
-		public int Scores { get; set; }
-		public int Simulations { get; set; }
 		public T Pars { get; set; }
 
 		public override string ToString()
@@ -51,11 +73,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		}
 		
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private string DebuggerDisplay
+		internal string DebuggerDisplay
 		{
 			get
 			{
-				return String.Format("Score: {0:0.00}, Runs: {1:#,##0}", Score, Simulations);
+				return String.Format("Score: {0:0.00%}, Win: {1:0.0}, Lose: {2:0.0} Runs: {3:#,##0}", Score, WinningLength, LosingLength,  Scores.Count);
 			}
 		}
 

@@ -141,5 +141,29 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 
 			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
 		}
+
+		[Test]
+		public void GetMoves_AlmostFilledField_17candidates()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+XXXX.XX...
+.XXXXXXXXX
+XXXX..XX.X
+XXX.XXXXXX
+XXX.XXXXXX
+XXX.XXXXXX
+XXX.XXXXXX
+XXX.XXXXXX
+XXX.XXXXXX
+XXX.XXXXXX
+XXXXX.XXXX
+.XXXX.XXXX");
+			var generator = new MoveGenerator();
+			var candiates = generator.GetMoves(field, Block.J, Position.Start).ToList();
+
+			Assert.AreEqual(8 + 8, candiates.Count);
+		}	
 	}
 }

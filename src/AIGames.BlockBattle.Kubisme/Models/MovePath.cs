@@ -4,6 +4,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 {
 	public struct MovePath
 	{
+		public static readonly MovePath None = new MovePath(Block.RotationType.None, Position.None);
 		public readonly Block.RotationType Option;
 		public readonly Position Target;
 

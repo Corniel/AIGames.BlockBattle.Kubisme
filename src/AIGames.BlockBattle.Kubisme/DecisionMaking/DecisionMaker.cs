@@ -18,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 
 		private MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
-			var bestPath = new MovePath(0, position);
+			var bestPath =  MovePath.None;
 			var bestScore = int.MinValue;
 
 			foreach (var candidate in candidates)

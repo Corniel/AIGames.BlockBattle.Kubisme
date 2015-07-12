@@ -8,6 +8,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 	public struct Position
 	{
 		public static readonly Position Start = new Position(4, -1);
+		public static readonly Position None = new Position(255, 255);
 
 		[DebuggerStepThrough]
 		public Position(int c, int r) : this((sbyte)c, (sbyte)r) { }

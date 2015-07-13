@@ -1,4 +1,5 @@
 ﻿using AIGames.BlockBattle.Kubisme.Models;
+using System.Collections.Generic;
 
 namespace AIGames.BlockBattle.Kubisme.Evaluation
 {
@@ -49,15 +50,18 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public Parameters()
 			{
 				RowWeights = new int[21];
+				NineRowWeights = new int[21];
 			}
 
 			public int[] RowWeights { get; set; }
+			public int[] NineRowWeights { get; set; }
 
 			public int Points { get; set; }
 			public int Combo { get; set; }
 			public int Holes { get; set; }
 			public int Blockades { get; set; }
-			public int Walls { get; set; }
+			public int WallsLeft { get; set; }
+			public int WallsRight { get; set; }
 			public int FLoor { get; set; }
 			public int NeighborsHorizontal { get; set; }
 			public int NeighborsVertical { get; set; }
@@ -65,17 +69,18 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 107.361  611:52 Score: 36,69%, Win: 116,4, Lose: 117,4 Runs: 1.270, ID: 38, Max: 89
+				// 360.878  128:25 Score: 18,65%, Win: 110,1, Lose: 98,1 Runs: 520, ID: 75, Max: 91
 				{
-					RowWeights = new int[] { 9, -556, -551, -346, -18, 62, 63, 927, -106, -166, 226, -54, 505, 39, 65, 235, -218, -145, -37, -6, -99 },
-					Points = 1661,
-					Combo = 892,
-					Holes = -1234,
-					Blockades = -808,
-					Walls = 790,
-					FLoor = -120,
-					NeighborsHorizontal = -571,
-					NeighborsVertical = 562,
+					RowWeights = new int[] { -184, -124, -107, -62, 24, 60, 81, 57, 34, 19, 12, -25, 42, -19, -61, 30, -67, -50, -20, -44, 4 },
+					Points = 142,
+					Combo = 39,
+					Holes = -87,
+					Blockades = -71,
+					WallsLeft = 66,
+					WallsRight = 71,
+					FLoor = -12,
+					NeighborsHorizontal = -56,
+					NeighborsVertical = 77,
 				};
 			}
 		}
@@ -94,39 +99,67 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			int filterTopColomns = 0;
 			int filterBlocades = 0;
 			var holes = 0;
-			var walls = 0;
+			var wallLeft = 0;
+			var wallRight = 0;
 			var blokades = 0;
 			var neighborsH = 0;
 			var neighborsV = 0;
 			ushort previous = 0;
 
+			var openNineRows = true;
+			var nineRows = 0;
+
 			for (var r = rMin; r < field.RowCount; r++)
 			{
 				var row = field[r].row;
+				var rowMirrored = Row.Filled ^ row;
+				var rowCount =Row.Count[row];
+				var holesMask = filterTopColomns & rowMirrored;
 
-				score += RowWeights[Row.Count[row], r];
+				if ((row & MaskWallLeft) != 0) { wallLeft++; }
+				if ((row & MaskWallRight) != 0) { wallRight++; }
 
-				if ((row & MaskWallLeft) != 0) { walls++; }
-				if ((row & MaskWallRight) != 0) { walls++; }
-
-				var holesMask = filterTopColomns & (Row.Filled ^ row);
-
+				score += RowWeights[rowCount, r];
 				holes += Row.Count[holesMask];
 				blokades += Row.Count[filterBlocades & row];
 
 				filterBlocades |= holesMask;
 				filterTopColomns |= row;
 
+				// Only if this option is not blocked already.
+				if (openNineRows)
+				{
+					// If facing a nine row.
+					if (rowCount == 9)
+					{
+						// No top column should block the open file.
+						if (Row.Count[filterTopColomns | row] == 9)
+						{
+							nineRows++;
+						}
+						else
+						{
+							openNineRows = false;
+						}
+					}
+					else if(nineRows > 0)
+					{
+						openNineRows = false;
+					}
+				}
+
 				neighborsV += NeighborsVertical[row];
 				neighborsH += Row.Count[row & previous];
 				previous = row;
 			}
-			score += walls * pars.Walls;
+			score += wallLeft * pars.WallsLeft;
+			score += wallRight + pars.WallsRight;
 			score += holes * pars.Holes;
 			score += blokades * pars.Blockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
 			score += Row.Count[previous] * pars.FLoor;
+			score += pars.NineRowWeights[nineRows];
 
 			return score;
 		}

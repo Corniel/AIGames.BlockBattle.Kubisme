@@ -10,7 +10,7 @@ using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
 {
-	public class Simulator
+	public class Simulator : IComparer<SimulationResult<SimpleEvaluator.Parameters>>
 	{
 		private Stopwatch sw = Stopwatch.StartNew();
 
@@ -28,12 +28,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			ResultCount = 32;
 			GenerateCount = 3;
 			RunsTest = 10;
-			RunsRetry = 1000;
+			RunsRetry = 500;
 			Results = new List<SimulationResult<SimpleEvaluator.Parameters>>();
 			LastId = 1;
 #if DEBUG
 			LogIndividualSimulations = true;
-			LogDir = new DirectoryInfo(@"D:\Code\AIGames.BlockBattle.Kubisme\img");
+			LogDir = new DirectoryInfo(@"C:\Code\AIGames.BlockBattle.Kubisme\img");
 			ImageLogger = new FieldVisualizer(16);
 #else
 			//LogIndividualSimulations = true;
@@ -92,9 +92,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					Simulate(result, RunsTest, 0);
 					if (result.Score >= BestResult.Score)
 					{
-						Simulate(result, RunsRetry - RunsTest, Threshold);
-						result.Id = ++LastId;
-						Results.Insert(1, result);
+						Simulate(result, RunsRetry, Threshold);
+						if (result.Simulations >= RunsRetry * Threshold)
+						{
+							LastId++;
+							result.Id = LastId;
+							Results.Add(result);
+						}
 						break;
 					}
 					LogStatus(false);
@@ -105,18 +109,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private void FitResults()
 		{
 			var best = BestResult.Id;
-			Results.Sort();
+			Results.Sort(this);
 			if (Results.Count > ResultCount)
 			{
 				Results.RemoveRange(ResultCount, Results.Count - ResultCount);
 			}
-
 			Simulate(Results[0], RunsTest, 0);
-			Results.Sort();
+			Results.Sort(this);
 
 			LogStatus(BestResult.Id != best);
 		}
-
+	
 		private void LogStatus(bool newLine)
 		{
 			var line = String.Format("\r{0:#,#00}  {1:#,##0}:{2:00} {3}, ID: {4}, Max: {5}   ",
@@ -215,6 +218,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					MaximumScore = s;
 				} 
+				if(i % 10 == 0)
+				{
+					LogStatus(false);
+				}
 				if (LogIndividualSimulations)
 				{
 					Console.ReadLine();
@@ -231,5 +238,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 ..........
 ..........
 ..........");
+
+		public int Compare(SimulationResult<SimpleEvaluator.Parameters> l, SimulationResult<SimpleEvaluator.Parameters> r)
+		{
+			var compare = (r.Simulations >= RunsRetry).CompareTo(l.Simulations >= RunsRetry);
+			if (compare != 0) { return compare; }
+			compare = r.Score.CompareTo(l.Score);
+			if (compare != 0) { return compare; }
+			compare = l.WinningLength.CompareTo(r.WinningLength);
+			return compare;
+		}
 	}
 }

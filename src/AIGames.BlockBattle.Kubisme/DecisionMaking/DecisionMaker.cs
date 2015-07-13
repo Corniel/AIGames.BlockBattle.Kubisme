@@ -1,6 +1,7 @@
 ﻿using AIGames.BlockBattle.Kubisme.Evaluation;
 using AIGames.BlockBattle.Kubisme.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 {
@@ -16,19 +17,26 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 			return GetBestMove(position, next, candidates);
 		}
 
+		private IEnumerable<MoveCandiate> GetBest(IEnumerable<MoveCandiate> candidates, int best)
+		{
+			return candidates
+				.OrderByDescending(candidate => Evaluator.GetScore(candidate.Field))
+				.Take(best);
+		}
+
 		private MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
 			var bestPath =  MovePath.None;
 			var bestScore = int.MinValue;
 
-			foreach (var candidate in candidates)
+			foreach (var candidate in GetBest(candidates, 10))
 			{
 				var tests = Generator.GetMoves(candidate.Field, next, position);
 
-				foreach (var test in tests)
+				foreach (var test in GetBest(tests, 5))
 				{
-					var score = Evaluator.GetScore(test.Field);
-					//var score = GetAverageScore(test, position);
+					//var score = Evaluator.GetScore(test.Field);
+					var score = GetAverageScore(test, position);
 
 					if (score > bestScore)
 					{

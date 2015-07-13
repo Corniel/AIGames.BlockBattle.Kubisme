@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play tetris.
 
+Version 9
+---------
+Fixed the swapped L rotate left and right.
+
 Version 8
 ---------
 Fixed rotate right bug (was move right).

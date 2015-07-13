@@ -115,9 +115,9 @@ namespace AIGames.BlockBattle.Kubisme.Models
 
 		/// <summary>Gets the L block.</summary>
 		/// <remarks>
-		///  ..X.  .X..  .... XX.. 
+		///  ..X.  XX..  .... .X.. 
 		///  XXX.  .X..  XXX. .X.. 
-		///  ....  .XX.  X... .X.. 
+		///  ....  .X..  X... .XX. 
 		///  ....  ....  .... .... 
 		/// </remarks>
 		public static readonly Block L = new Block(
@@ -128,9 +128,9 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			RotationType.None,
 			new Block(
 				3, 2,
-				1, 1,
+				0, 2,
 				0, 1,
-				2, 2, 6, 0,
+				3, 2, 2, 0,
 				RotationType.Left),
 			new Block(
 				2, 3,
@@ -140,9 +140,9 @@ namespace AIGames.BlockBattle.Kubisme.Models
 				RotationType.Uturn),
 			new Block(
 				3, 2,
-				0, 2,
+				1, 1,
 				0, 1,
-				3, 2, 2, 0,
+				2, 2, 6, 0,
 				RotationType.Right));
 
 		/// <summary>Gets the T block.</summary>

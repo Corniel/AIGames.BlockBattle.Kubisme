@@ -1,0 +1,968 @@
+﻿settings timebank 10000
+settings time_per_move 500
+settings player_names player1,player2
+settings your_bot player1
+settings field_width 10
+settings field_height 20
+Round 1
+update game round 1
+update game this_piece_type I
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 0
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 2
+update game round 2
+update game this_piece_type O
+update game next_piece_type Z
+update game this_piece_position 4,-1
+update player1 row_points 0
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,2,2,0,0,0,0
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,2,2,2,0,0,0
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "left,left,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 3
+update game round 3
+update game this_piece_type Z
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 0
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,2,0,0,0,0,0,0,0,0;2,2,2,2,2,2,0,0,0,0
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,0,0,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 4
+update game round 4
+update game this_piece_type Z
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 0
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,2,0,0,0,2,2,0,0,0;2,2,2,2,2,2,2,2,0,0
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,0,0,0,0,0,0;0,0,2,2,0,0,0,0,2,2;0,0,2,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 5
+update game round 5
+update game this_piece_type Z
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 1
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,2,0,0,0,2,2,2,2,0
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,0,2,0,0,0,0,0,0;2,2,2,2,0,0,0,0,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 6
+update game round 6
+update game this_piece_type T
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,0,0,0,0,0,0,0;2,2,2,2,0,2,2,2,2,0
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,0,2,2,2,0,0,0,0;2,2,2,2,0,2,2,0,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 7
+update game round 7
+update game this_piece_type T
+update game next_piece_type I
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;0,2,2,0,0,0,0,0,2,2;2,2,2,2,0,2,2,2,2,2
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,0,0,0,0,0;0,2,2,2,2,2,0,0,0,0;2,2,2,2,0,2,2,0,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,left,left,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 8
+update game round 8
+update game this_piece_type I
+update game next_piece_type L
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,2;0,2,2,0,0,0,0,0,2,2;2,2,2,2,0,2,2,2,2,2
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,0,0,0,0,0;0,2,2,2,2,2,2,2,2,0;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 9
+update game round 9
+update game this_piece_type L
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,2;0,2,2,0,0,0,0,0,2,2;2,2,2,2,0,2,2,2,2,2
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 10
+update game round 10
+update game this_piece_type J
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,0,0,0,0,0,0,0;2,2,2,0,0,2,0,0,0,2;0,2,2,2,2,2,0,0,2,2;2,2,2,2,0,2,2,2,2,2
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 0
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 11
+update game round 11
+update game this_piece_type S
+update game next_piece_type L
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,2,0,0,0,0,0;2,2,0,0,2,0,0,0,0,0;2,2,2,2,2,2,0,0,0,2;0,2,2,2,2,2,0,0,2,2;2,2,2,2,0,2,2,2,2,2
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,2,0,0,0,0,0,0,2,2;2,2,2,2,0,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 1
+update player2 combo 1
+action moves 10000
+Output from your bot: "turnleft,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 12
+update game round 12
+update game this_piece_type L
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,0,0,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,2,2,2,0,0,0,2;0,2,2,2,2,2,0,0,2,2;2,2,2,2,0,2,2,2,2,2
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,0,0,0,0,0,0;2,2,0,2,2,0,0,0,2,2;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 3
+update player2 combo 2
+action moves 10000
+Output from your bot: "right,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 13
+update game round 13
+update game this_piece_type S
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,2,0,0,0,0;2,2,0,2,2,2,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,2,2,2,0,0,0,2;0,2,2,2,2,2,0,0,2,2;2,2,2,2,0,2,2,2,2,2
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,0,0,0,2,0,0;2,2,0,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 3
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 14
+update game round 14
+update game this_piece_type O
+update game next_piece_type T
+update game this_piece_position 4,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,0,0,0,0,0,0,0;2,2,0,0,0,2,0,0,0,0;2,2,0,2,2,2,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,2,2,2,0,0,0,2;0,2,2,2,2,2,0,0,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,0,0,0,0,0,0,0,0;0,2,2,2,0,0,0,2,0,0;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 4
+update player2 combo 1
+action moves 10000
+Output from your bot: "right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 15
+update game round 15
+update game this_piece_type T
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,0,0,0,0,0,0,0;2,2,0,0,0,2,0,0,0,0;2,2,0,2,2,2,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,2,2,2,2,2,0,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,0,0,0,2,2,0,0,0;0,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 4
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 16
+update game round 16
+update game this_piece_type Z
+update game next_piece_type I
+update game this_piece_position 3,-1
+update player1 row_points 1
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,2,0,0,0,0,0,0;2,2,2,2,2,2,0,0,0,0;2,2,0,2,2,2,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,2,2,2,2,2,0,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,0;0,2,0,0,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 4
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 17
+update game round 17
+update game this_piece_type I
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 2
+update player1 combo 1
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,2,0,0,0,0,0,0;2,2,2,2,2,2,0,0,0,0;2,2,0,2,2,2,0,0,0,0;2,2,2,0,2,0,0,0,0,2;2,2,2,0,2,0,0,0,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,0,0,0,0,0,2,0;0,2,2,2,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 4
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,left,left,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 18
+update game round 18
+update game this_piece_type T
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,2,0,0,0,0,0,0;2,2,2,2,2,2,0,0,0,0;2,2,0,2,2,2,0,0,0,0;2,2,2,0,2,0,0,0,0,2;2,2,2,0,2,0,0,0,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,0,2,0,0,0,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 1
+action moves 10000
+Output from your bot: "turnleft,turnleft,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 19
+update game round 19
+update game this_piece_type Z
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,2,0,0,0,0,0,0;2,2,2,2,0,0,0,0,0,0;2,2,2,2,2,2,0,0,0,0;2,2,0,2,2,2,0,0,0,0;2,2,2,0,2,0,0,0,0,2;2,2,2,0,2,0,0,0,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,2,0,0,0;0,2,2,0,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 20
+update game round 20
+update game this_piece_type S
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,2,0,0,0,0,0,0;2,2,2,2,0,0,0,0,0,0;2,2,2,2,2,2,0,0,0,0;2,2,0,2,2,2,0,0,2,0;2,2,2,0,2,0,0,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,2,0,0,0,0,0;0,0,0,2,2,0,2,0,0,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 21
+update game round 21
+update game this_piece_type Z
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,2,0,0,0,0,0,0;2,2,2,2,0,0,0,0,2,0;2,2,2,2,2,2,0,0,2,2;2,2,0,2,2,2,0,0,2,2;2,2,2,0,2,0,0,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,2,0,0,0,0,0;0,2,2,2,2,0,2,0,0,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 22
+update game round 22
+update game this_piece_type S
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,2,0,0,0,0,0,0;2,2,2,2,0,0,0,0,2,0;2,2,2,2,2,2,0,2,2,2;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,2,0,2,2,0,0;0,2,2,2,2,0,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 23
+update game round 23
+update game this_piece_type O
+update game next_piece_type O
+update game this_piece_position 4,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,2,0;2,2,2,2,0,0,0,0,2,2;2,2,2,2,0,0,0,0,2,2;2,2,2,2,2,2,0,2,2,2;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,2,0,0;0,0,0,0,0,0,0,2,2,0;0,0,2,2,2,0,2,2,2,0;0,2,2,2,2,0,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 24
+update game round 24
+update game this_piece_type O
+update game next_piece_type O
+update game this_piece_position 4,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,2,0;2,2,2,2,2,2,0,0,2,2;2,2,2,2,2,2,0,0,2,2;2,2,2,2,2,2,0,2,2,2;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,0,0,2,0,0;0,0,2,2,0,0,0,2,2,0;0,0,2,2,2,0,2,2,2,0;0,2,2,2,2,0,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "left,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 25
+update game round 25
+update game this_piece_type O
+update game next_piece_type I
+update game this_piece_position 4,-1
+update player1 row_points 2
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,2,2,0,0,0,0,0;2,0,0,2,2,0,0,0,2,0;2,2,2,2,2,2,0,0,2,2;2,2,2,2,2,2,0,0,2,2;2,2,2,2,2,2,0,2,2,2;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,0,0,0,2,0,0;0,0,2,2,0,0,0,2,2,0;0,0,2,2,2,0,2,2,2,0;0,2,2,2,2,0,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 26
+update game round 26
+update game this_piece_type I
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 4
+update player1 combo 1
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,2,2,0,0,0,0,0;2,0,0,2,2,0,0,0,2,0;2,2,2,2,2,2,0,2,2,2;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,0,2,2,2,0,0;0,0,2,2,0,2,2,2,2,0;0,0,2,2,2,0,2,2,2,0;0,2,2,2,2,0,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 27
+update game round 27
+update game this_piece_type O
+update game next_piece_type I
+update game this_piece_position 4,-1
+update player1 row_points 6
+update player1 combo 2
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,2,0,0,0;2,0,0,2,2,0,2,0,0,0;2,0,0,2,2,0,2,0,2,0;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,0,2,2,2,0,0;0,0,2,2,0,2,2,2,2,0;0,0,2,2,2,0,2,2,2,0;0,2,2,2,2,0,2,2,2,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "left,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 28
+update game round 28
+update game this_piece_type I
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 6
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,2,2,0,0,0,0,0;2,0,0,2,2,0,2,0,0,0;2,0,0,2,2,0,2,0,0,0;2,0,0,2,2,0,2,0,2,0;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,2,2,0,0,0;0,0,2,2,0,2,2,0,0,0;0,0,2,2,0,2,2,2,0,0;0,0,2,2,0,2,2,2,2,0;0,0,2,2,2,0,2,2,2,0;0,2,2,2,2,0,2,2,2,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 5
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,left,left,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 29
+update game round 29
+update game this_piece_type T
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 6
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,2,2,0,0,0,0,0;2,0,0,2,2,0,2,0,0,0;2,0,0,2,2,0,2,0,0,0;2,0,0,2,2,0,2,0,2,0;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,2,2,0,0,0;0,0,2,2,0,2,2,0,0,0;0,0,2,2,0,2,2,2,0,0;0,0,2,2,0,2,2,2,2,0;0,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 1
+action moves 10000
+Output from your bot: "turnleft,right,right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 30
+update game round 30
+update game this_piece_type S
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 6
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,2,2,0,0,0,0,0;2,0,0,2,2,0,2,0,0,2;2,0,0,2,2,0,2,0,2,2;2,0,0,2,2,0,2,0,2,2;2,2,0,2,2,2,2,2,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,2,2,0,0,0;0,0,2,2,0,2,2,0,0,0;2,0,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 31
+update game round 31
+update game this_piece_type T
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 1
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,2,2,0,0,0,0,0;2,0,0,2,2,0,2,0,0,2;2,2,0,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,2,2,2,0,0;0,0,2,2,0,2,2,2,2,0;2,0,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 32
+update game round 32
+update game this_piece_type J
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,2,2,2,0,0,0,0,0;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 33
+update game round 33
+update game this_piece_type O
+update game next_piece_type L
+update game this_piece_position 4,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,2,0,0;2,0,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 34
+update game round 34
+update game this_piece_type L
+update game next_piece_type L
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,2,2;2,0,0,0,0,0,0,2,2,2;2,0,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,0,0,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,turnleft,right,right,right,right,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 35
+update game round 35
+update game this_piece_type L
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,2,0,2,2,2,0,0;0,0,2,2,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 36
+update game round 36
+update game this_piece_type Z
+update game next_piece_type L
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;2,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 37
+update game round 37
+update game this_piece_type L
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;2,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,2,0,0,0,0,2,2,2;2,2,2,0,0,0,0,2,2,2;2,2,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 38
+update game round 38
+update game this_piece_type S
+update game next_piece_type I
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;2,0,0,0,0,0,0,2,2,2;2,0,2,2,0,0,0,2,2,2;2,0,2,2,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,2,0,0;2,2,2,0,0,2,2,2,0,0;2,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 39
+update game round 39
+update game this_piece_type I
+update game next_piece_type I
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,2,2,0,0,0,2,2,2;2,0,2,2,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,0,2,0,2,2;2,2,2,2,2,0,2,0,2,2;2,2,2,0,2,0,2,2,2,2;2,2,2,0,2,0,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,2,2,0,0;0,0,2,0,0,2,2,2,0,0;2,2,2,0,0,2,2,2,0,0;2,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,0;2,0,2,2,2,0,2,2,2,0;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 40
+update game round 40
+update game this_piece_type I
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,0,0,0,0,0,0,2,2,2;2,0,0,0,0,0,0,2,2,2;2,0,2,2,0,0,0,2,2,2;2,0,2,2,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,2,2,0,0;0,0,2,0,0,2,2,2,0,0;2,2,2,0,0,2,2,2,0,0;2,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,0,2,2,2,2,0;2,2,2,2,0,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 8
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,left,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 41
+update game round 41
+update game this_piece_type Z
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 7
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,2,0,0,0,0,0,2,2,2;2,2,0,0,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,2,0,0,2,2,2;2,2,2,2,2,0,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,2,2,0,0;0,0,2,0,0,2,2,2,0,0;2,2,2,0,0,2,2,2,0,0;2,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 11
+update player2 combo 1
+action moves 10000
+Output from your bot: "turnleft,right,right,drop,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 42
+update game round 42
+update game this_piece_type O
+update game next_piece_type T
+update game this_piece_position 4,-1
+update player1 row_points 8
+update player1 combo 1
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,2,0,0,0,0,0,2,2,2;2,2,0,0,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,0,0,2,2,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;0,2,2,0,0,0,2,2,0,0;0,2,2,0,0,2,2,2,0,0;2,2,2,0,0,2,2,2,0,0;2,2,2,2,0,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 11
+update player2 combo 0
+action moves 10000
+Output from your bot: "drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 43
+update game round 43
+update game this_piece_type T
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 10
+update player1 combo 2
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,2,0,0,0,0,0,2,2,2;2,2,0,0,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,2,2,0,2,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;0,2,2,0,0,0,2,2,0,0;0,2,2,0,0,2,2,2,0,0;2,2,2,0,0,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;2,2,2,2,0,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 11
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 44
+update game round 44
+update game this_piece_type Z
+update game next_piece_type I
+update game this_piece_position 3,-1
+update player1 row_points 13
+update player1 combo 3
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,2,0,0,0,0,0,2,2,2;2,2,0,0,0,0,2,2,2,2;2,2,2,2,0,2,2,2,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;0,2,2,0,0,0,2,2,0,0;0,2,2,0,2,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 13
+update player2 combo 1
+action moves 10000
+Output from your bot: "turnleft,right,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 45
+update game round 45
+update game this_piece_type I
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 17
+update player1 combo 4
+update player1 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;0,2,0,0,0,2,0,2,2,2;2,2,0,0,2,2,2,2,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,1,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,2,0,0,0,0,0;0,2,2,2,2,0,2,2,0,0;0,2,2,2,2,2,2,2,0,0;2,2,2,2,0,2,2,2,2,0;0,2,2,2,2,2,2,2,2,0;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 13
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,left,left,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 46
+update game round 46
+update game this_piece_type S
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 17
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,2,2;2,2,0,0,0,2,0,2,2,2;2,2,0,0,2,2,2,2,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,2,0,0,0,0,0;0,2,2,2,2,0,2,2,0,2;0,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 13
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 47
+update game round 47
+update game this_piece_type T
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 17
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,2,0,0,0,0;2,0,0,0,0,2,2,0,2,2;2,2,0,0,0,2,2,2,2,2;2,2,0,0,2,2,2,2,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;0,0,2,2,0,0,0,0,0,0;0,0,2,2,2,0,0,0,0,0;0,2,2,2,2,0,2,2,0,2;0,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 13
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,turnleft,left,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 48
+update game round 48
+update game this_piece_type S
+update game next_piece_type L
+update game this_piece_position 3,-1
+update player1 row_points 18
+update player1 combo 1
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,0,0,0,0,2,0,0,0,0;2,0,0,0,0,2,2,0,2,2;2,2,0,2,2,2,2,2,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;0,0,2,2,0,2,0,0,0,0;0,0,2,2,2,2,2,0,0,0;0,2,2,2,2,2,2,2,0,2;0,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 13
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,left,left,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 49
+update game round 49
+update game this_piece_type L
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 20
+update player1 combo 2
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,0,0,0,2,0,0,0,0;2,2,2,0,0,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;0,0,2,2,0,2,0,2,0,0;0,0,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 13
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 50
+update game round 50
+update game this_piece_type J
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 20
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,2;2,2,0,0,0,2,0,2,2,2;2,2,2,0,0,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,2,2;0,0,2,2,0,2,0,2,0,2;0,0,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 13
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,turnleft,left,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 51
+update game round 51
+update game this_piece_type O
+update game next_piece_type L
+update game this_piece_position 4,-1
+update player1 row_points 20
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,2;2,2,2,2,2,2,0,2,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,2,2;0,0,2,2,0,2,0,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 15
+update player2 combo 1
+action moves 10000
+Output from your bot: "left,left,left,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 52
+update game round 52
+update game this_piece_type L
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 20
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,2;2,2,2,2,2,2,0,2,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,2,2;2,2,2,2,0,2,0,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 15
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,turnleft,left,left,left,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 53
+update game round 53
+update game this_piece_type J
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 20
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,2;2,2,2,2,2,2,0,2,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,2,2,2;2,2,2,0,0,0,0,2,2,2;2,2,2,2,0,2,0,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 15
+update player2 combo 0
+action moves 10000
+Output from your bot: "left,left,left,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 54
+update game round 54
+update game this_piece_type S
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 20
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,2;2,2,2,2,2,2,0,2,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,0,0,2,2,2;2,2,2,2,0,0,0,2,2,2;2,2,2,2,0,2,0,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 15
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,right,right,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 55
+update game round 55
+update game this_piece_type J
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 21
+update player1 combo 1
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,0,2,0,0,0,0;2,2,2,0,0,2,2,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,2,0,2,2,2;2,2,2,2,0,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 15
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 56
+update game round 56
+update game this_piece_type S
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 21
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,0,2,2,0,0,0,0;2,2,2,2,2,2,2,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,2,2,0,0,0,0;0,2,2,2,2,2,0,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 16
+update player2 combo 1
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 57
+update game round 57
+update game this_piece_type O
+update game next_piece_type L
+update game this_piece_position 4,-1
+update player1 row_points 22
+update player1 combo 1
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,0,0;2,2,2,0,2,0,0,0,0,0;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,2,0,0,0,0,0;0,0,2,2,2,2,0,0,0,0;0,2,2,2,2,2,0,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 16
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 58
+update game round 58
+update game this_piece_type L
+update game next_piece_type O
+update game this_piece_position 3,-1
+update player1 row_points 22
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,0,0,0,0,0,0,0,0,0;2,2,2,0,0,0,0,0,2,2;2,2,2,0,2,0,0,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,2,0,0,2,2,0;0,0,2,2,2,2,0,2,2,0;0,2,2,2,2,2,0,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 16
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 59
+update game round 59
+update game this_piece_type O
+update game next_piece_type L
+update game this_piece_position 4,-1
+update player1 row_points 22
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;2,0,0,0,0,0,0,2,2,2;2,2,2,0,0,0,0,0,2,2;2,2,2,0,2,0,0,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,2,2,2,2,2,0;0,0,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 16
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 60
+update game round 60
+update game this_piece_type L
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 22
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;2,0,0,0,0,0,0,2,2,2;2,2,2,0,0,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;2,2,0,2,2,2,2,2,2,0;2,2,2,2,2,2,2,2,2,0;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 16
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,turnleft,right,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 61
+update game round 61
+update game this_piece_type S
+update game next_piece_type Z
+update game this_piece_position 3,-1
+update player1 row_points 22
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;2,0,0,0,2,2,2,2,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,2,2;2,2,0,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 17
+update player2 combo 1
+action moves 10000
+Output from your bot: "left,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 62
+update game round 62
+update game this_piece_type Z
+update game next_piece_type L
+update game this_piece_position 3,-1
+update player1 row_points 22
+update player1 combo 0
+update player1 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,2,0,0,0,0,2;2,0,2,2,2,2,2,2,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,0,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,0,0,0,0,0,0,0,0;0,2,2,0,0,0,0,0,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 19
+update player2 combo 2
+action moves 10000
+Output from your bot: "turnleft,left,left,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 63
+update game round 63
+update game this_piece_type L
+update game next_piece_type S
+update game this_piece_position 3,-1
+update player1 row_points 23
+update player1 combo 1
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,2,0,0,0,0,0,0,0;0,2,2,2,2,0,0,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,0,0,0,0,0;0,2,2,2,2,0,0,0,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 19
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,drop,drop,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 64
+update game round 64
+update game this_piece_type S
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 23
+update player1 combo 0
+update player1 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;0,0,2,0,0,0,0,2,2,2;0,2,2,2,2,0,0,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,2,0,0,0,2,0,0;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 19
+update player2 combo 0
+action moves 10000
+Output from your bot: "left,left,left,drop"
+Round 65
+update game round 65
+update game this_piece_type T
+update game next_piece_type T
+update game this_piece_position 3,-1
+update player1 row_points 23
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,0,0,0,0,0,0,2;2,2,2,0,0,0,0,2,2,2;0,2,2,2,2,0,0,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,2,2,0,0;0,2,2,2,0,2,2,2,0,0;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 19
+update player2 combo 0
+action moves 10000
+Output from your bot: "drop"
+Round 66
+update game round 66
+update game this_piece_type T
+update game next_piece_type L
+update game this_piece_position 3,-1
+update player1 row_points 23
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,0,2,0,0,0,0,2;2,2,2,2,2,2,0,2,2,2;0,2,2,2,2,0,0,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,2,2,2,2,2,0,0;0,2,2,2,2,2,2,2,0,0;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 19
+update player2 combo 0
+action moves 10000
+Output from your bot: "turnleft,turnleft,right,right,drop"
+Round 67
+update game round 67
+update game this_piece_type L
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 24
+update player1 combo 1
+update player1 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,2,2,0,2,2,2,2,0,2;0,2,2,2,2,0,0,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;0,0,0,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,0,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 19
+update player2 combo 0
+action moves 10000
+Output from your bot: "right,right,right,right,right,drop,drop"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."
+Round 68
+update game round 68
+update game this_piece_type J
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 24
+update player1 combo 0
+update player1 field 0,0,0,1,1,1,0,0,0,2;0,0,0,0,0,0,0,2,2,2;0,2,2,0,2,2,2,2,0,2;0,2,2,2,2,0,0,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,2;2,2,2,2,2,2,2,2,0,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 20
+update player2 combo 1
+action moves 10000
+Output from your bot: "left,left,left,left"
+Round 69
+update game round 69
+update game this_piece_type J
+update game next_piece_type J
+update game this_piece_position 3,-1
+update player1 row_points 24
+update player1 combo 0
+update player1 field 2,0,0,1,1,1,0,0,0,2;2,2,2,0,0,0,0,2,2,2;0,2,2,0,2,2,2,2,0,2;0,2,2,2,2,0,0,0,0,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,0,2,2,0,0,2,2;2,2,2,0,2,2,2,0,2,2;2,2,2,2,2,2,2,0,0,2;2,2,2,2,2,2,2,0,2,2;2,2,2,2,2,2,2,0,2,2;2,2,2,0,2,2,2,2,2,2;2,2,2,0,2,2,0,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 field 0,0,0,1,1,1,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,0,0,0,0;0,0,0,0,0,0,2,2,2,2;0,2,2,2,2,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,2,2,2,0,2,2,2,0,2;2,2,2,2,2,2,2,2,0,2;2,2,2,2,0,2,2,2,2,2;0,2,2,2,2,2,2,2,2,2;2,0,2,2,2,0,2,2,2,2;2,2,2,2,2,0,2,2,2,2;2,0,2,2,2,2,2,0,2,2;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3;3,3,3,3,3,3,3,3,3,3
+update player2 row_points 22
+update player2 combo 2
+action moves 10000
+Output from your bot: "left,left,left,left"
+Engine warning: "Piece was frozen in place on the previous move. Skipping all next moves."

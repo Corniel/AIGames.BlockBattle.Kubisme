@@ -27,7 +27,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 			{
 				case Block.RotationType.Left: actions.Add(ActionType.TurnLeft); break;
 				case Block.RotationType.Uturn: actions.Add(ActionType.TurnLeft); actions.Add(ActionType.TurnLeft); break;
-				case Block.RotationType.Right: actions.Add(ActionType.Right); break;
+				case Block.RotationType.Right: actions.Add(ActionType.TurnRight); break;
 			}
 			var delta = source.Col - target.Col;
 			if (delta >= 0)

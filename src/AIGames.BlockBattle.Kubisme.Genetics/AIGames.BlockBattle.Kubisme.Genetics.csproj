@@ -46,7 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DecisionMaking\SimpleDecisionMaker.cs" />
     <Compile Include="FieldVisualizer.cs" />
+    <Compile Include="Models\OpponentProfile.cs" />
+    <Compile Include="Models\GameSimulation.cs" />
     <Compile Include="ParameterRandomizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

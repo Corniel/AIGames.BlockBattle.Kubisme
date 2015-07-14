@@ -1,4 +1,5 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
+﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
+using AIGames.BlockBattle.Kubisme.Models;
 using NUnit.Framework;
 using System.Linq;
 

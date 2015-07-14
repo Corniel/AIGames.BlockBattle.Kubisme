@@ -4,45 +4,30 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public struct SimScore : IComparable, IComparable<SimScore>
 	{
-		public const int WinningScore = 80;
-		public const int MaximumTurns = 200;
-
-		public const byte Win = 2;
-		public const byte Draw = 1;
-		public const byte Lost = 0;
+		public const byte WIN = 2;
+		public const byte DRAW = 1;
+		public const byte LOST = 0;
 
 		private static readonly char[] res = { '0', '½', '1' };
 		
-		public SimScore(int turns, int score)
+		private SimScore(byte res, int turns, int score)
 		{
-			if (turns < MaximumTurns && score >= WinningScore)
-			{
-				Result = Win;
-			}
-			else if (turns == MaximumTurns && score == WinningScore)
-			{
-				Result = Draw;
-			}
-			else
-			{
-				Result = Lost;
-			}
+			Result = res;
 			Turns = (byte)turns;
-			Score = (byte)score;
+			Points = (byte)score;
 		}
 		public readonly byte Result;
 		public readonly byte Turns;
-		public readonly byte Score;
+		public readonly byte Points;
 
-		public bool IsWin { get { return Score == Win; } }
-		public bool IsDraw{ get { return Score == Draw; } }
-		public bool IsLost { get { return Score == Lost; } }
+		public bool IsWin { get { return Result == SimScore.WIN; } }
+		public bool IsDraw { get { return Result == SimScore.DRAW; } }
+		public bool IsLost { get { return Result == SimScore.LOST; } }
 
 		public override string ToString()
 		{
-			return String.Format("{0}, Turns: {1}, Score: {2}", res[Result], Turns, Score);
+			return String.Format("{0}, Turns: {1}, Score: {2}", res[Result], Turns, Points);
 		}
-
 
 		public int CompareTo(object obj)
 		{
@@ -53,7 +38,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var c = other.Result.CompareTo(Result);
 			if (c != 0) { return c; }
 
-			if (Result == Win)
+			if (Result == WIN)
 			{
 				c = Turns.CompareTo(other.Turns);
 			}
@@ -62,7 +47,20 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				c = other.Turns.CompareTo(Turns);
 			}
 			if (c != 0) { return c; }
-			return other.Score.CompareTo(Score);
+			return other.Points.CompareTo(Points);
+		}
+
+		public static SimScore Lost(int turns, int score)
+		{
+			return new SimScore(SimScore.LOST, turns, score);
+		}
+		public static SimScore Draw(int turns, int score)
+		{
+			return new SimScore(SimScore.DRAW, turns, score);
+		}
+		public static SimScore Win(int turns, int score)
+		{
+			return new SimScore(SimScore.WIN, turns, score);
 		}
 	}
 }

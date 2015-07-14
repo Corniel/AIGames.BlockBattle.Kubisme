@@ -160,6 +160,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				var score = game.Run();
 				result.Scores.Add(score);
 				Simulations++;
+				if (score.CompareTo(MaximumScore) < 0)
+				{
+					MaximumScore = score;
+				}
 
 				if ((i & 15) == 0)
 				{

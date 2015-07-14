@@ -26,7 +26,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public override string ToString()
 		{
-			return String.Format("{0}, Turns: {1}, Score: {2}", res[Result], Turns, Points);
+			return String.Format("{0}, Turns: {1}, Points: {2}", res[Result], Turns, Points);
 		}
 
 		public int CompareTo(object obj)

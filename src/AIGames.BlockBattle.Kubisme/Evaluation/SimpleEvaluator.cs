@@ -68,7 +68,19 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
+				// 780,508  0.08:22:42 Score: 41.45%, Win: 117.1, Lose: 101.0 Runs: 2,480, ID: 59134, Max: 1, Turns: 34, Points: 91
 				{
+					RowWeights = new int[] { -24, -8, -45, 18, 70, 66, 53, 30, -37, 12, 26, 32, 27, 40, -111, -4, -32, -84, -40, -1, 28 },
+					NineRowWeights = new int[] { 79, 64, -33, -30, -36, 27, -43, 94, 155, -45, -31, 49, 60, 12, 102, -17, 35, 37, 10, 32, -15 },
+					Points = 100,
+					Combo = 47,
+					Holes = -57,
+					Blockades = -53,
+					WallsLeft = 36,
+					WallsRight = 27,
+					FLoor = -7,
+					NeighborsHorizontal = -35,
+					NeighborsVertical = 50,
 				};
 			}
 		}

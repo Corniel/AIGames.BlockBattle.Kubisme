@@ -26,16 +26,16 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 
 		protected virtual MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
-			var bestPath =  MovePath.None;
+			var bestPath = MovePath.None;
 			var bestScore = int.MinValue;
 
-			foreach (var candidate in GetBest(candidates, 12))
+			foreach (var candidate in candidates)
 			{
 				var tests = Generator.GetMoves(candidate.Field, next, position);
 
-				foreach (var test in GetBest(tests, 8))
+				foreach (var test in tests)
 				{
-					var score = GetAverageScore(test, position);
+					var score = Evaluator.GetScore(test.Field);
 
 					if (score > bestScore)
 					{

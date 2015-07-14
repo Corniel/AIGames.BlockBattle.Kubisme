@@ -29,11 +29,11 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 			var bestPath =  MovePath.None;
 			var bestScore = int.MinValue;
 
-			foreach (var candidate in GetBest(candidates, 10))
+			foreach (var candidate in GetBest(candidates, 12))
 			{
 				var tests = Generator.GetMoves(candidate.Field, next, position);
 
-				foreach (var test in GetBest(tests, 5))
+				foreach (var test in GetBest(tests, 8))
 				{
 					//var score = Evaluator.GetScore(test.Field);
 					var score = GetAverageScore(test, position);

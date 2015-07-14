@@ -40,7 +40,6 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 					RowWeights[count, row] = count * pars.RowWeights[row];
 				}
 			}
-
 		}
 
 		private int[,] RowWeights = new int[11, 21];
@@ -69,18 +68,19 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 360.878  128:25 Score: 18,65%, Win: 110,1, Lose: 98,1 Runs: 520, ID: 75, Max: 91
+				// 1.102.953  0.06:50:48 Score: 10,32%, Win: 125,2, Lose: 116,2 Runs: 1.550, ID: 286, Max: 89
 				{
-					RowWeights = new int[] { -184, -124, -107, -62, 24, 60, 81, 57, 34, 19, 12, -25, 42, -19, -61, 30, -67, -50, -20, -44, 4 },
-					Points = 142,
-					Combo = 39,
-					Holes = -87,
-					Blockades = -71,
-					WallsLeft = 66,
+					RowWeights = new int[] { -632, -490, -291, -86, 126, 221, 94, 242, 34, 2, -20, -76, 47, -88, -218, 155, 89, 14, -9, -66, -96 },
+					NineRowWeights = new int[] { 94, 205, -101, -88, -55, -153, 2, -161, 2, 37, 27, -37, 230, -22, -116, -122, 65, 9, 4, 175, -68 },
+					Points = 530,
+					Combo = 175,
+					Holes = -343,
+					Blockades = -232,
+					WallsLeft = 210,
 					WallsRight = 71,
-					FLoor = -12,
-					NeighborsHorizontal = -56,
-					NeighborsVertical = 77,
+					FLoor = 18,
+					NeighborsHorizontal = -207,
+					NeighborsVertical = 231,
 				};
 			}
 		}
@@ -116,12 +116,13 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				var rowCount =Row.Count[row];
 				var holesMask = filterTopColomns & rowMirrored;
 
-				if ((row & MaskWallLeft) != 0) { wallLeft++; }
-				if ((row & MaskWallRight) != 0) { wallRight++; }
-
 				score += RowWeights[rowCount, r];
 				holes += Row.Count[holesMask];
 				blokades += Row.Count[filterBlocades & row];
+
+				// Give points for blocks against the wall, that are not under an hole.
+				if ((row & MaskWallLeft) != 0 && (holes & MaskWallLeft) == 0) { wallLeft++; }
+				if ((row & MaskWallRight) != 0 && (holes & MaskWallRight) == 0) { wallRight++; }
 
 				filterBlocades |= holesMask;
 				filterTopColomns |= row;

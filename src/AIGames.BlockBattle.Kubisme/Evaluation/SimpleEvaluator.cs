@@ -68,19 +68,19 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			public static Parameters GetDefault()
 			{
 				return new Parameters()
-				// 1.102.953  0.06:50:48 Score: 10,32%, Win: 125,2, Lose: 116,2 Runs: 1.550, ID: 286, Max: 89
+				// 181,740  0.00:21:52 Score: 28.68%, Win: 35.9, Lose: 31.1 Runs: 1,020, ID: 42, Max: 1, Turns: 62, Score: 85
 				{
-					RowWeights = new int[] { -632, -490, -291, -86, 126, 221, 94, 242, 34, 2, -20, -76, 47, -88, -218, 155, 89, 14, -9, -66, -96 },
-					NineRowWeights = new int[] { 94, 205, -101, -88, -55, -153, 2, -161, 2, 37, 27, -37, 230, -22, -116, -122, 65, 9, 4, 175, -68 },
-					Points = 530,
-					Combo = 175,
-					Holes = -343,
-					Blockades = -232,
-					WallsLeft = 210,
-					WallsRight = 71,
-					FLoor = 18,
-					NeighborsHorizontal = -207,
-					NeighborsVertical = 231,
+					RowWeights = new int[] { -656, -484, -268, -29, 26, 136, 37, 223, 25, 62, 17, -56, 89, -162, -215, 100, 65, -16, -108, -32, -95 },
+					NineRowWeights = new int[] { 118, 247, -186, -80, -95, -166, -20, -126, 68, 48, 36, -13, 192, 19, -133, -104, 151, 49, 34, 100, -134 },
+					Points = 493,
+					Combo = 213,
+					Holes = -404,
+					Blockades = -241,
+					WallsLeft = 265,
+					WallsRight = 64,
+					FLoor = -36,
+					NeighborsHorizontal = -83,
+					NeighborsVertical = 323,
 				};
 			}
 		}

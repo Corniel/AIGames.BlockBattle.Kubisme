@@ -60,13 +60,15 @@
     <Compile Include="Communication\Settings.cs" />
     <Compile Include="Communication\ConsolePlatform.cs" />
     <Compile Include="DecisionMaking\DecisionMaker.cs" />
+    <Compile Include="DecisionMaking\IDecisionMaker.cs" />
+    <Compile Include="DecisionMaking\IMoveGenerator.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\SimpleEvaluator.cs" />
     <Compile Include="Models\Block.cs" />
     <Compile Include="KubismeBot.cs" />
     <Compile Include="Models\Move.cs" />
     <Compile Include="Models\MoveCandiate.cs" />
-    <Compile Include="Models\MoveGenerator.cs" />
+    <Compile Include="DecisionMaking\MoveGenerator.cs" />
     <Compile Include="Models\MovePath.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Field.cs" />

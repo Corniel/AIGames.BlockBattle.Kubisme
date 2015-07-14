@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using AIGames.BlockBattle.Kubisme.Models;
+using System.Collections.Generic;
 
-namespace AIGames.BlockBattle.Kubisme.Models
+namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 {
-	public class MoveGenerator
+	public class MoveGenerator : AIGames.BlockBattle.Kubisme.DecisionMaking.IMoveGenerator
 	{
 		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, Position pos)
 		{

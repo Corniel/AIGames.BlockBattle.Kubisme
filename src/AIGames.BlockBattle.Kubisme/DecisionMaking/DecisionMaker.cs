@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 {
-	public class DecisionMaker
+	public class DecisionMaker : IDecisionMaker
 	{
 		public IEvaluator Evaluator { get; set; }
-		public MoveGenerator Generator { get; set; }
+		public IMoveGenerator Generator { get; set; }
 
 		public MovePath GetMove(Field field, Position position, Block current, Block next)
 		{
@@ -24,7 +24,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 				.Take(best);
 		}
 
-		private MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
+		protected virtual MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
 			var bestPath =  MovePath.None;
 			var bestScore = int.MinValue;
@@ -35,7 +35,6 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 
 				foreach (var test in GetBest(tests, 8))
 				{
-					//var score = Evaluator.GetScore(test.Field);
 					var score = GetAverageScore(test, position);
 
 					if (score > bestScore)

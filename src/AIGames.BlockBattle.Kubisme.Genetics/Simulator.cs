@@ -26,7 +26,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			Threshold = 0.975;
 			ResultCount = 32;
-			GenerateCount = 3;
+			GenerateCount = 8;
 			RunsTest = 10;
 			RunsRetry = 500;
 			Results = new List<SimulationResult<SimpleEvaluator.Parameters>>();
@@ -48,7 +48,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public int GenerateCount { get; set; }
 		public int ResultCount { get; set; }
 
-		public int MaximumScore { get; protected set; }
+		public SimScore MaximumScore { get; protected set; }
 		public int Simulations { get; protected set; }
 		protected int LastId { get; set; }
 		public int RunsTest { get; set; }
@@ -65,7 +65,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			Results.Add(new SimulationResult<SimpleEvaluator.Parameters>()
 			{
 				Pars = SimpleEvaluator.Parameters.GetDefault(),
+				Id = ++LastId,
 			});
+			Simulate(Results[0], RunsRetry, 1);
 
 			var queue = new Queue<SimpleEvaluator.Parameters>();
 
@@ -95,8 +97,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						Simulate(result, RunsRetry, Threshold);
 						if (result.Simulations >= RunsRetry * Threshold)
 						{
-							LastId++;
-							result.Id = LastId;
+							result.Id = ++LastId;
 							Results.Add(result);
 						}
 						break;
@@ -118,14 +119,20 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			Results.Sort(this);
 
 			LogStatus(BestResult.Id != best);
+
+#if DEBUG
+			foreach (var result in Results)
+			{
+				result.Scores.Sort();
+			}
+#endif
 		}
 	
 		private void LogStatus(bool newLine)
 		{
-			var line = String.Format("\r{0:#,#00}  {1:#,##0}:{2:00} {3}, ID: {4}, Max: {5}   ",
+			var line = String.Format("\r{0:#,#00}  {1:d\\.hh\\:mm\\:ss} {2}, ID: {3}, Max: {4}   ",
 				Simulations,
-				sw.Elapsed.TotalMinutes,
-				sw.Elapsed.Seconds,
+				sw.Elapsed,
 				BestResult.DebuggerDisplay,
 				BestResult.Id,
 				MaximumScore);
@@ -151,45 +158,60 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private void Simulate(SimulationResult<SimpleEvaluator.Parameters> result, int simulations, double threshold)
 		{
-			var current = Block.All[Rnd.Next(7)];
-			var next = Block.All[Rnd.Next(7)];
-
 			((SimpleEvaluator)DecisionMaker.Evaluator).pars = result.Pars;
 
 			for (var i = 0; i < simulations; i++)
 			{
-				var field = Field.Empty;
-				var sx = Stopwatch.StartNew();
-				var t = 0;
-				var running = true;
-				var blocks = 0;
-				var points = 0;
-				var combo = 0;
-				while (running)
+				Simulate(result);
+
+				if ((i & 15) == 0)
 				{
-					t++;
+					LogStatus(false);
+				}
+				if (result.Score <= BestResult.Score * threshold) { return; }
+			}
+		}
 
-					var path = DecisionMaker.GetMove(field, Position.Start, current, next);
-					if (LogIndividualSimulations)
-					{
-						Console.WriteLine(
-							"{0,4}  {1,3} ({2})  {3:0.0}ms/t  {4,2}",
-							t,
-							field.Points,
-							field.Combo,
-							sx.Elapsed.TotalMilliseconds / t,
-							field.FirstNoneEmptyRow);
+		private void Simulate(SimulationResult<SimpleEvaluator.Parameters> result)
+		{
+			var current = Block.All[Rnd.Next(7)];
+			var next = Block.All[Rnd.Next(7)];
 
-						ImageLogger.Draw(field, LogDir, t - 1);
-					}
-					if (path.Equals(MovePath.None) || field.Points >= 80)
+			var field = Field.Empty;
+			var sx = Stopwatch.StartNew();
+			var turn = 0;
+			var running = true;
+			var blocks = 0;
+			var points = 0;
+			var combo = 0;
+
+			while (running)
+			{
+				turn++;
+
+				var path = DecisionMaker.GetMove(field, Position.Start, current, next);
+
+				if (LogIndividualSimulations)
+				{
+					Console.WriteLine("{0,4}  {1,3} ({2})  {3:0.0}ms/t  {4,2}", turn, field.Points, field.Combo, sx.Elapsed.TotalMilliseconds / turn, field.FirstNoneEmptyRow);
+					ImageLogger.Draw(field, LogDir, turn - 1);
+				}
+				if (path.Equals(MovePath.None))
+				{
+					running = false;
+				}
+				else
+				{
+					var old = field;
+					field = field.Apply(current[path.Option], path.Target);
+
+					if (field.Points >= SimScore.WinningScore)
 					{
 						running = false;
 					}
-					else
+					if (LogIndividualSimulations)
 					{
-						var old = field;
-						field = field.Apply(current[path.Option], path.Target);
+#if DEBUG
 						var blocksTest = field.Count;
 						var pointsTest = field.Points;
 						var rows = pointsTest - points;
@@ -202,42 +224,32 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						points = pointsTest;
 						blocks = blocksTest;
 						combo = field.Combo;
+#endif
+					}
 
-						current = next;
-						next = Block.All[Rnd.Next(7)];
-						if (t % 10 == 0)
-						{
-							field = field.LockRows(1);
-							running &= field.RowCount > 0;
-						}
+					current = next;
+					next = Block.All[Rnd.Next(7)];
+					
+					if (turn % 10 == 0)
+					{
+						field = field.LockRows(1);
+						running &= field.RowCount > 0;
 					}
 				}
-				var s = field.Points;
-
-				if (s > MaximumScore)
-				{
-					MaximumScore = s;
-				} 
-				if(i % 10 == 0)
-				{
-					LogStatus(false);
-				}
-				if (LogIndividualSimulations)
-				{
-					Console.ReadLine();
-				}
-				Simulations++;
-				result.Scores.Add(SimScore.Create(t, s));
-				if (result.Score < BestResult.Score * Threshold) { return; }
 			}
-		}
+			var score = new SimScore(turn, field.Points);
 
-		private static readonly Field Small = Field.Create(0, 0, @"
-..........
-..........
-..........
-..........
-..........");
+			if (score.CompareTo(MaximumScore) < 0)
+			{
+				MaximumScore = score;
+			}
+			if (LogIndividualSimulations)
+			{
+				Console.ReadLine();
+			}
+			Simulations++;
+			result.Scores.Add(score);
+		}
 
 		public int Compare(SimulationResult<SimpleEvaluator.Parameters> l, SimulationResult<SimpleEvaluator.Parameters> r)
 		{
@@ -246,6 +258,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			compare = r.Score.CompareTo(l.Score);
 			if (compare != 0) { return compare; }
 			compare = l.WinningLength.CompareTo(r.WinningLength);
+			if (compare != 0) { return compare; }
+			compare = r.LosingLength.CompareTo(l.LosingLength);
 			return compare;
 		}
 	}

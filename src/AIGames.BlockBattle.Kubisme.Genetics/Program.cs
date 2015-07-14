@@ -7,7 +7,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 	{
 		public static void Main(string[] args)
 		{
-			Console.WindowWidth = 100;
+			Console.WindowWidth = 120;
 			var simulator = new Simulator(new MT19937Generator())
 			{
 				//LogIndividualSimulations = false,

@@ -17,26 +17,26 @@
 		public int Blockades { get; set; }
 		public int WallsLeft { get; set; }
 		public int WallsRight { get; set; }
-		public int FLoor { get; set; }
+		public int Floor { get; set; }
 		public int NeighborsHorizontal { get; set; }
 		public int NeighborsVertical { get; set; }
 
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// 7,397  0.00:08:01 Score: 1.67%, Win: 147.0, Lose: 125.1 Runs: 60, ID: 124, Max: 1, Turns: 147, Points: 80
+			// 1,720,874  0.11:06:05 Score: 64.16%, Win: 119.1, Lose: 104.5 Runs: 47,270, ID: 67255
 			{
-				RowWeights = new int[] { 14, 1, -28, -75, -6, -83, -39, -14, -37, -18, -45, -44, 26, -37, -103, -11, -8, 39, 0, -14, 8 },
-				NineRowWeights = new int[] { -102, -57, 32, -39, 35, -10, -105, 50, -118, -43, -23, 13, -90, -96, 21, 23, 6, 3, 84, 34, -36 },
-				Points = -89,
-				Combo = -62,
-				Holes = -52,
-				Blockades = -112,
-				WallsLeft = 57,
-				WallsRight = 13,
-				FLoor = -11,
-				NeighborsHorizontal = -115,
-				NeighborsVertical = 92,
+				RowWeights = new int[] { -48, 38, -124, -86, -64, -35, -13, 0, 7, 16, 6, 12, 28, 25, 29, 22, 46, -17, 54, 32, 7 },
+				NineRowWeights = new int[] { 18, 89, -1, -75, 18, -23, -62, -18, 65, 60, 86, -30, -3, -63, 34, 5, -24, 48, -39, 36, -65 },
+				Points = 250,
+				Combo = 101,
+				Holes = -136,
+				Blockades = -121,
+				WallsLeft = 98,
+				WallsRight = 14,
+				Floor = -55,
+				NeighborsHorizontal = -80,
+				NeighborsVertical = 102,
 			};
 		}
 	}

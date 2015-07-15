@@ -115,7 +115,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			score += blokades * pars.Blockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
-			score += Row.Count[previous] * pars.FLoor;
+			score += Row.Count[previous] * pars.Floor;
 			score += pars.NineRowWeights[nineRows];
 
 			return score;

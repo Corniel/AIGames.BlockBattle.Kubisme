@@ -28,7 +28,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			ResultCount = 32;
 			GenerateCount = 8;
 			RunsTest = 10;
-			RunsRetry = 100;
+			RunsRetry = 1000;
 			Results = new List<SimulationResult<SimpleParameters>>();
 		}
 

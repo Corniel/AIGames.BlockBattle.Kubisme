@@ -29,6 +29,11 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			}
 		}
 
+		public SimpleEvaluator()
+		{
+			pars = SimpleParameters.GetDefault();
+		}
+
 		public IParameters Parameters
 		{
 			get

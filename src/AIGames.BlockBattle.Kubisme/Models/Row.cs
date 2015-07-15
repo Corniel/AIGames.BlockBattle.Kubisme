@@ -1,10 +1,12 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AIGames.BlockBattle.Kubisme.Models
 {
 	public struct Row
 	{
+		[SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline", Justification = "Too complex to generate otherwise.")]
 		static Row()
 		{
 			Count = new byte[Row.Filled + 1];

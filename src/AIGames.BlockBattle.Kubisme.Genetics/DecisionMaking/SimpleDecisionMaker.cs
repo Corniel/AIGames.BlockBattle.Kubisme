@@ -6,8 +6,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking
 {
 	public class SimpleDecisionMaker : DecisionMaker
 	{
-		private SimpleDecisionMaker() { }
-
 		protected override MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
 			var bestPath = MovePath.None;

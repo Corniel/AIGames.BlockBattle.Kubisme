@@ -1,5 +1,6 @@
 ﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
 using AIGames.BlockBattle.Kubisme.Evaluation;
+using AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking;
 using AIGames.BlockBattle.Kubisme.Genetics.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			Rnd = rnd;
 			Randomizer = new ParameterRandomizer(rnd);
-			DecisionMaker = new DecisionMaker()
+			DecisionMaker = new SimpleDecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator(),
 				Generator = new MoveGenerator(),
@@ -81,7 +82,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						Id = ++LastId,
 					};
 					Simulate(result, RunsTest, 0);
-					if (result.Score >= BestResult.Score)
+					if (result.Scores.Score >= BestResult.Scores.Score)
 					{
 						Simulate(result, RunsRetry, Threshold);
 						if (result.Simulations >= RunsRetry * Threshold)
@@ -153,7 +154,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				var game = new GameSimulation()
 				{
 					Rnd = Rnd,
-					Profile = new OpponentProfile(),
+					Profile = new DefaultOpponentProfile(),
 					DecisionMaker = DecisionMaker,
 				};
 				var score = game.Run();
@@ -168,7 +169,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					LogStatus(false);
 				}
-				if (result.Score < BestResult.Score * threshold) { return; }
+				if (result.Scores.Score < BestResult.Scores.Score * threshold) { return; }
 			}
 		}
 		
@@ -176,11 +177,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			var compare = (r.Simulations >= RunsRetry).CompareTo(l.Simulations >= RunsRetry);
 			if (compare != 0) { return compare; }
-			compare = r.Score.CompareTo(l.Score);
+			compare = r.Scores.Score.CompareTo(l.Scores.Score);
 			if (compare != 0) { return compare; }
-			compare = l.WinningLength.CompareTo(r.WinningLength);
+			compare = l.Scores.WinningLength.CompareTo(r.Scores.WinningLength);
 			if (compare != 0) { return compare; }
-			compare = r.LosingLength.CompareTo(l.LosingLength);
+			compare = r.Scores.LosingLength.CompareTo(l.Scores.LosingLength);
 			return compare;
 		}
 	}

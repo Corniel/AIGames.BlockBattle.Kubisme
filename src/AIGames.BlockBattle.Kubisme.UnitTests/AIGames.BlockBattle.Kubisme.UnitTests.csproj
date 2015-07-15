@@ -39,10 +39,15 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="Troschuetz.Random, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Troschuetz.Random.3.2.0\lib\net40-client\Troschuetz.Random.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\ConsolePlatformTest.cs" />
     <Compile Include="Communication\InstructionTest.cs" />
+    <Compile Include="DecisionMaking\PerformanceTest.cs" />
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Deployoment\DeployerTest.cs" />
     <Compile Include="Models\BlockTest.cs" />
@@ -58,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AIGames.BlockBattle.Kubisme.Genetics\AIGames.BlockBattle.Kubisme.Genetics.csproj">
+      <Project>{e0f41239-b11b-4f64-905c-a9fa7121bb67}</Project>
+      <Name>AIGames.BlockBattle.Kubisme.Genetics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AIGames.BlockBattle.Kubisme\AIGames.BlockBattle.Kubisme.csproj">
       <Project>{c0b84d98-8285-4a46-ba15-911597172a9a}</Project>
       <Name>AIGames.BlockBattle.Kubisme</Name>

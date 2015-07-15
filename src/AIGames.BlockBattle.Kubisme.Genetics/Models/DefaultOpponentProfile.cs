@@ -2,7 +2,7 @@
 
 namespace AIGames.BlockBattle.Kubisme.Genetics.Models
 {
-	public class OpponentProfile
+	public class DefaultOpponentProfile
 	{
 		public Field Apply(Field field, int turn)
 		{

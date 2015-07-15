@@ -15,7 +15,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			Scores = new List<SimScore>();
 		}
-		private static readonly PropertyInfo[] Props = typeof(SimpleEvaluator.Parameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+		private static readonly PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 		public int Id { get; set; }
 
 		public List<SimScore> Scores { get; protected set; }

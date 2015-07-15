@@ -29,63 +29,19 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			}
 		}
 
-		public SimpleEvaluator()
+		public IParameters Parameters
 		{
-			pars = Parameters.GetDefault();
-
-			for (var count = 1; count <= 10; count++)
+			get
 			{
-				for (var row = 0; row <= 20; row++)
-				{
-					RowWeights[count, row] = count * pars.RowWeights[row];
-				}
+				return pars;
+			}
+			set
+			{
+				pars = value as SimpleParameters;
 			}
 		}
 
-		private int[,] RowWeights = new int[11, 21];
-
-		public class Parameters
-		{
-			public Parameters()
-			{
-				RowWeights = new int[21];
-				NineRowWeights = new int[21];
-			}
-
-			public int[] RowWeights { get; set; }
-			public int[] NineRowWeights { get; set; }
-
-			public int Points { get; set; }
-			public int Combo { get; set; }
-			public int Holes { get; set; }
-			public int Blockades { get; set; }
-			public int WallsLeft { get; set; }
-			public int WallsRight { get; set; }
-			public int FLoor { get; set; }
-			public int NeighborsHorizontal { get; set; }
-			public int NeighborsVertical { get; set; }
-
-			public static Parameters GetDefault()
-			{
-				return new Parameters()
-				// 780,508  0.08:22:42 Score: 41.45%, Win: 117.1, Lose: 101.0 Runs: 2,480, ID: 59134, Max: 1, Turns: 34, Points: 91
-				{
-					RowWeights = new int[] { -24, -8, -45, 18, 70, 66, 53, 30, -37, 12, 26, 32, 27, 40, -111, -4, -32, -84, -40, -1, 28 },
-					NineRowWeights = new int[] { 79, 64, -33, -30, -36, 27, -43, 94, 155, -45, -31, 49, 60, 12, 102, -17, 35, 37, 10, 32, -15 },
-					Points = 100,
-					Combo = 47,
-					Holes = -57,
-					Blockades = -53,
-					WallsLeft = 36,
-					WallsRight = 27,
-					FLoor = -7,
-					NeighborsHorizontal = -35,
-					NeighborsVertical = 50,
-				};
-			}
-		}
-
-		public Parameters pars { get; set; }
+		protected SimpleParameters pars { get; set; }
 
 		public int GetScore(Field field)
 		{
@@ -116,7 +72,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				var rowCount =Row.Count[row];
 				var holesMask = filterTopColomns & rowMirrored;
 
-				score += RowWeights[rowCount, r];
+				score += rowCount * pars.RowWeights[r];
 				holes += Row.Count[holesMask];
 				blokades += Row.Count[filterBlocades & row];
 
@@ -164,5 +120,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 
 			return score;
 		}
+
+		
 	}
 }

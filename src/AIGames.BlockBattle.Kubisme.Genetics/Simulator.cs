@@ -1,6 +1,5 @@
 ﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
 using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking;
 using AIGames.BlockBattle.Kubisme.Genetics.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
 {
-	public class Simulator : IComparer<SimulationResult<SimpleEvaluator.Parameters>>
+	public class Simulator : IComparer<SimulationResult<SimpleParameters>>
 	{
 		private Stopwatch sw = Stopwatch.StartNew();
 
@@ -19,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			Rnd = rnd;
 			Randomizer = new ParameterRandomizer(rnd);
-			DecisionMaker = new SimpleDecisionMaker()
+			DecisionMaker = new DecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator(),
 				Generator = new MoveGenerator(),
@@ -29,8 +28,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			ResultCount = 32;
 			GenerateCount = 8;
 			RunsTest = 10;
-			RunsRetry = 1000;
-			Results = new List<SimulationResult<SimpleEvaluator.Parameters>>();
+			RunsRetry = 100;
+			Results = new List<SimulationResult<SimpleParameters>>();
 		}
 
 		public double Threshold { get; set; }
@@ -45,20 +44,20 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public MT19937Generator Rnd { get; protected set; }
 		public ParameterRandomizer Randomizer { get; protected set; }
-		public SimpleDecisionMaker DecisionMaker { get; protected set; }
-		public List<SimulationResult<SimpleEvaluator.Parameters>> Results { get; protected set; }
-		public SimulationResult<SimpleEvaluator.Parameters> BestResult { get { return Results[0]; } }
+		public IDecisionMaker DecisionMaker { get; protected set; }
+		public List<SimulationResult<SimpleParameters>> Results { get; protected set; }
+		public SimulationResult<SimpleParameters> BestResult { get { return Results[0]; } }
 
 		public void Run()
 		{
-			Results.Add(new SimulationResult<SimpleEvaluator.Parameters>()
+			Results.Add(new SimulationResult<SimpleParameters>()
 			{
-				Pars = SimpleEvaluator.Parameters.GetDefault(),
+				Pars = SimpleParameters.GetDefault(),
 				Id = ++LastId,
 			});
 			Simulate(Results[0], RunsRetry >> 2, 0);
 
-			var queue = new Queue<SimpleEvaluator.Parameters>();
+			var queue = new Queue<SimpleParameters>();
 
 			while (true)
 			{
@@ -66,7 +65,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 				if (queue.Count == 0)
 				{
-					Randomizer.Generate<SimpleEvaluator.Parameters>(BestResult.Pars, queue, GenerateCount);
+					Randomizer.Generate<SimpleParameters>(BestResult.Pars, queue, GenerateCount);
 				}
 
 				var count = queue.Count;
@@ -76,7 +75,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					var pars = queue.Dequeue();
 
-					var result = new SimulationResult<SimpleEvaluator.Parameters>()
+					var result = new SimulationResult<SimpleParameters>()
 					{
 						Pars = pars,
 						Id = ++LastId,
@@ -134,7 +133,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					writer.Write("// ");
 					writer.WriteLine(line.Trim());
 					writer.WriteLine(BestResult);
-					foreach (var result in Results.Skip(1).Take(7))
+					foreach (var result in Results.Skip(1))
 					{
 						writer.WriteLine("// {0:#,##0.00}, ID {1}", result.DebuggerDisplay, result.Id);
 						writer.WriteLine(result);
@@ -145,9 +144,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 		}
 
-		private void Simulate(SimulationResult<SimpleEvaluator.Parameters> result, int simulations, double threshold)
+		private void Simulate(SimulationResult<SimpleParameters> result, int simulations, double threshold)
 		{
-			((SimpleEvaluator)DecisionMaker.Evaluator).pars = result.Pars;
+			DecisionMaker.Evaluator.Parameters = result.Pars;
 
 			for (var i = 0; i < simulations; i++)
 			{
@@ -173,7 +172,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 		}
 		
-		public int Compare(SimulationResult<SimpleEvaluator.Parameters> l, SimulationResult<SimpleEvaluator.Parameters> r)
+		public int Compare(SimulationResult<SimpleParameters> l, SimulationResult<SimpleParameters> r)
 		{
 			var compare = (r.Simulations >= RunsRetry).CompareTo(l.Simulations >= RunsRetry);
 			if (compare != 0) { return compare; }

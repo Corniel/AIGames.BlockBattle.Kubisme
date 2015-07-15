@@ -63,7 +63,9 @@
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\IMoveGenerator.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
+    <Compile Include="Evaluation\IParameters.cs" />
     <Compile Include="Evaluation\SimpleEvaluator.cs" />
+    <Compile Include="Evaluation\SimpleParameters.cs" />
     <Compile Include="Models\Block.cs" />
     <Compile Include="KubismeBot.cs" />
     <Compile Include="Models\Move.cs" />

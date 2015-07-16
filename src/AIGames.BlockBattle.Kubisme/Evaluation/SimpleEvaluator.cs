@@ -50,12 +50,9 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 
 		public int GetScore(Field field)
 		{
-			var rMin = field.FirstNoneEmptyRow;
-
 			var score = 0;
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
-			score += pars.RowWeights[rMin];
 
 			int filterTopColomns = 0;
 			int filterBlocades = 0;
@@ -67,10 +64,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			var neighborsV = 0;
 			ushort previous = 0;
 
-			var openNineRows = true;
-			var nineRows = 0;
-
-			for (var r = rMin; r < field.RowCount; r++)
+			for (var r = 0; r < field.RowCount; r++)
 			{
 				var row = field[r].row;
 				var rowMirrored = Row.Filled ^ row;
@@ -82,33 +76,26 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				blokades += Row.Count[filterBlocades & row];
 
 				// Give points for blocks against the wall, that are not under an hole.
-				if ((row & MaskWallLeft) != 0 && (holes & MaskWallLeft) == 0) { wallLeft++; }
-				if ((row & MaskWallRight) != 0 && (holes & MaskWallRight) == 0) { wallRight++; }
+				if ((row & MaskWallLeft) != 0)
+				{
+					wallLeft++;
+				}
+				// Else reset.
+				else
+				{
+					wallLeft = 0;
+				}
+				if ((row & MaskWallRight) != 0)
+				{
+					wallRight++;
+				}
+				else
+				{
+					wallRight = 0;
+				}
 
 				filterBlocades |= holesMask;
 				filterTopColomns |= row;
-
-				// Only if this option is not blocked already.
-				if (openNineRows)
-				{
-					// If facing a nine row.
-					if (rowCount == 9)
-					{
-						// No top column should block the open file.
-						if (Row.Count[filterTopColomns | row] == 9)
-						{
-							nineRows++;
-						}
-						else
-						{
-							openNineRows = false;
-						}
-					}
-					else if(nineRows > 0)
-					{
-						openNineRows = false;
-					}
-				}
 
 				neighborsV += NeighborsVertical[row];
 				neighborsH += Row.Count[row & previous];
@@ -121,8 +108,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
 			score += Row.Count[previous] * pars.Floor;
-			score += pars.NineRowWeights[nineRows];
-
+			
 			return score;
 		}
 

@@ -1,7 +1,11 @@
 Kubisme
 =======
 
-Kubisme (Cubism) is an AI trying to play tetris.
+Kubisme (Cubism) is an AI trying to play Tetris.
+
+Version 12
+----------
+Added block per row count specific weights.
 
 Version 11
 ----------
@@ -26,4 +30,4 @@ Fixed a lot of bugs, enabled evaluation of one 'unknown' block as well.
 
 Version 1
 ---------
-First atempt. Local runs (without competion) run 75 points on average before dieing.
+First attempt. Local runs (without competition) run 75 points on average before dying.

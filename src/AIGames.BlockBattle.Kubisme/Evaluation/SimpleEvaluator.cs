@@ -77,7 +77,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				var rowCount =Row.Count[row];
 				var holesMask = filterTopColomns & rowMirrored;
 
-				score += rowCount * pars.RowWeights[r];
+				score += pars.RowCountWeights[rowCount] * pars.RowWeights[r];
 				holes += Row.Count[holesMask];
 				blokades += Row.Count[filterBlocades & row];
 

@@ -6,5 +6,8 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 	{
 		int GetScore(Field field);
 		IParameters Parameters { get; set; }
+		int WinScore { get; }
+		int DrawScore { get; }
+		int LostScore { get; }
 	}
 }

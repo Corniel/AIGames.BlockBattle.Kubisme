@@ -18,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 		[Test]
 		public void Run_DecisionMaker_92procent()
 		{
-			var dm = new DecisionMaker()
+			var dm = new NodeDecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator()
 				{
@@ -38,8 +38,10 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 					},
 				},
 				Generator = new MoveGenerator(),
+				MaximumDuration = TimeSpan.FromMilliseconds(100),
+				MaximumDepth = 3,
 			};
-			TestSimulation(dm, 100);
+			TestSimulation(dm, Runs);
 		}
 		[Test]
 		public void Run_DecisionMakerWithRowCountWeights_67procent()
@@ -122,7 +124,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			TestSimulation(dm, Runs);
 		}
 
-		private SimScores TestSimulation(DecisionMaker dm, int runs)
+		private SimScores TestSimulation(IDecisionMaker dm, int runs)
 		{
 			var rnd = new MT19937Generator(17);
 			var result = new SimScores();

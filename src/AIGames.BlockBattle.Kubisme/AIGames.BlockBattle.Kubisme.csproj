@@ -59,9 +59,16 @@
     <Compile Include="Communication\GameState.cs" />
     <Compile Include="Communication\Settings.cs" />
     <Compile Include="Communication\ConsolePlatform.cs" />
+    <Compile Include="DecisionMaking\ApplyParameters.cs" />
+    <Compile Include="DecisionMaking\Block1Node.cs" />
+    <Compile Include="DecisionMaking\BlockNode.cs" />
+    <Compile Include="DecisionMaking\BlockRndNode.cs" />
+    <Compile Include="DecisionMaking\BlockRootNode.cs" />
     <Compile Include="DecisionMaking\DecisionMaker.cs" />
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
+    <Compile Include="DecisionMaking\IBlockNode.cs" />
     <Compile Include="DecisionMaking\IMoveGenerator.cs" />
+    <Compile Include="DecisionMaking\NodeDecisionMaker.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\IParameters.cs" />
     <Compile Include="Evaluation\SimpleEvaluator.cs" />

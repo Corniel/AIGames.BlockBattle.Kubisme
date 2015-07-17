@@ -67,8 +67,10 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			for (var r = 0; r < field.RowCount; r++)
 			{
 				var row = field[r].row;
+				if (row == Row.Empty) { continue; }
+
+				var rowCount = Row.Count[row];
 				var rowMirrored = Row.Filled ^ row;
-				var rowCount =Row.Count[row];
 				var holesMask = filterTopColomns & rowMirrored;
 
 				score += pars.RowCountWeights[rowCount] * pars.RowWeights[r];
@@ -108,10 +110,12 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
 			score += Row.Count[previous] * pars.Floor;
-			
+
 			return score;
 		}
 
-		
+		public int WinScore { get { return short.MaxValue; } }
+		public int DrawScore { get { return 0; } }
+		public int LostScore { get { return short.MinValue; } }
 	}
 }

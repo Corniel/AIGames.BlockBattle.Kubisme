@@ -21,26 +21,38 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		}
 		public MT19937Generator Rnd { get; set; }
 
+		public T Copy<T>(T org)
+		{
+			var target = Activator.CreateInstance<T>();
+			foreach (var prop in GetProperties<T>())
+			{
+				if (prop.PropertyType == typeof(int))
+				{
+					var val = (int)prop.GetValue(org);
+					prop.SetValue(target, val);
+				}
+				else if (prop.PropertyType == typeof(int[]))
+				{
+					int[] vals = (int[])prop.GetValue(org);
+					var copy = vals.ToArray();
+					prop.SetValue(target, copy);
+				}
+			}
+			return target;
+		}
 		public void Generate<T>(T org, Queue<T> queue, int count)
 		{
-			PropertyInfo[] props;
-			if (!Properties.TryGetValue(typeof(T), out props))
-			{
-				props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-				Properties[typeof(T)] = props;
-			}
+			var props = GetProperties<T>();
 
 			for (var c = 0; c < count; c++)
 			{
-				var scaling = ScaleType.None;// (ScaleType)Rnd.Next(0, 4);
-
 				var target = Activator.CreateInstance<T>();
 
 				foreach (var prop in props)
 				{
 					if (prop.PropertyType == typeof(int))
 					{
-						int val = Randomize((int)prop.GetValue(org), scaling);
+						int val = Randomize((int)prop.GetValue(org));
 						prop.SetValue(target, val);
 					}
 					else if (prop.PropertyType == typeof(int[]))
@@ -49,7 +61,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						var copy = vals.ToArray();
 						for (var i = 0; i < copy.Length; i++)
 						{
-							copy[i] = Randomize(vals[i], scaling);
+							copy[i] = Randomize(vals[i]);
 						}
 						prop.SetValue(target, copy);
 					}
@@ -57,19 +69,24 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				queue.Enqueue(target);
 			}
 		}
-		private int Randomize(int value, ScaleType scaling)
+
+		private int Randomize(int value)
 		{
 			var val = value;
-			switch (scaling)
-			{
-				case ScaleType.DivideBy2: val >>= 1; break;
-				case ScaleType.MultiplyBy2: val <<= 1; break;
-				default: break;
-			}
-			val += Rnd.Next(-20, 21);
+			val += Rnd.Next(-3, 3) * Rnd.Next(0, 3) * Rnd.Next(0, 3) * Rnd.Next(0, 3) * Rnd.Next(0, 3);
 			return val;
 		}
 
-		Dictionary<Type, PropertyInfo[]> Properties = new Dictionary<Type, PropertyInfo[]>();
+		private static readonly Dictionary<Type, PropertyInfo[]> Properties = new Dictionary<Type, PropertyInfo[]>();
+		private static PropertyInfo[] GetProperties<T>()
+		{
+			PropertyInfo[] props;
+			if (!Properties.TryGetValue(typeof(T), out props))
+			{
+				props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+				Properties[typeof(T)] = props;
+			}
+			return props;
+		}
 	}
 }

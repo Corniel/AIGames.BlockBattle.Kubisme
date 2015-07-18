@@ -29,7 +29,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			ResultCount = 32;
 			GenerateCount = 8;
 			RunsTest = 10;
-			RunsRetry = 100;
+			RunsRetry = 1000;
 			RunsMax = 10000;
 			Results = new List<SimulationResult<SimpleParameters>>();
 			File = new FileInfo("parameters.xml");
@@ -60,8 +60,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				collection = SimpleParametersCollection.Load(File);
 			}
-			AddInitialResult(SimpleParameters.GetDefault());
-
+			else
+			{
+				AddInitialResult(SimpleParameters.GetDefault());
+			}
 			Run(collection);
 		}
 
@@ -141,6 +143,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			};
 			Results.Add(res);
 			Simulate(res, RunsRetry >> 2);
+			Results.Sort();
 		}
 
 		private void FitResults()
@@ -151,19 +154,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				Results.RemoveRange(ResultCount, Results.Count - ResultCount);
 			}
-			if (Results[0].Scores.Count < RunsMax)
-			{
-				Simulate(Results[0], RunsTest);
-				Results.Sort(this);
-			}
+			Simulate(Results[0], Results[0].Scores.Count < RunsMax ? RunsTest : 1);
+			Results.Sort(this);
 			LogStatus(BestResult.Id != best);
 
-			if (BestResult.Id != best)
-			{
-				var collection = new SimpleParametersCollection();
-				collection.AddRange(Results.Select(res => res.Pars));
-				collection.Save(File);
-			}
 #if DEBUG
 			foreach (var result in Results)
 			{
@@ -174,28 +168,28 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private void LogStatus(bool newLine)
 		{
-			var line = String.Format("\r{0:#,#00}  {1:d\\.hh\\:mm\\:ss} {2}, ID: {3}  ",
+			var line = String.Format("\r{0:#,#00}  {1:d\\.hh\\:mm\\:ss} {2}  ",
 				Simulations,
 				sw.Elapsed,
-				BestResult.DebuggerDisplay,
-				BestResult.Id);
+				BestResult.DebuggerDisplay);
 
 			Console.Write(line);
-			if (newLine)
-			{
-				using (var writer = new StreamWriter("parameters.cs", false))
-				{
-					writer.Write("// ");
-					writer.WriteLine(line.Trim());
-					writer.WriteLine(BestResult);
-					foreach (var result in Results.Skip(1))
-					{
-						writer.WriteLine("// {0:#,##0.00}, ID {1}", result.DebuggerDisplay, result.Id);
-						writer.WriteLine(result);
-					}
-				}
+			if (newLine) { Console.WriteLine(); }
 
-				Console.WriteLine();
+			var collection = new SimpleParametersCollection();
+			collection.AddRange(Results.Select(res => res.Pars));
+			collection.Save(File);
+
+			using (var writer = new StreamWriter("parameters.cs", false))
+			{
+				writer.Write("// ");
+				writer.WriteLine(line.Trim());
+				writer.WriteLine(BestResult);
+				foreach (var result in Results.Skip(1))
+				{
+					writer.WriteLine("// {0:#,##0.00}", result.DebuggerDisplay);
+					writer.WriteLine(result);
+				}
 			}
 		}
 

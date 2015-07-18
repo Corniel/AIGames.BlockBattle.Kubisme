@@ -1,7 +1,11 @@
-﻿using System.Reflection;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Text;
+
 namespace AIGames.BlockBattle.Kubisme.Evaluation
 {
+	[Serializable]
 	public class SimpleParameters : IParameters
 	{
 		private static readonly PropertyInfo[] Props = typeof(SimpleParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -32,10 +36,19 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			{
 				if (prop.PropertyType == typeof(int))
 				{
-					int val = (int)prop.GetValue(this);
-					writer.AppendFormat("{0}: {1},", prop.Name, val);
+					var val = (int)prop.GetValue(this);
+					writer.AppendFormat("{0}: {1}, ", prop.Name, val);
 				}
 			}
+			foreach (var prop in Props)
+			{
+				if (prop.PropertyType == typeof(int[]))
+				{
+					var vals = (int[])prop.GetValue(this);
+					writer.AppendFormat("{0}: {{{1}}}, ", prop.Name, String.Join(",", vals));
+				}
+			}
+			writer.Remove(writer.Length - 2, 2);
 			return writer.ToString();
 		}
 

@@ -28,12 +28,6 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				NeighborsVertical[i] = (byte)count;
 			}
 		}
-
-		public SimpleEvaluator()
-		{
-			pars = SimpleParameters.GetDefault();
-		}
-
 		public IParameters Parameters
 		{
 			get

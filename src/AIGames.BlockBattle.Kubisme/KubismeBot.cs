@@ -12,7 +12,10 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			DecisionMaker = new DecisionMaker()
 			{
-				Evaluator = new SimpleEvaluator(),
+				Evaluator = new SimpleEvaluator()
+				{
+					Parameters = SimpleParameters.GetDefault(),
+				},
 				Generator = new MoveGenerator(),
 			};
 		}

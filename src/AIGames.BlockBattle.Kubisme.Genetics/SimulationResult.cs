@@ -9,7 +9,7 @@ using System.Text;
 namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	[DebuggerDisplay("{DebuggerDisplay}")]
-	public class SimulationResult<T>
+	public class SimulationResult<T>: IComparable, IComparable<SimulationResult<T>>
 	{
 		public SimulationResult() { Scores = new SimScores(); }
 
@@ -51,8 +51,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			get
 			{
-				return String.Format("Score: {0:0.00%}, Win: {1:0.0}, Lose: {2:0.0} Runs: {3:#,##0}", Scores.Score, Scores.WinningLength, Scores.LosingLength, Simulations);
+				return String.Format("Score: {0:0.00%}, Win: {1:0.0}, Lose: {2:0.0} Runs: {3:#,##0}, ID: {4}", Scores.Score, Scores.WinningLength, Scores.LosingLength, Simulations, Id);
 			}
+		}
+
+		public int CompareTo(object obj) { return CompareTo((SimulationResult<T>)obj); }
+
+		public int CompareTo(SimulationResult<T> other)
+		{
+			return Scores.CompareTo(other.Scores);
 		}
 	}
 }

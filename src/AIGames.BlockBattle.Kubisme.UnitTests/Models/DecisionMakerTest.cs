@@ -13,7 +13,10 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		{
 			var dm = new DecisionMaker()
 			{
-				Evaluator = new SimpleEvaluator(),
+				Evaluator = new SimpleEvaluator()
+				{
+					Parameters = SimpleParameters.GetDefault(),
+				},
 				Generator = new MoveGenerator(),
 			};
 
@@ -29,7 +32,10 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		{
 			var dm = new DecisionMaker()
 			{
-				Evaluator = new SimpleEvaluator(),
+				Evaluator = new SimpleEvaluator()
+				{
+					Parameters = SimpleParameters.GetDefault(),
+				},
 				Generator = new MoveGenerator(),
 			};
 

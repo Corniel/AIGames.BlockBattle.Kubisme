@@ -2,6 +2,7 @@
 using AIGames.BlockBattle.Kubisme.Evaluation;
 using AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking;
 using AIGames.BlockBattle.Kubisme.Genetics.Models;
+using AIGames.BlockBattle.Kubisme.Genetics.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,15 +26,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Generator = new MoveGenerator(),
 			};
 
-			Threshold = 0.975;
 			ResultCount = 32;
 			GenerateCount = 8;
 			RunsTest = 10;
-			RunsRetry = 1000;
+			RunsRetry = 100;
+			RunsMax = 10000;
 			Results = new List<SimulationResult<SimpleParameters>>();
+			File = new FileInfo("parameters.xml");
 		}
 
-		public double Threshold { get; set; }
+		public FileInfo File { get; set; }
 		public int GenerateCount { get; set; }
 		public int ResultCount { get; set; }
 
@@ -42,6 +44,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		protected int LastId { get; set; }
 		public int RunsTest { get; set; }
 		public int RunsRetry { get; set; }
+		public int RunsMax { get; set; }
 
 		public MT19937Generator Rnd { get; protected set; }
 		public ParameterRandomizer Randomizer { get; protected set; }
@@ -51,12 +54,23 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public void Run()
 		{
-			Results.Add(new SimulationResult<SimpleParameters>()
+			var collection = new SimpleParametersCollection();
+
+			if (File.Exists)
 			{
-				Pars = SimpleParameters.GetDefault(),
-				Id = ++LastId,
-			});
-			Simulate(Results[0], RunsRetry >> 2, 0);
+				collection = SimpleParametersCollection.Load(File);
+			}
+			AddInitialResult(SimpleParameters.GetDefault());
+
+			Run(collection);
+		}
+
+		public void Run(IEnumerable<SimpleParameters> collection)
+		{
+			foreach (var parameters in collection)
+			{
+				AddInitialResult(parameters);
+			}
 
 			var queue = new Queue<SimpleParameters>();
 
@@ -66,7 +80,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 				if (queue.Count == 0)
 				{
-					Randomizer.Generate<SimpleParameters>(BestResult.Pars, queue, GenerateCount);
+					for (var i = 0; i < GenerateCount; i++)
+					{
+						if (Results.Count <= i) { break; }
+						Randomizer.Generate<SimpleParameters>(Results[i].Pars, queue, GenerateCount >> i);
+					}
 				}
 
 				var count = queue.Count;
@@ -81,19 +99,48 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						Pars = pars,
 						Id = ++LastId,
 					};
-					Simulate(result, RunsTest, 0);
-					if (result.Scores.Score >= BestResult.Scores.Score)
+					var runs = RunsTest;
+					Simulate(result, RunsTest);
+
+					var compare = result.Scores.CompareTo(BestResult.Scores);
+
+					if (compare <= 0)
 					{
-						Simulate(result, RunsRetry, Threshold);
-						if (result.Simulations >= RunsRetry * Threshold)
+						while (result.Simulations < RunsRetry)
 						{
-							Results.Add(result);
+							runs <<= 1;
+							Simulate(result, runs);
+							compare = result.Scores.CompareTo(BestResult.Scores);
+							if (compare >= 0)
+							{
+								break;
+							}
 						}
+						compare = result.Scores.CompareTo(BestResult.Scores);
+						if (compare < 0)
+						{
+							if (result.Scores.Score > 0)
+							{
+							}
+							queue.Clear();
+						}
+						Results.Add(result);
 						break;
 					}
 					LogStatus(false);
 				}
 			}
+		}
+
+		private void AddInitialResult(SimpleParameters parameters)
+		{
+			var res = new SimulationResult<SimpleParameters>()
+			{
+				Pars = parameters,
+				Id = ++LastId,
+			};
+			Results.Add(res);
+			Simulate(res, RunsRetry >> 2);
 		}
 
 		private void FitResults()
@@ -104,11 +151,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				Results.RemoveRange(ResultCount, Results.Count - ResultCount);
 			}
-			Simulate(Results[0], RunsTest, 0);
-			Results.Sort(this);
-
+			if (Results[0].Scores.Count < RunsMax)
+			{
+				Simulate(Results[0], RunsTest);
+				Results.Sort(this);
+			}
 			LogStatus(BestResult.Id != best);
 
+			if (BestResult.Id != best)
+			{
+				var collection = new SimpleParametersCollection();
+				collection.AddRange(Results.Select(res => res.Pars));
+				collection.Save(File);
+			}
 #if DEBUG
 			foreach (var result in Results)
 			{
@@ -116,15 +171,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 #endif
 		}
-	
+
 		private void LogStatus(bool newLine)
 		{
-			var line = String.Format("\r{0:#,#00}  {1:d\\.hh\\:mm\\:ss} {2}, ID: {3}, Max: {4}   ",
+			var line = String.Format("\r{0:#,#00}  {1:d\\.hh\\:mm\\:ss} {2}, ID: {3}  ",
 				Simulations,
 				sw.Elapsed,
 				BestResult.DebuggerDisplay,
-				BestResult.Id,
-				MaximumScore);
+				BestResult.Id);
 
 			Console.Write(line);
 			if (newLine)
@@ -145,7 +199,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 		}
 
-		private void Simulate(SimulationResult<SimpleParameters> result, int simulations, double threshold)
+		private void Simulate(SimulationResult<SimpleParameters> result, int simulations)
 		{
 			DecisionMaker.Evaluator.Parameters = result.Pars;
 
@@ -165,23 +219,25 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					MaximumScore = score;
 				}
 
-				if ((i & 15) == 0)
+				if (i % 5 == 0)
 				{
 					LogStatus(false);
 				}
-				if (result.Scores.Score < BestResult.Scores.Score * threshold) { return; }
 			}
 		}
-		
+
 		public int Compare(SimulationResult<SimpleParameters> l, SimulationResult<SimpleParameters> r)
 		{
-			var compare = (r.Simulations >= RunsRetry).CompareTo(l.Simulations >= RunsRetry);
+			var ls = l.Scores;
+			var rs = r.Scores;
+
+			var compare = rs.Score.CompareTo(ls.Score);
 			if (compare != 0) { return compare; }
-			compare = r.Scores.Score.CompareTo(l.Scores.Score);
+			
+			compare = ls.WinningLength.CompareTo(rs.WinningLength);
 			if (compare != 0) { return compare; }
-			compare = l.Scores.WinningLength.CompareTo(r.Scores.WinningLength);
-			if (compare != 0) { return compare; }
-			compare = r.Scores.LosingLength.CompareTo(l.Scores.LosingLength);
+
+			compare = rs.LosingLength.CompareTo(ls.LosingLength);
 			return compare;
 		}
 	}

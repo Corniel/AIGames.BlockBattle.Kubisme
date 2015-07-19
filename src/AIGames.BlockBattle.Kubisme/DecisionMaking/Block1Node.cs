@@ -11,7 +11,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 		}
 
 		public override byte Depth { get { return 1; } }
-		public override int BranchingFactor { get { return 6; } }
+		public override int BranchingFactor { get { return 8; } }
 
 		public MovePath Path { get; protected set; }
 

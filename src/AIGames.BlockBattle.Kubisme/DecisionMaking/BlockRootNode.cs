@@ -7,7 +7,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 		public BlockRootNode(Field field) : base(field, 0) { }
 
 		public override byte Depth { get { return 0; } }
-		public override int BranchingFactor { get { return 10; } }
+		public override int BranchingFactor { get { return 12; } }
 		
 		public MovePath BestMove { get { return Children == null || Children.Count == 0 ? MovePath.None : Children[0].Path; } }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using System.Text;
 
@@ -8,7 +7,9 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 	[Serializable]
 	public class SimpleParameters : IParameters
 	{
+#if DEBUG
 		private static readonly PropertyInfo[] Props = typeof(SimpleParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+#endif
 
 		public SimpleParameters()
 		{
@@ -29,8 +30,14 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 		public int NeighborsHorizontal { get; set; }
 		public int NeighborsVertical { get; set; }
 
+		/// <summary>Gets a string representation of the simple evaluator parameters.</summary>
+		/// <remarks>
+		/// Apparently, this code does not compile under Mono. As it is only for
+		/// debug purposes, it is disabled in release mode.
+		/// </remarks>
 		public override string ToString()
 		{
+#if DEBUG
 			var writer = new StringBuilder();
 			foreach (var prop in Props)
 			{
@@ -50,24 +57,27 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			}
 			writer.Remove(writer.Length - 2, 2);
 			return writer.ToString();
+#else
+			return base.ToString();
+#endif
 		}
 
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// 1.060.699  0.07:22:16 Score: 70,44%, Win: 109,6, Lose: 99,3 Runs: 67.160, ID: 31076, Max: 1, Turns: 36, Points: 81
+			// 2.109.520  0.12:51:52 Score: 87,96%, Win: 110,8, Lose: 109,7 Runs: 2.300, ID: 128474
 			{
-				RowWeights = new int[] { -449, -401, -130, -149, -68, -48, -20, 6, 10, 20, 7, 10, 13, 35, 9, 37, 10, 8, 28, -6, 45 },
-				RowCountWeights = new int[] { 73, 15, 27, 49, 47, 72, 88, 103, 95, 84, -51 },
-				Points = 2450,
-				Combo = 990,
-				Holes = -1391,
-				Blockades = -1207,
-				WallsLeft = 946,
-				WallsRight = 162,
-				Floor = -544,
-				NeighborsHorizontal = -757,
-				NeighborsVertical = 1011,
+				RowWeights = new int[] { -85, -50, -97, -76, -2, 0, -1, 0, 0, 0, 1, 1, 1, 1, 0, 2, 1, 2, 1, 5, -121 },
+				RowCountWeights = new int[] { -20, 9, 26, 26, 35, 38, 48, 60, 57, 48, -1 },
+				Points = 114,
+				Combo = 8,
+				Holes = -66,
+				Blockades = -7,
+				WallsLeft = 28,
+				WallsRight = 27,
+				Floor = -7,
+				NeighborsHorizontal = -15,
+				NeighborsVertical = 26,
 			};
 		}
 	}

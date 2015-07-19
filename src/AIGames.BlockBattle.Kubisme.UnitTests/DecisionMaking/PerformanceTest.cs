@@ -23,23 +23,24 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Evaluator = new SimpleEvaluator()
 				{
 					Parameters = new SimpleParameters()
+					// 2.109.520  0.12:51:52 Score: 87,96%, Win: 110,8, Lose: 109,7 Runs: 2.300, ID: 128474
 					{
-						RowWeights = new int[] { -48, 38, -124, -86, -64, -35, -13, 0, 7, 16, 6, 12, 28, 25, 29, 22, 46, -17, 54, 32, 7 },
-						RowCountWeights = new int[11] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-						Points = 250,
-						Combo = 101,
-						Holes = -136,
-						Blockades = -121,
-						WallsLeft = 98,
-						WallsRight = 14,
-						Floor = -55,
-						NeighborsHorizontal = -80,
-						NeighborsVertical = 102,
-					},
+						RowWeights = new int[] { -85, -50, -97, -76, -2, 0, -1, 0, 0, 0, 1, 1, 1, 1, 0, 2, 1, 2, 1, 5, -121 },
+						RowCountWeights = new int[] { -20, 9, 26, 26, 35, 38, 48, 60, 57, 48, -1 },
+						Points = 114,
+						Combo = 8,
+						Holes = -66,
+						Blockades = -7,
+						WallsLeft = 28,
+						WallsRight = 27,
+						Floor = -7,
+						NeighborsHorizontal = -15,
+						NeighborsVertical = 26,
+					}
 				},
 				Generator = new MoveGenerator(),
-				MaximumDuration = TimeSpan.FromMilliseconds(100),
-				MaximumDepth = 3,
+				MaximumDuration = TimeSpan.FromMilliseconds(5),
+				MaximumDepth = 4,
 			};
 			TestSimulation(dm, Runs);
 		}
@@ -80,7 +81,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				{
 					Parameters = new SimpleParameters()
 					{
-						RowWeights = new int[] { -48,38,-124,-86,-64,-35,-13,0,7,16,6,12,28,25,29,22,46,-17,54,32,7 },
+						RowWeights = new int[] { -48, 38, -124, -86, -64, -35, -13, 0, 7, 16, 6, 12, 28, 25, 29, 22, 46, -17, 54, 32, 7 },
 						RowCountWeights = new int[11] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
 						Points = 250,
 						Combo = 101,

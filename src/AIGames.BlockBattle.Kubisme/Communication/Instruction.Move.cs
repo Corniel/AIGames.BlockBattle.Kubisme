@@ -6,6 +6,8 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 {
 	public class MoveInstruction : IInstruction
 	{
+		public static readonly MoveInstruction NoMoves = new MoveInstruction(new ActionType[0]);
+
 		public MoveInstruction(params ActionType[] actions)
 		{
 			Actions = actions;

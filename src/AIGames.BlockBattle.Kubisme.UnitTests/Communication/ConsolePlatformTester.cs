@@ -7,7 +7,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 	public class ConsolePlatformTester : ConsolePlatform
 	{
 		public ConsolePlatformTester(string path)
-			: base(LoadInput(path), Console.Out) { }
+			: base(LoadInput(path), Console.Out, Console.Error) { }
 
 		private static TextReader LoadInput(string path)
 		{

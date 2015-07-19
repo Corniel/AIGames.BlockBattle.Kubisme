@@ -15,10 +15,12 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 		public int MaximumDepth { get; set; }
 		public IEvaluator Evaluator { get; set; }
 		public IMoveGenerator Generator { get; set; }
+		public BlockRootNode Root { get; protected set; }
+		public ApplyParameters Pars { get; protected set; }
 
 		public MovePath GetMove(Field field, Position position, Block current, Block next)
 		{
-			var pars = new ApplyParameters()
+			Pars = new ApplyParameters()
 			{
 				MaximumDuration = MaximumDuration,
 				MaximumDepth = MaximumDepth,
@@ -27,13 +29,13 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 				Current = current,
 				Next = next,
 			};
-			var root = new BlockRootNode(field);
+			Root = new BlockRootNode(field);
 
-			while (pars.Depth++ < pars.MaximumDepth && pars.HasTimeLeft)
+			while (Pars.Depth++ < Pars.MaximumDepth && Pars.HasTimeLeft)
 			{
-				root.Apply(pars.Depth, pars);
+				Root.Apply(Pars.Depth, Pars);
 			}
-			return root.BestMove;
+			return Root.BestMove;
 		}
 	}
 }

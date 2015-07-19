@@ -3,6 +3,16 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 14
+----------
+Fixed the determination of blockades, and of the the contacts with the right 
+wall. Furthermore, the parameters were updated. On top of that, the search
+depth is extended. In practice, it searches up to 6 ply.
+
+Version 13
+----------
+Failed to compile on TheAIGames.com due to some not supported reflection code?!
+
 Version 12
 ----------
 Added block per row count specific weights.

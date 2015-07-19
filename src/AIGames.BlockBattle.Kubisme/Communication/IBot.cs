@@ -6,6 +6,6 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 	{
 		void ApplySettings(Settings settings);
 		void Update(GameState state);
-		MoveInstruction GetMove(TimeSpan time);
+		BotResponse GetResponse(TimeSpan time);
 	}
 }

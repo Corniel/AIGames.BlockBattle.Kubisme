@@ -10,16 +10,17 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public KubismeBot()
 		{
-			DecisionMaker = new DecisionMaker()
+			DecisionMaker = new NodeDecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator()
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
+				MaximumDuration = TimeSpan.FromMilliseconds(500),
 			};
 		}
-		public DecisionMaker DecisionMaker { get; set; }
+		public NodeDecisionMaker DecisionMaker { get; set; }
 		public Settings Settings { get; set; }
 		public GameState State { get; set; }
 		public Field Field { get; set; }
@@ -38,12 +39,15 @@ namespace AIGames.BlockBattle.Kubisme
 			Field = Field.Create(State, Settings.YourBot);
 		}
 
-		public MoveInstruction GetMove(TimeSpan time)
+		public BotResponse GetResponse(TimeSpan time)
 		{
 			var path = DecisionMaker.GetMove(Field, State.Position, Current, Next);
-			var nw = Field.Apply(Current[path.Option], path.Target);
 			var move = MoveInstruction.Create(Current[path.Option], State.Position, path.Target);
-			return move;
+			return new BotResponse()
+			{
+				Move = move,
+				Log = DecisionMaker.Pars.ToString(),
+			};
 		}
 	}
 }

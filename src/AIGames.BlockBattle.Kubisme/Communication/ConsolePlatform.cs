@@ -18,18 +18,22 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 		protected TextReader Reader { get; set; }
 		/// <summary>The reader.</summary>
 		protected TextWriter Writer { get; set; }
+		/// <summary>The reader.</summary>
+		protected TextWriter Logger { get; set; }
 
 		/// <summary>Constructs a console platform with Console.In and Console.Out.</summary>
-		protected ConsolePlatform() : this(Console.In, Console.Out) { }
+		protected ConsolePlatform() : this(Console.In, Console.Out, Console.Error) { }
 
 		/// <summary>Constructs a console platform.</summary>
-		protected ConsolePlatform(TextReader reader, TextWriter writer)
+		protected ConsolePlatform(TextReader reader, TextWriter writer, TextWriter logger)
 		{
 			if (reader == null) { throw new ArgumentNullException("reader"); }
 			if (writer == null) { throw new ArgumentNullException("writer"); }
+			if (logger == null) { throw new ArgumentNullException("logger"); }
 
 			this.Reader = reader;
 			this.Writer = writer;
+			this.Logger = logger;
 		}
 
 		/// <summary>Runs it all.</summary>
@@ -58,8 +62,24 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 				else if (instruction is RequestMoveInstruction)
 				{
 					bot.Update(state);
-					var move = bot.GetMove(((RequestMoveInstruction)instruction).Time);
-					Writer.WriteLine(move);
+#if !DEBUG
+					try
+					{
+#endif
+						var response = bot.GetResponse(((RequestMoveInstruction)instruction).Time);
+						Writer.WriteLine(response.Move);
+						if (!String.IsNullOrEmpty(response.Log))
+						{
+							Logger.WriteLine(response.Log);
+						}
+#if !DEBUG
+					}
+					catch (Exception x)
+					{
+						Writer.WriteLine(MoveInstruction.NoMoves);
+						Logger.WriteLine(x);
+					}
+#endif
 				}
 			}
 		}

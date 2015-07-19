@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bits.cs" />
+    <Compile Include="Communication\BotResponse.cs" />
     <Compile Include="Communication\ActionType.cs" />
     <Compile Include="Communication\IBot.cs" />
     <Compile Include="Communication\Instruction.cs" />

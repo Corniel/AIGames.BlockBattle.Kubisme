@@ -73,7 +73,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private int Randomize(int value)
 		{
 			var val = value;
-			val += Rnd.Next(-3, 3) * Rnd.Next(0, 3) * Rnd.Next(0, 3) * Rnd.Next(0, 3) * Rnd.Next(0, 3);
+			val +=
+				Rnd.Next(-3, 3) *
+				Rnd.Next(0, 3) * 
+				Rnd.Next(0, 3) * 
+				Rnd.Next(0, 3) * 
+				Rnd.Next(0, 3);
 			return val;
 		}
 

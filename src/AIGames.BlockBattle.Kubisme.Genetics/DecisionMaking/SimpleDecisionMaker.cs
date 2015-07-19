@@ -1,12 +1,16 @@
 ﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
+using AIGames.BlockBattle.Kubisme.Evaluation;
 using AIGames.BlockBattle.Kubisme.Models;
 using System.Collections.Generic;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking
 {
-	public class SimpleDecisionMaker : DecisionMaker
+	public class SimpleDecisionMaker : IDecisionMaker
 	{
-		protected override MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
+		public IEvaluator Evaluator { get; set; }
+		public IMoveGenerator Generator { get; set; }
+
+		protected MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
 			var bestPath = MovePath.None;
 			var bestScore = int.MinValue;
@@ -27,6 +31,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking
 				}
 			}
 			return bestPath;
+		}
+
+		public MovePath GetMove(Field field, Position position, Block current, Block next)
+		{
+			var candidates = Generator.GetMoves(field, current, position);
+			return GetBestMove(position, next, candidates);
 		}
 	}
 }

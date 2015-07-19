@@ -1,5 +1,6 @@
 ﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
 using AIGames.BlockBattle.Kubisme.Evaluation;
+using AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking;
 using AIGames.BlockBattle.Kubisme.Models;
 using NUnit.Framework;
 
@@ -11,7 +12,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		[Test]
 		public void GetMove_EmptyBoard_()
 		{
-			var dm = new DecisionMaker()
+			var dm = new SimpleDecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator()
 				{
@@ -30,7 +31,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		[Test]
 		public void GetMove_BoardWithRowToClear_()
 		{
-			var dm = new DecisionMaker()
+			var dm = new SimpleDecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator()
 				{

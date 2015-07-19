@@ -65,7 +65,6 @@
     <Compile Include="DecisionMaking\BlockNode.cs" />
     <Compile Include="DecisionMaking\BlockRndNode.cs" />
     <Compile Include="DecisionMaking\BlockRootNode.cs" />
-    <Compile Include="DecisionMaking\DecisionMaker.cs" />
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\IBlockNode.cs" />
     <Compile Include="DecisionMaking\IMoveGenerator.cs" />

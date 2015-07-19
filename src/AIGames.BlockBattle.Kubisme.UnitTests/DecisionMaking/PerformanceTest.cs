@@ -16,7 +16,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 		public const int Runs = 100;
 
 		[Test]
-		public void Run_DecisionMaker_92procent()
+		public void Run_NodeDecisionMaker_92procent()
 		{
 			var dm = new NodeDecisionMaker()
 			{
@@ -44,34 +44,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			};
 			TestSimulation(dm, Runs);
 		}
-		[Test]
-		public void Run_DecisionMakerWithRowCountWeights_67procent()
-		{
-			var dm = new DecisionMaker()
-			{
-				Evaluator = new SimpleEvaluator()
-				{
-					Parameters = new SimpleParameters()
-					{
-						RowWeights = new int[] { -449, -401, -130, -149, -68, -48, -20, 6, 10, 20, 7, 10, 13, 35, 9, 37, 10, 8, 28, -6, 45 },
-						RowCountWeights = new int[] { 73, 15, 27, 49, 47, 72, 88, 103, 95, 84, -51 },
-						Points = 2450,
-						Combo = 990,
-						Holes = -1391,
-						Blockades = -1207,
-						WallsLeft = 946,
-						WallsRight = 162,
-						Floor = -544,
-						NeighborsHorizontal = -757,
-						NeighborsVertical = 1011,
-					},
-				},
-				Generator = new MoveGenerator(),
-			};
-			TestSimulation(dm, Runs);
-		}
-
-
+		
 		[Test]
 		public void Run_SimpleDecisionMaker_62procent()
 		{

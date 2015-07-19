@@ -48,8 +48,10 @@
   <ItemGroup>
     <Compile Include="DecisionMaking\SimpleDecisionMaker.cs" />
     <Compile Include="FieldVisualizer.cs" />
+    <Compile Include="Models\ComboAddictOpponentProfile.cs" />
     <Compile Include="Models\DefaultOpponentProfile.cs" />
     <Compile Include="Models\GameSimulation.cs" />
+    <Compile Include="Models\IOpponentProfile.cs" />
     <Compile Include="ParameterRandomizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

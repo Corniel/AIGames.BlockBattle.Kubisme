@@ -15,7 +15,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics.Models
 		public MT19937Generator Rnd { get; set; }
 		public IDecisionMaker DecisionMaker { get; set; }
 		public List<Field> Turns { get; protected set; }
-		public DefaultOpponentProfile Profile { get; set; }
+		public IOpponentProfile Profile { get; set; }
 		public Stopwatch Stopwatch { get; protected set; }
 
 		public SimScore Run()

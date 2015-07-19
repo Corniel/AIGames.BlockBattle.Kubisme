@@ -203,7 +203,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				var game = new GameSimulation()
 				{
 					Rnd = Rnd,
-					Profile = new DefaultOpponentProfile(),
+					Profile = new ComboAddictOpponentProfile(),
 					DecisionMaker = DecisionMaker,
 				};
 				var score = game.Run();

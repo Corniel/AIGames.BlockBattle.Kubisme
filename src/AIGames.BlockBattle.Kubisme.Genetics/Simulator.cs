@@ -121,13 +121,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						compare = result.Scores.CompareTo(BestResult.Scores);
 						if (compare < 0)
 						{
-							if (result.Scores.Score > 0)
-							{
-							}
 							queue.Clear();
 						}
-						Results.Add(result);
-						break;
+						// At least 25% of the runs should have be run to add it.
+						if (result.Simulations > RunsRetry >> 2)
+						{
+							Results.Add(result);
+							break;
+						}
 					}
 					LogStatus(false);
 				}

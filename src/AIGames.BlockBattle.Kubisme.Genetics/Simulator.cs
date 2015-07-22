@@ -23,7 +23,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			DecisionMaker = new SimpleDecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator(),
-				Generator = new MoveGenerator(),
+				Generator = new SimpleMoveGenerator(),
 			};
 
 			ResultCount = 32;

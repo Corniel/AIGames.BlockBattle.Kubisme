@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 {
-	public class MoveGenerator : AIGames.BlockBattle.Kubisme.DecisionMaking.IMoveGenerator
+	public class SimpleMoveGenerator : IMoveGenerator
 	{
 		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, Position pos)
 		{

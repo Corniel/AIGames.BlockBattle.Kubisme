@@ -18,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
-				Generator = new MoveGenerator(),
+				Generator = new SimpleMoveGenerator(),
 			};
 
 			var field = Field.Create(0, 0, @"
@@ -37,7 +37,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
-				Generator = new MoveGenerator(),
+				Generator = new SimpleMoveGenerator(),
 			};
 
 			var field = Field.Create(0, 0, @"

@@ -16,7 +16,7 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
-				Generator = new MoveGenerator(),
+				Generator = new SimpleMoveGenerator(),
 				MaximumDuration = TimeSpan.FromMilliseconds(500),
 			};
 		}

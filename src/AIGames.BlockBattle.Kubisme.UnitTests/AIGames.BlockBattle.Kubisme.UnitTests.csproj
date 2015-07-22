@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Communication\ConsolePlatformTest.cs" />
     <Compile Include="Communication\InstructionTest.cs" />
+    <Compile Include="DecisionMaking\BlockPathTest.cs" />
     <Compile Include="DecisionMaking\PerformanceTest.cs" />
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Deployoment\DeployerTest.cs" />

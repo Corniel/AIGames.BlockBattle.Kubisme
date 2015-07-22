@@ -38,7 +38,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 						NeighborsVertical = 26,
 					}
 				},
-				Generator = new MoveGenerator(),
+				Generator = new SimpleMoveGenerator(),
 				MaximumDuration = TimeSpan.FromMilliseconds(5),
 				MaximumDepth = 4,
 			};
@@ -67,7 +67,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 						NeighborsVertical = 102,
 					},
 				},
-				Generator = new MoveGenerator(),
+				Generator = new SimpleMoveGenerator(),
 			};
 			TestSimulation(dm, Runs);
 		}
@@ -93,7 +93,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 						NeighborsVertical = 1011,
 					},
 				},
-				Generator = new MoveGenerator(),
+				Generator = new SimpleMoveGenerator(),
 			};
 			TestSimulation(dm, Runs);
 		}

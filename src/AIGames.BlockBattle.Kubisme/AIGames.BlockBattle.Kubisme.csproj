@@ -63,6 +63,7 @@
     <Compile Include="DecisionMaking\ApplyParameters.cs" />
     <Compile Include="DecisionMaking\Block1Node.cs" />
     <Compile Include="DecisionMaking\BlockNode.cs" />
+    <Compile Include="DecisionMaking\BlockPath.cs" />
     <Compile Include="DecisionMaking\BlockRndNode.cs" />
     <Compile Include="DecisionMaking\BlockRootNode.cs" />
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="KubismeBot.cs" />
     <Compile Include="Models\Move.cs" />
     <Compile Include="Models\MoveCandiate.cs" />
-    <Compile Include="DecisionMaking\MoveGenerator.cs" />
+    <Compile Include="DecisionMaking\SimpleMoveGenerator.cs" />
     <Compile Include="Models\MovePath.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Field.cs" />

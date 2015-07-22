@@ -131,6 +131,7 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		/// <summary>Returns a field, with locked rows.</summary>
 		public Field LockRows(int count)
 		{
+			if (count == 0) { return this; }
 			for(var i = 0; i < count; i++)
 			{
 				if (rows[i].row != Row.Empty)

@@ -3,6 +3,12 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 15
+----------
+Introduced a rudimental combo potential detection, and tweaked (increased) the
+branching factor a bit. Based on a stronger virtual opponent and the compo 
+potential, updated parameters as well.
+
 Version 14
 ----------
 Fixed the determination of blockades, and of the the contacts with the right 

@@ -39,6 +39,10 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				pars = value as SimpleParameters;
 			}
 		}
+		/// <summary>A set of masks with 7 blocks and one hole.</summary>
+		public static readonly HashSet<int> Row7ComboPotential = new HashSet<int>() { 0X03F8, 0X03F1, 0X03E3, 0X03C7, 0X038F, 0X031F, 0X023F, 0X007F, };
+		/// <summary>A set of masks with 8 blocks and one hole.</summary>
+		public static readonly HashSet<int> Row8ComboPotential = new HashSet<int>() { 0X03FC, 0X03F9, 0X03F3, 0X03E7, 0X03CF, 0X039F, 0X033F, 0X027F, 0X00FF, };
 
 		protected SimpleParameters pars { get; set; }
 
@@ -51,13 +55,17 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 
 			int filterTopColomns = 0;
 			int filterBlockades = 0;
+			int filterComboPotential = 0;
 			var holes = 0;
 			var wallLeft = 0;
 			var wallRight = 0;
 			var blockades = 0;
 			var neighborsH = 0;
 			var neighborsV = 0;
+			var comboPotential = 0;
 			ushort previous = 0;
+
+			var hasComboPotential = true;
 
 			// loop through the rows.
 			for (var r = 0; r < field.RowCount; r++)
@@ -92,6 +100,41 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 					wallRight = 0;
 				}
 
+				// check for rows who can be filled in a combo.
+				if (hasComboPotential)
+				{
+					if (rowCount == 7)
+					{
+						if (Row7ComboPotential.Contains(row | filterComboPotential))
+						{
+							comboPotential++;
+						}
+						else
+						{
+							hasComboPotential = false;
+						}
+					}
+					else if (rowCount == 8)
+					{
+						if (Row8ComboPotential.Contains(row | filterComboPotential))
+						{
+							comboPotential++;
+						}
+						else
+						{
+							hasComboPotential = false;
+						}
+					}
+					else if (rowCount == 9)
+					{
+						hasComboPotential = false;
+					}
+					else
+					{
+						filterComboPotential |= row;
+					}
+				}
+
 				filterTopColomns |= row;
 
 				neighborsV += NeighborsVertical[row];
@@ -117,6 +160,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			score += blockades * pars.Blockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
+			score += pars.ComboPotential[comboPotential];
 			score += Row.Count[previous] * pars.Floor;
 
 			return score;

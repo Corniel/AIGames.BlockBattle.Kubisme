@@ -15,10 +15,12 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 		{
 			RowWeights = new int[21];
 			RowCountWeights = new int[11];
+			ComboPotential = new int[21];
 		}
 
 		public int[] RowWeights { get; set; }
 		public int[] RowCountWeights { get; set; }
+		public int[] ComboPotential { get; set; }
 
 		public int Points { get; set; }
 		public int Combo { get; set; }
@@ -65,19 +67,20 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// 2.109.520  0.12:51:52 Score: 87,96%, Win: 110,8, Lose: 109,7 Runs: 2.300, ID: 128474
+			// 1.826.151  0.07:11:11 Score: 30,79%, Win: 66,4, Lose: 59,4 Runs: 3.690, ID: 109340
 			{
-				RowWeights = new int[] { -85, -50, -97, -76, -2, 0, -1, 0, 0, 0, 1, 1, 1, 1, 0, 2, 1, 2, 1, 5, -121 },
-				RowCountWeights = new int[] { -20, 9, 26, 26, 35, 38, 48, 60, 57, 48, -1 },
-				Points = 114,
-				Combo = 8,
-				Holes = -66,
-				Blockades = -7,
-				WallsLeft = 28,
+				RowWeights = new int[] { -89, -58, -81, -130, -2, 0, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 1, 2, 1, 5, -173 },
+				RowCountWeights = new int[] { -24, 8, 20, 22, 27, 38, 48, 64, 59, 48, -7 },
+				ComboPotential = new int[] { -36, -16, -2, -22, -4, 8, 32, 24, 40, 30, 8, 12, -110, 8, -46, -40, -4, -48, -18, 24, 4 },
+				Points = 108,
+				Combo = 12,
+				Holes = -80,
+				Blockades = -9,
+				WallsLeft = 26,
 				WallsRight = 27,
 				Floor = -7,
 				NeighborsHorizontal = -15,
-				NeighborsVertical = 26,
+				NeighborsVertical = 28,
 			};
 		}
 	}

@@ -1,11 +1,7 @@
 ﻿using AIGames.BlockBattle.Kubisme.Evaluation;
 using AIGames.BlockBattle.Kubisme.Models;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 {
@@ -181,6 +177,116 @@ XXX.......";
 			var expected = 0;
 
 			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void TestComboPotential_0()
+		{
+			var field = @"
+.........X
+..X.......
+.X.XXXXXXX
+XXX...XXXX
+X..XXX.XXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				ComboPotential = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void TestComboPotential_1()
+		{
+			var field = @"
+.........X
+..X.......
+XXX..XXXXX
+XXX.X.XXXX
+X..XXX.XXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				ComboPotential = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TestComboPotential_2()
+		{
+			var field = @"
+.........X
+..X.......
+XXX..XXXXX
+XXX...XXXX
+X..XXX.XXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				ComboPotential = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
+			};
+			var expected = 2;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TestComboPotential_3()
+		{
+			var field = @"
+.........X
+........XX
+XXX..XXXXX
+XXX...XXXX
+...XXXXXXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				ComboPotential = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 },
+			};
+			var expected = 3;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Row7ComboPotential_All_Matches()
+		{
+			var act = SimpleEvaluator.Row7ComboPotential.Select(r => new Row((ushort)r).ToString()).ToArray();
+			var exp = new string[] 
+			{ 
+				"...XXXXXXX",
+				"X...XXXXXX",
+				"XX...XXXXX",
+				"XXX...XXXX",
+				"XXXX...XXX",
+				"XXXXX...XX",
+				"XXXXXX...X",
+				"XXXXXXX...",
+			};
+			CollectionAssert.AreEqual(exp, act);
+		}
+		[Test]
+		public void Row8ComboPotential_All_Matches()
+		{
+			var act = SimpleEvaluator.Row8ComboPotential.Select(r => new Row((ushort)r).ToString()).ToArray();
+			var exp = new string[] 
+			{ 
+				"..XXXXXXXX",
+				"X..XXXXXXX",
+				"XX..XXXXXX",
+				"XXX..XXXXX",
+				"XXXX..XXXX",
+				"XXXXX..XXX",
+				"XXXXXX..XX",
+				"XXXXXXX..X",
+				"XXXXXXXX..",
+			};
+			CollectionAssert.AreEqual(exp, act);
 		}
 
 		private static void Test(string str, SimpleParameters pars, int expected)

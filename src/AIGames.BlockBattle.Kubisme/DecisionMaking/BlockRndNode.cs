@@ -1,15 +1,15 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace AIGames.BlockBattle.Kubisme.DecisionMaking
+namespace AIGames.BlockBattle.Kubisme
 {
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	public class BlockRndNode : IBlockNode
 	{
+		public static readonly int[] TestNodes = new int[] { 1, 4 };
 		public const int BranchingFactor = 2;
 
 		public BlockRndNode(Field field, byte depth, int score)
@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 			this.ScoreField = score;
 		}
 
-		public List<BlockRndNode>[] Children { get; protected set; }
+		public List<BlockRndNodes> Children { get; protected set; }
 
 		public void Apply(byte depth, ApplyParameters pars)
 		{
@@ -28,39 +28,55 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 			{
 				if (Children == null)
 				{
-					Children = new List<BlockRndNode>[7];
+					Children = new List<BlockRndNodes>();
 
-					for (var i = 0; i < 7 && pars.HasTimeLeft; i++)
+					foreach(var block in Block.All)
 					{
-						var list = new List<BlockRndNode>();
-						var block = Block.All[i];
-						foreach (var candidate in pars.Generator.GetMoves(Field, block, Position.Start))
+						var nodes = new BlockRndNodes();
+						foreach (var field in pars.Generator.GetFields(Field, block, Position.Start, false))
 						{
 							if (!pars.HasTimeLeft) { return; }
-							var score = pars.Evaluator.GetScore(candidate.Field);
-							var child = new BlockRndNode(candidate.Field, Depth, score);
+							var score = pars.Evaluator.GetScore(field);
+							var locks = (pars.Points[Depth + 1] >> 2) - 20 + field.RowCount;
+							var child = new BlockRndNode(locks > 0 ? field.LockRows(locks) : field, Depth, score);
 							pars.Evaluations++;
-							list.Add(child);
+							nodes.Add(child);
 						}
-						list.Sort();
-						Children[i] = list;
+						nodes.Sort();
+						Children.Add(nodes);
 					}
 				}
 				else
 				{
-					foreach (var list in Children)
+					if (Children.Count == 7)
 					{
-						foreach (var child in list.Take(BranchingFactor))
+						foreach (var test in TestNodes)
 						{
-							child.Apply(depth, pars);
+							var nodes = Children[test];
+							foreach (var child in nodes.Take(BranchingFactor))
+							{
+								child.Apply(depth, pars);
+							}
+							nodes.Sort();
 						}
-						list.Sort();
 					}
+					else
+					{
+						foreach (var nodes in Children)
+						{
+							foreach (var child in nodes.Take(BranchingFactor))
+							{
+								child.Apply(depth, pars);
+							}
+							nodes.Sort();
+						}
+					}
+					Children.Sort();
 				}
 				Score = ScoreField;
-				foreach (var list in Children)
+				foreach (var nodes in Children)
 				{
-					Score += list == null || list.Count == 0 ? pars.Evaluator.LostScore : list[0].Score;
+					Score += nodes.Score;
 				}
 				// Divide by 8.
 				Score >>= 3;

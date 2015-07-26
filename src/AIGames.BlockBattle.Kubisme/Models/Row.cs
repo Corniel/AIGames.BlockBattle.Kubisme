@@ -1,11 +1,18 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace AIGames.BlockBattle.Kubisme.Models
+namespace AIGames.BlockBattle.Kubisme
 {
 	public struct Row
 	{
+		/// <summary>A set of masks with 7 blocks and one hole.</summary>
+		public static readonly HashSet<int> Row7BlockOneHole = new HashSet<int>() { 0X03F8, 0X03F1, 0X03E3, 0X03C7, 0X038F, 0X031F, 0X023F, 0X007F, };
+		/// <summary>A set of masks with 8 blocks and one hole.</summary>
+		public static readonly HashSet<int> Row8BlockOneHole = new HashSet<int>() { 0X03FC, 0X03F9, 0X03F3, 0X03E7, 0X03CF, 0X039F, 0X033F, 0X027F, 0X00FF, };
+
+
 		[SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline", Justification = "Too complex to generate otherwise.")]
 		static Row()
 		{

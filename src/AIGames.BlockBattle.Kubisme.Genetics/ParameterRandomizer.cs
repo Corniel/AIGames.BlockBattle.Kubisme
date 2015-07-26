@@ -74,10 +74,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			var val = value;
 			val +=
-				Rnd.Next(-3, 3) *
-				Rnd.Next(0, 3) * 
-				Rnd.Next(0, 3) * 
-				Rnd.Next(0, 3) * 
+				Rnd.Next(-8, 9) *
+				Rnd.Next(0, 3) *
+				Rnd.Next(0, 3) *
+				Rnd.Next(0, 3) *
 				Rnd.Next(0, 3);
 			return val;
 		}

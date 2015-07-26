@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace AIGames.BlockBattle.Kubisme.Models
+namespace AIGames.BlockBattle.Kubisme
 {
 	public class Block
 	{
@@ -202,7 +202,8 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			sbyte left, sbyte right,
 			sbyte top, sbyte bottom,
 			byte l0, byte l1, byte l2, byte l3,
-			RotationType r, params Block[] variations)
+			RotationType r, 
+			params Block[] variations)
 		{
 			Height = height;
 			Width = width;
@@ -213,13 +214,50 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			Top = top;
 			Bottom = bottom;
 
+			for (var l = 0; l < 4; l++)
+			{
+				ushort line = 0;
+				switch (l)
+				{
+					case 0: line = l0; break;
+					case 1: line = l1; break;
+					case 2: line = l2; break;
+					case 3: line = l3; break;
+				}
+
+				lines[l, 0] = (ushort)(line >> 1);
+				lines[l, 1] = line;
+
+				for (var i = 1; i < 10; i++)
+				{
+					lines[l, i + 1] = (ushort)(line << i);
+				}
+			}
+
 			Line0 = l0;
 			Line1 = l1;
 			Line2 = l2;
 			Line3 = l3;
 
+			var minCol = 0 - Left;
+			var maxCol = 10 - 3 + Right;
+			Columns = new sbyte[maxCol - minCol];
+			for (var i = 0; i < Columns.Length; i++)
+			{
+				Columns[i] = (sbyte)minCol++;
+			}
 			Rotation = r;
+			switch (r)
+			{
 
+				case RotationType.Left: InitialPath = BlockPath.Left; break;
+				case RotationType.Uturn: InitialPath = BlockPath.Uturn; break;
+				case RotationType.Right: InitialPath = BlockPath.Right; break;
+				case RotationType.None:
+				default: InitialPath = BlockPath.None; break;
+					
+			}
+			 
 			var list = variations.ToList();
 			list.Insert(0, this);
 			var copy = list.ToArray();
@@ -236,6 +274,9 @@ namespace AIGames.BlockBattle.Kubisme.Models
 			Uturn = 2,
 			Right = 3,
 		}
+		private readonly ushort[,] lines = new ushort[4, 16];
+
+		public ushort this[int line, int pos] { get { return lines[line, pos + 1]; } }
 
 		/// <summary>Gets a line based on the index.</summary>
 		public byte this[int line]
@@ -264,6 +305,10 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		public readonly sbyte Right;
 		public readonly sbyte Top;
 		public readonly sbyte Bottom;
+
+		public readonly sbyte[] Columns;
+
+		public readonly BlockPath InitialPath;
 
 		public int Count
 		{

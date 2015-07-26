@@ -1,4 +1,4 @@
-﻿namespace AIGames.BlockBattle.Kubisme.Evaluation
+﻿namespace AIGames.BlockBattle.Kubisme
 {
 	public interface IParameters { }
 }

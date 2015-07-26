@@ -1,9 +1,7 @@
-﻿using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Models;
-using System;
+﻿using System;
 using System.Diagnostics;
 
-namespace AIGames.BlockBattle.Kubisme.DecisionMaking
+namespace AIGames.BlockBattle.Kubisme
 {
 	public class ApplyParameters
 	{
@@ -13,7 +11,10 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 		{
 			sw = Stopwatch.StartNew();
 			MaximumDepth = int.MaxValue;
+			Points = new int[10];
 		}
+
+		public int[] Points { get; set; }
 
 		public int MaximumDepth { get; set; }
 		public bool HasTimeLeft { get { return Elapsed < MaximumDuration; } }

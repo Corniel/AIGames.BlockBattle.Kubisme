@@ -1,5 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace AIGames.BlockBattle.Kubisme.Communication

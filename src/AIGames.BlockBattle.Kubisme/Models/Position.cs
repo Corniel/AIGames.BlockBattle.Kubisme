@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace AIGames.BlockBattle.Kubisme.Models
+namespace AIGames.BlockBattle.Kubisme
 {
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	public struct Position
@@ -26,6 +26,10 @@ namespace AIGames.BlockBattle.Kubisme.Models
 		private sbyte row;
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private sbyte col;
+
+		public Position Left { get { return new Position(col - 1, row); } }
+		public Position Right { get { return new Position(col + 1, row); } }
+		public Position Drop { get { return new Position(col, row + 1); } }
 
 		public override string ToString() { return String.Format("{0},{1}", Col, Row); }
 

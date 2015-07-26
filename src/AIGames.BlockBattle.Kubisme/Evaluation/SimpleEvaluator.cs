@@ -1,7 +1,6 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace AIGames.BlockBattle.Kubisme.Evaluation
+namespace AIGames.BlockBattle.Kubisme
 {
 	public class SimpleEvaluator : IEvaluator
 	{
@@ -39,11 +38,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				pars = value as SimpleParameters;
 			}
 		}
-		/// <summary>A set of masks with 7 blocks and one hole.</summary>
-		public static readonly HashSet<int> Row7ComboPotential = new HashSet<int>() { 0X03F8, 0X03F1, 0X03E3, 0X03C7, 0X038F, 0X031F, 0X023F, 0X007F, };
-		/// <summary>A set of masks with 8 blocks and one hole.</summary>
-		public static readonly HashSet<int> Row8ComboPotential = new HashSet<int>() { 0X03FC, 0X03F9, 0X03F3, 0X03E7, 0X03CF, 0X039F, 0X033F, 0X027F, 0X00FF, };
-
+	
 		protected SimpleParameters pars { get; set; }
 
 		/// <summary>Gets a score only based on characters of the current state.</summary>
@@ -68,11 +63,9 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			var hasComboPotential = true;
 
 			// loop through the rows.
-			for (var r = 0; r < field.RowCount; r++)
+			for (var r = field.FirstFilled; r < field.RowCount; r++)
 			{
-				var rw = field[r];
-				var row = rw.row;
-				if (row == Row.Empty) { continue; }
+				var row = field[r].row;
 
 				var rowCount = Row.Count[row];
 				var rowMirrored = Row.Filled ^ row;
@@ -105,7 +98,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 				{
 					if (rowCount == 7)
 					{
-						if (Row7ComboPotential.Contains(row | filterComboPotential))
+						if (Row.Row7BlockOneHole.Contains(row | filterComboPotential))
 						{
 							comboPotential++;
 						}
@@ -116,7 +109,7 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 					}
 					else if (rowCount == 8)
 					{
-						if (Row8ComboPotential.Contains(row | filterComboPotential))
+						if (Row.Row8BlockOneHole.Contains(row | filterComboPotential))
 						{
 							comboPotential++;
 						}
@@ -143,11 +136,10 @@ namespace AIGames.BlockBattle.Kubisme.Evaluation
 			}
 
 			// loop for blockades too.
-			for (var r = field.RowCount - 1; r >= 0; r--)
+			for (var r = field.RowCount - 1; r >= field.FirstFilled; r--)
 			{
 				var rw = field[r];
 				var row = rw.row;
-				if (row == Row.Empty) { break; }
 				filterBlockades |= Row.Filled ^ row;
 
 				var blockadesMask = filterBlockades & row;

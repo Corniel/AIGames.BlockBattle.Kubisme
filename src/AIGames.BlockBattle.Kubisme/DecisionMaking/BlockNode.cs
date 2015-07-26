@@ -1,11 +1,10 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace AIGames.BlockBattle.Kubisme.DecisionMaking
+namespace AIGames.BlockBattle.Kubisme
 {
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	public abstract class BlockNode<T> : IBlockNode where T : IBlockNode
@@ -26,7 +25,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 
 		public List<T> Children { get; protected set; }
 
-		public void Apply(byte depth, ApplyParameters pars)
+		public virtual void Apply(byte depth, ApplyParameters pars)
 		{
 			if (depth > Depth  && depth <= pars.MaximumDepth && pars.HasTimeLeft)
 			{
@@ -34,10 +33,11 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 				{
 					Children = new List<T>();
 					var block = GetBlock(pars);
-					foreach (var candidate in pars.Generator.GetMoves(Field, block, Position.Start))
+					foreach (var field in pars.Generator.GetFields(Field, block, Position.Start, true))
 					{
 						if (!pars.HasTimeLeft) { return; }
-						T child = Create(Depth, candidate.Field, candidate.Path, pars);
+						var locks = (pars.Points[Depth + 1] >> 2) - 20 + field.RowCount;
+						T child = Create(Depth, locks > 0 ? field.LockRows(locks) : field, pars);
 						pars.Evaluations++;
 						Children.Add(child);
 					}
@@ -61,7 +61,7 @@ namespace AIGames.BlockBattle.Kubisme.DecisionMaking
 			}
 		}
 
-		protected abstract T Create(byte depth, Field field, MovePath path, ApplyParameters pars);
+		protected abstract T Create(byte depth, Field field, ApplyParameters pars);
 		protected abstract Block GetBlock(ApplyParameters pars);
 		
 		public int CompareTo(object obj) { return CompareTo((IBlockNode)obj); }

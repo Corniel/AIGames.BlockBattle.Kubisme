@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text;
 
-namespace AIGames.BlockBattle.Kubisme.Evaluation
+namespace AIGames.BlockBattle.Kubisme
 {
 	[Serializable]
 	public class SimpleParameters : IParameters

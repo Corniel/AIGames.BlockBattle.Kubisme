@@ -1,6 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-
-namespace AIGames.BlockBattle.Kubisme.Genetics.Models
+﻿namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public interface IOpponentProfile
 	{

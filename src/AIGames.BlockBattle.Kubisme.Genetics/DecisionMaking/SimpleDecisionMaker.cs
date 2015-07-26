@@ -1,41 +1,43 @@
-﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-namespace AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking
+namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class SimpleDecisionMaker : IDecisionMaker
 	{
 		public IEvaluator Evaluator { get; set; }
 		public IMoveGenerator Generator { get; set; }
+		public int[] Points { get; set; }
+		public Field BestField { get; protected set; }
 
-		protected MovePath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
+		protected BlockPath GetBestMove(Position position, Block next, IEnumerable<MoveCandiate> candidates)
 		{
-			var bestPath = MovePath.None;
+			var bestPath = BlockPath.None;
 			var bestScore = int.MinValue;
 
 			foreach (var candidate in candidates)
 			{
-				var tests = Generator.GetMoves(candidate.Field, next, position);
+				var fields = Generator.GetFields(candidate.Field, next, position, true);
 
-				foreach (var test in tests)
+				foreach (var field in fields)
 				{
-					var score = Evaluator.GetScore(test.Field);
+					var score = Evaluator.GetScore(field);
 
 					if (score > bestScore)
 					{
 						bestPath = candidate.Path;
 						bestScore = score;
+						BestField = candidate.Field;
 					}
 				}
 			}
 			return bestPath;
 		}
 
-		public MovePath GetMove(Field field, Position position, Block current, Block next)
+		public BlockPath GetMove(Field field, Position position, Block current, Block next)
 		{
-			var candidates = Generator.GetMoves(field, current, position);
+			var candidates = Generator.GetMoves(field, current, position, true);
+		
 			return GetBestMove(position, next, candidates);
 		}
 	}

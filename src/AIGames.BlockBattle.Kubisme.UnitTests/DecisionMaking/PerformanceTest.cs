@@ -1,8 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Genetics;
-using AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Genetics.Models;
+﻿using AIGames.BlockBattle.Kubisme.Genetics;
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
@@ -13,7 +9,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 	[TestFixture]
 	public class PerformanceTest
 	{
-		public const int Runs = 100;
+		public const int Runs = 10;
 
 		[Test]
 		public void Run_NodeDecisionMaker_92procent()
@@ -38,8 +34,9 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 						NeighborsVertical = 26,
 					}
 				},
-				Generator = new SimpleMoveGenerator(),
-				MaximumDuration = TimeSpan.FromMilliseconds(5),
+				Points = new int[10],
+				Generator = new MoveGenerator(),
+				MaximumDuration = TimeSpan.FromMilliseconds(50),
 				MaximumDepth = 4,
 			};
 			TestSimulation(dm, Runs);
@@ -67,7 +64,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 						NeighborsVertical = 102,
 					},
 				},
-				Generator = new SimpleMoveGenerator(),
+				Generator = new MoveGenerator(),
 			};
 			TestSimulation(dm, Runs);
 		}
@@ -93,7 +90,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 						NeighborsVertical = 1011,
 					},
 				},
-				Generator = new SimpleMoveGenerator(),
+				Generator = new MoveGenerator(),
 			};
 			TestSimulation(dm, Runs);
 		}

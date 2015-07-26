@@ -1,10 +1,8 @@
-﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Troschuetz.Random.Generators;
 
-namespace AIGames.BlockBattle.Kubisme.Genetics.Models
+namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class GameSimulation
 	{
@@ -30,13 +28,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics.Models
 			{
 				var move = DecisionMaker.GetMove(field, Position.Start, current, next);
 
-				if (move.Equals(MovePath.None))
+				if (move.Equals(BlockPath.None))
 				{
 					Stopwatch.Stop();
 					return SimScore.Lost(Turns.Count, field.Points);
 				}
 
-				field = field.Apply(current[move.Option], move.Target);
+				field = DecisionMaker.BestField;
 				Turns.Add(field);
 
 				field = Profile.Apply(field, Turns.Count);

@@ -1,7 +1,6 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using System;
+﻿using System;
 
-namespace AIGames.BlockBattle.Kubisme.Genetics.Models
+namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class ComboAddictOpponentProfile : IOpponentProfile
 	{
@@ -60,8 +59,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics.Models
 				Combo = 0;
 			}
 
-			var lck = (PointsOwn >> 2) - (20 - field.RowCount);
-			return lck > 0 ? field.LockRows(lck) : field;
+			var locks = (PointsOwn >> 2) - (20 - field.RowCount);
+			return locks > 0 ? field.LockRows(locks) : field;
 		}
 
 		public bool IsAlive(Field field, int turn)

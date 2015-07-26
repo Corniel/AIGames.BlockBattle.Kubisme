@@ -1,7 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Models;
+﻿using AIGames.BlockBattle.Kubisme.Genetics;
 using NUnit.Framework;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
@@ -18,7 +15,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
-				Generator = new SimpleMoveGenerator(),
+				Generator = new MoveGenerator(),
 			};
 
 			var field = Field.Create(0, 0, @"
@@ -26,6 +23,11 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ..........
 ..........");
 			var path = dm.GetMove(field, new Position(4, -1), Block.O, Block.L);
+
+			var act = path.ToString();
+			var exp = "left,left,left,left";
+
+			Assert.AreEqual(exp, act);
 		}
 
 		[Test]
@@ -37,7 +39,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
-				Generator = new SimpleMoveGenerator(),
+				Generator = new MoveGenerator(),
 			};
 
 			var field = Field.Create(0, 0, @"
@@ -49,8 +51,10 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 XXX.XXXXXX");
 			var path = dm.GetMove(field, new Position(4, -1), Block.Z, Block.O);
 
-			Assert.AreEqual(Block.RotationType.Left, path.Option);
-			Assert.AreEqual(new Position(3, 3), path.Target);
+			var act = path.ToString();
+			var exp = "turnleft,left,down,down,down,down";
+
+			Assert.AreEqual(exp, act);
 		}
 	}
 }

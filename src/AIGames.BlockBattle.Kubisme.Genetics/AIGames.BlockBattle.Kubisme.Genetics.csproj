@@ -48,10 +48,10 @@
   <ItemGroup>
     <Compile Include="DecisionMaking\SimpleDecisionMaker.cs" />
     <Compile Include="FieldVisualizer.cs" />
-    <Compile Include="Models\ComboAddictOpponentProfile.cs" />
-    <Compile Include="Models\DefaultOpponentProfile.cs" />
-    <Compile Include="Models\GameSimulation.cs" />
-    <Compile Include="Models\IOpponentProfile.cs" />
+    <Compile Include="Opponent\ComboAddictOpponentProfile.cs" />
+    <Compile Include="Opponent\DefaultOpponentProfile.cs" />
+    <Compile Include="GameSimulation.cs" />
+    <Compile Include="Opponent\IOpponentProfile.cs" />
     <Compile Include="ParameterRandomizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,7 +62,6 @@
     <Compile Include="Simulator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

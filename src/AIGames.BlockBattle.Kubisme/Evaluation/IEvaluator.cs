@@ -1,6 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-
-namespace AIGames.BlockBattle.Kubisme.Evaluation
+﻿namespace AIGames.BlockBattle.Kubisme
 {
 	public interface IEvaluator
 	{

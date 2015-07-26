@@ -1,8 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Genetics.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Genetics.Models;
-using AIGames.BlockBattle.Kubisme.Genetics.Serialization;
+﻿using AIGames.BlockBattle.Kubisme.Genetics.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +19,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			DecisionMaker = new SimpleDecisionMaker()
 			{
 				Evaluator = new SimpleEvaluator(),
-				Generator = new SimpleMoveGenerator(),
+				Generator = new MoveGenerator(),
 			};
 
 			ResultCount = 32;

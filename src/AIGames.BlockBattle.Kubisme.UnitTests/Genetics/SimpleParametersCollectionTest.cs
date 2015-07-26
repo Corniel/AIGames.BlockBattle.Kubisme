@@ -1,5 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Genetics.Serialization;
+﻿using AIGames.BlockBattle.Kubisme.Genetics.Serialization;
 using NUnit.Framework;
 using System.IO;
 

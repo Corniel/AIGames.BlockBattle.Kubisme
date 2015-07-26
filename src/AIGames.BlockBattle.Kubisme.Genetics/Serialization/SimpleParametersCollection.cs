@@ -1,5 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.Evaluation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;

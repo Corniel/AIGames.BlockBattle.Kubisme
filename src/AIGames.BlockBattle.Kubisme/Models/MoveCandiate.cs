@@ -1,11 +1,11 @@
-﻿namespace AIGames.BlockBattle.Kubisme.Models
+﻿namespace AIGames.BlockBattle.Kubisme
 {
 	public struct MoveCandiate
 	{
-		public readonly MovePath Path;
+		public readonly BlockPath Path;
 		public readonly Field Field;
 
-		public MoveCandiate(MovePath path, Field field)
+		public MoveCandiate(BlockPath path, Field field)
 		{
 			Path = path;
 			Field = field;

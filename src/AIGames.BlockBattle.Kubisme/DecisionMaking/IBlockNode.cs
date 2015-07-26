@@ -1,7 +1,6 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using System;
+﻿using System;
 
-namespace AIGames.BlockBattle.Kubisme.DecisionMaking
+namespace AIGames.BlockBattle.Kubisme
 {
 	public interface IBlockNode: IComparable, IComparable<IBlockNode>
 	{

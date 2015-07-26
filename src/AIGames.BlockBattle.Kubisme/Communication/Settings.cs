@@ -5,8 +5,20 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 {
 	public class Settings
 	{
-		public  PlayerName YourBot { get; set; }
-
+		public PlayerName YourBot { get; set; }
+		public PlayerName OppoBot
+		{
+			get
+			{
+				switch (YourBot)
+				{
+					case PlayerName.Player1: return PlayerName.Player2;
+					case PlayerName.Player2: return PlayerName.Player1;
+					case PlayerName.None:
+					default: return PlayerName.None;
+				}
+			}
+		}
 
 		public bool Apply(IInstruction instruction)
 		{

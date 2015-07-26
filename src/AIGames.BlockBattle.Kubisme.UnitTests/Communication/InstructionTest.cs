@@ -1,5 +1,4 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
-using AIGames.BlockBattle.Kubisme.Models;
 using NUnit.Framework;
 using System;
 

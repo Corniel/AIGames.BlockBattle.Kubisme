@@ -65,10 +65,13 @@
     <Compile Include="DecisionMaking\BlockNode.cs" />
     <Compile Include="DecisionMaking\BlockPath.cs" />
     <Compile Include="DecisionMaking\BlockRndNode.cs" />
+    <Compile Include="DecisionMaking\BlockRndNodes.cs" />
     <Compile Include="DecisionMaking\BlockRootNode.cs" />
+    <Compile Include="Generation\IFieldGenerator.cs" />
+    <Compile Include="Generation\MoveGenerator.cs" />
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\IBlockNode.cs" />
-    <Compile Include="DecisionMaking\IMoveGenerator.cs" />
+    <Compile Include="Generation\IMoveGenerator.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMaker.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\IParameters.cs" />
@@ -76,13 +79,11 @@
     <Compile Include="Evaluation\SimpleParameters.cs" />
     <Compile Include="Models\Block.cs" />
     <Compile Include="KubismeBot.cs" />
-    <Compile Include="Models\Move.cs" />
     <Compile Include="Models\MoveCandiate.cs" />
-    <Compile Include="DecisionMaking\SimpleMoveGenerator.cs" />
-    <Compile Include="Models\MovePath.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Field.cs" />
     <Compile Include="Models\Row.cs" />
+    <Compile Include="Opponent\PointsPredictor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

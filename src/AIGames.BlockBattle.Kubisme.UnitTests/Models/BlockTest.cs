@@ -1,5 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 {

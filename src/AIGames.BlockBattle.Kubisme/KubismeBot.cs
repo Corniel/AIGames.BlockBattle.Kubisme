@@ -1,8 +1,6 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
-using AIGames.BlockBattle.Kubisme.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Models;
 using System;
+using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -16,14 +14,18 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
-				Generator = new SimpleMoveGenerator(),
-				MaximumDuration = TimeSpan.FromMilliseconds(500),
+				Generator = new MoveGenerator(),
+				MaximumDepth = 6,
+				MaximumDuration = TimeSpan.FromMilliseconds(700),
 			};
+			Predictor = new PointsPredictor();
 		}
 		public NodeDecisionMaker DecisionMaker { get; set; }
+		public PointsPredictor Predictor { get; set; }
 		public Settings Settings { get; set; }
 		public GameState State { get; set; }
 		public Field Field { get; set; }
+		public Field Opponent { get; set; }
 
 		public Block Current { get { return Block.Select(State.ThisPiece); } }
 		public Block Next { get { return Block.Select(State.NextPiece); } }
@@ -37,12 +39,17 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			State = state;
 			Field = Field.Create(State, Settings.YourBot);
+			Opponent = Field.Create(State, Settings.OppoBot);
 		}
 
 		public BotResponse GetResponse(TimeSpan time)
 		{
+			var ms = Math.Min(time.TotalMilliseconds / 2, 700);
+			DecisionMaker.MaximumDuration = TimeSpan.FromMinutes(ms);
+			DecisionMaker.Points = Predictor.GetPoints(Opponent, Current, Next);
+
 			var path = DecisionMaker.GetMove(Field, State.Position, Current, Next);
-			var move = MoveInstruction.Create(Current[path.Option], State.Position, path.Target);
+			var move = new MoveInstruction(path.Moves.ToArray());
 			return new BotResponse()
 			{
 				Move = move,

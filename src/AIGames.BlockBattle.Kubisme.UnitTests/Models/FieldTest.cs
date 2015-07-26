@@ -1,5 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.Models;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
@@ -65,7 +64,21 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ");
 			var act = field.Apply(Block.S, new Position(5, 2));
 			var exp = "..........|..........|......XX..|.....XXXX.";
-			Assert.AreEqual(exp, act.ToString());
+			AssertField(exp, 0, 0, 2, act);
+		}
+
+		[Test]
+		public void Apply_I_Added()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+..........
+.......XX.
+");
+			var act = field.Apply(Block.I, new Position(0, 2));
+			var exp = "..........|..........|..........|XXXX...XX.";
+			AssertField(exp, 0, 0, 3, act);
 		}
 
 		[Test]
@@ -82,12 +95,9 @@ XXXXXX.XX.
 ");
 			var act = field.Apply(Block.I.Variations[1], new Position(5, 3));
 			var exp = "..........|..........|..........|..........|..........|XXXXX.XXX.|XXXXXXXXX.";
-			Assert.AreEqual(exp, act.ToString());
-			Assert.AreEqual(14, act.Points);
-			Assert.AreEqual(1, act.Combo);
+			AssertField(exp, 14, 1, 5, act);
 		}
-
-
+		
 		[Test]
 		public void Apply_WithNegativeColumnPosition_Successful()
 		{
@@ -107,8 +117,15 @@ X.........
 XX....X..X
 XX.XXXXXXX");
 			Console.WriteLine(act);
-			Assert.AreEqual(exp.ToString(), act.ToString());
+			AssertField(exp.ToString(), 1, 1, 2, act);
+		}
 
+		private static void AssertField(string str, int points, int combo, int freeRows, Field act)
+		{
+			Assert.AreEqual(str, act.ToString());
+			Assert.AreEqual(points, act.Points, "Points");
+			Assert.AreEqual(combo, act.Combo, "Combo");
+			Assert.AreEqual(freeRows, act.FirstFilled, "Free rows");
 		}
 	}
 }

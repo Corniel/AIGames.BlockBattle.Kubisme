@@ -1,12 +1,12 @@
-﻿using AIGames.BlockBattle.Kubisme.Evaluation;
-using AIGames.BlockBattle.Kubisme.Models;
-
-namespace AIGames.BlockBattle.Kubisme.DecisionMaking
+﻿namespace AIGames.BlockBattle.Kubisme
 {
 	public interface IDecisionMaker
 	{
 		IEvaluator Evaluator { get; set; }
 		IMoveGenerator Generator { get; set; }
-		MovePath GetMove(Field field, Position position, Block current, Block next);
+		int[] Points { get; set; }
+		Field BestField { get; }
+		
+		BlockPath GetMove(Field field, Position position, Block current, Block next);
 	}
 }

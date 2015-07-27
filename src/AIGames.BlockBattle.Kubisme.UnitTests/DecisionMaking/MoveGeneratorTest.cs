@@ -31,15 +31,15 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 
 			var exp = new string[]
 			{
-				"down,down,down,down",
-				"left,down,down,down,down",
-				"left,left,down,down,down,down",
-				"left,left,left,down,down,down,down",
-				"left,left,left,left,down,down,down,down",
-				"right,down,down,down,down",
-				"right,right,down,down,down,down",
-				"right,right,right,down,down,down,down",
-				"right,right,right,right,down,down,down,down",
+				"left,left,left,left,drop",
+				"left,left,left,drop",
+				"left,left,drop",
+				"left,drop",
+				"drop",
+				"right,drop",
+				"right,right,drop",
+				"right,right,right,drop",
+				"right,right,right,right,drop",
 			};
 			var act = candiates.Select(c => c.ToString()).ToArray();
 			CollectionAssert.AreEqual(exp, act);
@@ -192,11 +192,11 @@ XXXXX.XXXX
 			var act = candiates.Select(c => c.ToString()).ToArray();
 			var exp = new string[]
 			{
-				"down",
-				"down,left",
-				"right,down",
-				"right,right,down",
-				"right,right,right,down",
+				"drop",
+				"right,drop",
+				"right,right,drop",
+				"right,right,right,drop",
+				"down,left,drop",
 			};
 
 			CollectionAssert.AreEqual(exp, act);

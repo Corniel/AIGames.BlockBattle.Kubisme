@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
+using System.IO;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
@@ -41,7 +42,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			};
 			TestSimulation(dm, Runs);
 		}
-		
+
 		[Test]
 		public void Run_SimpleDecisionMaker_62procent()
 		{
@@ -111,8 +112,15 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 					DecisionMaker = dm,
 				};
 				result.Add(simulation.Run());
+#if DEBUG
+				var dir = new DirectoryInfo(Path.Combine(@"..\..\..\..\img", DateTime.Now.ToString("yyyy-MM-dd hh_mm_ss_fff")));
+				dir.Create();
+
+				simulation.Draw(dir);
+#endif
 			}
 			sw.Stop();
+
 			Console.WriteLine("{0:0.0%}, {1:0.0} ms/game, Elapsed: {2}", result.Score, sw.Elapsed.TotalMilliseconds / runs, sw.Elapsed);
 			result.Sort();
 			Console.WriteLine(result[0]);

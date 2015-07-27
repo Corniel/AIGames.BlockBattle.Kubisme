@@ -104,6 +104,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public BlockPath AddLeft() { return Add(ActionType.Left); }
 		public BlockPath AddRight() { return Add(ActionType.Right); }
 		public BlockPath AddDown() { return Add(ActionType.Down); }
+		public BlockPath AddDrop() { return Add(ActionType.Drop); }
 
 		public BlockPath AddShift(int count)
 		{

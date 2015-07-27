@@ -25,7 +25,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 			var path = dm.GetMove(field, new Position(4, -1), Block.O, Block.L);
 
 			var act = path.ToString();
-			var exp = "left,left,left,left";
+			var exp = "right,right,right,right,drop";
 
 			Assert.AreEqual(exp, act);
 		}
@@ -52,7 +52,7 @@ XXX.XXXXXX");
 			var path = dm.GetMove(field, new Position(4, -1), Block.Z, Block.O);
 
 			var act = path.ToString();
-			var exp = "turnleft,left,down,down,down,down";
+			var exp = "turnleft,left,drop";
 
 			Assert.AreEqual(exp, act);
 		}

@@ -33,21 +33,4 @@
   <PostinstrumentEvent>
     <InstrEventExclude>false</InstrEventExclude>
   </PostinstrumentEvent>
-  <Reports>
-    <Report>
-      <Path>Report150710.vspx</Path>
-    </Report>
-    <Report>
-      <Path>Report150710(1).vspx</Path>
-    </Report>
-    <Report>
-      <Path>Report150710(2).vspx</Path>
-    </Report>
-    <Report>
-      <Path>Report150710(3).vspx</Path>
-    </Report>
-    <Report>
-      <Path>Report150710(4).vspx</Path>
-    </Report>
-  </Reports>
 </VSPerformanceSession>

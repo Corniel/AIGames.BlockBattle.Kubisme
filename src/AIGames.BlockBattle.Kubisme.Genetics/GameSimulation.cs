@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
@@ -55,5 +56,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 		}
 
+		public void Draw(DirectoryInfo dir)
+		{
+			var drawer = new FieldVisualizer(4);
+
+			for (var turn = 1; turn < Turns.Count; turn++)
+			{
+				drawer.Draw(Turns[turn], dir, turn);
+			}
+		}
 	}
 }

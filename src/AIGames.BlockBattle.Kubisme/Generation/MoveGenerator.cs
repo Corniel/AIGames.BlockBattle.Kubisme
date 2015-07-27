@@ -48,12 +48,12 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					for (var row = minRow; row < maxRow; row++)
 					{
-						var test = field.Test(block, new Position(col, row));
+						var test = field.Test(block, col, row);
 						if (test == Field.TestResult.True)
 						{
 							var target = new Position(col, row);
 							var applied = field.Apply(block, target);
-							yield return new MoveCandiate(block.InitialPath.AddShift(col - pos.Col), applied);
+							yield return new MoveCandiate(block.InitialPath.AddShift(col - pos.Col).AddDrop(), applied);
 						}
 						if (test != Field.TestResult.Retry)
 						{

@@ -1,6 +1,8 @@
 ﻿using System;
+#if DEBUG
 using System.Reflection;
 using System.Text;
+#endif
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -69,9 +71,9 @@ namespace AIGames.BlockBattle.Kubisme
 			return new SimpleParameters()
 			// 4.565.153  0.18:26:11 Score: 31,56%, Win: 66,2, Lose: 58,9 Runs: 11.763, ID: 194242
 			{
-				RowWeights = new int[] { -125, -58, -93, -122, -2, 0, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 1, 2, 1, 3, -173 },
-				RowCountWeights = new int[] { 42, 8, 20, 22, 31, 38, 48, 64, 59, 45, -31 },
-				ComboPotential = new int[] { -56 + 56, 0 + 56, -2 + 56, -22 + 56, -4 + 56, 8 + 56, 34 + 56, 22 + 56, 40 + 56, 20 + 56, 12 + 56, 32 + 56, -112 + 56, 12 + 56, -46 + 56, -32 + 56, -28 + 56, -46 + 56, -20 + 56, 20 + 56, 4 + 56 },
+				RowWeights = new int[] { -325, -258, -193, -122, -2, -1, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4 },
+				RowCountWeights = new int[] { 0, 8, 20, 22, 31, 38, 48, 64, 59, 45, 0 },
+				ComboPotential = new int[] { 0, 56, 60, 64, 70, 95, 100, 80, 90, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0,0 },
 				Points = 96,
 				Combo = 16,
 				Holes = -82,

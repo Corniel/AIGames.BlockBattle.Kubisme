@@ -152,6 +152,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Results.RemoveRange(ResultCount, Results.Count - ResultCount);
 			}
 			Simulate(Results[0], Results[0].Scores.Count < RunsMax ? RunsTest : 1);
+
+			foreach (var result in Results)
+			{
+				Simulate(result, 1);
+			}
+
 			Results.Sort(this);
 			LogStatus(BestResult.Id != best);
 
@@ -219,17 +225,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public int Compare(SimulationResult<SimpleParameters> l, SimulationResult<SimpleParameters> r)
 		{
-			var ls = l.Scores;
-			var rs = r.Scores;
-
-			var compare = rs.Score.CompareTo(ls.Score);
-			if (compare != 0) { return compare; }
-			
-			compare = ls.WinningLength.CompareTo(rs.WinningLength);
-			if (compare != 0) { return compare; }
-
-			compare = rs.LosingLength.CompareTo(ls.LosingLength);
-			return compare;
+			return l.Scores.CompareTo(r.Scores);
 		}
 	}
 }

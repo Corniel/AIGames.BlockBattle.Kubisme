@@ -372,5 +372,17 @@ namespace AIGames.BlockBattle.Kubisme
 				return sb.ToString();
 			}
 		}
+
+		/// <summary>Get the first row that should be tested for this block.</summary>
+		public int GetMinRow(Field field)
+		{
+			return field.FirstFilled - 4 + Bottom;
+		}
+
+		/// <summary>Get the last row (exclusive) that should be tested for this block.</summary>
+		public int GetMaxRow(Field field)
+		{
+			return field.RowCount - 3 + Bottom;
+		}
 	}
 }

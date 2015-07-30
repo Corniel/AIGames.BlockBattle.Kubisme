@@ -6,6 +6,7 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public struct Field
 	{
+		public static readonly Field None = new Field(-1, 0, 0, new Row[0]);
 		public static readonly Field Empty = Field.Create(0, 0, @"..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........");
 
 		private readonly Row[] rows;
@@ -155,12 +156,13 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Returns a field, with locked rows.</summary>
 		public Field LockRows(int count)
 		{
+			if (count >= RowCount) { return None; }
 			for(var i = 0; i < count; i++)
 			{
 				if (rows[i].row != Row.Empty)
 				{
 					// A lock will lead to death.
-					return new Field(Points, 0, new Row[0]);
+					return None;
 				}
 			}
 			var rs = new Row[rows.Length - count];

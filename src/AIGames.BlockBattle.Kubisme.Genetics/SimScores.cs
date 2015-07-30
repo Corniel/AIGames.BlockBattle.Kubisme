@@ -49,49 +49,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public int CompareTo(SimScores rght)
 		{
-			var count = Math.Min(Count, rght.Count);
-
-			var scoreCount = 1 + (count >> 1);
-
-			int leftS = (int)(Score * scoreCount);
-			int rghtS = (int)(rght.Score * scoreCount);
-
 			// Higher is better.
-			var compare = rghtS.CompareTo(leftS);
-			if (compare != 0) { return compare; }
-
-			var lengthCount = 1 + (count >> 4);
-
-			var leftL = (int)(LosingLength * lengthCount);
-			var rghtL = (int)(rght.LosingLength * lengthCount);
-
-			// Higher is better.
-			compare = rghtL.CompareTo(leftL);
-			if (compare != 0) { return compare; }
-
-			var leftW = (int)(WinningLength * lengthCount);
-			var rghtW = (int)(rght.WinningLength * lengthCount);
-
-			// If no win, ignore.
-			if (leftW > 0 && rghtW > 0)
-			{
-				// Lower is better.
-				compare = leftW.CompareTo(rghtW);
-				if (compare != 0) { return compare; }
-			}
-
-			// Rounded no differences, so unrounded.
-
-			// Higher is better.
-			compare = rght.Score.CompareTo(Score);
-			if (compare != 0) { return compare; }
-
-			// Higher is better.
-			compare = rght.LosingLength.CompareTo(LosingLength);
+			var compare = rght.Score.CompareTo(Score);
 			if (compare != 0) { return compare; }
 
 			// Lower is better.
 			compare = WinningLength.CompareTo(rght.WinningLength);
+			if (compare != 0) { return compare; }
+
+			// Higher is better.
+			compare = rght.LosingLength.CompareTo(LosingLength); 
 			return compare;
 		}
 	}

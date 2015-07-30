@@ -152,7 +152,7 @@ namespace AIGames.BlockBattle.Kubisme
 			score += blockades * pars.Blockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
-			score += pars.ComboPotential[comboPotential];
+			score += (1 + field.Combo) * pars.ComboPotential[comboPotential];
 			score += Row.Count[previous] * pars.Floor;
 
 			return score;

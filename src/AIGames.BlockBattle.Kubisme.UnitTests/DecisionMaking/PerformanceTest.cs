@@ -20,19 +20,20 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Evaluator = new SimpleEvaluator()
 				{
 					Parameters = new SimpleParameters()
-					// 2.109.520  0.12:51:52 Score: 87,96%, Win: 110,8, Lose: 109,7 Runs: 2.300, ID: 128474
+					// 4.565.153  0.18:26:11 Score: 31,56%, Win: 66,2, Lose: 58,9 Runs: 11.763, ID: 194242
 					{
-						RowWeights = new int[] { -85, -50, -97, -76, -2, 0, -1, 0, 0, 0, 1, 1, 1, 1, 0, 2, 1, 2, 1, 5, -121 },
-						RowCountWeights = new int[] { -20, 9, 26, 26, 35, 38, 48, 60, 57, 48, -1 },
-						Points = 114,
-						Combo = 8,
-						Holes = -66,
-						Blockades = -7,
-						WallsLeft = 28,
+						RowWeights = new int[] { -325, -258, -193, -122, -2, -1, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4 },
+						RowCountWeights = new int[] { 0, 8, 20, 22, 31, 38, 48, 64, 59, 45, 0 },
+						ComboPotential = new int[] { 0, 56, 60, 64, 70, 95, 100, 80, 90, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+						Points = 96,
+						Combo = 16,
+						Holes = -82,
+						Blockades = -9,
+						WallsLeft = 26,
 						WallsRight = 27,
 						Floor = -7,
 						NeighborsHorizontal = -15,
-						NeighborsVertical = 26,
+						NeighborsVertical = 28,
 					}
 				},
 				Points = new int[10],
@@ -51,18 +52,20 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Evaluator = new SimpleEvaluator()
 				{
 					Parameters = new SimpleParameters()
+					// 4.565.153  0.18:26:11 Score: 31,56%, Win: 66,2, Lose: 58,9 Runs: 11.763, ID: 194242
 					{
-						RowWeights = new int[] { -48, 38, -124, -86, -64, -35, -13, 0, 7, 16, 6, 12, 28, 25, 29, 22, 46, -17, 54, 32, 7 },
-						RowCountWeights = new int[11] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-						Points = 250,
-						Combo = 101,
-						Holes = -136,
-						Blockades = -121,
-						WallsLeft = 98,
-						WallsRight = 14,
-						Floor = -55,
-						NeighborsHorizontal = -80,
-						NeighborsVertical = 102,
+						RowWeights = new int[] { -325, -258, -193, -122, -2, -1, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4 },
+						RowCountWeights = new int[] { 0, 8, 20, 22, 31, 38, 48, 64, 59, 45, 0 },
+						ComboPotential = new int[] { 0, 56, 60, 64, 70, 95, 100, 80, 90, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+						Points = 96,
+						Combo = 16,
+						Holes = -82,
+						Blockades = -9,
+						WallsLeft = 26,
+						WallsRight = 27,
+						Floor = -7,
+						NeighborsHorizontal = -15,
+						NeighborsVertical = 28,
 					},
 				},
 				Generator = new MoveGenerator(),

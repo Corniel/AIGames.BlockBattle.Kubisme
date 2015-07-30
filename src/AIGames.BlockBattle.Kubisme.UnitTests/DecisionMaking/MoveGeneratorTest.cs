@@ -29,7 +29,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			var generator = new MoveGenerator();
 			var candiates = generator.GetMoves(Small, Block.O, Position.Start, true).ToList();
 
-			var exp = new string[]
+			var expPath = new string[]
 			{
 				"left,left,left,left,drop",
 				"left,left,left,drop",
@@ -41,8 +41,24 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				"right,right,right,drop",
 				"right,right,right,right,drop",
 			};
-			var act = candiates.Select(c => c.ToString()).ToArray();
-			CollectionAssert.AreEqual(exp, act);
+			var expField = new string[]
+			{
+				"..........|..........|..........|XX........|XX........",
+				"..........|..........|..........|.XX.......|.XX.......",
+				"..........|..........|..........|..XX......|..XX......",
+				"..........|..........|..........|...XX.....|...XX.....",
+				"..........|..........|..........|....XX....|....XX....",
+				"..........|..........|..........|.....XX...|.....XX...",
+				"..........|..........|..........|......XX..|......XX..",
+				"..........|..........|..........|.......XX.|.......XX.",
+				"..........|..........|..........|........XX|........XX",
+			};
+
+			var actPath = candiates.Select(c => c.Path.ToString()).ToArray();
+			var actField = candiates.Select(c => c.Field.ToString()).ToArray();
+
+			CollectionAssert.AreEqual(expPath, actPath);
+			CollectionAssert.AreEqual(expField, actField);
 		}
 
 		[Test]
@@ -68,6 +84,53 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			var candiates = generator.GetMoves(Small, Block.Z, Position.Start, true).ToList();
 
 			Assert.AreEqual(9 + 8, candiates.Count);
+
+			var expPath = new string[]
+			{
+				"left,left,left,left,drop",
+				"left,left,left,drop",
+				"left,left,drop",
+				"left,drop",
+				"drop",
+				"right,drop",
+				"right,right,drop",
+				"right,right,right,drop",
+				"turnleft,left,left,left,left,drop",
+				"turnleft,left,left,left,drop",
+				"turnleft,left,left,drop",
+				"turnleft,left,drop",
+				"turnleft,drop",
+				"turnleft,right,drop",
+				"turnleft,right,right,drop",
+				"turnleft,right,right,right,drop",
+				"turnleft,right,right,right,right,drop",
+			};
+			var expField = new string[]
+			{
+				"..........|..........|..........|XX........|.XX.......",
+				"..........|..........|..........|.XX.......|..XX......",
+				"..........|..........|..........|..XX......|...XX.....",
+				"..........|..........|..........|...XX.....|....XX....",
+				"..........|..........|..........|....XX....|.....XX...",
+				"..........|..........|..........|.....XX...|......XX..",
+				"..........|..........|..........|......XX..|.......XX.",
+				"..........|..........|..........|.......XX.|........XX",
+				"..........|..........|.X........|XX........|X.........",
+				"..........|..........|..X.......|.XX.......|.X........",
+				"..........|..........|...X......|..XX......|..X.......",
+				"..........|..........|....X.....|...XX.....|...X......",
+				"..........|..........|.....X....|....XX....|....X.....",
+				"..........|..........|......X...|.....XX...|.....X....",
+				"..........|..........|.......X..|......XX..|......X...",
+				"..........|..........|........X.|.......XX.|.......X..",
+				"..........|..........|.........X|........XX|........X.",
+			};
+
+			var actPath = candiates.Select(c => c.Path.ToString()).ToArray();
+			var actField = candiates.Select(c => c.Field.ToString()).ToArray();
+
+			CollectionAssert.AreEqual(expPath, actPath);
+			CollectionAssert.AreEqual(expField, actField);
 		}
 
 		[Test]

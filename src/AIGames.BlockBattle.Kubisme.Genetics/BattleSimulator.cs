@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BattleSimulator(MT19937Generator rnd)
 		{
 			File = new FileInfo("parameters.xml");
-			Capacity = 100;
+			Capacity = 97;
 			Stable = 1000;
 
 			Rnd = rnd;
@@ -29,6 +29,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			Bots = new List<BotData>();
 		}
 
+		public bool InParallel { get; set; }
 		public int LastId { get; protected set; }
 		public int Capacity { get; set; }
 		public int Simulations { get; set; }
@@ -105,23 +106,40 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 				var copy = pairings.OrderBy(p => Rnd.Next()).ToList();
 
-				try
+				if (InParallel)
 				{
-					Parallel.ForEach(copy, p =>
-					{
-						MT19937Generator rnd;
-						if (queue.Count > 0 && queue.TryDequeue(out rnd))
-						{
-							RunSimulation(p.Bot0, p.Bot1, rnd);
-							queue.Enqueue(rnd);
-						}
-					});
+					SimulateParallel(queue, copy);
 				}
-				catch( Exception x)
+				else
 				{
-					Console.WriteLine(x.Message);
+					Simulate(copy);
 				}
 			}
+		}
+
+		private void Simulate(IEnumerable<BattlePairing> pairings)
+		{
+			foreach(var p in pairings)
+			{
+				RunSimulation(p.Bot0, p.Bot1, Rnd);
+			}
+		}
+
+		private void SimulateParallel(ConcurrentQueue<MT19937Generator> queue, IEnumerable<BattlePairing> pairings)
+		{
+			try
+			{
+				Parallel.ForEach(pairings, p =>
+				{
+					MT19937Generator rnd;
+					if (queue.Count > 0 && queue.TryDequeue(out rnd))
+					{
+						RunSimulation(p.Bot0, p.Bot1, rnd);
+						queue.Enqueue(rnd);
+					}
+				});
+			}
+			catch { }
 		}
 
 		private IEnumerable<BattlePairing> GetRandomPairings(int number)
@@ -157,7 +175,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					Bots.Sort();
 				}
-				Console.Write("\r{0:d\\.hh\\:mm\\:ss} {1} ({2:0.00} /sec), Elo: {3:0.0}, Avg: {7:0.000}, Runs: {4}, ID: {5}, Parent: {6}     ",
+				Console.Write("\r{0:d\\.hh\\:mm\\:ss} {1} ({2:0.00} /sec), Elo: {3:0.0}, Avg: {7:0.0000}, Runs: {4}, ID: {5}, Parent: {6}     ",
 					sw.Elapsed, Simulations, Simulations / sw.Elapsed.TotalSeconds,
 					BestBot.Elo,
 					BestBot.Runs,
@@ -246,7 +264,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				int pos = 1;
 				foreach (var bot in Bots)
 				{
-					writer.WriteLine("{5,2} {0:0000.0} {4:0.000}, Runs: {1,5}, ID: {2,5}, Parent: {3,5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.Average, pos++);
+					writer.WriteLine("{5,2} {0:0000.0} {4:0.0000}, Runs: {1,5}, ID: {2,5}, Parent: {3,5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.Average, pos++);
 				}
 			}
 		}

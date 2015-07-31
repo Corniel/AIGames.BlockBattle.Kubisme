@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
@@ -8,10 +9,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public static void Main(string[] args)
 		{
 			Console.WindowWidth = 100;
-			//var simulator = new Simulator(new MT19937Generator());
-			//simulator.Run();
 
 			var simulator = new BattleSimulator(new MT19937Generator());
+			simulator.InParallel = args.Length > 0 && args.Any(arg => arg.Contains("par"));
 			simulator.Run();
 		}
 	}

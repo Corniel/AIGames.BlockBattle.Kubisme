@@ -22,8 +22,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 					Parameters = new SimpleParameters()
 					// 4.565.153  0.18:26:11 Score: 31,56%, Win: 66,2, Lose: 58,9 Runs: 11.763, ID: 194242
 					{
-						RowWeights = new int[] { -325, -258, -193, -122, -2, -1, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4 },
-						RowCountWeights = new int[] { 0, 8, 20, 22, 31, 38, 48, 64, 59, 45, 0 },
+						FreeCellWeights = new int[] { -325, -258, -193, -122, -2, -1, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4 },
 						ComboPotential = new int[] { 0, 56, 60, 64, 70, 95, 100, 80, 90, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 						Points = 96,
 						Combo = 16,
@@ -54,8 +53,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 					Parameters = new SimpleParameters()
 					// 4.565.153  0.18:26:11 Score: 31,56%, Win: 66,2, Lose: 58,9 Runs: 11.763, ID: 194242
 					{
-						RowWeights = new int[] { -325, -258, -193, -122, -2, -1, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4 },
-						RowCountWeights = new int[] { 0, 8, 20, 22, 31, 38, 48, 64, 59, 45, 0 },
+						FreeCellWeights = new int[] { -325, -258, -193, -122, -2, -1, -1, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4 },
 						ComboPotential = new int[] { 0, 56, 60, 64, 70, 95, 100, 80, 90, 70, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 						Points = 96,
 						Combo = 16,
@@ -81,8 +79,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				{
 					Parameters = new SimpleParameters()
 					{
-						RowWeights = new int[] { -449, -401, -130, -149, -68, -48, -20, 6, 10, 20, 7, 10, 13, 35, 9, 37, 10, 8, 28, -6, 45 },
-						RowCountWeights = new int[] { 73, 15, 27, 49, 47, 72, 88, 103, 95, 84, -51 },
+						FreeCellWeights = new int[] { -449, -401, -130, -149, -68, -48, -20, 6, 10, 20, 7, 10, 13, 35, 9, 37, 10, 8, 28, -6, 45 },
 						Points = 2450,
 						Combo = 990,
 						Holes = -1391,

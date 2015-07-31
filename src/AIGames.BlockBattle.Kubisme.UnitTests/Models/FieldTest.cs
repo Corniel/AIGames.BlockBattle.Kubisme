@@ -49,7 +49,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 			var act = field.LockRows(3);
 			
 			Assert.AreEqual(0, act.RowCount, "RowCount");
-			Assert.AreEqual(12, act.Points, "Points");
+			Assert.AreEqual(-1, act.Points, "Points");
 			Assert.AreEqual(0, act.Combo, "Combo");
 		}
 

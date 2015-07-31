@@ -38,7 +38,7 @@ namespace AIGames.BlockBattle.Kubisme
 				pars = value as SimpleParameters;
 			}
 		}
-	
+
 		protected SimpleParameters pars { get; set; }
 
 		/// <summary>Gets a score only based on characters of the current state.</summary>
@@ -48,6 +48,7 @@ namespace AIGames.BlockBattle.Kubisme
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
 
+			int filterFreeCells = Row.Filled;
 			int filterTopColomns = 0;
 			int filterBlockades = 0;
 			int filterComboPotential = 0;
@@ -62,18 +63,24 @@ namespace AIGames.BlockBattle.Kubisme
 
 			var hasComboPotential = true;
 
+			for (var r = 0; r < field.FirstFilled; r++)
+			{
+				score += 10 * pars.FreeCellWeights[r];
+			}
+
 			// loop through the rows.
 			for (var r = field.FirstFilled; r < field.RowCount; r++)
 			{
 				var row = field[r].row;
 
-				var rowCount = Row.Count[row];
 				var rowMirrored = Row.Filled ^ row;
 				var holesMask = filterTopColomns & rowMirrored;
 
-				score += pars.RowCountWeights[rowCount] * pars.RowWeights[r];
+				filterFreeCells &= rowMirrored;
+
+				score += Row.Count[filterFreeCells] * pars.FreeCellWeights[r];
 				holes += Row.Count[holesMask];
-				
+
 				// Give points for blocks against the wall, that are not under an hole.
 				if ((row & MaskWallLeft) != 0)
 				{
@@ -96,6 +103,8 @@ namespace AIGames.BlockBattle.Kubisme
 				// check for rows who can be filled in a combo.
 				if (hasComboPotential)
 				{
+					var rowCount = Row.Count[row];
+
 					if (rowCount == 7)
 					{
 						if (Row.Row7BlockOneHole.Contains(row | filterComboPotential))

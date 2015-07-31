@@ -26,6 +26,26 @@ XXX.......";
 		}
 
 		[Test]
+		public void Test_FreeCells_2()
+		{
+			var field = @"
+..........
+..X.......
+.X.XXXXXXX
+.XX...X.XX
+...XXX.XXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				FreeCellWeights = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+			};
+			var expected = 22;
+
+			Test(field, pars, expected);
+		}
+
+
+		[Test]
 		public void Test_Floor_3()
 		{
 			var field = @"

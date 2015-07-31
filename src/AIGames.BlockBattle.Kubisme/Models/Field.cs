@@ -167,7 +167,9 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			var rs = new Row[rows.Length - count];
 			Array.Copy(rows, count, rs, 0, rs.Length);
-			return new Field(Points, Combo, (byte)(FirstFilled - count), rs);
+			var free = FirstFilled - count;
+			if (free < 0) { free = 0; }
+			return new Field(Points, Combo, (byte)free, rs);
 		}
 
 		public override string ToString() { return String.Join("|", rows); }

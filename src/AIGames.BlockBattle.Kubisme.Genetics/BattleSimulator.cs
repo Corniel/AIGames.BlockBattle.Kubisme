@@ -39,7 +39,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public ParameterRandomizer Randomizer { get; set; }
 		public List<BotData> Bots { get; protected set; }
 		public BotData BestBot { get { return Bots[0]; } }
-		public BotData ReferenceBot { get { return Bots.Single(bot => bot.Id == 1); } }
+		public BotData ReferenceBot { get; protected set; }
 		public FileInfo File { get; set; }
 
 		public void Run()
@@ -57,6 +57,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					Bots.Add(new BotData(++LastId, BestBot, Randomizer));
 				}
 			}
+			ReferenceBot = Bots.Single(bot => bot.Id == 1);
 			sw = Stopwatch.StartNew();
 
 			GetRandomPairings(Capacity * 20);
@@ -81,17 +82,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					if (Bots.Count > Capacity)
 					{
-						var refBot = ReferenceBot;
-						Bots.RemoveRange(Capacity, Bots.Count - Capacity);
-
-						// Always keep the ref bot.
-						if (!Bots.Contains(refBot))
+						for (var i = Bots.Count - 1; i >= Capacity; i--)
 						{
-							Bots.Add(refBot);
+							var bot = Bots[i];
+							if (bot != ReferenceBot)
+							{
+								Bots.Remove(bot);
+							}
 						}
 					}
 				}
-				// if the best bot stable: clone.
+				// if the best bot is stable: clone.
 				if (BestBot.Runs > Capacity)
 				{
 					var newBot = new BotData(++LastId, BestBot, Randomizer);

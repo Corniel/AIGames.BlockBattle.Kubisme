@@ -66,16 +66,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			GetRandomPairings(Capacity * 20);
 
 			var queue = new ConcurrentQueue<MT19937Generator>();
-			for (var i = 0; i < 64; i++)
-			{
-				queue.Enqueue(new MT19937Generator());
-			}
 
 			while (true)
 			{
 				ProcessElos();
 				LogRankings();
 				LogStatus();
+
+				for (var i = queue.Count; i < 64; i++)
+				{
+					queue.Enqueue(new MT19937Generator());
+				}
 
 				var pairings = new List<BattlePairing>();
 

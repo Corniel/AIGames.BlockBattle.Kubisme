@@ -15,7 +15,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private static readonly object lockElo = new object();
 		private static readonly object lockList = new object();
 
-		private Stopwatch sw;
+		private Stopwatch sw = Stopwatch.StartNew();
 
 		public BattleSimulator(MT19937Generator rnd)
 		{
@@ -43,6 +43,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData ReferenceBot { get; protected set; }
 		public FileInfo File { get; set; }
 
+		public BotData GetHighestElo()
+		{
+			var bot = Bots.FirstOrDefault(b => b.Runs > Stable);
+			return bot == null || bot == ReferenceBot ? Bots[0] : bot;
+		}
+		public BotData GetHighestAvg()
+		{
+			return Bots.Where(bot => bot.Runs > Stable).OrderByDescending(bot => bot.Average).FirstOrDefault();
+		}
+
 		public ConcurrentQueue<BattlePairing> Results { get; protected set; }
 
 		public void Run()
@@ -61,17 +71,20 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 			}
 			ReferenceBot = Bots.Single(bot => bot.Id == 1);
-			sw = Stopwatch.StartNew();
 
 			GetRandomPairings(Capacity * 20);
 
 			var queue = new ConcurrentQueue<MT19937Generator>();
+
+			var keepRunning = true;
 
 			while (true)
 			{
 				ProcessElos();
 				LogRankings();
 				LogStatus();
+
+				if (!keepRunning) { break; }
 
 				for (var i = queue.Count; i < 64; i++)
 				{
@@ -125,6 +138,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						pairings.AddRange(PairOther(newBot));
 					}
 				}
+				// The bot with the best avg deserves extra attention as well.
+				var bestAvg = GetHighestAvg();
+				if (bestAvg != null)
+				{
+					pairings.AddRange(PairOther(bestAvg));
+				}
 				
 				// Run also random matches.
 				pairings.AddRange(GetRandomPairings(Bots.Count * 4));
@@ -133,11 +152,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 				if (InParallel)
 				{
-					SimulateParallel(queue, copy);
+					keepRunning = SimulateParallel(queue, copy);
 				}
 				else
 				{
-					Simulate(copy);
+					keepRunning = Simulate(copy);
 				}
 			}
 		}
@@ -200,16 +219,18 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 		}
 
-		private void Simulate(IEnumerable<BattlePairing> pairings)
+		private bool Simulate(IEnumerable<BattlePairing> pairings)
 		{
 			foreach (var p in pairings)
 			{
 				RunSimulation(p.Bot0, p.Bot1, Rnd);
 			}
+			return true;
 		}
 
-		private void SimulateParallel(ConcurrentQueue<MT19937Generator> queue, IEnumerable<BattlePairing> pairings)
+		private bool SimulateParallel(ConcurrentQueue<MT19937Generator> queue, IEnumerable<BattlePairing> pairings)
 		{
+			var result = true;
 			try
 			{
 				Parallel.ForEach(pairings, p =>
@@ -220,9 +241,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						RunSimulation(p.Bot0, p.Bot1, rnd);
 						queue.Enqueue(rnd);
 					}
+					else
+					{
+						result = false;
+					}
 				});
+				return result;
 			}
-			catch { }
+			catch { return false; }
 		}
 
 		private IEnumerable<BattlePairing> GetRandomPairings(int number)
@@ -282,8 +308,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Bots.Sort();
 			}
 
-			BestBot = Bots.FirstOrDefault(b => b.Runs > Stable);
-			BestBot = BestBot == null || BestBot == ReferenceBot ? Bots[0] : BestBot;
+			BestBot = GetHighestElo();
+
+			var bestAvg = GetHighestAvg();
 
 			Console.Clear();
 			var max = Math.Min(Console.WindowHeight - 2, Bots.Count);
@@ -297,6 +324,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					Console.ForegroundColor = ConsoleColor.Yellow;
 				}
+				else if (bot == bestAvg)
+				{
+					Console.ForegroundColor = ConsoleColor.Blue;
+				}
 				else if (bot.ParentId == bestId)
 				{
 					Console.ForegroundColor = ConsoleColor.Green;
@@ -307,7 +338,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				else if (bot.ParentId == bestParent)
 				{
-					Console.ForegroundColor = ConsoleColor.DarkMagenta;
+					Console.ForegroundColor = ConsoleColor.Magenta;
 				}
 				else if (bot.Runs > Stable)
 				{

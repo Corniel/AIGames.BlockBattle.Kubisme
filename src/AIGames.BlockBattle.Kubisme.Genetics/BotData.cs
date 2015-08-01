@@ -21,7 +21,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData(int id, BotData parent, ParameterRandomizer rnd)
 			: this(id, rnd.Randomize(parent.Pars))
 		{
-			Elo = parent.Elo - 20d;
+			Elo = parent.Elo + 20d;
 			ParentId = parent.Id;
 		}
 

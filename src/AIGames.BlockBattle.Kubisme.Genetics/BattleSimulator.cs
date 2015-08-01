@@ -51,7 +51,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					Bots.AddRange(SimulationBotCollection.Load(File));
 					LastId = Bots.Max(bot => bot.Id);
 				}
-				else
+				if(Bots.Count < 2)
 				{
 					Bots.Add(new BotData(++LastId, SimpleParameters.GetDefault()));
 					Bots.Add(new BotData(++LastId, BestBot, Randomizer));
@@ -71,13 +71,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			while (true)
 			{
 				LogStatus();
-
+				LogRankings();
 				var pairings = new List<BattlePairing>();
 
-				if (BestBot.Runs < Stable)
-				{
-					pairings.AddRange(PairOther(BestBot, 1));
-				}
 				lock (lockList)
 				{
 					if (Bots.Count > Capacity)
@@ -92,14 +88,22 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						}
 					}
 				}
-				// if the best bot is stable: clone.
-				if (BestBot.Runs > Capacity)
+				if (BestBot.Runs < Stable)
 				{
-					var newBot = new BotData(++LastId, BestBot, Randomizer);
-					Bots.Add(newBot);
+					pairings.AddRange(PairOther(BestBot, 1));
+				}
+				// if the best bot is stable: clone.
+				var cloneBot = Bots.FirstOrDefault(b => b.Runs > Capacity);
+				if (cloneBot != null)
+				{
+					for (var i = 1; i <= 8; i++)
+					{
+						var newBot = new BotData(++LastId, cloneBot, Randomizer);
+						Bots.Insert(i, newBot);
 
-					// the new created should challenge the others too.
-					pairings.AddRange(PairOther(newBot, 2));
+						// the new created should challenge the others too.
+						pairings.AddRange(PairOther(newBot, i + 1));
+					}
 				}
 
 				// Run also random matches.
@@ -170,19 +174,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private void RunSimulation(BotData bot0, BotData bot1, MT19937Generator rnd)
 		{
-			if (Simulations % 7 == 0)
+			if (Simulations % 17 == 0)
 			{
-				lock (lockList)
-				{
-					Bots.Sort();
-				}
-				Console.Write("\r{0:d\\.hh\\:mm\\:ss} {1} ({2:0.00} /sec), Elo: {3:0.0}, Avg: {7:0.0000}, Runs: {4}, ID: {5}, Parent: {6}     ",
-					sw.Elapsed, Simulations, Simulations / sw.Elapsed.TotalSeconds,
-					BestBot.Elo,
-					BestBot.Runs,
-					BestBot.Id,
-					BestBot.ParentId,
-					BestBot.Average);
+				Console.Write("\r{0:d\\.hh\\:mm\\:ss} {1:#,##0} ({2:0.00} /sec) Last ID: {3}  ",
+					sw.Elapsed, 
+					Simulations,
+					Simulations / sw.Elapsed.TotalSeconds,
+					LastId);
 			}
 
 			var simulation = new BattleSimulation(bot0, bot1);
@@ -235,6 +233,50 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				bot0.UpdateK();
 				bot1.UpdateK();
 			}
+		}
+
+		private void LogRankings()
+		{
+			lock (lockList)
+			{
+				Bots.Sort();
+			}
+			Console.Clear();
+			var max = Math.Min(Console.WindowHeight - 2, Bots.Count);
+			var bestId = BestBot.Id;
+			var bestParent = BestBot.ParentId;
+
+			for (var pos = 1; pos <= max; pos++)
+			{
+				var bot = Bots[pos - 1];
+				if (pos == 1)
+				{
+					Console.ForegroundColor = ConsoleColor.Yellow;
+				}
+				else if (bot.ParentId == bestId)
+				{
+					Console.ForegroundColor = ConsoleColor.Green;
+				}
+				else if (bot.Id == bestParent)
+				{
+					Console.ForegroundColor = ConsoleColor.Red;
+				}
+				else if (bot.ParentId == bestParent)
+				{
+					Console.ForegroundColor = ConsoleColor.DarkMagenta;
+				}
+				else if (bot.Runs > Stable)
+				{
+					Console.ForegroundColor = ConsoleColor.White;
+				}
+				else
+				{
+					Console.ForegroundColor = ConsoleColor.Gray;
+				}
+				Console.WriteLine("{5,2} {0:0000.0} {4:0.0000}, Runs: {1,5}, ID: {2,5}, Parent: {3,5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.Average, pos);
+			}
+			Console.ForegroundColor = ConsoleColor.Gray;
+			Console.WriteLine();
 		}
 
 		private void UpdateBotElos(Elo dif)

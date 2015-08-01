@@ -9,5 +9,7 @@
 		}
 		public BotData Bot0 { get; set; }
 		public BotData Bot1 { get; set; }
+
+		public override string ToString() { return string.Format("{0} - {1}", Bot0.Id, Bot1.Id); }
 	}
 }

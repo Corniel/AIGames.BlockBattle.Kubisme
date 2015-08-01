@@ -10,7 +10,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData()
 		{
 			Elo = 1000d;
-			K = 10;
+			K = 12;
 		}
 
 		public BotData(int id, SimpleParameters pars): this()
@@ -21,7 +21,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData(int id, BotData parent, ParameterRandomizer rnd)
 			: this(id, rnd.Randomize(parent.Pars))
 		{
-			Elo = parent.Elo;
+			Elo = parent.Elo - 20d;
 			ParentId = parent.Id;
 		}
 

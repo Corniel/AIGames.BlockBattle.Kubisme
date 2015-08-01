@@ -94,7 +94,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private int Randomize(int value)
 		{
-			if (Rnd.Next(17) == 0)
+			if (Rnd.Next(5) == 0)
 			{
 				var val = value + Distribution[Rnd.Next(Distribution.Length)];
 				return val;

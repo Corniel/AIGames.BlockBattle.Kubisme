@@ -10,6 +10,8 @@
 		public BotData Bot0 { get; set; }
 		public BotData Bot1 { get; set; }
 
-		public override string ToString() { return string.Format("{0} - {1}", Bot0.Id, Bot1.Id); }
+		public BattleSimulation.Result Result { get; set; }
+
+		public override string ToString() { return string.Format("{0} - {1}{2}", Bot0.Id, Bot1.Id, Result == null ? "" : " : "+Result.Outcome.ToString()); }
 	}
 }

@@ -100,7 +100,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					{
 						pairings.AddRange(PairOther(bot));
 					}
-					if (bot == BestBot) { break; }
+					if (bot == BestBot)
+					{
+						pairings.AddRange(PairOther(bot));
+						break; 
+					}
 				}
 				
 				if (Bots.Any(b => b.Runs < Capacity))

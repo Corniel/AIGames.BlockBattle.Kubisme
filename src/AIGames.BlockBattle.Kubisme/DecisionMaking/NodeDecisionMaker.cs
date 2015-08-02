@@ -40,5 +40,15 @@ namespace AIGames.BlockBattle.Kubisme
 			BestField = Root.BestField;
 			return Root.BestMove;
 		}
+
+		public string GetLog()
+		{
+			var parameters = (SimpleParameters)Evaluator.Parameters;
+
+			return string.Format("{0}  {1:0.00}  {2}",
+				BestField.Points,
+				Root.Score / (double)parameters.Points,
+				Pars);
+		}
 	}
 }

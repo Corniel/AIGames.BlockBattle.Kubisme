@@ -246,6 +246,8 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				Columns[i] = (sbyte)minCol++;
 			}
+			ColumnMinimum = Columns[0];
+			ColumnMaximum = Columns[Columns.Length - 1];
 			Rotation = r;
 			switch (r)
 			{
@@ -264,6 +266,21 @@ namespace AIGames.BlockBattle.Kubisme
 			foreach (var block in list)
 			{
 				block.Variations = copy;
+			}
+
+			Touches = new Position[4];
+			var tI = 0;
+
+			for (var tC = 0; tC < 4; tC++)
+			{
+				for(var tR = 0; tR < 4; tR++)
+				{
+					var line = this[tR];
+					if (((line >> tC) & 1) == 1)
+					{
+						Touches[tI++] = new Position(-tC, -tR);
+					}
+				}
 			}
 		}
 
@@ -307,6 +324,10 @@ namespace AIGames.BlockBattle.Kubisme
 		public readonly sbyte Bottom;
 
 		public readonly sbyte[] Columns;
+		public readonly sbyte ColumnMinimum;
+		public readonly sbyte ColumnMaximum;
+
+		public readonly Position[] Touches;
 
 		public readonly BlockPath InitialPath;
 

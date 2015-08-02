@@ -2,6 +2,8 @@
 {
 	public struct MoveCandiate
 	{
+		public static readonly MoveCandiate None = new MoveCandiate(BlockPath.None, Field.None);
+
 		public readonly BlockPath Path;
 		public readonly Field Field;
 

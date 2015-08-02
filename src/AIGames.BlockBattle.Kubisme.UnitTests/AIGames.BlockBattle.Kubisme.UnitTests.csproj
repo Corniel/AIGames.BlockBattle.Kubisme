@@ -59,7 +59,6 @@
     <Compile Include="Models\BlockTest.cs" />
     <Compile Include="Models\DecisionMakerTest.cs" />
     <Compile Include="Models\FieldTest.cs" />
-    <Compile Include="DecisionMaking\MoveGeneratorTest.cs" />
     <Compile Include="Models\RowTest.cs" />
     <Compile Include="Opponent\PointsPredictorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

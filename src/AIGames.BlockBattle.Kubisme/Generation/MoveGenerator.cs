@@ -1,12 +1,11 @@
-﻿using AIGames.BlockBattle.Kubisme.Communication;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
 {
 	public class MoveGenerator : IMoveGenerator
 	{
-		public IEnumerable<Field> GetFields(Field field, Block current, Position pos, bool searchNoDrops)
+		public IEnumerable<Field> GetFields(Field field, Block current, Position source, bool searchNoDrops)
 		{
 			foreach (var block in current.Variations)
 			{
@@ -30,20 +29,24 @@ namespace AIGames.BlockBattle.Kubisme
 						}
 					}
 				}
-				if (searchNoDrops)
+			}
+			if (searchNoDrops)
+			{
+				foreach (var candidate in GetReachableHoles(field, current, source))
 				{
+					yield return candidate.Field;
 				}
 			}
 		}
 
-		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, Position pos, bool searchNoDrops)
+		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, Position source, bool searchNoDrops)
 		{
 			foreach (var block in current.Variations)
 			{
 				int minRow = block.GetMinRow(field);
 				int maxRow = block.GetMaxRow(field);
 
-				foreach(var col in block.Columns)
+				foreach (var col in block.Columns)
 				{
 					for (var row = minRow; row < maxRow; row++)
 					{
@@ -52,7 +55,7 @@ namespace AIGames.BlockBattle.Kubisme
 						{
 							var target = new Position(col, row);
 							var applied = field.Apply(block, target);
-							yield return new MoveCandiate(block.InitialPath.AddShift(col - pos.Col).AddDrop(), applied);
+							yield return new MoveCandiate(block.InitialPath.AddShift(col - source.Col).AddDrop(), applied);
 						}
 						if (test != Field.TestResult.Retry)
 						{
@@ -60,14 +63,74 @@ namespace AIGames.BlockBattle.Kubisme
 						}
 					}
 				}
-				if (searchNoDrops)
+			}
+			if (searchNoDrops)
+			{
+				foreach (var candidate in GetReachableHoles(field, current, source))
 				{
+					yield return candidate;
 				}
 			}
 		}
 
+		public static BlockPath GetPath(Field field, Block block, Position source, Position target)
+		{
+			var options = new Dictionary<Position, BlockPath>();
+			var queue = new Queue<Position>();
+			queue.Enqueue(source.Down);
+			queue.Enqueue(source.Left);
+			queue.Enqueue(source.Right);
+			options[source.Down] = block.InitialPath.AddDown();
+			options[source.Left] = block.InitialPath.AddLeft();
+			options[source.Right] = block.InitialPath.AddRight();
+
+			while (queue.Count > 0)
+			{
+				var position = queue.Dequeue();
+				var path = options[position];
+
+				if (position.Equals(target))
+				{
+					return path;
+				}
+
+				var test = field.Test(block, position);
+				if (test == Field.TestResult.False) { continue; }
+
+				if (position.Row < target.Row && test != Field.TestResult.True)
+				{
+					var down = position.Down;
+					if (!options.ContainsKey(down))
+					{
+						queue.Enqueue(down);
+						options[down] = path.AddDown();
+					}
+				}
+
+				if (position.Col > block.ColumnMinimum)
+				{
+					var left = position.Left;
+					if (!options.ContainsKey(left))
+					{
+						queue.Enqueue(left);
+						options[left] = path.AddLeft();
+					}
+				}
+				if (position.Col < block.ColumnMaximum)
+				{
+					var right = position.Right;
+					if (!options.ContainsKey(right))
+					{
+						queue.Enqueue(right);
+						options[right] = path.AddRight();
+					}
+				}
+			}
+			return BlockPath.None;
+		}
+
 		/// <summary>Gets a score only based on characters of the current state.</summary>
-		public static bool HasReachableHoles(Field field)
+		public static IEnumerable<MoveCandiate> GetReachableHoles(Field field, Block current, Position source)
 		{
 			int filterTopColomns = 0;
 			int open = Row.Filled;
@@ -80,43 +143,75 @@ namespace AIGames.BlockBattle.Kubisme
 				var rowMirrored = Row.Filled ^ row;
 
 				open &= rowMirrored;
-				var openCount =Row.Count[open];
+				var openCount = Row.Count[open];
 				// If only one hole, no access.
 				if (openCount < 2)
 				{
-					return false;
+					break;
 				}
 				// If there are no free spots combined on a role there is no access.
 				if (openCount > 6 && !Row.Row8BlockOneHole.Any(map => (map & open) != 0))
 				{
-					return false;
+					break;
 				}
 
 				var movement = prev & rowMirrored;
 				var movementCount = Row.Count[movement];
 				if (movementCount < 2)
 				{
-					return false;
+					break;
 				}
 				// there should be a way for a block to get from one row to another.
 				if (movementCount > 6 && !Row.Row8BlockOneHole.Any(map => (map & movement) != 0))
 				{
-					return false;
+					break;
 				}
 
 				// is there a hole anyway?
 				var holesMask = filterTopColomns & rowMirrored;
 				if (holesMask != 0)
 				{
-					return true;
+					for (var i = 0; i < 10; i++)
+					{
+						if ((holesMask & Bits.FlagUInt16[i]) != 0)
+						{
+							foreach (var block in current.Variations)
+							{
+								foreach (var transfer in block.Touches)
+								{
+									var cc = i + transfer.Col;
+									if (cc >= block.ColumnMinimum && cc <= block.ColumnMaximum)
+									{
+										var rr = r + transfer.Row;
+
+										var minRow = r - 4 + block.Bottom;
+										var maxRow = r - 3 + block.Bottom;
+
+										if (rr >= minRow && rr <= maxRow)
+										{
+											var test = field.Test(block, cc, rr);
+											if (test == Field.TestResult.True)
+											{
+												var target = new Position(cc, rr);
+												var path = GetPath(field, block, source, target);
+												if (!path.Equals(BlockPath.None))
+												{
+													var applied = field.Apply(block, target);
+													yield return new MoveCandiate(path, applied);
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 
 				filterTopColomns |= row;
 
 				prev = rowMirrored;
 			}
-			return false;
-
 		}
 	}
 }

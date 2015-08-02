@@ -53,7 +53,7 @@ namespace AIGames.BlockBattle.Kubisme
 			return new BotResponse()
 			{
 				Move = move,
-				Log = DecisionMaker.Pars.ToString(),
+				Log = DecisionMaker.GetLog(),
 			};
 		}
 	}

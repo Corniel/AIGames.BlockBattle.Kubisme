@@ -3,6 +3,27 @@
 	/// <summary>Represents a class to manipulate and investigate bits.</summary>
 	public static class Bits
 	{
+		/// <summary>Contains a flag bits for UInt16.</summary>
+		public static readonly ushort[] FlagUInt16 = new ushort[]
+		{
+			0X0001,
+			0X0002,
+			0X0004,
+			0x0008,
+			0X0010,
+			0X0020,
+			0X0040,
+			0x0080,
+			0X0100,
+			0X0200,
+			0X0400,
+			0x0800,
+			0X1000,
+			0X2000,
+			0X4000,
+			0x8000,
+		};
+
 		/// <summary>Counts the number of (1) bits.</summary>
 		public static int Count(byte bits) { return BytesCount[bits]; }
 

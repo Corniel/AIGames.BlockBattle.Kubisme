@@ -45,16 +45,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Communication\input.version0016.txt" />
     <Compile Include="Communication\ConsolePlatformTest.cs" />
     <Compile Include="Communication\InstructionTest.cs" />
     <Compile Include="Communication\MoveInstructionTest.cs" />
     <Compile Include="DecisionMaking\BlockPathTest.cs" />
+    <Compile Include="DecisionMaking\NodeDescisionMakerTest.cs" />
     <Compile Include="DecisionMaking\PerformanceTest.cs" />
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Deployoment\DeployerTest.cs" />
     <Compile Include="Evaluation\SimpleEvaluatorTest.cs" />
     <Compile Include="Generation\MoveGeneratorTest.cs" />
-    <Compile Include="Generation\SimScoresTest.cs" />
     <Compile Include="Genetics\SimpleParametersCollectionTest.cs" />
     <Compile Include="Models\BlockTest.cs" />
     <Compile Include="Models\DecisionMakerTest.cs" />

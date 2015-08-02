@@ -48,7 +48,7 @@ namespace AIGames.BlockBattle.Kubisme
 			DecisionMaker.MaximumDuration = TimeSpan.FromMinutes(ms);
 			DecisionMaker.Points = Predictor.GetPoints(Opponent, Current, Next);
 
-			var path = DecisionMaker.GetMove(Field, State.Position, Current, Next);
+			var path = DecisionMaker.GetMove(Field, Current, Next);
 			var move = new MoveInstruction(path.Moves.ToArray());
 			return new BotResponse()
 			{

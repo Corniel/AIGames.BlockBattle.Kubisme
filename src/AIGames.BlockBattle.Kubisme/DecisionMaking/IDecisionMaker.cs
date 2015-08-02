@@ -7,6 +7,6 @@
 		int[] Points { get; set; }
 		Field BestField { get; }
 		
-		BlockPath GetMove(Field field, Position position, Block current, Block next);
+		BlockPath GetMove(Field field, Block current, Block next);
 	}
 }

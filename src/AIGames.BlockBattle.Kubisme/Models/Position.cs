@@ -8,7 +8,7 @@ namespace AIGames.BlockBattle.Kubisme
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	public struct Position : IEquatable<Position>
 	{
-		public static readonly Position Start = new Position(4, -1);
+		//public static readonly Position Start = new Position(4, -1);
 		public static readonly Position None = new Position(255, 255);
 
 		[DebuggerStepThrough]

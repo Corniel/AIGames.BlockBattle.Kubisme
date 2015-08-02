@@ -22,7 +22,7 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					Children = new List<Block1Node>();
 					var block = GetBlock(pars);
-					foreach (var candidate in pars.Generator.GetMoves(Field, block, Position.Start, true))
+					foreach (var candidate in pars.Generator.GetMoves(Field, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }
 						var locks = (pars.Points[Depth + 1] >> 2) - 20 + candidate.Field.RowCount;

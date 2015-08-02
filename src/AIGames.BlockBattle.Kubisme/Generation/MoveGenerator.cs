@@ -5,7 +5,7 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public class MoveGenerator : IMoveGenerator
 	{
-		public IEnumerable<Field> GetFields(Field field, Block current, Position source, bool searchNoDrops)
+		public IEnumerable<Field> GetFields(Field field, Block current,  bool searchNoDrops)
 		{
 			foreach (var block in current.Variations)
 			{
@@ -32,14 +32,14 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			if (searchNoDrops)
 			{
-				foreach (var candidate in GetReachableHoles(field, current, source))
+				foreach (var candidate in GetReachableHoles(field, current))
 				{
 					yield return candidate.Field;
 				}
 			}
 		}
 
-		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, Position source, bool searchNoDrops)
+		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, bool searchNoDrops)
 		{
 			foreach (var block in current.Variations)
 			{
@@ -55,7 +55,7 @@ namespace AIGames.BlockBattle.Kubisme
 						{
 							var target = new Position(col, row);
 							var applied = field.Apply(block, target);
-							yield return new MoveCandiate(block.InitialPath.AddShift(col - source.Col).AddDrop(), applied);
+							yield return new MoveCandiate(block.InitialPath.AddShift(col - current.Start.Col).AddDrop(), applied);
 						}
 						if (test != Field.TestResult.Retry)
 						{
@@ -66,23 +66,20 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			if (searchNoDrops)
 			{
-				foreach (var candidate in GetReachableHoles(field, current, source))
+				foreach (var candidate in GetReachableHoles(field, current))
 				{
 					yield return candidate;
 				}
 			}
 		}
 
-		public static BlockPath GetPath(Field field, Block block, Position source, Position target)
+		public static BlockPath GetPath(Field field, Block block, Position target)
 		{
 			var options = new Dictionary<Position, BlockPath>();
 			var queue = new Queue<Position>();
-			queue.Enqueue(source.Down);
-			queue.Enqueue(source.Left);
-			queue.Enqueue(source.Right);
-			options[source.Down] = block.InitialPath.AddDown();
-			options[source.Left] = block.InitialPath.AddLeft();
-			options[source.Right] = block.InitialPath.AddRight();
+
+			queue.Enqueue(block.Start);
+			options[block.Start] = block.InitialPath;
 
 			while (queue.Count > 0)
 			{
@@ -130,7 +127,7 @@ namespace AIGames.BlockBattle.Kubisme
 		}
 
 		/// <summary>Gets a score only based on characters of the current state.</summary>
-		public static IEnumerable<MoveCandiate> GetReachableHoles(Field field, Block current, Position source)
+		public static IEnumerable<MoveCandiate> GetReachableHoles(Field field, Block current)
 		{
 			int filterTopColomns = 0;
 			int open = Row.Filled;
@@ -184,16 +181,16 @@ namespace AIGames.BlockBattle.Kubisme
 									{
 										var rr = r + transfer.Row;
 
-										var minRow = r - 4 + block.Bottom;
-										var maxRow = r - 3 + block.Bottom;
+										var minRow = rr - 4 + block.Bottom;
+										var maxRow = rr - 3 + block.Bottom;
 
-										if (rr >= minRow && rr <= maxRow)
+										if (minRow >= 0 && maxRow < field.RowCount)
 										{
 											var test = field.Test(block, cc, rr);
 											if (test == Field.TestResult.True)
 											{
 												var target = new Position(cc, rr);
-												var path = GetPath(field, block, source, target);
+												var path = GetPath(field, block, target);
 												if (!path.Equals(BlockPath.None))
 												{
 													var applied = field.Apply(block, target);

@@ -33,7 +33,7 @@ namespace AIGames.BlockBattle.Kubisme
 					foreach(var block in Block.All)
 					{
 						var nodes = new BlockRndNodes();
-						foreach (var field in pars.Generator.GetFields(Field, block, Position.Start, false))
+						foreach (var field in pars.Generator.GetFields(Field, block, false))
 						{
 							if (!pars.HasTimeLeft) { return; }
 							var score = pars.Evaluator.GetScore(field);

@@ -17,7 +17,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			DecisionMaker.Points = Predictor.GetPoints(other, current, next);
 
-			var path = DecisionMaker.GetMove(own, Position.Start, current, next);
+			var path = DecisionMaker.GetMove(own, current, next);
 			if (path.Equals(BlockPath.None))
 			{
 				return Field.None;

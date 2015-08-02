@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 17
+----------
+Fix in starting position, first taken in to account in Version 16.
+
 Version 16
 ----------
 Further tweaked the parameters. Reduced the branching factor even further. On top 

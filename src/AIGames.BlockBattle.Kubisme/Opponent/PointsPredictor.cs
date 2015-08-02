@@ -21,13 +21,13 @@
 				points[i] = points[i - 1] + ++combo;
 			}
 
-			foreach (var depth1 in Generator.GetFields(field, current, Position.Start, false))
+			foreach (var depth1 in Generator.GetFields(field, current, false))
 			{
 				if (depth1.Points > points[1])
 				{
 					points[1] = depth1.Points;
 				}
-				foreach (var depth2 in Generator.GetFields(depth1, next, Position.Start, false))
+				foreach (var depth2 in Generator.GetFields(depth1, next, false))
 				{
 					if (depth2.Points > points[2])
 					{

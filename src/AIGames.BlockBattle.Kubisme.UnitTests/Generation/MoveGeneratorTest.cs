@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AIGames.BlockBattle.Kubisme.Communication;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallO_9candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.O, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(Small, Block.O, true).ToList();
 
 			var expPath = new string[]
 			{
@@ -66,7 +67,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallI_17candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.I, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(Small, Block.I, true).ToList();
 
 			Assert.AreEqual(10 + 7, candiates.Count);
 		}
@@ -74,7 +75,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallS_17candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.S, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(Small, Block.S, true).ToList();
 
 			Assert.AreEqual(9 + 8, candiates.Count);
 		}
@@ -82,13 +83,12 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallZ_17candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.Z, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(Small, Block.Z, true).ToList();
 
 			Assert.AreEqual(9 + 8, candiates.Count);
 
 			var expPath = new string[]
 			{
-				"left,left,left,left,drop",
 				"left,left,left,drop",
 				"left,left,drop",
 				"left,drop",
@@ -96,7 +96,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 				"right,drop",
 				"right,right,drop",
 				"right,right,right,drop",
-				"turnleft,left,left,left,left,drop",
+				"right,right,right,right,drop",
 				"turnleft,left,left,left,drop",
 				"turnleft,left,left,drop",
 				"turnleft,left,drop",
@@ -105,6 +105,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 				"turnleft,right,right,drop",
 				"turnleft,right,right,right,drop",
 				"turnleft,right,right,right,right,drop",
+				"turnleft,right,right,right,right,right,drop",
 			};
 			var expField = new string[]
 			{
@@ -138,7 +139,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallJ_34candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.J, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(Small, Block.J, true).ToList();
 
 			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
 		}
@@ -146,7 +147,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallL_34candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.L, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(Small, Block.L,  true).ToList();
 
 			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
 		}
@@ -154,7 +155,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallT_34candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.T, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(Small, Block.T, true).ToList();
 
 			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
 		}
@@ -163,7 +164,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallFilledO_9candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.O, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(SmallFilled, Block.O, true).ToList();
 
 			Assert.AreEqual(9, candiates.Count);
 		}
@@ -172,7 +173,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallFilledI_17candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.I, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(SmallFilled, Block.I, true).ToList();
 
 			Assert.AreEqual(10 + 7, candiates.Count);
 		}
@@ -180,7 +181,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallFilledS_17candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.S, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(SmallFilled, Block.S, true).ToList();
 
 			Assert.AreEqual(9 + 8, candiates.Count);
 		}
@@ -189,7 +190,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallFilledZ_17candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.Z, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(SmallFilled, Block.Z,  true).ToList();
 
 			Assert.AreEqual(9 + 8, candiates.Count);
 		}
@@ -197,7 +198,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallFilledJ_34candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.J, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(SmallFilled, Block.J,  true).ToList();
 
 			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
 		}
@@ -206,7 +207,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallFilledL_34candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.L, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(SmallFilled, Block.L,  true).ToList();
 
 			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
 		}
@@ -214,7 +215,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		public void GetMoves_SmallFilledT_34candidates()
 		{
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.T, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(SmallFilled, Block.T,  true).ToList();
 
 			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
 		}
@@ -238,20 +239,20 @@ XXX.XXXXXX
 XXXXX.XXXX
 .XXXX.XXXX");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.J, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(field, Block.J,  true).ToList();
 
 			Assert.AreEqual(8 + 8 + 3 + 2, candiates.Count);
 		}
 
 		[Test]
-		public void GetMoves_WithMoveUnder_21candidates()
+		public void GetMoves_WithMoveUnder_6candidates()
 		{
 			var field = Field.Create(0, 0, @"
-..XX......
 .XX.......
+XX........
 ");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.S, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(field, Block.S,  true).ToList();
 
 			var act = candiates.Select(c => c.ToString()).ToArray();
 			var exp = new string[]
@@ -260,6 +261,7 @@ XXXXX.XXXX
 				"right,drop",
 				"right,right,drop",
 				"right,right,right,drop",
+				"right,right,right,right,drop",
 				"down,left",
 			};
 
@@ -287,11 +289,11 @@ XXXXXX.XXX
 X.XXXXXXXX
 XXXXXX.XXX");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.I, Position.Start, true).ToList();
+			var candiates = generator.GetMoves(field, Block.I,  true).ToList();
 		}
 
 		[Test]
-		public void GetPath_HolesReachable_4()
+		public void GetPath_HolesReachable_PathEndingWithDownLeft()
 		{
 			var field = Field.Create(0, 0, @"
 ..........
@@ -303,16 +305,24 @@ XXXXXX..XX
 XXXXXX..X.
 ");
 			var target =new Position(5,3);
-			var act = MoveGenerator.GetPath(field, Block.T[Block.RotationType.Left], Position.Start, target);
-			var exp = "turnleft,down,right,down,right,down,down,left";
+			var act = MoveGenerator.GetPath(field, Block.T[Block.RotationType.Left],  target);
+			var exp = BlockPath.Create(
+				ActionType.TurnLeft,
+				ActionType.Down, 
+				ActionType.Right, 
+				ActionType.Right,
+				ActionType.Down, 
+				ActionType.Right,
+				ActionType.Down,
+				ActionType.Down,
+				ActionType.Left);
 			
 			var applied = field.Apply(Block.T[Block.RotationType.Left], target);
 			Console.WriteLine(applied);
 			
-			Assert.AreEqual(exp, act.ToString());
+			Assert.AreEqual(exp, act);
 		}
-
-
+		
 		[Test]
 		public void GetReachableHoles_HolesNotReachable_False()
 		{
@@ -325,7 +335,7 @@ XXXXX..XX.
 XXXXXX.XXX
 XXXXXX.XX.
 ");
-			var act = MoveGenerator.GetReachableHoles(field, Block.I, Position.Start).ToList();
+			var act = MoveGenerator.GetReachableHoles(field, Block.I).ToList();
 			var exp = new List<MoveCandiate>();
 			CollectionAssert.AreEqual(exp, act);
 		}
@@ -343,10 +353,10 @@ XXXXX...X.
 XXXXXX..XX
 XXXXXX..X.
 ");
-			var act = MoveGenerator.GetReachableHoles(field, Block.T, Position.Start).Select(c => c.Path.ToString()).ToArray();
+			var act = MoveGenerator.GetReachableHoles(field, Block.T).Select(c => c.Path.ToString()).ToArray();
 			var exp = new string[]
 			{
-				"turnleft,down,down,right,down,left"
+				"turnleft,down,right,right,down,right,down,down,left"
 			};
 			CollectionAssert.AreEqual(exp, act);
 		}
@@ -363,7 +373,7 @@ XXXX...XXX
 XXXXXX..XX
 XXXXXX..X.
 ");
-			var act = MoveGenerator.GetReachableHoles(field, Block.O, Position.Start).ToList();
+			var act = MoveGenerator.GetReachableHoles(field, Block.O).ToList();
 			var exp = new List<MoveCandiate>();
 			CollectionAssert.AreEqual(exp, act);
 		}

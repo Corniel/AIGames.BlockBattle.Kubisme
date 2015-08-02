@@ -27,7 +27,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			while (true)
 			{
-				var move = DecisionMaker.GetMove(field, Position.Start, current, next);
+				var move = DecisionMaker.GetMove(field, current, next);
 
 				if (move.Equals(BlockPath.None))
 				{

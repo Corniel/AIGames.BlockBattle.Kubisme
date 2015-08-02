@@ -282,6 +282,8 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 				}
 			}
+			// The O block starts on (4, -1), the rest on (3, -1)
+			Start = height == 2 && width == 2 ? new Position(4, -1) : new Position(3, -1);
 		}
 
 		public enum RotationType
@@ -326,6 +328,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public readonly sbyte[] Columns;
 		public readonly sbyte ColumnMinimum;
 		public readonly sbyte ColumnMaximum;
+
+		public readonly Position Start;
 
 		public readonly Position[] Touches;
 

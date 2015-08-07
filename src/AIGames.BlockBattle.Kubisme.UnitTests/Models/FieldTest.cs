@@ -115,12 +115,7 @@ XX.XXXXXXX");
 
 			var act = field.Garbage(Row.Garbage[0], Row.Garbage[1]);
 
-			AssertField(@"
-......X..X
-.XXXXXXXXX
-XX.XXXXXXX
-.XXXXXXXXX
-X.XXXXXXXX", 0, 0, 0, act);
+			AssertField("......X..X|.XXXXXXXXX|XX.XXXXXXX|.XXXXXXXXX|X.XXXXXXXX", 0, 0, 0, act);
 
 
 		}

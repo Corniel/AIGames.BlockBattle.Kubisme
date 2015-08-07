@@ -13,11 +13,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public NodeDecisionMaker DecisionMaker { get; protected set; }
 		public PointsPredictor Predictor { get; protected set; }
 
-		public Field GetResponse(Field own, Field other, Block current, Block next)
+		public Field GetResponse(Field own, Field other, Block current, Block next, int round)
 		{
 			DecisionMaker.Points = Predictor.GetPoints(other, current, next);
 
-			var path = DecisionMaker.GetMove(own, current, next);
+			var path = DecisionMaker.GetMove(own, current, next, round);
 			if (path.Equals(BlockPath.None))
 			{
 				return Field.None;

@@ -4,9 +4,9 @@
 	{
 		public Field Apply(Field field, int turn)
 		{
-			if (turn % 10 == 0)
+			if (turn % 20 == 0)
 			{
-				return field.LockRows(1);
+				return field.LockRow();
 			}
 			return field;
 		}

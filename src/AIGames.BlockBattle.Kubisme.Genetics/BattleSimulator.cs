@@ -40,13 +40,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public ParameterRandomizer Randomizer { get; set; }
 		public List<BotData> Bots { get; protected set; }
 		public BotData BestBot { get; protected set; }
-		public BotData ReferenceBot { get; protected set; }
 		public FileInfo File { get; set; }
 
 		public BotData GetHighestElo()
 		{
 			var bot = Bots.FirstOrDefault(b => b.Runs > Stable);
-			return bot == null || bot == ReferenceBot ? Bots[0] : bot;
+			return bot ?? Bots[0];
 		}
 		public BotData GetHighestAvg()
 		{
@@ -67,10 +66,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				if (Bots.Count < 2)
 				{
 					Bots.Add(new BotData(++LastId, SimpleParameters.GetDefault()));
+					BestBot = GetHighestElo();
 					Bots.Add(new BotData(++LastId, BestBot, Randomizer));
 				}
 			}
-			ReferenceBot = Bots.Single(bot => bot.Id == 1);
 
 			GetRandomPairings(Capacity * 20);
 
@@ -100,10 +99,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						for (var i = Bots.Count - 1; i >= Capacity; i--)
 						{
 							var bot = Bots[i];
-							if (bot != ReferenceBot)
-							{
-								Bots.Remove(bot);
-							}
+							Bots.Remove(bot);
 						}
 					}
 				}
@@ -189,32 +185,40 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					switch (result.Outcome)
 					{
 						case BattleSimulation.Outcome.Win:
-							bot0.Elo += (1.0 - z0) * bot0.K;
-							bot1.Elo += (0.0 - z1) * bot1.K;
+							elo0 = bot0.Elo+ (1.0 - z0) * bot0.K;
+							elo1 = bot1.Elo+(0.0 - z1) * bot1.K;
 							break;
 
 						case BattleSimulation.Outcome.Draw:
-							bot0.Elo += (0.5 - z0) * bot0.K;
-							bot1.Elo += (0.5 - z1) * bot1.K;
+							elo0 = bot0.Elo+(0.5 - z0) * bot0.K;
+							elo1 = bot1.Elo+(0.5 - z1) * bot1.K;
 							break;
 
 						case BattleSimulation.Outcome.Loss:
-							bot0.Elo += (0.0 - z0) * bot0.K;
-							bot1.Elo += (1.0 - z1) * bot1.K;
+							elo0 = bot0.Elo+(0.0 - z0) * bot0.K;
+							elo1 = bot1.Elo+(1.0 - z1) * bot1.K;
 							break;
 					}
-					if (bot0 == ReferenceBot)
+
+					var stable0 = bot0.Runs > Stable;
+					var stable1 = bot1.Runs > Stable;
+
+					if (stable1)
 					{
-						var dif = elo0 - bot0.Elo;
-						UpdateBotElos(dif);
+						bot0.Elo = elo0;
+						bot0.UpdateK();
 					}
-					else if (bot1 == ReferenceBot)
+					if (stable0)
 					{
-						var dif = elo1 - bot1.Elo;
-						UpdateBotElos(dif);
+						bot1.Elo = elo1;
+						bot1.UpdateK();
 					}
-					bot0.UpdateK();
-					bot1.UpdateK();
+					if (!stable0 && !stable1)
+					{
+						bot0.Elo = elo0;
+						bot1.Elo = elo1;
+					}
+
 				}
 			}
 		}
@@ -352,14 +356,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.WriteLine();
-		}
-
-		private void UpdateBotElos(Elo dif)
-		{
-			foreach (var bot in Bots)
-			{
-				bot.Elo += dif;
-			}
 		}
 
 		private void LogStatus()

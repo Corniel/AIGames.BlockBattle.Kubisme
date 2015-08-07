@@ -41,7 +41,7 @@ XXXXX.XXXX");
 			var act = predictor.GetPoints(field, Block.I, Block.T);
 			Console.WriteLine(sw.Elapsed.TotalMilliseconds);
 			
-			var exp = new int[] { 10, 21, 26, 32, 39, 47, 56, 66, 77, 89 };
+			var exp = new int[] { 10, 25, 30, 36, 37, 38, 39, 40, 41, 42 };
 
 			CollectionAssert.AreEqual(exp, act);
 		}

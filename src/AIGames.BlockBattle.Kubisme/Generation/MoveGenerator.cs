@@ -32,10 +32,10 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			if (searchNoDrops)
 			{
-				foreach (var candidate in GetReachableHoles(field, current))
-				{
-					yield return candidate.Field;
-				}
+				//foreach (var candidate in GetReachableHoles(field, current))
+				//{
+				//	yield return candidate.Field;
+				//}
 			}
 		}
 
@@ -66,10 +66,10 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			if (searchNoDrops)
 			{
-				foreach (var candidate in GetReachableHoles(field, current))
-				{
-					yield return candidate;
-				}
+				//foreach (var candidate in GetReachableHoles(field, current))
+				//{
+				//	yield return candidate;
+				//}
 			}
 		}
 
@@ -136,7 +136,7 @@ namespace AIGames.BlockBattle.Kubisme
 			// loop through the rows.
 			for (var r = field.FirstFilled; r < field.RowCount; r++)
 			{
-				var row = field[r].row;
+				var row = field[r];
 				var rowMirrored = Row.Filled ^ row;
 
 				open &= rowMirrored;

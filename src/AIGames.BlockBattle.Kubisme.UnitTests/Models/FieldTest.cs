@@ -21,36 +21,19 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		}
 
 		[Test]
-		public void LockRows_2_FieldWithLessRows()
+		public void LockRow_None_FieldWithLessRows()
 		{
 			var field = Field.Create(0, 0, @"
-..........
 ..........
 ........X.
 .......XX.
 ");
-			var act = field.LockRows(2);
+			var act = field.LockRow();
 			var exp = Field.Create(0, 0, @"
 ........X.
 .......XX.
 "); 
 			Assert.AreEqual(exp.ToString(), act.ToString());
-		}
-
-		[Test]
-		public void LockRows_3_EndOfGame()
-		{
-			var field = Field.Create(12, 3, @"
-..........
-..........
-........X.
-.......XX.
-");
-			var act = field.LockRows(3);
-			
-			Assert.AreEqual(0, act.RowCount, "RowCount");
-			Assert.AreEqual(-1, act.Points, "Points");
-			Assert.AreEqual(0, act.Combo, "Combo");
 		}
 
 		[Test]
@@ -95,7 +78,7 @@ XXXXXX.XX.
 ");
 			var act = field.Apply(Block.I.Variations[1], new Position(5, 3));
 			var exp = "..........|..........|..........|..........|..........|XXXXX.XXX.|XXXXXXXXX.";
-			AssertField(exp, 14, 1, 5, act);
+			AssertField(exp, 15, 1, 5, act);
 		}
 		
 		[Test]
@@ -118,6 +101,28 @@ XX....X..X
 XX.XXXXXXX");
 			Console.WriteLine(act);
 			AssertField(exp.ToString(), 1, 1, 2, act);
+		}
+
+		[Test]
+		public void Garbage_TwoRows_AppliedSuccessful()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+......X..X
+.XXXXXXXXX
+XX.XXXXXXX");
+
+			var act = field.Garbage(Row.Garbage[0], Row.Garbage[1]);
+
+			AssertField(@"
+......X..X
+.XXXXXXXXX
+XX.XXXXXXX
+.XXXXXXXXX
+X.XXXXXXXX", 0, 0, 0, act);
+
+
 		}
 
 		private static void AssertField(string str, int points, int combo, int freeRows, Field act)

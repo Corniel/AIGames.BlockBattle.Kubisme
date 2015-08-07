@@ -71,7 +71,7 @@ namespace AIGames.BlockBattle.Kubisme
 			// loop through the rows.
 			for (var r = field.FirstFilled; r < field.RowCount; r++)
 			{
-				var row = field[r].row;
+				var row = field[r];
 
 				var rowMirrored = Row.Filled ^ row;
 				var holesMask = filterTopColomns & rowMirrored;
@@ -147,8 +147,7 @@ namespace AIGames.BlockBattle.Kubisme
 			// loop for blockades too.
 			for (var r = field.RowCount - 1; r >= field.FirstFilled; r--)
 			{
-				var rw = field[r];
-				var row = rw.row;
+				var row = field[r];
 				filterBlockades |= Row.Filled ^ row;
 
 				var blockadesMask = filterBlockades & row;
@@ -161,7 +160,11 @@ namespace AIGames.BlockBattle.Kubisme
 			score += blockades * pars.Blockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
-			score += (1 + field.Combo) * pars.ComboPotential[comboPotential];
+
+			for (var i = 0; i < comboPotential; i++)
+			{
+				score += (i + 1 + field.Combo) * pars.ComboPotential[i];
+			}
 			score += Row.Count[previous] * pars.Floor;
 
 			return score;

@@ -36,8 +36,10 @@ namespace AIGames.BlockBattle.Kubisme
 					foreach (var field in pars.Generator.GetFields(Field, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }
-						var locks = (pars.Points[Depth + 1] >> 2) - 20 + field.RowCount;
-						T child = Create(Depth, locks > 0 ? field.LockRows(locks) : field, pars);
+
+						var fld = (pars.Round + Depth) % 20 == 0 ? field.LockRow() : field;
+						var garbage = (pars.Points[Depth + 1] >> 2) - 20 + field.RowCount;
+						T child = Create(Depth, garbage > 0 ? fld.Garbage(garbage, pars.Rnd) : fld, pars);
 						pars.Evaluations++;
 						Children.Add(child);
 					}

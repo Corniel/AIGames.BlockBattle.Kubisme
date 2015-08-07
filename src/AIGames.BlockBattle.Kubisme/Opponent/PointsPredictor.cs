@@ -32,10 +32,10 @@
 					if (depth2.Points > points[2])
 					{
 						points[2] = depth2.Points;
-						combo = depth2.Combo;
-						for (var i = 3; i < points.Length; i++)
+						points[3] = points[2]+1+depth2.Combo;
+						for (var i = 4; i < points.Length; i++)
 						{
-							points[i] = points[i - 1] + ++combo;
+							points[i] = points[i - 1] + 1;
 						}
 					}
 				}

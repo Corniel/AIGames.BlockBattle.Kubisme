@@ -42,7 +42,7 @@ XXX.....XX");
 				MaximumDepth = 1,
 			};
 
-			var act = dm.GetMove(field, Block.Z, Block.S);
+			var act = dm.GetMove(field, Block.Z, Block.S, 1);
 			var exp = BlockPath.Create(ActionType.Left, ActionType.Drop);
 
 			Assert.AreEqual(exp, act);

@@ -60,7 +60,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 
 			var locks = (PointsOwn >> 2) - (20 - field.RowCount);
-			return locks > 0 ? field.LockRows(locks) : field;
+			return locks > 0 ? field.LockRow() : field;
 		}
 
 		public bool IsAlive(Field field, int turn)

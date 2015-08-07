@@ -9,7 +9,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		[Test]
 		public void Row7BlockOneHole_All_Matches()
 		{
-			var act = Row.Row7BlockOneHole.Select(r => new Row((ushort)r).ToString()).ToArray();
+			var act = Row.Row7BlockOneHole.Select(r => Row.ToString((ushort)r)).ToArray();
 			var exp = new string[] 
 			{ 
 				"...XXXXXXX",
@@ -26,7 +26,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		[Test]
 		public void Row8BlockOneHole_All_Matches()
 		{
-			var act = Row.Row8BlockOneHole.Select(r => new Row((ushort)r).ToString()).ToArray();
+			var act = Row.Row8BlockOneHole.Select(r => Row.ToString((ushort)r)).ToArray();
 			var exp = new string[] 
 			{ 
 				"..XXXXXXXX",

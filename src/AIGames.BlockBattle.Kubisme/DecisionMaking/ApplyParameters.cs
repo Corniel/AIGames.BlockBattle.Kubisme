@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -12,9 +13,11 @@ namespace AIGames.BlockBattle.Kubisme
 			sw = Stopwatch.StartNew();
 			MaximumDepth = int.MaxValue;
 			Points = new int[10];
+			Rnd = new MT19937Generator();
 		}
 
 		public int[] Points { get; set; }
+		public int Round { get; set; }
 
 		public int MaximumDepth { get; set; }
 		public bool HasTimeLeft { get { return Elapsed < MaximumDuration; } }
@@ -23,6 +26,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public IMoveGenerator Generator { get; set; }
 		public IEvaluator Evaluator { get; set; }
+		public MT19937Generator Rnd { get; set; }
 
 		public Block Current { get; set; }
 		public Block Next { get; set; }

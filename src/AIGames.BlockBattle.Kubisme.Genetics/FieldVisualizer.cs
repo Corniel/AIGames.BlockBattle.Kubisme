@@ -30,7 +30,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				for (var x = 0; x < xMax; x++)
 				{
-					var row = field[y].row;
+					var row = field[y];
 					if ((Row.Flag[x] & row) != 0)
 					{
 						DrawPixel(image, x, y, Color.Red);

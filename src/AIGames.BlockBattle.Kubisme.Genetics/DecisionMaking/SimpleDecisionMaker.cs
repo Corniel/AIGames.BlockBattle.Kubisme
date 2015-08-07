@@ -34,7 +34,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			return bestPath;
 		}
 
-		public BlockPath GetMove(Field field, Block current, Block next)
+		public BlockPath GetMove(Field field, Block current, Block next, int round)
 		{
 			var bestMove = BlockPath.None;
 			var bestScore = int.MinValue;

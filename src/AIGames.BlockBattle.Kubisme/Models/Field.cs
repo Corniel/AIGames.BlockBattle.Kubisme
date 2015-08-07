@@ -1,20 +1,28 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using System;
 using System.Linq;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
 {
 	public struct Field
 	{
-		public static readonly Field None = new Field(-1, 0, 0, new Row[0]);
+		public const short SingleLineClear = 1;
+		public const short DoubleLineClear = 3;
+		public const short TripleLineClear = 6;
+		public const short QuadrupleLineClear = 12;
+		public const short PerfectClear = 24;
+
+
+		public static readonly Field None = new Field(-1, 0, 0, new ushort[0]);
 		public static readonly Field Empty = Field.Create(0, 0, @"..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........");
 
-		private readonly Row[] rows;
+		private readonly ushort[] rows;
 		public readonly short Points;
 		public readonly byte Combo;
 		public readonly byte FirstFilled;
 
-		public Field(short pt, byte combo, byte freeRows, params Row[] rs)
+		public Field(short pt, byte combo, byte freeRows, params ushort[] rs)
 		{
 			rows = rs;
 			Points = pt;
@@ -22,23 +30,23 @@ namespace AIGames.BlockBattle.Kubisme
 			FirstFilled = freeRows;
 		}
 
-		public Field(short pt, byte combo, params Row[] rs) :
+		public Field(short pt, byte combo, params ushort[] rs) :
 			this(pt, combo, GetFirstNoneEmptyRow(rs), rs) { }
 
-		private static byte GetFirstNoneEmptyRow(Row[] rows)
+		private static byte GetFirstNoneEmptyRow(ushort[] rows)
 		{
 			for (byte r = 0; r < rows.Length; r++)
 			{
-				if (rows[r].row != Row.Empty) { return r; }
+				if (rows[r] != Row.Empty) { return r; }
 			}
 			return (byte)rows.Length;
 		}
 
-		public int Count { get { return rows.Sum(r => Row.Count[r.row]); } }
+		public int Count { get { return rows.Sum(r => Row.Count[r]); } }
 
 		public int RowCount { get { return rows.Length; } }
 
-		public Row this[int row] { get { return rows[row]; } }
+		public ushort this[int row] { get { return rows[row]; } }
 
 		public enum TestResult
 		{
@@ -84,12 +92,12 @@ namespace AIGames.BlockBattle.Kubisme
 				// if no floor detected yet.
 				if (!hasFloor)
 				{
-					var floor = rows[row + l + 1].row;
+					var floor = rows[row + l + 1];
 					hasFloor = (floor & line) != 0;
 				}
 
 				var current = rows[row + l];
-				var merged = current.row & line;
+				var merged = current & line;
 
 				// overlap.
 				if (merged != 0)
@@ -102,7 +110,7 @@ namespace AIGames.BlockBattle.Kubisme
 		
 		public Field Apply(Block block, Position pos)
 		{
-			var rs = new Row[rows.Length];
+			var rs = new ushort[rows.Length];
 			Array.Copy(rows, rs, RowCount);
 
 			short pt = Points;
@@ -116,21 +124,21 @@ namespace AIGames.BlockBattle.Kubisme
 				var l = pos.Row + line;
 				if (l >= 0 && l < RowCount)
 				{
-					rs[l] = rs[l].AddBlock(block[line], pos.Col);
+					rs[l] = Row.AddBlock(rs[l], block[line], pos.Col);
 				}
 			}
 			for (var r = RowCount - 1; r >= 0; r--)
 			{
-				if (rs[r].row == Row.Filled)
+				if (rs[r] == Row.Filled)
 				{
-					rs[r] = new Row(Row.Empty);
+					rs[r] = Row.Empty;
 					cleared++;
 				}
 				else
 				{
 					if (r < cleared)
 					{
-						rs[r] = new Row(Row.Empty);
+						rs[r] = Row.Empty;
 					}
 					if (cleared > 0)
 					{
@@ -138,50 +146,79 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 				}
 			}
-			if (cleared == 4)
-			{
-				pt += 4;
-			}
 			if (cleared > 0)
 			{
 				free += (byte)cleared;
-				pt += combo;
-				pt += cleared;
-				combo++;
+
+				switch (cleared)
+				{
+					case 1: pt += SingleLineClear; break;
+					case 2: pt += DoubleLineClear; break;
+					case 3: pt += TripleLineClear; break;
+					case 4: pt += QuadrupleLineClear; break;
+				}
+				// perfect clear 
+				if (free == RowCount)
+				{
+					pt += PerfectClear;
+				}
+				pt += combo++;
 			}
 			else { combo = 0; }
 			return new Field(pt, combo, free, rs);
 		}
 
-		/// <summary>Returns a field, with locked rows.</summary>
-		public Field LockRows(int count)
+		public Field Garbage(int count, MT19937Generator rnd)
 		{
-			if (count >= RowCount) { return None; }
-			for(var i = 0; i < count; i++)
+			var garbage = new ushort[count];
+
+			var prev = -1;
+			for(var i = 0;i< count;i++)
 			{
-				if (rows[i].row != Row.Empty)
-				{
-					// A lock will lead to death.
-					return None;
-				}
+				var index = rnd.Next(i == 0 ? 10 : 9);
+				if(index == prev){index++;}
+				garbage[i] = Row.Garbage[index];
+				prev = index;
 			}
-			var rs = new Row[rows.Length - count];
-			Array.Copy(rows, count, rs, 0, rs.Length);
+			return Garbage(garbage);
+		}
+
+		/// <summary>Returns a field, with garbage rows.</summary>
+		public Field Garbage(params ushort[] garbage)
+		{
+			if (garbage.Length > FirstFilled) { return None; }
+
+			var count = garbage.Length;
+
+			var rs = new ushort[RowCount];
+			var copyCount = RowCount - count;
+			Array.Copy(garbage, 0, rs, copyCount, count);
+			Array.Copy(rows, count, rs, 0, copyCount);
+			
 			var free = FirstFilled - count;
-			if (free < 0) { free = 0; }
 			return new Field(Points, Combo, (byte)free, rs);
 		}
 
-		public override string ToString() { return String.Join("|", rows); }
+		/// <summary>Returns a field, with a locked row.</summary>
+		public Field LockRow()
+		{
+			if (FirstFilled == 0) { return None; }
+			var rs = new ushort[rows.Length - 1];
+			Array.Copy(rows, 1, rs, 0, rs.Length);
+			var free = FirstFilled - 1;
+			return new Field(Points, Combo, (byte)free, rs);
+		}
+
+		public override string ToString() { return String.Join("|", rows.Select(r=> Row.ToString(r))); }
 
 		public static Field Create(GameState state, PlayerName name)
 		{
-			var rows = new Row[state[name].Field.GetLength(0)];
+			var rows = new ushort[state[name].Field.GetLength(0)];
 			
 			for (var r = 0; r < rows.GetLength(0); r++)
 			{
 				var row = Row.Create(state, name, r);
-				if (row.row == Row.Locked)
+				if (row == Row.Locked)
 				{
 					Array.Resize(ref rows, r);
 					break;
@@ -196,12 +233,12 @@ namespace AIGames.BlockBattle.Kubisme
 		public static Field Create(int pt, int combo, string str)
 		{
 			var lines = str.Split(new String[] { "|", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-			var rows = new Row[lines.Length];
+			var rows = new ushort[lines.Length];
 
 			for (var r = 0; r < rows.Length; r++)
 			{
 				var row = Row.Create(lines[r].Trim());
-				if (row.row == Row.Locked)
+				if (row == Row.Locked)
 				{
 					Array.Resize(ref rows, r);
 					break;

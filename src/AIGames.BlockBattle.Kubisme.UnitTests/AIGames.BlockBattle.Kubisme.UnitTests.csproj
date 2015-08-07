@@ -39,13 +39,10 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="Troschuetz.Random">
-      <HintPath>..\packages\Troschuetz.Random.3.2.0\lib\net40-client\Troschuetz.Random.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Communication\input.version0016.txt" />
+    <EmbeddedResource Include="Communication\input.version0017.txt" />
     <Compile Include="Communication\ConsolePlatformTest.cs" />
     <Compile Include="Communication\InstructionTest.cs" />
     <Compile Include="Communication\MoveInstructionTest.cs" />

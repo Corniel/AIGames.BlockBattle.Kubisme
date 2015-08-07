@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
@@ -55,8 +50,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			while(s0 && s1)
 			{
-				field0 =b0.GetResponse(field0, field1, current, next);
-				field1 =b1.GetResponse(field1, field0, current, next);
+				field0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
+				field1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
 
 				Turns0.Add(field0);
 				Turns1.Add(field1);

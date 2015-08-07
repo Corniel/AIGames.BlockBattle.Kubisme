@@ -23,7 +23,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ..........
 ..........
 ..........");
-			var path = dm.GetMove(field, Block.O, Block.L);
+			var path = dm.GetMove(field, Block.O, Block.L, 1);
 
 			var act = path;
 			var exp = BlockPath.Create(ActionType.Left, ActionType.Left, ActionType.Left, ActionType.Left, ActionType.Drop);
@@ -53,7 +53,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ..........
 ..........
 XXX.XXXXXX");
-			var path = dm.GetMove(field, Block.Z, Block.O);
+			var path = dm.GetMove(field, Block.Z, Block.O, 1);
 
 			var act = path;
 			var exp = BlockPath.Create(ActionType.TurnLeft, ActionType.Drop);

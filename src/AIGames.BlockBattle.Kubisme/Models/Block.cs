@@ -423,7 +423,8 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Get the first row that should be tested for this block.</summary>
 		public int GetMinRow(Field field)
 		{
-			return field.FirstFilled - 4 + Bottom;
+			var row = field.FirstFilled - 4 + Bottom;
+			return row < 0 ? 0 : row;
 		}
 
 		/// <summary>Get the last row (exclusive) that should be tested for this block.</summary>

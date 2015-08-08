@@ -157,6 +157,18 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 			Assert.AreEqual(exp, act);
 		}
 		[Test]
+		public void GetMinRow_TOnFilledFieldOf3_0()
+		{
+			var field = Field.Create(0, 0, @"
+.........X
+........XX
+.......XX.");
+
+			var act = Block.T.GetMinRow(field);
+			var exp = 0;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
 		public void GetMaxRow_TOnFieldOf3_2()
 		{
 			var field = Field.Create(0, 0, @"

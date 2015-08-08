@@ -1,13 +1,11 @@
-﻿using AIGames.BlockBattle.Kubisme.Communication;
-using System;
-
-namespace AIGames.BlockBattle.Kubisme
+﻿namespace AIGames.BlockBattle.Kubisme
 {
 	public class Program
 	{
-		public static void Main(String[] args)
+		[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+		public static void Main(string[] args)
 		{
-			ConsolePlatform.Run(new KubismeBot());
+			Communication.ConsolePlatform.Run(new KubismeBot());
 		}
 	}
 }

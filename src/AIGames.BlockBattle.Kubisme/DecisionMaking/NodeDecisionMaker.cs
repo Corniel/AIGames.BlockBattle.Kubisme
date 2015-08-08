@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace AIGames.BlockBattle.Kubisme
@@ -43,6 +44,7 @@ namespace AIGames.BlockBattle.Kubisme
 			return Root.BestMove;
 		}
 
+		[ExcludeFromCodeCoverage]
 		public string GetLog()
 		{
 			var parameters = (SimpleParameters)Evaluator.Parameters;

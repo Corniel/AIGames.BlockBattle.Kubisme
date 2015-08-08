@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -27,6 +28,7 @@ namespace AIGames.BlockBattle.Kubisme
 				NeighborsVertical[i] = (byte)count;
 			}
 		}
+		[ExcludeFromCodeCoverage]
 		public IParameters Parameters
 		{
 			get

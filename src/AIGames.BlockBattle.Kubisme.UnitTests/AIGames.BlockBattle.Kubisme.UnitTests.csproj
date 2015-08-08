@@ -55,6 +55,7 @@
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Deployoment\DeployerTest.cs" />
     <Compile Include="Evaluation\SimpleEvaluatorTest.cs" />
+    <Compile Include="Evaluation\SimpleParametersTest.cs" />
     <Compile Include="Generation\MoveGeneratorTest.cs" />
     <Compile Include="Genetics\SimpleParametersCollectionTest.cs" />
     <Compile Include="Models\BlockTest.cs" />

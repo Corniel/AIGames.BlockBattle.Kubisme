@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
@@ -33,6 +34,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Evaluations{ get; set; }
 		public byte Depth { get; set; }
 
+		[ExcludeFromCodeCoverage]
 		public override string ToString()
 		{
 			return String.Format("{0:0.000}s ({1} depth) {2:#,##0.0}kN ({3:#,##0.0}kN/s)", Elapsed.TotalSeconds, Depth, Evaluations / 1000d, Evaluations / Elapsed.TotalMilliseconds);

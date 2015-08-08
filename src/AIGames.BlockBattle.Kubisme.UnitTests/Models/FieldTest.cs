@@ -8,17 +8,16 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 	public class FieldTest
 	{
 		[Test]
-		public void Create_WithLockedRow_InitializedField()
+		public void Create_Field_InitializedField()
 		{
 			var act = Field.Create(0, 0, @"
 ..........
 .......XX.
-##########
 ");
 			AssertField("..........|.......XX.", 0, 0, 1, act);
 		}
 		[Test]
-		public void Create_FromStateWithLockedRow_InitializedField()
+		public void Create_FromState_InitializedField()
 		{
 			var state = new GameState()
 			{

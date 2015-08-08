@@ -232,11 +232,6 @@ namespace AIGames.BlockBattle.Kubisme
 			for (var r = 0; r < rows.Length; r++)
 			{
 				var row = Row.Create(lines[r].Trim());
-				if (row == Row.Locked)
-				{
-					Array.Resize(ref rows, r);
-					break;
-				}
 				rows[r] = row;
 			}
 			return new Field((short)pt, (byte)combo, rows);

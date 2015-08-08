@@ -17,28 +17,17 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			0X03FE,
 			0X03FD,
-			0X03FA,
+			0X03FB,
 			0X03F7,
-
 			0X03EF,
 			0X03DF,
-			0X03AF,
+			0X03BF,
 			0X037F,
-
 			0X02FF,
 			0X01FF,
 		};
 
-		[SuppressMessage("Microsoft.Usage", "CA2207:InitializeValueTypeStaticFieldsInline", Justification = "Too complex to generate otherwise.")]
-		static Row()
-		{
-			Count = new byte[Row.Filled + 1];
-			for (ushort r = Row.Empty; r <= Row.Filled; r++)
-			{
-				Count[r] = (byte)Bits.Count(r);
-			}
-		}
-		public static readonly byte[] Count;
+		public static readonly byte[] Count = GetCount();
 		
 		public static readonly ushort[] Flag = new ushort[]{
 			0x0001,
@@ -58,7 +47,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public const ushort Filled = 0X03FF;
 		public const ushort Locked = 0X07FF;
 
-			public static ushort Create(GameState state, PlayerName name, int r)
+		public static ushort Create(GameState state, PlayerName name, int r)
 		{
 			ushort row = 0;
 
@@ -78,7 +67,6 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public static ushort Create(string line)
 		{
-			if (line == "##########") { return Row.Locked; }
 			ushort row = 0;
 			for (var i = 0; i < 10; i++)
 			{
@@ -109,16 +97,23 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public static string ToString(ushort row)
 		{
-			if (row == Row.Locked) { return "##########"; }
 			var chars = new char[10];
 
 			for (var i = 0; i < 10; i++)
 			{
 				chars[i] = (Flag[i] & row) == 0 ? '.' : 'X';
 			}
-
 			return new String(chars);
 		}
 
+		private static byte[] GetCount()
+		{
+			var cnt = new byte[Row.Filled + 1];
+			for (ushort r = Row.Empty; r <= Row.Filled; r++)
+			{
+				cnt[r] = (byte)Bits.Count(r);
+			}
+			return cnt;
+		}
 	}
 }

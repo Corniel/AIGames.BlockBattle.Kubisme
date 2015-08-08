@@ -48,7 +48,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 
 		public class Player
 		{
-			public int RowPoints { get; set; }
+			public int Points { get; set; }
 			public int Combo { get; set; }
 			public int[,] Field { get; set; }
 		}
@@ -70,7 +70,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 				typeof(RowPointsInstruction), (instruction, state) =>
 				{
 					var inst = (RowPointsInstruction)instruction;
-					state[inst.Name].RowPoints = inst.Points;
+					state[inst.Name].Points = inst.Points;
 				}
 			},
 			{

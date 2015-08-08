@@ -1,7 +1,7 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -12,7 +12,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public const short TripleLineClear = 6;
 		public const short QuadrupleLineClear = 12;
 		public const short PerfectClear = 24;
-
 
 		public static readonly Field None = new Field(-1, 0, 0, new ushort[0]);
 		public static readonly Field Empty = Field.Create(0, 0, @"..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........");
@@ -46,6 +45,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int RowCount { get { return rows.Length; } }
 
+		[ExcludeFromCodeCoverage]
 		public ushort this[int row] { get { return rows[row]; } }
 
 		public enum TestResult
@@ -55,48 +55,46 @@ namespace AIGames.BlockBattle.Kubisme
 			Retry = 2,
 		}
 
+		[ExcludeFromCodeCoverage]
 		public TestResult Test(Block block, Position pos)
 		{
 			return Test(block, pos.Col, pos.Row);
 		}
 
+		/// <summary>Tests if the block fits.</summary>
+		/// <returns>
+		/// Returns false if there is overlap.
+		/// Else, returns true if solid ground, or retry if not.
+		/// </returns>
 		public TestResult Test(Block block, int col, int row)
 		{
 			var lineMax = 3 - block.Bottom;
-			// free space.
-			if (lineMax + row < FirstFilled - 1) { return TestResult.Retry; }
-
 			var lineMin = block.Top;
 
-			var fl = lineMax + row + 1 - RowCount;
-			// Not high enough.
-			if (fl > 0)
+			var rowMax = lineMax + row;
+			
+			// Not fit, block lower than bottom.
+			if (rowMax >= RowCount) { return TestResult.False; }
+
+			var rowMin = lineMin + row;
+
+			var hasFloor = rowMax == RowCount - 1;
+
+			// From high to low, because of change on shortcuts.
+			for (var r = rowMax; r >= rowMin; r--)
 			{
-				return TestResult.False;
-			}
-			// The block does not fit. This can lead to false and a retry.
-			var fit = row + lineMin >= 0;
-
-			var hasFloor = fl == 0;
-
-			for (var l = lineMax; l >= lineMin; l--)
-			{
-				// There is no fit, but also no overlap, so a drop can be tested.
-				if (!fit && row + l < 0)
-				{
-					return TestResult.Retry;
-				}
-
+				var l = r - row;
 				var line = block[l, col];
 
 				// if no floor detected yet.
 				if (!hasFloor)
 				{
-					var floor = rows[row + l + 1];
+					var floor = rows[r + 1];
+					// overlap with the row below.
 					hasFloor = (floor & line) != 0;
 				}
-
-				var current = rows[row + l];
+				
+				var current = rows[r];
 				var merged = current & line;
 
 				// overlap.
@@ -123,10 +121,9 @@ namespace AIGames.BlockBattle.Kubisme
 			for (var line = block.Top; line < lineMax; line++)
 			{
 				var l = pos.Row + line;
-				if (l >= 0 && l < RowCount)
-				{
-					rs[l] = Row.AddBlock(rs[l], block[line], pos.Col);
-				}
+				// This should be checked by test methods before.
+				// if (l >= 0 && l < RowCount)
+				rs[l] = (ushort)(rs[l] | block[line, pos.Col]);
 			}
 			for (var r = RowCount - 1; r >= 0; r--)
 			{
@@ -137,13 +134,13 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				else
 				{
-					if (r < cleared)
-					{
-						rs[r] = Row.Empty;
-					}
 					if (cleared > 0)
 					{
 						rs[r + cleared] = rs[r];
+					}
+					if (r < cleared)
+					{
+						rs[r] = Row.Empty;
 					}
 				}
 			}
@@ -172,21 +169,6 @@ namespace AIGames.BlockBattle.Kubisme
 			return new Field(pt, combo, free, rs);
 		}
 
-		public Field Garbage(int count, MT19937Generator rnd)
-		{
-			var garbage = new ushort[count];
-
-			var prev = -1;
-			for(var i = 0;i< count;i++)
-			{
-				var index = rnd.Next(i == 0 ? 10 : 9);
-				if(index == prev){index++;}
-				garbage[i] = Row.Garbage[index];
-				prev = index;
-			}
-			return Garbage(garbage);
-		}
-
 		/// <summary>Returns a field, with garbage rows.</summary>
 		public Field Garbage(params ushort[] garbage)
 		{
@@ -213,17 +195,15 @@ namespace AIGames.BlockBattle.Kubisme
 			return new Field(Points, Combo, (byte)free, rs);
 		}
 
-		public override string ToString() { return String.Join("|", rows.Select(r=> Row.ToString(r))); }
+		public override string ToString() { return String.Join("|", Rows); }
 
-#if DEBUG
-		public string[] rws
+		public string[] Rows
 		{
 			get
 			{
 				return rows.Select(r => Row.ToString(r)).ToArray();
 			}
 		}
-#endif
 
 		public static Field Create(GameState state, PlayerName name)
 		{
@@ -239,7 +219,7 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				rows[r] = row;
 			}
-			var field = new Field((short)state[name].RowPoints, (byte)state[name].Combo, rows);
+			var field = new Field((short)state[name].Points, (byte)state[name].Combo, rows);
 
 			return field;
 		}

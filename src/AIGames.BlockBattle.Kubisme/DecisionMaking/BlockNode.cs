@@ -36,10 +36,7 @@ namespace AIGames.BlockBattle.Kubisme
 					foreach (var field in pars.Generator.GetFields(Field, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }
-
-						var fld = (pars.Round + Depth) % 20 == 0 ? field.LockRow() : field;
-						var garbage = (pars.Points[Depth + 1] >> 2) - 20 + field.RowCount;
-						T child = Create(Depth, garbage > 0 ? fld.Garbage(garbage, pars.Rnd) : fld, pars);
+						T child = Create(Depth, BlockNode.Apply(field, Depth, pars), pars);
 						pars.Evaluations++;
 						Children.Add(child);
 					}
@@ -68,7 +65,7 @@ namespace AIGames.BlockBattle.Kubisme
 		
 		public int CompareTo(object obj) { return CompareTo((IBlockNode)obj); }
 		public int CompareTo(IBlockNode other) { return other.Score.CompareTo(Score); }
-
+		
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), ExcludeFromCodeCoverage]
 		private string DebuggerDisplay
 		{
@@ -76,6 +73,23 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				return String.Format("{0:#,##0}, Depth: {1}, Children: {2}", Score, Depth, Children == null ? 0 : Children.Count);
 			}
+		}
+	}
+
+	public static class BlockNode
+	{
+		public static Field Apply(Field field, int depth, ApplyParameters pars)
+		{
+			var garbage = (pars.Points[depth + 1] >> 2) - 20 + field.RowCount;
+			if ((pars.Round + depth) % 20 == 0)
+			{
+				field = field.LockRow();
+			}
+			if (garbage > 0)
+			{
+				return field.Garbage(Row.GetGarbage(garbage, pars.Rnd));
+			}
+			return field;
 		}
 	}
 }

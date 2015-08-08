@@ -38,9 +38,7 @@ namespace AIGames.BlockBattle.Kubisme
 							if (!pars.HasTimeLeft) { return; }
 
 							var score = pars.Evaluator.GetScore(field);
-							var fld = (pars.Round + Depth) % 20 == 0 ? field.LockRow() : field;
-							var garbage = (pars.Points[Depth + 1] >> 2) - 20 + field.RowCount;
-							var child = new BlockRndNode(garbage > 0 ? fld.Garbage(garbage, pars.Rnd) : fld, Depth, score);
+							var child = new BlockRndNode(BlockNode.Apply(field, Depth, pars), Depth, score);
 							pars.Evaluations++;
 							nodes.Add(child);
 						}

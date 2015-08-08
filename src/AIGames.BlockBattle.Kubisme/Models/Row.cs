@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -57,31 +58,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public const ushort Filled = 0X03FF;
 		public const ushort Locked = 0X07FF;
 
-
-
-		public static ushort AddBlock(ushort row, ushort line, int left)
-		{
-			if (left < 0)
-			{
-				return (ushort)(row | (line >> -left));
-			}
-			return (ushort)(row | (line << left));
-		}
-
-		public static string ToString(ushort row)
-		{
-			if (row == Row.Locked) { return "##########"; }
-			var chars = new char[10];
-
-			for (var i = 0; i < 10; i++)
-			{
-				chars[i] = (Flag[i] & row) == 0 ? '.' : 'X';
-			}
-
-			return new String(chars);
-		}
-
-		public static ushort Create(GameState state, PlayerName name, int r)
+			public static ushort Create(GameState state, PlayerName name, int r)
 		{
 			ushort row = 0;
 
@@ -112,5 +89,36 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			return row;
 		}
+
+		public static ushort[] GetGarbage(int count, MT19937Generator rnd)
+		{
+			var garbage = new ushort[count];
+
+			var prev = -1;
+			for (var i = 0; i < count; i++)
+			{
+				var index = rnd.Next(i == 0 ? 10 : 9);
+				// 9 is not assigned, so move the to that one.
+				if (index == prev) { index = 9; }
+				garbage[i] = Garbage[index];
+				prev = index;
+			}
+			return garbage;
+		}
+
+
+		public static string ToString(ushort row)
+		{
+			if (row == Row.Locked) { return "##########"; }
+			var chars = new char[10];
+
+			for (var i = 0; i < 10; i++)
+			{
+				chars[i] = (Flag[i] & row) == 0 ? '.' : 'X';
+			}
+
+			return new String(chars);
+		}
+
 	}
 }

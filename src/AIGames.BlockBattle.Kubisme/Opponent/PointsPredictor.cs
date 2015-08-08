@@ -9,6 +9,15 @@
 
 		public MoveGenerator Generator { get; set; }
 
+		public static int GetGarbageCount(int[] points, int depth)
+		{
+			if (depth == 0) { return 0; }
+
+			var rows_old = points[depth - 1] >> 2;
+			var row_new = points[depth] >> 2;
+			return row_new - rows_old;
+		}
+
 		public int[] GetPoints(Field field, Block current, Block next)
 		{
 			var points = new int[10];

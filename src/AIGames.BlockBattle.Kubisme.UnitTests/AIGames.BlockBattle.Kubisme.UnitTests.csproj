@@ -44,6 +44,7 @@
     <EmbeddedResource Include="Communication\input.version0016.txt" />
     <EmbeddedResource Include="Communication\input.version0017.txt" />
     <Compile Include="BitsTest.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Communication\ConsolePlatformTest.cs" />
     <EmbeddedResource Include="Communication\input.version0018.txt" />
     <Compile Include="Communication\InstructionTest.cs" />

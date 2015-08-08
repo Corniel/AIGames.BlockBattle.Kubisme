@@ -2,7 +2,7 @@
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 {
-	[TestFixture]
+	[TestFixture, Category(Category.IntegrationTest)]
 	public class ConsolePlatformTest
 	{
 		[Test]

@@ -7,7 +7,7 @@ using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 {
-	[TestFixture]
+	[TestFixture, Category(Category.IntegrationTest)]
 	public class PerformanceTest
 	{
 		public const int Runs = 10;

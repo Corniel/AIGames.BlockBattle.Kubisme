@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 {
-	[TestFixture]
+	[TestFixture, Category(Category.Deployment)]
 	public class DeployerTest
 	{
 		[Test]

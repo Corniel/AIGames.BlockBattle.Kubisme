@@ -1,10 +1,19 @@
-﻿using NUnit.Framework;
+﻿using AIGames.BlockBattle.Kubisme.Communication;
+using NUnit.Framework;
+using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 {
 	[TestFixture]
 	public class BlockTest
 	{
+		[Test]
+		public void Name_O_O()
+		{
+			var act = Block.O.Name;
+			var exp = "O";
+			Assert.AreEqual(exp, act);
+		}
 		[Test]
 		public void BlockRotates_O_AllTheSame()
 		{
@@ -105,6 +114,73 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		public void BlockRotates_TRight_IsValidDefinition()
 		{
 			ValidateDefinition(".X..|.XX.|.X..|....", Block.T[Block.RotationType.Right]);
+		}
+
+		[Test]
+		public void ThisIndex_Index0To5_Matches()
+		{
+			var block =Block.I[Block.RotationType.Left];
+			var act = new byte[5];
+			for (var i = 0; i < 5; i++)
+			{
+				act[i] = block[i];
+			}
+			var exp = new byte[]{2, 2, 2, 2, 0};
+
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void ThisLineCol_AllPossibleColumns_Matches()
+		{
+			var block = Block.I[Block.RotationType.Left];
+			var act = new int[16];
+
+			for (var i = 0; i < 16; i++)
+			{
+				act[i] = block[0, i - 1];
+			}
+			var exp = new int[] { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 0, 0, 0, 0, 0, 0 };
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void GetMinRow_TOnFieldOf3_1()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+..........");
+
+			var act = Block.T.GetMinRow(field);
+			var exp = 1;
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void GetMaxRow_TOnFieldOf3_2()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+..........");
+
+			var act = Block.T.GetMaxRow(field);
+			var exp = 2;
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void Select_All_Matches()
+		{
+			var tps = new PieceType[] { PieceType.I, PieceType.J, PieceType.L, PieceType.O, PieceType.S, PieceType.T, PieceType.Z };
+			var act = tps.Select(tp => Block.Select(tp)).Select(block => block.Name).ToArray();
+			var exp = new string[]{ "I", "J", "L", "O", "S", "T", "Z" };
+			CollectionAssert.AreEqual(exp, act);
+		}
+		[Test]
+		public void Select_None_IsNull()
+		{
+			Assert.IsNull(Block.Select(PieceType.None));
 		}
 
 		protected void ValidateDefinition(string expected, Block org)

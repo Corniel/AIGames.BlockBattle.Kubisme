@@ -231,7 +231,7 @@ namespace AIGames.BlockBattle.Kubisme
 				lines[l, 0] = (ushort)(line >> 1);
 				lines[l, 1] = line;
 
-				for (var i = 1; i < 10; i++)
+				for (var i = 1; i < 9; i++)
 				{
 					lines[l, i + 1] = (ushort)(line << i);
 				}
@@ -358,6 +358,7 @@ namespace AIGames.BlockBattle.Kubisme
 			get { return Variations[(int)rotation]; }
 		}
 		
+		[ExcludeFromCodeCoverage]
 		public override string ToString()
 		{
 			var sb = new StringBuilder();

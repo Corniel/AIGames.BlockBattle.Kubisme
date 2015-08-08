@@ -51,14 +51,11 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 
 			var exp = new string[] 
 			{ 
-				"XXXXXX.XXX",
+				"XXXXX.XXXX",
 				"XXXXXXXXX.",
-				"XXXXXX.XXX",
-				"XXXXXXX.XX",
-				"XX.XXXXXXX",
 			};
 			CollectionAssert.AreEqual(exp, act);			
-	}
+		}
 
 		[Test]
 		public void Flag_All_Matches()

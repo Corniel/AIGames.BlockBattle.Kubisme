@@ -18,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme
 					Parameters = SimpleParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 6,
+				MaximumDepth = 5,
 				MaximumDuration = TimeSpan.FromMilliseconds(700),
 			};
 			Predictor = new PointsPredictor();

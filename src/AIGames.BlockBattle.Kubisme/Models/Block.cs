@@ -1,10 +1,13 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace AIGames.BlockBattle.Kubisme
 {
+	[DebuggerDisplay("{DebuggerDisplay}")]
 	public class Block
 	{
 		/// <summary>Gets the O block.</summary>
@@ -357,44 +360,62 @@ namespace AIGames.BlockBattle.Kubisme
 		
 		public override string ToString()
 		{
-			return DebuggerDisplay;
+			var sb = new StringBuilder();
+			for (var i = 0; i < 4; i++)
+			{
+				if (i > 0) { sb.Append('|'); }
+				var row = this[i];
+				switch (row)
+				{
+					case 00: sb.Append("...."); break;
+					case 01: sb.Append("X..."); break;
+					case 02: sb.Append(".X.."); break;
+					case 03: sb.Append("XX.."); break;
+
+					case 04: sb.Append("..X."); break;
+					case 05: sb.Append("X.X."); break;
+					case 06: sb.Append(".XX."); break;
+					case 07: sb.Append("XXX."); break;
+
+					case 08: sb.Append("...X"); break;
+					case 09: sb.Append("X..X"); break;
+					case 10: sb.Append(".X.X"); break;
+					case 11: sb.Append("XX.X"); break;
+
+					case 12: sb.Append("..XX"); break;
+					case 13: sb.Append("X.XX"); break;
+					case 14: sb.Append(".XXX"); break;
+					case 15: sb.Append("XXXX"); break;
+					default: sb.Append("????"); break;
+				}
+			}
+			return sb.ToString();
 		}
 
-		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		public string Name
+		{
+			get
+			{
+				if (m_Name == null)
+				{
+					var consts = typeof(Block)
+						.GetFields(BindingFlags.Static | BindingFlags.Public)
+						.Where(field => field.ReflectedType == typeof(Block))
+						.ToList();
+
+					m_Name = consts.FirstOrDefault(c => Variations.Contains(c.GetValue(null))).Name;
+				}
+				return m_Name;
+			}
+		}
+		private string m_Name;
+
+		[DebuggerBrowsable(DebuggerBrowsableState.Never), ExcludeFromCodeCoverage]
 		private string DebuggerDisplay
 		{
 			get
 			{
-				var sb = new StringBuilder();
-				for (var i = 0; i < 4; i++)
-				{
-					if (i > 0) { sb.Append('|'); }
-					var row = this[i];
-					switch (row)
-					{
-						case 00: sb.Append("...."); break;
-						case 01: sb.Append("X..."); break;
-						case 02: sb.Append(".X.."); break;
-						case 03: sb.Append("XX.."); break;
-
-						case 04: sb.Append("..X."); break;
-						case 05: sb.Append("X.X."); break;
-						case 06: sb.Append(".XX."); break;
-						case 07: sb.Append("XXX."); break;
-
-						case 08: sb.Append("...X"); break;
-						case 09: sb.Append("X..X"); break;
-						case 10: sb.Append(".X.X"); break;
-						case 11: sb.Append("XX.X"); break;
-
-						case 12: sb.Append("..XX"); break;
-						case 13: sb.Append("X.XX"); break;
-						case 14: sb.Append(".XXX"); break;
-						case 15: sb.Append("XXXX"); break;
-						default: sb.Append("????"); break;
-					}
-				}
-				return sb.ToString();
+				return string.Format("{0}{1}", Name, Rotation == RotationType.None ? "" : " " + Rotation.ToString());
 			}
 		}
 

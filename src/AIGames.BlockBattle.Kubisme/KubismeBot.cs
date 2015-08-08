@@ -1,9 +1,12 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
 {
+	[DebuggerDisplay("{DebuggerDisplay}")]
 	public class KubismeBot : IBot
 	{
 		public KubismeBot()
@@ -50,12 +53,22 @@ namespace AIGames.BlockBattle.Kubisme
 
 			var path = DecisionMaker.GetMove(Field, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());
-			
-			return new BotResponse()
+
+			var response = new BotResponse()
 			{
 				Move = move,
 				Log = DecisionMaker.GetLog(),
 			};
+			return response;
+		}
+
+		[DebuggerBrowsable(DebuggerBrowsableState.Never), ExcludeFromCodeCoverage]
+		private string DebuggerDisplay
+		{
+			get
+			{
+				return string.Format("{0:00} Current: {1}, Next: {2}", State.Round, Current.Name, Next.Name);
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -46,10 +47,13 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			var parameters = (SimpleParameters)Evaluator.Parameters;
 
-			return string.Format("{0}  {1:0.00}  {2}",
+			return string.Format(
+				CultureInfo.InvariantCulture,
+				"Round {3:00}, Points: {0:00}  {1:0.000}  {2}",
 				BestField.Points,
 				Root.Score / (double)parameters.Points,
-				Pars);
+				Pars,
+				Pars.Round);
 		}
 	}
 }

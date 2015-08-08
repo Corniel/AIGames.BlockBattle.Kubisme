@@ -115,7 +115,8 @@ namespace AIGames.BlockBattle.Kubisme
 
 			short pt = Points;
 			byte combo = Combo;
-			byte free = (byte)(pos.Row + block.Top);
+			// the current position, and if the block is higher, pick that one.
+			byte free = (byte)Math.Min(FirstFilled, pos.Row + block.Top);
 			short cleared = 0;
 			var lineMax = 4 - block.Bottom;
 
@@ -146,25 +147,28 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 				}
 			}
-			if (cleared > 0)
+			if (cleared == 0) { combo = 0; }
+			else
 			{
 				free += (byte)cleared;
 
-				switch (cleared)
-				{
-					case 1: pt += SingleLineClear; break;
-					case 2: pt += DoubleLineClear; break;
-					case 3: pt += TripleLineClear; break;
-					case 4: pt += QuadrupleLineClear; break;
-				}
 				// perfect clear 
 				if (free == RowCount)
 				{
 					pt += PerfectClear;
 				}
+				else
+				{
+					switch (cleared)
+					{
+						case 1: pt += SingleLineClear; break;
+						case 2: pt += DoubleLineClear; break;
+						case 3: pt += TripleLineClear; break;
+						case 4: pt += QuadrupleLineClear; break;
+					}
+				}
 				pt += combo++;
 			}
-			else { combo = 0; }
 			return new Field(pt, combo, free, rs);
 		}
 
@@ -210,6 +214,16 @@ namespace AIGames.BlockBattle.Kubisme
 		}
 
 		public override string ToString() { return String.Join("|", rows.Select(r=> Row.ToString(r))); }
+
+#if DEBUG
+		public string[] rws
+		{
+			get
+			{
+				return rows.Select(r => Row.ToString(r)).ToArray();
+			}
+		}
+#endif
 
 		public static Field Create(GameState state, PlayerName name)
 		{

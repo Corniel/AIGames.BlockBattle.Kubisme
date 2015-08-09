@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 23
+----------
+New parameters and a block node lock row fix.
+
 Version 22
 ----------
 Max depth to 5, and higher branching, to prevent time-outs.

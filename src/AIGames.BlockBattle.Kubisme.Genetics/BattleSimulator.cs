@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,8 +21,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BattleSimulator(MT19937Generator rnd)
 		{
 			File = new FileInfo("parameters.xml");
-			Capacity = 97;
-			Stable = 1000;
+			Capacity = AppConfig.Data.BotCapacity;
+			Stable = AppConfig.Data.BotStable;
 
 			Rnd = rnd;
 			Randomizer = new ParameterRandomizer(rnd);
@@ -49,7 +50,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		}
 		public BotData GetHighestAvg()
 		{
-			return Bots.Where(bot => bot.Runs > Stable).OrderByDescending(bot => bot.Average).FirstOrDefault();
+			return Bots.Where(bot => bot.Runs > Stable).OrderByDescending(bot => bot.PointsAvg).FirstOrDefault();
 		}
 
 		public ConcurrentQueue<BattlePairing> Results { get; protected set; }
@@ -71,10 +72,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 			}
 
-			GetRandomPairings(Capacity * 20);
-
-			var queue = new ConcurrentQueue<MT19937Generator>();
-
+			GetRandomPairings(AppConfig.Data.PairingsRandom);
+				
 			var keepRunning = true;
 
 			while (true)
@@ -84,12 +83,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				LogStatus();
 
 				if (!keepRunning) { break; }
-
-				for (var i = queue.Count; i < 64; i++)
-				{
-					queue.Enqueue(new MT19937Generator());
-				}
-
+			
 				var pairings = new List<BattlePairing>();
 
 				lock (lockList)
@@ -116,44 +110,50 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					}
 				}
 				
-				if (Bots.Any(b => b.Runs < Capacity))
+				if (Bots.Any(b => b.Runs < AppConfig.Data.BotStable))
 				{
-					foreach (var bot in Bots.Where(b => b.Runs < Capacity))
+					foreach (var bot in Bots.Where(b => b.Runs < AppConfig.Data.BotStable))
 					{
 						pairings.AddRange(PairOther(bot));
 					}
 				}
-				else
+				if (BestBot.Runs > AppConfig.Data.BotStable)
 				{
-					for (var i = 1; i <= 8; i++)
-					{
-						var newBot = new BotData(++LastId, BestBot, Randomizer);
-						Bots.Insert(i, newBot);
-
-						// the new created should challenge the others too.
-						pairings.AddRange(PairOther(newBot));
-					}
+					Copy(pairings, AppConfig.Data.CopyHighestElo, BestBot);
 				}
 				// The bot with the best avg deserves extra attention as well.
 				var bestAvg = GetHighestAvg();
 				if (bestAvg != null)
 				{
+					Copy(pairings, AppConfig.Data.CopyHighestScore, bestAvg);
 					pairings.AddRange(PairOther(bestAvg));
 				}
 				
 				// Run also random matches.
-				pairings.AddRange(GetRandomPairings(Bots.Count * 4));
+				pairings.AddRange(GetRandomPairings(AppConfig.Data.PairingsRandom));
 
 				var copy = pairings.OrderBy(p => Rnd.Next()).ToList();
 
 				if (InParallel)
 				{
-					keepRunning = SimulateParallel(queue, copy);
+					keepRunning = SimulateParallel(copy);
 				}
 				else
 				{
 					keepRunning = Simulate(copy);
 				}
+			}
+		}
+
+		private void Copy(List<BattlePairing> pairings, int copies, BotData bot)
+		{
+			for (var i = 0; i < copies; i++)
+			{
+				var newBot = new BotData(++LastId, bot, Randomizer);
+				Bots.Add(newBot);
+
+				// the new created should challenge the others too.
+				pairings.AddRange(PairOther(newBot));
 			}
 		}
 
@@ -232,23 +232,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			return true;
 		}
 
-		private bool SimulateParallel(ConcurrentQueue<MT19937Generator> queue, IEnumerable<BattlePairing> pairings)
+		private bool SimulateParallel(IEnumerable<BattlePairing> pairings)
 		{
 			var result = true;
 			try
 			{
 				Parallel.ForEach(pairings, p =>
 				{
-					MT19937Generator rnd;
-					if (queue.Count > 0 && queue.TryDequeue(out rnd))
-					{
-						RunSimulation(p.Bot0, p.Bot1, rnd);
-						queue.Enqueue(rnd);
-					}
-					else
-					{
-						result = false;
-					}
+					var rnd = new MT19937Generator();
+					RunSimulation(p.Bot0, p.Bot1, rnd);
 				});
 				return result;
 			}
@@ -320,6 +312,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var max = Math.Min(Console.WindowHeight - 2, Bots.Count);
 			var bestId = BestBot.Id;
 			var bestParent = BestBot.ParentId;
+			var avgParent = bestAvg == null ? -1 : bestAvg.Id;
 
 			for (var pos = 1; pos <= max; pos++)
 			{
@@ -335,6 +328,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				else if (bot.ParentId == bestId)
 				{
 					Console.ForegroundColor = ConsoleColor.Green;
+				}
+				else if (bot.ParentId == avgParent)
+				{
+					Console.ForegroundColor = ConsoleColor.Cyan;
 				}
 				else if (bot.Id == bestParent)
 				{
@@ -352,7 +349,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					Console.ForegroundColor = ConsoleColor.Gray;
 				}
-				Console.WriteLine("{5,2} {0:0000.0} {4:0.0000}, Runs: {1,5}, ID: {2,5}, Parent: {3,5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.Average, pos);
+				Console.WriteLine(
+					String.Format(
+						CultureInfo.InvariantCulture,
+						"{6,2} {0:0000.0} {4:0.0000}, Runs: {1,5} ({5:0.0}), ID: {2,5}, Parent: {3,5}",
+						bot.Elo, 
+						bot.Runs, 
+						bot.Id,
+						bot.ParentId, 
+						bot.PointsAvg,
+						bot.TurnsAvg,
+						pos));
 			}
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.WriteLine();
@@ -368,7 +375,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				foreach (var bot in Bots)
 				{
-					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.Average);
+					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg);
 					writer.WriteLine(bot.ParametersToString());
 					writer.WriteLine();
 				}
@@ -378,7 +385,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				int pos = 1;
 				foreach (var bot in Bots)
 				{
-					writer.WriteLine("{5,2} {0:0000.0} {4:0.0000}, Runs: {1,5}, ID: {2,5}, Parent: {3,5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.Average, pos++);
+					writer.WriteLine("{5,2} {0:0000.0} {4:0.0000}, Runs: {1,5}, ID: {2,5}, Parent: {3,5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, pos++);
 				}
 			}
 		}

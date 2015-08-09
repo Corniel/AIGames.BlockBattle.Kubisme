@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfig.cs" />
     <Compile Include="BattleBot.cs" />
     <Compile Include="BattlePairing.cs" />
     <Compile Include="BattleSimulation.cs" />
@@ -51,22 +53,16 @@
     <Compile Include="Elo.cs" />
     <Compile Include="EloExtensions.cs" />
     <Compile Include="FieldVisualizer.cs" />
-    <Compile Include="Opponent\ComboAddictOpponentProfile.cs" />
-    <Compile Include="Opponent\DefaultOpponentProfile.cs" />
-    <Compile Include="GameSimulation.cs" />
-    <Compile Include="Opponent\IOpponentProfile.cs" />
     <Compile Include="ParameterRandomizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\SimpleParametersCollection.cs" />
     <Compile Include="Serialization\SimulationBotCollection.cs" />
-    <Compile Include="SimScore.cs" />
-    <Compile Include="SimScores.cs" />
     <Compile Include="BotData.cs" />
-    <Compile Include="SimulationResult.cs" />
-    <Compile Include="Simulator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config.xample" />
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

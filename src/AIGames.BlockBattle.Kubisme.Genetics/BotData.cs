@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 
@@ -9,8 +10,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 	{
 		public BotData()
 		{
-			Elo = 1000d;
-			K = 12;
+			Elo = AppConfig.Data.EloInitial;
+			K = AppConfig.Data.KInitial;
 		}
 
 		public BotData(int id, SimpleParameters pars): this()
@@ -21,7 +22,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData(int id, BotData parent, ParameterRandomizer rnd)
 			: this(id, rnd.Randomize(parent.Pars))
 		{
-			Elo = parent.Elo - 20d;
 			ParentId = parent.Id;
 		}
 
@@ -34,14 +34,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public long Points { get; set; }
 		public long Turns { get; set; }
 
-		public double Average { get { return Turns == 0 ? 0 : (double)Points / (double)Turns; } }
+		public double PointsAvg { get { return Turns == 0 ? 0 : (double)Points / (double)Turns; } }
+		public double TurnsAvg { get { return Runs == 0 ? 0 : (double)Turns / (double)Runs; } }
 
 		public Elo Elo { get; set; }
 		public double K { get; set; }
 
 		public void UpdateK()
 		{
-			K = Math.Max(2, K * 0.95);
+			K = Math.Max(AppConfig.Data.KMinimum, K * AppConfig.Data.KMultiplier);
 		}
 
 		public int CompareTo(object obj)
@@ -56,7 +57,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public override string ToString()
 		{
-			return String.Format("ID: {0}, Parent: {1}, Elo: {2:0} {3:#,###0} runs, Avg: {4:0.000}", Id, ParentId, Elo, Runs, Average);
+			return String.Format(CultureInfo.InvariantCulture,
+				"ID: {0}, Parent: {1}, Elo: {2:0} {3:#,###0} (5:0.0) runs, Avg: {4:0.000}",
+				Id, ParentId, Elo, Runs, PointsAvg, TurnsAvg);
 		}
 
 		private static readonly PropertyInfo[] Props = typeof(SimpleParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);

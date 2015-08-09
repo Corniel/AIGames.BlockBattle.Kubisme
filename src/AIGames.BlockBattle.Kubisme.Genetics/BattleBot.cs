@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AIGames.BlockBattle.Kubisme.Genetics
+﻿namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class BattleBot
 	{
@@ -37,7 +31,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						Parameters = pars,
 					},
 					Generator = new MoveGenerator(),
-					MaximumDepth = 2,
+					MaximumDepth = AppConfig.Data.SearchDepth,
 				}
 			};
 		}

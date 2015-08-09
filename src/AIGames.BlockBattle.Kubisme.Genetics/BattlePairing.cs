@@ -12,6 +12,13 @@
 
 		public BattleSimulation.Result Result { get; set; }
 
-		public override string ToString() { return string.Format("{0} - {1}{2}", Bot0.Id, Bot1.Id, Result == null ? "" : " : "+Result.Outcome.ToString()); }
+		public override string ToString()
+		{
+			return string.Format(
+				"{0} - {1}{2}",
+				Bot0.Id,
+				Bot1.Id,
+				Result == null ? "" : " : " + Result.Outcome.ToString());
+		}
 	}
 }

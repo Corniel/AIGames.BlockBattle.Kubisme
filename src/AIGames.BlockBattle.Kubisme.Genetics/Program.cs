@@ -8,8 +8,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 	{
 		public static void Main(string[] args)
 		{
-			Console.WindowWidth = 100;
-
+			AppConfig.Data.UpdateFromConfig();
+			Console.ReadLine();
 			var simulator = new BattleSimulator(new MT19937Generator());
 			simulator.InParallel = args.Length > 0 && args.Any(arg => arg.Contains("par"));
 			while (true)

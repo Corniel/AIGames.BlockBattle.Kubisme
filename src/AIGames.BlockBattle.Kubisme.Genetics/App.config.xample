@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<appSettings>
+		<add key="SearchDepth" value="2"/>
+		<add key="BotCapacity" value="60"/>
+		<add key="BotStable" value="1024"/>
+		<add key="CopyHighestElo" value="2"/>
+		<add key="CopyHighestScore" value="2"/>
+		<add key="PairingsRandom" value="2"/>
+	</appSettings>
+</configuration>

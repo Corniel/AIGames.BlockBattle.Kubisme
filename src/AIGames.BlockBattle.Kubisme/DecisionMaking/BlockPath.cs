@@ -101,6 +101,9 @@ namespace AIGames.BlockBattle.Kubisme
 			return new BlockPath(m0, m1, count + 1);
 		}
 
+		public BlockPath AddTurnLeft() { return Add(ActionType.TurnLeft); }
+		public BlockPath AddTurnRight() { return Add(ActionType.TurnRight); }
+
 		public BlockPath AddLeft() { return Add(ActionType.Left); }
 		public BlockPath AddRight() { return Add(ActionType.Right); }
 		public BlockPath AddDown() { return Add(ActionType.Down); }
@@ -182,8 +185,8 @@ namespace AIGames.BlockBattle.Kubisme
 					actions.Add(ActionType.Right);
 				}
 			}
-			var drop = target.Row - source.Row - block.Bottom;
-			for (var i = 0; i < drop; i++)
+			var down = target.Row - source.Row - block.Bottom;
+			for (var i = 0; i < down; i++)
 			{
 				actions.Add(ActionType.Down);
 			}

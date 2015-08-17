@@ -20,8 +20,8 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				if (Children == null)
 				{
-					Children = new List<Block1Node>();
 					var block = GetBlock(pars);
+					Children = new BlockNodes<Block1Node>(block);
 					foreach (var candidate in pars.Generator.GetMoves(Field, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }

@@ -3,6 +3,11 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 24
+----------
+Re-factoring if the block object. Different implementation handle block type
+specific logic, including a test on the availability of the path.
+
 Version 23
 ----------
 New parameters and a block node lock row fix.

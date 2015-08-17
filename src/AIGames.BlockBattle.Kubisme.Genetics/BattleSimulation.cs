@@ -53,6 +53,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				field0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
 				field1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
 
+				//var rows = 20 - (Turns0.Count / 20);
+
+				//while (field0.RowCount > rows)
+				//{
+				//	field0 = field0.LockRow();
+				//}
+				//while (field1.RowCount > rows)
+				//{
+				//	field1 = field1.LockRow();
+				//}
+
 				Turns0.Add(field0);
 				Turns1.Add(field1);
 

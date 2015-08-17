@@ -68,20 +68,15 @@ namespace AIGames.BlockBattle.Kubisme
 		/// </returns>
 		public TestResult Test(Block block, int col, int row)
 		{
-			var lineMax = 3 - block.Bottom;
-			var lineMin = block.Top;
-
-			var rowMax = lineMax + row;
+			var rowMax = block.Lines.Length - 1 + row;
 			
 			// Not fit, block lower than bottom.
 			if (rowMax >= RowCount) { return TestResult.False; }
 
-			var rowMin = lineMin + row;
-
 			var hasFloor = rowMax == RowCount - 1;
 
 			// From high to low, because of change on shortcuts.
-			for (var r = rowMax; r >= rowMin; r--)
+			for (var r = rowMax; r >= row; r--)
 			{
 				var l = r - row;
 				var line = block[l, col];
@@ -114,11 +109,11 @@ namespace AIGames.BlockBattle.Kubisme
 			short pt = Points;
 			byte combo = Combo;
 			// the current position, and if the block is higher, pick that one.
-			byte free = (byte)Math.Min(FirstFilled, pos.Row + block.Top);
+			byte free = (byte)Math.Min(FirstFilled, pos.Row);
 			short cleared = 0;
 			var lineMax = 4 - block.Bottom;
 
-			for (var line = block.Top; line < lineMax; line++)
+			for (var line = 0; line < block.Lines.Length; line++)
 			{
 				var l = pos.Row + line;
 				// This should be checked by test methods before.

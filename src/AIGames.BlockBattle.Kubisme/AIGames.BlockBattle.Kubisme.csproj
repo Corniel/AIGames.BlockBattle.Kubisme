@@ -38,6 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bits.cs" />
+    <Compile Include="Blocks\BlockI.cs" />
+    <Compile Include="Blocks\BlockILeft.cs" />
+    <Compile Include="Blocks\BlockZ.cs" />
+    <Compile Include="Blocks\BlockS.cs" />
+    <Compile Include="Blocks\BlockL.cs" />
+    <Compile Include="Blocks\BlockO.cs" />
+    <Compile Include="Blocks\BlockJ.cs" />
+    <Compile Include="Blocks\BlockT.cs" />
     <Compile Include="Communication\BotResponse.cs" />
     <Compile Include="Communication\ActionType.cs" />
     <Compile Include="Communication\IBot.cs" />
@@ -63,6 +71,7 @@
     <Compile Include="DecisionMaking\ApplyParameters.cs" />
     <Compile Include="DecisionMaking\Block1Node.cs" />
     <Compile Include="DecisionMaking\BlockNode.cs" />
+    <Compile Include="DecisionMaking\BlockNodes.cs" />
     <Compile Include="DecisionMaking\BlockPath.cs" />
     <Compile Include="DecisionMaking\BlockRndNode.cs" />
     <Compile Include="DecisionMaking\BlockRndNodes.cs" />
@@ -77,7 +86,7 @@
     <Compile Include="Evaluation\IParameters.cs" />
     <Compile Include="Evaluation\SimpleEvaluator.cs" />
     <Compile Include="Evaluation\SimpleParameters.cs" />
-    <Compile Include="Models\Block.cs" />
+    <Compile Include="Blocks\Block.cs" />
     <Compile Include="KubismeBot.cs" />
     <Compile Include="Models\MoveCandiate.cs" />
     <Compile Include="Models\Position.cs" />

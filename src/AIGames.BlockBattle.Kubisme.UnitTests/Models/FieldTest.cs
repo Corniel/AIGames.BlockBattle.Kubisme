@@ -93,7 +93,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ..........
 .......XX.
 ");
-			var act = field.Apply(Block.I, new Position(0, 2));
+			var act = field.Apply(Block.I, new Position(0, 3));
 			var exp = "..........|..........|..........|XXXX...XX.";
 			AssertField(exp, 0, 0, 3, act);
 		}
@@ -109,7 +109,7 @@ XXXXX..XX.
 XXXXXX.XXX
 XXXXXX.XX.
 ");
-			var act = field.Apply(Block.I.Variations[1], new Position(5, 3));
+			var act = field.Apply(Block.I.Variations[1], new Position(6, 3));
 			var exp = "..........|..........|..........|..........|..........|XXXXX.XXX.|XXXXXXXXX.";
 			AssertField(exp, 15, 1, 5, act);
 		}
@@ -118,7 +118,7 @@ XXXXXX.XX.
 		{
 			var field = Field.Create(0, 0, "..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|........XX|.XX.....XX|XX......XX|XXXX....XX");
 
-			var act = field.Apply(Block.I, new Position(4, 18));
+			var act = field.Apply(Block.I, new Position(4, 19));
 			AssertField("..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|........XX|.XX.....XX|XX......XX", 1, 1, 17, act);
 		}
 		[Test]
@@ -129,7 +129,7 @@ XXXXXX.XX.
 ...XXXXXXX
 XX.XXXXXXX");
 
-			var act = field.Apply(Block.J[Block.RotationType.Uturn], new Position(0, 0));
+			var act = field.Apply(Block.J[Block.RotationType.Uturn], new Position(0, 1));
 			AssertField("..........|..........|..........", 30, 1, 3, act);
 		}
 		[Test]
@@ -140,7 +140,7 @@ XX.XXXXXXX");
 ....XXXXXX
 .XXXXXXXXX");
 
-			var act = field.Apply(Block.L[Block.RotationType.Uturn], new Position(0, 0));
+			var act = field.Apply(Block.L[Block.RotationType.Uturn], new Position(0, 1));
 			AssertField("..........|..........|XXX.XXXXXX", 10, 2, 2, act);
 		}
 		[Test]
@@ -151,7 +151,7 @@ XX.XXXXXXX");
 ...XXXXXXX
 .XXXXXXXXX");
 
-			var act = field.Apply(Block.L[Block.RotationType.Uturn], new Position(0, 0));
+			var act = field.Apply(Block.L[Block.RotationType.Uturn], new Position(0, 1));
 			AssertField("..........|..........|.........X", 10, 1, 2, act);
 		}
 		[Test]
@@ -163,7 +163,7 @@ XX.XXXXXXX");
 .XXXXXXXXX
 .XXXXXXXXX");
 
-			var act = field.Apply(Block.I[Block.RotationType.Left], new Position(-1, 0));
+			var act = field.Apply(Block.I[Block.RotationType.Left], new Position(0, 0));
 			AssertField("..........|..........|..........|X.........", 10, 1, 3, act);
 		}
 		[Test]
@@ -176,7 +176,7 @@ XXXXX.XXXX
 XXXXX.XXXX
 XXXXX.XXXX");
 
-			var act = field.Apply(Block.I[Block.RotationType.Left], new Position(4, 1));
+			var act = field.Apply(Block.I[Block.RotationType.Left], new Position(5, 1));
 			AssertField("..........|..........|..........|..........|XX.......X", 20, 1, 4, act);
 		}
 		[Test]
@@ -190,7 +190,7 @@ XXXXX.XXXX");
 XX.XXXXXXX");
 
 			var block = Block.T[Block.RotationType.Right];
-			var act = field.Apply(block, new Position(-1, 1));
+			var act = field.Apply(block, new Position(0, 1));
 			var exp = Field.Create(1, 1, @"
 ..........
 ..........

@@ -8,30 +8,6 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 	public class DecisionMakerTest
 	{
 		[Test]
-		public void GetMove_EmptyBoard_LeftLeftLeftLeftDrop()
-		{
-			var dm = new SimpleDecisionMaker()
-			{
-				Evaluator = new SimpleEvaluator()
-				{
-					Parameters = SimpleParameters.GetDefault(),
-				},
-				Generator = new MoveGenerator(),
-			};
-
-			var field = Field.Create(0, 0, @"
-..........
-..........
-..........");
-			var path = dm.GetMove(field, Block.O, Block.L, 1);
-
-			var act = path;
-			var exp = BlockPath.Create(ActionType.Left, ActionType.Left, ActionType.Left, ActionType.Left, ActionType.Drop);
-
-			Assert.AreEqual(exp, act);
-		}
-
-		[Test]
 		public void GetMove_BoardWithRowToClear_()
 		{
 			var dm = new SimpleDecisionMaker()

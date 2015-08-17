@@ -12,9 +12,9 @@ namespace AIGames.BlockBattle.Kubisme
 				int minRow = block.GetMinRow(field);
 				int maxRow = block.GetMaxRow(field);
 
-				foreach (var col in block.Columns)
+				foreach (var col in block.GetColumns(field))
 				{
-					for (var row = minRow; row < maxRow; row++)
+					for (var row = minRow; row <= maxRow; row++)
 					{
 						var test = field.Test(block, col, row);
 						if (test == Field.TestResult.True)
@@ -46,16 +46,16 @@ namespace AIGames.BlockBattle.Kubisme
 				int minRow = block.GetMinRow(field);
 				int maxRow = block.GetMaxRow(field);
 
-				foreach (var col in block.Columns)
+				foreach (var col in block.GetColumns(field))
 				{
-					for (var row = minRow; row < maxRow; row++)
+					for (var row = minRow; row <= maxRow; row++)
 					{
 						var test = field.Test(block, col, row);
 						if (test == Field.TestResult.True)
 						{
 							var target = new Position(col, row);
 							var applied = field.Apply(block, target);
-							yield return new MoveCandiate(block.InitialPath.AddShift(col - current.Start.Col).AddDrop(), applied);
+							yield return new MoveCandiate(block.GetPath(field, col), applied);
 						}
 						if (test != Field.TestResult.Retry)
 						{

@@ -23,7 +23,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Score { get; protected set; }
 		public int ScoreField { get; protected set; }
 
-		public List<T> Children { get; protected set; }
+		public BlockNodes<T> Children { get; protected set; }
 
 		public virtual void Apply(byte depth, ApplyParameters pars)
 		{
@@ -31,8 +31,8 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				if (Children == null)
 				{
-					Children = new List<T>();
 					var block = GetBlock(pars);
+					Children = new BlockNodes<T>(block);
 					foreach (var field in pars.Generator.GetFields(Field, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }

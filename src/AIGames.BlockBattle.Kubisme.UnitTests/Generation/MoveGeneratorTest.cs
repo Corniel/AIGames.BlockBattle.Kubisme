@@ -9,217 +9,6 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 	[TestFixture]
 	public class MoveGeneratorTest
 	{
-		private static readonly Field Small = Field.Create(0, 0, @"
-..........
-..........
-..........
-..........
-..........");
-
-		private static readonly Field SmallFilled = Field.Create(0, 0, @"
-..........
-..........
-..........
-..........
-....X.....
-....X.....
-...XX.....");
-
-		[Test]
-		public void GetMoves_SmallO_9candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.O, true).ToList();
-
-			var expPath = new string[]
-			{
-				"left,left,left,left,drop",
-				"left,left,left,drop",
-				"left,left,drop",
-				"left,drop",
-				"drop",
-				"right,drop",
-				"right,right,drop",
-				"right,right,right,drop",
-				"right,right,right,right,drop",
-			};
-			var expField = new string[]
-			{
-				"..........|..........|..........|XX........|XX........",
-				"..........|..........|..........|.XX.......|.XX.......",
-				"..........|..........|..........|..XX......|..XX......",
-				"..........|..........|..........|...XX.....|...XX.....",
-				"..........|..........|..........|....XX....|....XX....",
-				"..........|..........|..........|.....XX...|.....XX...",
-				"..........|..........|..........|......XX..|......XX..",
-				"..........|..........|..........|.......XX.|.......XX.",
-				"..........|..........|..........|........XX|........XX",
-			};
-
-			var actPath = candiates.Select(c => c.Path.ToString()).ToArray();
-			var actField = candiates.Select(c => c.Field.ToString()).ToArray();
-
-			CollectionAssert.AreEqual(expPath, actPath);
-			CollectionAssert.AreEqual(expField, actField);
-		}
-
-		[Test]
-		public void GetMoves_SmallI_17candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.I, true).ToList();
-
-			Assert.AreEqual(10 + 7, candiates.Count);
-		}
-		[Test]
-		public void GetMoves_SmallS_17candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.S, true).ToList();
-
-			Assert.AreEqual(9 + 8, candiates.Count);
-		}
-		[Test]
-		public void GetMoves_SmallZ_17candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.Z, true).ToList();
-
-			Assert.AreEqual(9 + 8, candiates.Count);
-
-			var expPath = new string[]
-			{
-				"left,left,left,drop",
-				"left,left,drop",
-				"left,drop",
-				"drop",
-				"right,drop",
-				"right,right,drop",
-				"right,right,right,drop",
-				"right,right,right,right,drop",
-				"turnleft,left,left,left,drop",
-				"turnleft,left,left,drop",
-				"turnleft,left,drop",
-				"turnleft,drop",
-				"turnleft,right,drop",
-				"turnleft,right,right,drop",
-				"turnleft,right,right,right,drop",
-				"turnleft,right,right,right,right,drop",
-				"turnleft,right,right,right,right,right,drop",
-			};
-			var expField = new string[]
-			{
-				"..........|..........|..........|XX........|.XX.......",
-				"..........|..........|..........|.XX.......|..XX......",
-				"..........|..........|..........|..XX......|...XX.....",
-				"..........|..........|..........|...XX.....|....XX....",
-				"..........|..........|..........|....XX....|.....XX...",
-				"..........|..........|..........|.....XX...|......XX..",
-				"..........|..........|..........|......XX..|.......XX.",
-				"..........|..........|..........|.......XX.|........XX",
-				"..........|..........|.X........|XX........|X.........",
-				"..........|..........|..X.......|.XX.......|.X........",
-				"..........|..........|...X......|..XX......|..X.......",
-				"..........|..........|....X.....|...XX.....|...X......",
-				"..........|..........|.....X....|....XX....|....X.....",
-				"..........|..........|......X...|.....XX...|.....X....",
-				"..........|..........|.......X..|......XX..|......X...",
-				"..........|..........|........X.|.......XX.|.......X..",
-				"..........|..........|.........X|........XX|........X.",
-			};
-
-			var actPath = candiates.Select(c => c.Path.ToString()).ToArray();
-			var actField = candiates.Select(c => c.Field.ToString()).ToArray();
-
-			CollectionAssert.AreEqual(expPath, actPath);
-			CollectionAssert.AreEqual(expField, actField);
-		}
-
-		[Test]
-		public void GetMoves_SmallJ_34candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.J, true).ToList();
-
-			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
-		}
-		[Test]
-		public void GetMoves_SmallL_34candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.L,  true).ToList();
-
-			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
-		}
-		[Test]
-		public void GetMoves_SmallT_34candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(Small, Block.T, true).ToList();
-
-			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
-		}
-
-		[Test]
-		public void GetMoves_SmallFilledO_9candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.O, true).ToList();
-
-			Assert.AreEqual(9, candiates.Count);
-		}
-
-		[Test]
-		public void GetMoves_SmallFilledI_17candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.I, true).ToList();
-
-			Assert.AreEqual(10 + 7, candiates.Count);
-		}
-		[Test]
-		public void GetMoves_SmallFilledS_17candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.S, true).ToList();
-
-			Assert.AreEqual(9 + 8, candiates.Count);
-		}
-
-		[Test]
-		public void GetMoves_SmallFilledZ_17candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.Z,  true).ToList();
-
-			Assert.AreEqual(9 + 8, candiates.Count);
-		}
-		[Test]
-		public void GetMoves_SmallFilledJ_34candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.J,  true).ToList();
-
-			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
-		}
-
-		[Test]
-		public void GetMoves_SmallFilledL_34candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.L,  true).ToList();
-
-			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
-		}
-		[Test]
-		public void GetMoves_SmallFilledT_34candidates()
-		{
-			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(SmallFilled, Block.T,  true).ToList();
-
-			Assert.AreEqual(9 + 8 + 9 + 8, candiates.Count);
-		}
-
 		[Test]
 		public void GetMoves_AlmostFilledField_21candidates()
 		{
@@ -244,7 +33,7 @@ XXXXX.XXXX
 			Assert.AreEqual(8 + 8 + 3 + 2, candiates.Count);
 		}
 
-		[Test]
+		[Test, Category(Category.PathFinding)]
 		public void GetMoves_WithMoveUnder_6candidates()
 		{
 			var field = Field.Create(0, 0, @"
@@ -292,7 +81,7 @@ XXXXXX.XXX");
 			var candiates = generator.GetMoves(field, Block.I,  true).ToList();
 		}
 
-		[Test]
+		[Test, Category(Category.PathFinding)]
 		public void GetPath_HolesReachable_PathEndingWithDownLeft()
 		{
 			var field = Field.Create(0, 0, @"
@@ -341,7 +130,7 @@ XXXXXX.XX.
 		}
 
 
-		[Test]
+		[Test, Category(Category.PathFinding)]
 		public void GetReachableHoles_HolesReachable_4()
 		{
 			var field = Field.Create(0, 0, @"

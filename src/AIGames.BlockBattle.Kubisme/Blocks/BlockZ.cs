@@ -18,6 +18,9 @@ namespace AIGames.BlockBattle.Kubisme
 		private static byte[] lines = new byte[] { 3, 6 };
 
 		public override int Width { get { return 3; } }
+
+		public override int BranchingFactor0 { get { return 9; } }
+		public override int BranchingFactor1 { get { return 7; } }
 	}
 
 	/// <summary>Gets the Z block rotated left.</summary>

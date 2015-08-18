@@ -26,6 +26,9 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public override int Width { get { return 2; } }
 
+		public override int BranchingFactor0 { get { return 5; } }
+		public override int BranchingFactor1 { get { return 4; } }
+
 		public override IEnumerable<int> GetColumns(Field field)
 		{
 			if (field.RowCount < Height) { }

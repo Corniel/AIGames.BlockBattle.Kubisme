@@ -4,14 +4,14 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public class Block1Node : BlockNode<BlockRndNode>
 	{
-		public Block1Node(Field field, BlockPath path, int score)
+		public Block1Node(Field field, BlockPath path, int score, int branchingfactor)
 			: base(field, score) 
 		{
 			this.Path = path;
+			this.BranchingFactor = branchingfactor;
 		}
 
 		public override byte Depth { get { return 1; } }
-		public override int BranchingFactor { get { return 8; } }
 
 		public BlockPath Path { get; protected set; }
 

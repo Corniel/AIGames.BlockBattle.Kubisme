@@ -218,8 +218,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 						bot0.Elo = elo0;
 						bot1.Elo = elo1;
 					}
-
 				}
+				var avg = Bots.Select(bot => bot.Elo).Avarage();
+				var dif = avg - AppConfig.Data.EloInitial;
+				foreach (var bot in Bots)
+				{
+					bot.Elo -= dif;
+				}
+
 			}
 		}
 

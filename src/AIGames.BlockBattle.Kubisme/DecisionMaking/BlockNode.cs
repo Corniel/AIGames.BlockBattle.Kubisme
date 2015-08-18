@@ -14,10 +14,11 @@ namespace AIGames.BlockBattle.Kubisme
 			this.Field = field;
 			this.Score = score;
 			this.ScoreField = score;
+			BranchingFactor = 2;
 		}
 
 		public abstract byte Depth { get; }
-		public abstract int BranchingFactor { get; }
+		public int BranchingFactor { get; protected set; }
 
 		public Field Field { get; protected set; }
 		public int Score { get; protected set; }

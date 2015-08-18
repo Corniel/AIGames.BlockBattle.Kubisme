@@ -9,7 +9,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public BlockRootNode(Field field) : base(field, 0) { }
 
 		public override byte Depth { get { return 0; } }
-		public override int BranchingFactor { get { return 16; } }
 
 		public BlockPath BestMove { get { return Children == null || Children.Count == 0 ? BlockPath.None : Children[0].Path; } }
 		public Field BestField { get { return Children == null || Children.Count == 0 ? Field.Empty : Children[0].Field; } }
@@ -20,6 +19,7 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				if (Children == null)
 				{
+					BranchingFactor = pars.Current.BranchingFactor0;
 					var block = GetBlock(pars);
 					Children = new BlockNodes<Block1Node>(block);
 					foreach (var candidate in pars.Generator.GetMoves(Field, block, true))
@@ -52,7 +52,7 @@ namespace AIGames.BlockBattle.Kubisme
 		protected Block1Node Create(byte depth, Field field, BlockPath path, ApplyParameters pars)
 		{
 			var score = pars.Evaluator.GetScore(field);
-			return new Block1Node(field, path, score);
+			return new Block1Node(field, path, score, pars.Next.BranchingFactor1);
 		}
 		protected override Block1Node Create(byte depth, Field field, ApplyParameters pars) { throw new NotImplementedException(); }
 

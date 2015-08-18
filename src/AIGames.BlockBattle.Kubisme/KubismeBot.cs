@@ -18,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme
 					Parameters = SimpleParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 5,
+				MaximumDepth = 7,
 				MaximumDuration = TimeSpan.FromMilliseconds(700),
 			};
 			Predictor = new PointsPredictor();
@@ -47,7 +47,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public BotResponse GetResponse(TimeSpan time)
 		{
-			var ms = Math.Min(time.TotalMilliseconds / 2, 700);
+			var ms = Math.Min(time.TotalMilliseconds / 3, 700);
 			DecisionMaker.MaximumDuration = TimeSpan.FromMinutes(ms);
 			DecisionMaker.Points = Predictor.GetPoints(Opponent, Current, Next);
 

@@ -21,7 +21,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public ApplyParameters Pars { get; protected set; }
 		public Field BestField { get; protected set; }
 
-		public BlockPath GetMove(Field field, Block current, Block next, int round)
+		public virtual BlockPath GetMove(Field field, Block current, Block next, int round)
 		{
 			Pars = new ApplyParameters()
 			{

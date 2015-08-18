@@ -22,8 +22,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				5, 5, 5, 5, 5,
 				4, 4, 4, 4, 4, 4,
 				3, 3, 3, 3, 3, 3, 3, 3,
-				2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 			};
 
 			var ls2 = list.ToList();
@@ -96,7 +96,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			if (Rnd.Next(5) == 0)
 			{
-				var val = value + Distribution[Rnd.Next(Distribution.Length)];
+				var val = value + Distribution[Rnd.Next(Distribution.Length)] * Rnd.Next(1, 3);
 				return val;
 			}
 			return value;

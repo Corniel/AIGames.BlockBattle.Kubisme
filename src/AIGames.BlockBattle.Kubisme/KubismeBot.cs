@@ -47,8 +47,18 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public BotResponse GetResponse(TimeSpan time)
 		{
+
 			var ms = Math.Min(time.TotalMilliseconds / 3, 700);
 			DecisionMaker.MaximumDuration = TimeSpan.FromMinutes(ms);
+			if (time.TotalMilliseconds > 9990)
+			{
+				DecisionMaker.MaximumDepth = 7;
+			}
+			else if (time.TotalMilliseconds < 5000)
+			{
+				DecisionMaker.MaximumDepth--;
+			}
+
 			DecisionMaker.Points = Predictor.GetPoints(Opponent, Current, Next);
 
 			var path = DecisionMaker.GetMove(Field, Current, Next, State.Round);

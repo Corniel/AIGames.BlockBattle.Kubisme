@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 27
+----------
+Yet another time consumption tweak.
+
 Version 26
 ----------
 Fix in time consumption.

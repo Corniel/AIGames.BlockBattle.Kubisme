@@ -111,7 +111,6 @@ namespace AIGames.BlockBattle.Kubisme
 			// the current position, and if the block is higher, pick that one.
 			byte free = (byte)Math.Min(FirstFilled, pos.Row);
 			short cleared = 0;
-			var lineMax = 4 - block.Bottom;
 
 			for (var line = 0; line < block.Lines.Length; line++)
 			{

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
@@ -34,7 +36,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData Bot0 { get; set; }
 		public BotData Bot1 { get; set; }
 
-		public Result Run(MT19937Generator rnd)
+		public Result Run(MT19937Generator rnd, bool logGames)
 		{
 			var field0 = Field.Empty;
 			var field1 = Field.Empty;
@@ -48,21 +50,27 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var s0 = true;
 			var s1 = true;
 
+			var g0 = 0;
+			var g1 = 0;
+
 			while(s0 && s1)
 			{
 				field0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
 				field1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
 
-				//var rows = 20 - (Turns0.Count / 20);
+				var t0 = field0.Points / 6;
+				var t1 = field1.Points / 6;
 
-				//while (field0.RowCount > rows)
-				//{
-				//	field0 = field0.LockRow();
-				//}
-				//while (field1.RowCount > rows)
-				//{
-				//	field1 = field1.LockRow();
-				//}
+				if (t0 > g0)
+				{
+					field1 = field1.Garbage(Row.GetGarbage(t0 - g0, rnd));
+					g0 = t0;
+				}
+				if (t1 > g1)
+				{
+					field0 = field0.Garbage(Row.GetGarbage(t1 - g1, rnd));
+					g1 = t1;
+				}
 
 				Turns0.Add(field0);
 				Turns1.Add(field1);
@@ -73,6 +81,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				current = next;
 				next = Block.All[rnd.Next(Block.All.Length)];
 			}
+
+			if (logGames)
+			{
+				var visualiser = new FieldVisualizer(16);
+				var dir = new DirectoryInfo(Path.Combine("games", DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss_fff")));
+				dir.Create();
+				visualiser.Draw(Turns0, Turns1, dir);
+			}
+
 
 			var result = new Result()
 			{

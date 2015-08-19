@@ -32,6 +32,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		}
 
 		public bool InParallel { get; set; }
+		public bool LogGames { get; set; }
 		public int LastId { get; protected set; }
 		public int Capacity { get; set; }
 		public int Simulations { get; set; }
@@ -293,7 +294,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			}
 
 			var simulation = new BattleSimulation(bot0, bot1);
-			var result = simulation.Run(rnd);
+			var result = simulation.Run(rnd, LogGames);
 
 			Results.Enqueue(new BattlePairing(bot0, bot1) { Result = result });
 

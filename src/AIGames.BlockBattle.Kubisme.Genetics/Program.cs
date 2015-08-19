@@ -12,6 +12,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			Console.ReadLine();
 			var simulator = new BattleSimulator(new MT19937Generator());
 			simulator.InParallel = args.Length > 0 && args.Any(arg => arg.Contains("par"));
+			simulator.LogGames = args.Length > 0 && args.Any(arg => arg.Contains("log"));
 			while (true)
 			{
 				simulator.Run();

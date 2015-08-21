@@ -456,5 +456,10 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			return block;
 		}
+
+		public bool TouchPosition(List<Position> targets)
+		{
+			return true;
+		}
 	}
 }

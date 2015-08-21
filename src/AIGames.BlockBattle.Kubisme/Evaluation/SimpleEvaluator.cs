@@ -131,14 +131,21 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 					else if (rowCount == 9)
 					{
-						if (Row.Count[row | filterComboPotential] == 9)
-						{
-							comboPotential++;
-						}
-						else
-						{
+						//if (pars.NineHasComboPotential)
+						//{
+						//	if (Row.Count[row | filterComboPotential] == 9)
+						//	{
+						//		comboPotential++;
+						//	}
+						//	else
+						//	{
+						//		hasComboPotential = false;
+						//	}
+						//}
+						//else
+						//{
 							hasComboPotential = false;
-						}
+						//}
 					}
 					else
 					{

@@ -31,6 +31,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Floor { get; set; }
 		public int NeighborsHorizontal { get; set; }
 		public int NeighborsVertical { get; set; }
+		public bool NineHasComboPotential { get; set; }
+
 
 		/// <summary>Gets a string representation of the simple evaluator parameters.</summary>
 		/// <remarks>
@@ -47,6 +49,11 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					var val = (int)prop.GetValue(this);
 					writer.AppendFormat("{0}: {1}, ", prop.Name, val);
+				}
+				else if (prop.PropertyType == typeof(bool))
+				{
+					var val = (bool)prop.GetValue(this);
+					writer.AppendFormat("{0}: {1}, ", prop.Name, val.ToString().ToLowerInvariant());
 				}
 			}
 			foreach (var prop in Props)
@@ -67,19 +74,20 @@ namespace AIGames.BlockBattle.Kubisme
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// Elo: 1028, Avg: 0,852, Runs: 1603, ID: 4375, Parent: 3836
+			// Elo: 1019, Avg: 0,866, Runs: 1365, ID: 4151, Parent: 3051
 			{
-				FreeCellWeights = new int[] { 17, 45, 27, 11, 30, 6, 13, -10, 13, -3, -2, 10, -6, 4, 1, -1, 1, -2, 13, -33, 1 },
-				ComboPotential = new int[] { 19, 8, 8, 2, 0, 4, -1, 2, -7, -29, -3, -14, 14, -18, -6, 25, 23, -63, 22, -11, 22 },
-				Points = 70,
-				Combo = 7,
-				Holes = -76,
-				Blockades = -3,
-				WallsLeft = 15,
-				WallsRight = 16,
-				Floor = 3,
-				NeighborsHorizontal = -7,
-				NeighborsVertical = 18,
+				FreeCellWeights = new int[] { 60, 42, 30, 23, 4, 19, 6, 7, 18, -1, 14, 3, 9, 6, 10, 4, 5, 6, -8, -13, -30 },
+				ComboPotential = new int[] { 31, 7, -14, -20, -61, -70, -80, -50, -47, -1, 52, 66, -28, 39, -22, -1, -9, -38, 29, 0, 8 },
+				Points = 62,
+				Combo = 31,
+				Holes = -77,
+				Blockades = -5,
+				WallsLeft = 24,
+				WallsRight = 24,
+				Floor = 18,
+				NeighborsHorizontal = -8,
+				NeighborsVertical = 26,
+				NineHasComboPotential = false,
 			};
 		}
 	}

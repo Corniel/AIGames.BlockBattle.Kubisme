@@ -76,6 +76,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					writer.AppendFormat("{0} = {1},", prop.Name, val);
 					writer.AppendLine();
 				}
+				else if (prop.PropertyType == typeof(bool))
+				{
+					bool val = (bool)prop.GetValue(Pars);
+					writer.AppendFormat("{0} = {1},", prop.Name, val.ToString().ToLowerInvariant());
+					writer.AppendLine();
+				}
 				else if (prop.PropertyType == typeof(int[]))
 				{
 					int[] vals = (int[])prop.GetValue(Pars);

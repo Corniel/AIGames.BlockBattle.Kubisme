@@ -48,6 +48,9 @@ namespace AIGames.BlockBattle.Kubisme
 		}
 		public bool Equals(Position pos) { return row == pos.row && col == pos.col; }
 
+		public static bool operator ==(Position l, Position r) { return l.Equals(r); }
+		public static bool operator !=(Position l, Position r) { return !(l == r); }
+
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), ExcludeFromCodeCoverage]
 		private string DebuggerDisplay
 		{

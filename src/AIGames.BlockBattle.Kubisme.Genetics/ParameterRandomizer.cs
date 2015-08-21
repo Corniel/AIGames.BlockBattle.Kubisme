@@ -48,6 +48,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					var val = (int)prop.GetValue(org);
 					prop.SetValue(target, val);
 				}
+				else if (prop.PropertyType == typeof(bool))
+				{
+					var val = (bool)prop.GetValue(org);
+					prop.SetValue(target, val);
+				}
 				else if (prop.PropertyType == typeof(int[]))
 				{
 					int[] vals = (int[])prop.GetValue(org);
@@ -78,6 +83,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					int val = Randomize((int)prop.GetValue(org));
 					prop.SetValue(target, val);
 				}
+				else if (prop.PropertyType == typeof(bool))
+				{
+					bool val = Randomize((bool)prop.GetValue(org));
+					prop.SetValue(target, val);
+				}
 				else if (prop.PropertyType == typeof(int[]))
 				{
 					int[] vals = (int[])prop.GetValue(org);
@@ -98,6 +108,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				var val = value + Distribution[Rnd.Next(Distribution.Length)] * Rnd.Next(1, 3);
 				return val;
+			}
+			return value;
+		}
+		private bool Randomize(bool value)
+		{
+			if (Rnd.Next(5) == 0)
+			{
+				return Rnd.NextBoolean();
 			}
 			return value;
 		}

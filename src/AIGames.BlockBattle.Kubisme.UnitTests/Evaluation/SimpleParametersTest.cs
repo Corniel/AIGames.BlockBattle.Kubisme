@@ -17,7 +17,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 			var act = pars.ToString();
 
 #if DEBUG
-			var exp = "Points: 0, Combo: 0, Holes: 0, Blockades: 0, WallsLeft: 0, WallsRight: 0, Floor: 0, NeighborsHorizontal: 0, NeighborsVertical: 0, FreeCellWeights: {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, ComboPotential: {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}";
+			var exp = "Points: 0, Combo: 0, Holes: 0, Blockades: 0, LastBlockades: 0, WallsLeft: 0, WallsRight: 0, Floor: 0, NeighborsHorizontal: 0, NeighborsVertical: 0, FreeCellWeights: {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, ComboPotential: {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}";
 #else
 			var exp = "AIGames.BlockBattle.Kubisme.SimpleParameters";
 #endif

@@ -26,6 +26,45 @@ XXX.......";
 		}
 
 		[Test]
+		public void Test_LastBlockades_1()
+		{
+			var field = @"
+..........
+..X.......
+.X.XXXXXXX
+XXX...X.XX
+...XXX.XXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				LastBlockades = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_LastBlockadesComplex_3()
+		{
+			var field = @"
+..X.......
+..XX......
+.X..XXXXXX
+XXX...X.XX
+...XXX.XXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				LastBlockades = 1,
+			};
+			var expected = 3;
+
+			Test(field, pars, expected);
+		}
+
+
+		[Test]
 		public void Test_FreeCells_2()
 		{
 			var field = @"

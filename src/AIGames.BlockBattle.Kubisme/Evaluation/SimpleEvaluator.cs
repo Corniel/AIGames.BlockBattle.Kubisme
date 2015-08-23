@@ -52,12 +52,10 @@ namespace AIGames.BlockBattle.Kubisme
 
 			int filterFreeCells = Row.Filled;
 			int filterTopColomns = 0;
-			int filterBlockades = 0;
 			int filterComboPotential = 0;
 			var holes = 0;
 			var wallLeft = 0;
 			var wallRight = 0;
-			var blockades = 0;
 			var neighborsH = 0;
 			var neighborsV = 0;
 			var comboPotential = 0;
@@ -131,21 +129,7 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 					else if (rowCount == 9)
 					{
-						//if (pars.NineHasComboPotential)
-						//{
-						//	if (Row.Count[row | filterComboPotential] == 9)
-						//	{
-						//		comboPotential++;
-						//	}
-						//	else
-						//	{
-						//		hasComboPotential = false;
-						//	}
-						//}
-						//else
-						//{
-							hasComboPotential = false;
-						//}
+						hasComboPotential = false;
 					}
 					else
 					{
@@ -161,19 +145,45 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 
 			// loop for blockades too.
+			var blockades = 0;
+			var lastBlockades = 0;
+			var filterBlockades = 0;
+			
+			var lastHoles = 0;
+			var filterCurrentBlockades = 0;
+			
 			for (var r = field.RowCount - 1; r >= field.FirstFilled; r--)
 			{
+				// blockades
 				var row = field[r];
-				filterBlockades |= Row.Filled ^ row;
+				var mirrored = Row.Filled ^ row;
+				filterBlockades |= mirrored;
 
 				var blockadesMask = filterBlockades & row;
 				blockades += Row.Count[blockadesMask];
+
+				// last blockades
+				filterBlockades = lastHoles & row;
+
+				// blockade detection.
+				if (filterBlockades != 0 && filterBlockades != filterCurrentBlockades)
+				{
+					lastBlockades = 0;
+					filterCurrentBlockades = filterBlockades;
+					lastBlockades = Row.Count[filterBlockades];
+				}
+				else
+				{
+					lastBlockades += Row.Count[filterCurrentBlockades & row];
+				}
+				lastHoles = mirrored;
 			}
 
 			score += wallLeft * pars.WallsLeft;
 			score += wallRight * pars.WallsRight;
 			score += holes * pars.Holes;
 			score += blockades * pars.Blockades;
+			score += lastBlockades * pars.LastBlockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
 

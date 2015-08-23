@@ -12,7 +12,6 @@ namespace AIGames.BlockBattle.Kubisme
 #if DEBUG
 		private static readonly PropertyInfo[] Props = typeof(SimpleParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 #endif
-
 		public SimpleParameters()
 		{
 			FreeCellWeights = new int[21];
@@ -26,13 +25,12 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Combo { get; set; }
 		public int Holes { get; set; }
 		public int Blockades { get; set; }
+		public int LastBlockades { get; set; }
 		public int WallsLeft { get; set; }
 		public int WallsRight { get; set; }
 		public int Floor { get; set; }
 		public int NeighborsHorizontal { get; set; }
 		public int NeighborsVertical { get; set; }
-		public bool NineHasComboPotential { get; set; }
-
 
 		/// <summary>Gets a string representation of the simple evaluator parameters.</summary>
 		/// <remarks>
@@ -87,7 +85,6 @@ namespace AIGames.BlockBattle.Kubisme
 				Floor = 18,
 				NeighborsHorizontal = -8,
 				NeighborsVertical = 26,
-				NineHasComboPotential = false,
 			};
 		}
 	}

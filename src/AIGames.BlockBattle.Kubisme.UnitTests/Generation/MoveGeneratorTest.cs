@@ -33,7 +33,7 @@ XXXXX.XXXX
 			Assert.AreEqual(8 + 8 + 3 + 2, candiates.Count);
 		}
 
-		[Test, Category(Category.PathFinding)]
+		[Test]
 		public void GetMoves_WithMoveUnder_6candidates()
 		{
 			var field = Field.Create(0, 0, @"
@@ -46,12 +46,12 @@ XX........
 			var act = candiates.Select(c => c.ToString()).ToArray();
 			var exp = new string[]
 			{
+				"down,left",
 				"drop",
 				"right,drop",
 				"right,right,drop",
 				"right,right,right,drop",
 				"right,right,right,right,drop",
-				"down,left",
 			};
 
 			CollectionAssert.AreEqual(exp, act);
@@ -81,7 +81,7 @@ XXXXXX.XXX");
 			var candiates = generator.GetMoves(field, Block.I,  true).ToList();
 		}
 
-		[Test, Category(Category.PathFinding)]
+		[Test]
 		public void GetPath_HolesReachable_PathEndingWithDownLeft()
 		{
 			var field = Field.Create(0, 0, @"
@@ -93,23 +93,6 @@ XXXXX...X.
 XXXXXX..XX
 XXXXXX..X.
 ");
-			var target =new Position(5,3);
-			var act = MoveGenerator.GetPath(field, Block.T[Block.RotationType.Left],  target);
-			var exp = BlockPath.Create(
-				ActionType.TurnLeft,
-				ActionType.Down, 
-				ActionType.Right, 
-				ActionType.Right,
-				ActionType.Down, 
-				ActionType.Right,
-				ActionType.Down,
-				ActionType.Down,
-				ActionType.Left);
-			
-			var applied = field.Apply(Block.T[Block.RotationType.Left], target);
-			Console.WriteLine(applied);
-			
-			Assert.AreEqual(exp, act);
 		}
 		
 		[Test]
@@ -130,7 +113,7 @@ XXXXXX.XX.
 		}
 
 
-		[Test, Category(Category.PathFinding)]
+		[Test]
 		public void GetReachableHoles_HolesReachable_4()
 		{
 			var field = Field.Create(0, 0, @"
@@ -145,7 +128,9 @@ XXXXXX..X.
 			var act = MoveGenerator.GetReachableHoles(field, Block.T).Select(c => c.Path.ToString()).ToArray();
 			var exp = new string[]
 			{
-				"turnleft,down,right,right,down,right,down,down,left"
+				"down,down,right,right,right,turnleft,down,down,left",
+				"down,down,right,right,right,turnleft,down,down,left,turnleft",
+				"down,down,right,right,right,turnleft,down,down,left,turnright"
 			};
 			CollectionAssert.AreEqual(exp, act);
 		}
@@ -164,6 +149,37 @@ XXXXXX..X.
 ");
 			var act = MoveGenerator.GetReachableHoles(field, Block.O).ToList();
 			var exp = new List<MoveCandiate>();
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void GetPaths_ToTwoHoles_Found()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+..........
+..........
+...XXX....
+....X.....
+");
+			var targets = new int[] { 0, 0, 0, 0, 0x28 };
+			var candidates = new List<MoveCandiate>();
+			foreach (var candidate in MoveGenerator.GetPaths(field, Block.J, targets, 4))
+			{
+				candidates.Add(candidate);
+
+				Console.WriteLine(candidate.Field.ToString().Replace("|", Environment.NewLine));
+				Console.WriteLine(candidate.Path);
+				Console.WriteLine();
+			}
+
+			var act = candidates.Select(c => c.Field.ToString()).ToArray();
+
+			var exp = new string[]
+			{
+				"..........|..........|..........|.X.XXX....|.XXXX.....",
+				"..........|..........|......X...|...XXXX...|....XXX...",
+			};
 			CollectionAssert.AreEqual(exp, act);
 		}
 	}

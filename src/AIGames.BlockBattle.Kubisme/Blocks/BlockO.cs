@@ -1,9 +1,5 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -28,6 +24,8 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public override int BranchingFactor0 { get { return 5; } }
 		public override int BranchingFactor1 { get { return 4; } }
+
+		#region Columns & Paths
 
 		public override IEnumerable<int> GetColumns(Field field)
 		{
@@ -84,5 +82,17 @@ namespace AIGames.BlockBattle.Kubisme
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.Drop),
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.Right, ActionType.Drop),
 		};
+
+		#endregion
+
+		#region Rotation
+
+		public override Block TurnLeft() { return this; }
+		public override Block TurnRight() { return this; }
+
+		public override Position TurnLeft(Position position) { return position; }
+		public override Position TurnRight(Position position) { return position; }
+
+		#endregion
 	}
 }

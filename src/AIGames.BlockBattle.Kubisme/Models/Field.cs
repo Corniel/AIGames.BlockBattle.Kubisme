@@ -75,8 +75,10 @@ namespace AIGames.BlockBattle.Kubisme
 
 			var hasFloor = rowMax == RowCount - 1;
 
+			var rowMin = row < 0 ? 0 : row;
+
 			// From high to low, because of change on shortcuts.
-			for (var r = rowMax; r >= row; r--)
+			for (var r = rowMax; r >= rowMin; r--)
 			{
 				var l = r - row;
 				var line = block[l, col];
@@ -98,7 +100,7 @@ namespace AIGames.BlockBattle.Kubisme
 					return TestResult.False;
 				}
 			}
-			return hasFloor ? TestResult.True : TestResult.Retry;
+			return hasFloor && row >= 0 ? TestResult.True : TestResult.Retry;
 		}
 		
 		public Field Apply(Block block, Position pos)

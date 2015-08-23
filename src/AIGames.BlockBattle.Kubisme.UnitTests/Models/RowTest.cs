@@ -88,6 +88,25 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 		}
 
 		[Test]
+		public void Row2BlocksConnected_All_Matches()
+		{
+			var act = Row.Row2BlocksConnected.Select(r => Row.ToString((ushort)r)).ToArray();
+			var exp = new string[] 
+			{ 
+				"XX........",
+				".XX.......",
+				"..XX......",
+				"...XX.....",
+				"....XX....",
+				".....XX...",
+				"......XX..",
+				".......XX.",
+				"........XX",
+			};
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
 		public void Row7BlockOneHole_All_Matches()
 		{
 			var act = Row.Row7BlockOneHole.Select(r => Row.ToString((ushort)r)).ToArray();

@@ -75,5 +75,20 @@ namespace AIGames.BlockBattle.Kubisme
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Drop),
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.Drop),
 		};
+
+		#region Rotation
+
+		public override Block TurnLeft() { return this[RotationType.Left]; }
+		public override Block TurnRight() { return this[RotationType.Left]; }
+
+		public override Position TurnLeft(Position position) { return new Position(position.Col + 1, position.Row - 1); }
+		public override Position TurnRight(Position position) { return new Position(position.Col + 2, position.Row - 1); }
+
+		#endregion
+
+		public override bool IsReachable(int currentMirrored, int prevMirrored)
+		{
+			return (currentMirrored & prevMirrored) != 0;
+		}
 	}
 }

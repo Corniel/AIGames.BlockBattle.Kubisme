@@ -87,6 +87,7 @@
     <Compile Include="Evaluation\SimpleEvaluator.cs" />
     <Compile Include="Evaluation\SimpleParameters.cs" />
     <Compile Include="Blocks\Block.cs" />
+    <Compile Include="Generation\TempPath.cs" />
     <Compile Include="KubismeBot.cs" />
     <Compile Include="Models\MoveCandiate.cs" />
     <Compile Include="Models\Position.cs" />

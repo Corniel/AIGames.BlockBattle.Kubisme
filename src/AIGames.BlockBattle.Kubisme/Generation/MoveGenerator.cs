@@ -7,6 +7,13 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public IEnumerable<Field> GetFields(Field field, Block current,  bool searchNoDrops)
 		{
+			if (searchNoDrops)
+			{
+				foreach (var candidate in GetReachableHoles(field, current))
+				{
+					yield return candidate.Field;
+				}
+			}
 			foreach (var block in current.Variations)
 			{
 				int minRow = block.GetMinRow(field);
@@ -30,17 +37,17 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 				}
 			}
-			if (searchNoDrops)
-			{
-				//foreach (var candidate in GetReachableHoles(field, current))
-				//{
-				//	yield return candidate.Field;
-				//}
-			}
 		}
 
 		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, bool searchNoDrops)
 		{
+			if (searchNoDrops)
+			{
+				foreach (var candidate in GetReachableHoles(field, current))
+				{
+					yield return candidate;
+				}
+			}
 			foreach (var block in current.Variations)
 			{
 				int minRow = block.GetMinRow(field);
@@ -64,74 +71,17 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 				}
 			}
-			if (searchNoDrops)
-			{
-				//foreach (var candidate in GetReachableHoles(field, current))
-				//{
-				//	yield return candidate;
-				//}
-			}
-		}
-
-		public static BlockPath GetPath(Field field, Block block, Position target)
-		{
-			var options = new Dictionary<Position, BlockPath>();
-			var queue = new Queue<Position>();
-
-			queue.Enqueue(block.Start);
-			options[block.Start] = block.InitialPath;
-
-			while (queue.Count > 0)
-			{
-				var position = queue.Dequeue();
-				var path = options[position];
-
-				if (position.Equals(target))
-				{
-					return path;
-				}
-
-				var test = field.Test(block, position);
-				if (test == Field.TestResult.False) { continue; }
-
-				if (position.Row < target.Row && test != Field.TestResult.True)
-				{
-					var down = position.Down;
-					if (!options.ContainsKey(down))
-					{
-						queue.Enqueue(down);
-						options[down] = path.AddDown();
-					}
-				}
-
-				if (position.Col > block.ColumnMinimum)
-				{
-					var left = position.Left;
-					if (!options.ContainsKey(left))
-					{
-						queue.Enqueue(left);
-						options[left] = path.AddLeft();
-					}
-				}
-				if (position.Col < block.ColumnMaximum)
-				{
-					var right = position.Right;
-					if (!options.ContainsKey(right))
-					{
-						queue.Enqueue(right);
-						options[right] = path.AddRight();
-					}
-				}
-			}
-			return BlockPath.None;
 		}
 
 		/// <summary>Gets a score only based on characters of the current state.</summary>
 		public static IEnumerable<MoveCandiate> GetReachableHoles(Field field, Block current)
 		{
 			int filterTopColomns = 0;
-			int open = Row.Filled;
-			int prev = Row.Filled;
+			int prevMirrored = Row.Filled;
+
+			var targets = new int[field.RowCount];
+			var found = false;
+			var maxRow = 0;
 
 			// loop through the rows.
 			for (var r = field.FirstFilled; r < field.RowCount; r++)
@@ -139,75 +89,92 @@ namespace AIGames.BlockBattle.Kubisme
 				var row = field[r];
 				var rowMirrored = Row.Filled ^ row;
 
-				open &= rowMirrored;
-				var openCount = Row.Count[open];
-				// If only one hole, no access.
-				if (openCount < 2)
+				// We can not enter any empty spot of this row, so exit.
+				if (!current.IsReachable(rowMirrored, prevMirrored))
 				{
-					break;
+					yield break;
 				}
-				// If there are no free spots combined on a role there is no access.
-				if (openCount > 6 && !Row.Row8BlockOneHole.Any(map => (map & open) != 0))
-				{
-					break;
-				}
+				prevMirrored = rowMirrored;
+				filterTopColomns |= row;
 
-				var movement = prev & rowMirrored;
-				var movementCount = Row.Count[movement];
-				if (movementCount < 2)
-				{
-					break;
-				}
-				// there should be a way for a block to get from one row to another.
-				if (movementCount > 6 && !Row.Row8BlockOneHole.Any(map => (map & movement) != 0))
-				{
-					break;
-				}
-
-				// is there a hole anyway?
 				var holesMask = filterTopColomns & rowMirrored;
 				if (holesMask != 0)
 				{
-					for (var i = 0; i < 10; i++)
-					{
-						if ((holesMask & Bits.FlagUInt16[i]) != 0)
-						{
-							foreach (var block in current.Variations)
-							{
-								foreach (var transfer in block.Touches)
-								{
-									var cc = i + transfer.Col;
-									if (cc >= block.ColumnMinimum && cc <= block.ColumnMaximum)
-									{
-										var rr = r + transfer.Row;
+					found = true;
+					targets[r] = holesMask;
+					maxRow = r;
+				}
+			}
+			if (!found) { yield break; }
+			foreach (var path in GetPaths(field, current, targets, maxRow))
+			{
+				yield return path;
+			}
+		}
 
-										var minRow = rr - 4 + block.Bottom;
-										var maxRow = rr - 3 + block.Bottom;
+		public static IEnumerable<MoveCandiate> GetPaths(Field field, Block current, int[] targets, int maxRow)
+		{
+			var dones = new bool[current.Variations.Length, field.RowCount + 1, 10];
+			dones[0, current.Start.Row + 1, current.Start.Col] = true;
+			var stack = new Stack<TempPath>();
+			stack.Push(new TempPath(current, current.Start, BlockPath.None));
 
-										if (minRow >= 0 && maxRow < field.RowCount)
-										{
-											var test = field.Test(block, cc, rr);
-											if (test == Field.TestResult.True)
-											{
-												var target = new Position(cc, rr);
-												var path = GetPath(field, block, target);
-												if (!path.Equals(BlockPath.None))
-												{
-													var applied = field.Apply(block, target);
-													yield return new MoveCandiate(path, applied);
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
+			while (stack.Count != 0)
+			{
+				var temp = stack.Pop();
+
+				if (temp.Position.Row > maxRow) { continue; }
+
+				var test = field.Test(temp.Block, temp.Position);
+				
+				// No reason the investigate
+				if (test == Field.TestResult.False) { continue; }
+
+				var tr = temp.TurnRight();
+				if (tr.Position.Col >= 0 && tr.Position.Col < tr.Block.ColumnMaximum &&
+					!dones[(int)tr.Block.Rotation, tr.Position.Row + 1, tr.Position.Col])
+				{
+					dones[(int)tr.Block.Rotation, tr.Position.Row + 1, tr.Position.Col] = true;
+					stack.Push(tr);
 				}
 
-				filterTopColomns |= row;
+				var tl = temp.TurnLeft();
+				if (tl.Position.Col >= 0 && tl.Position.Col < tl.Block.ColumnMaximum &&
+					!dones[(int)tl.Block.Rotation, tl.Position.Row + 1, tl.Position.Col])
+				{
+					dones[(int)tl.Block.Rotation, tl.Position.Row + 1, tl.Position.Col] = true;
+					stack.Push(tl);
+				}
 
-				prev = rowMirrored;
+				if (temp.Position.Col < temp.Block.ColumnMaximum && !dones[(int)temp.Block.Rotation, temp.Position.Row + 1, temp.Position.Col + 1])
+				{
+					dones[(int)temp.Block.Rotation, temp.Position.Row + 1, temp.Position.Col + 1] = true;
+					stack.Push(temp.Right());
+				}
+
+				if (temp.Position.Col > 0 && !dones[(int)temp.Block.Rotation, temp.Position.Row + 1, temp.Position.Col - 1])
+				{
+					dones[(int)temp.Block.Rotation, temp.Position.Row + 1, temp.Position.Col  - 1] = true;
+					stack.Push(temp.Left());
+				}
+
+				// we have a fit.
+				if (test == Field.TestResult.True)
+				{
+					if(temp.Block.TouchPosition(temp.Position, targets))
+					{
+						var apply = field.Apply(temp.Block, temp.Position);
+						yield return new MoveCandiate(temp.Path, apply);
+					}
+				}
+				else
+				{
+					if(!dones[(int)temp.Block.Rotation, temp.Position.Row + 2, temp.Position.Col])
+					{
+						dones[(int)temp.Block.Rotation, temp.Position.Row + 2, temp.Position.Col] = true;
+						stack.Push(temp.Down());
+					}
+				}
 			}
 		}
 	}

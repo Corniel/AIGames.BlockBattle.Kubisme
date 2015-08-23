@@ -100,5 +100,15 @@ namespace AIGames.BlockBattle.Kubisme
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.TurnRight, ActionType.Drop),
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.TurnRight, ActionType.Right, ActionType.Drop),
 		};
+
+		#region Rotation
+
+		public override Block TurnLeft() { return this[RotationType.None]; }
+		public override Block TurnRight() { return this[RotationType.None]; }
+
+		public override Position TurnLeft(Position position) { return new Position(position.Col - 1, position.Row + 2); }
+		public override Position TurnRight(Position position) { return new Position(position.Col - 2, position.Row + 2); }
+
+		#endregion
 	}
 }

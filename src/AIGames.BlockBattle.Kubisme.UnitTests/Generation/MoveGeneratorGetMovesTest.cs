@@ -21,7 +21,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 				"right,right,drop",
 				"right,right,right,drop",
 				"right,right,right,right,drop",
-							};
+			};
 			AssertGetMoves(exp, Block.O);
 		}
 
@@ -30,7 +30,23 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		{
 			var exp = new string[]
 			{ 
-				"left,left,left,drop",				"left,left,drop",				"left,drop",				"drop",				"right,drop",				"right,right,drop",				"right,right,right,drop",				"left,left,left,turnleft,left,drop",				"left,left,left,turnleft,drop",				"left,left,turnleft,drop",				"left,turnleft,drop",				"turnleft,drop",				"turnright,drop",				"right,turnright,drop",				"right,right,turnright,drop",				"right,right,right,turnright,drop",				"right,right,right,turnright,right,drop",
+				"left,left,left,drop",
+				"left,left,drop",
+				"left,drop",
+				"drop",
+				"right,drop",
+				"right,right,drop",
+				"right,right,right,drop",
+				"left,left,left,turnleft,left,drop",
+				"left,left,left,turnleft,drop",
+				"left,left,turnleft,drop",
+				"left,turnleft,drop",
+				"turnleft,drop",
+				"turnright,drop",
+				"right,turnright,drop",
+				"right,right,turnright,drop",
+				"right,right,right,turnright,drop",
+				"right,right,right,turnright,right,drop",
 			};
 			AssertGetMoves(exp, Block.I);
 		}

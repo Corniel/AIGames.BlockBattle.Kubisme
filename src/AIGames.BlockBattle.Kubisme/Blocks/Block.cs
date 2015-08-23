@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 
 namespace AIGames.BlockBattle.Kubisme
@@ -120,6 +119,13 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			get { return Variations[(int)rotation]; }
 		}
+
+		public abstract Block TurnLeft();
+		public abstract Block TurnRight();
+
+		public abstract Position TurnLeft(Position position);
+		public abstract Position TurnRight(Position position);
+		
 
 		#region S Z J L T no rotation
 
@@ -418,16 +424,14 @@ namespace AIGames.BlockBattle.Kubisme
 			return sb.ToString();
 		}
 
-
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), ExcludeFromCodeCoverage]
-		private string DebuggerDisplay
+		internal string DebuggerDisplay
 		{
 			get
 			{
 				return string.Format("{0}{1}", Name, Rotation == RotationType.None ? "" : " " + Rotation.ToString());
 			}
 		}
-
 
 		/// <summary>Get the first row that should be tested for this block.</summary>
 		public int GetMinRow(Field field)
@@ -457,9 +461,36 @@ namespace AIGames.BlockBattle.Kubisme
 			return block;
 		}
 
-		public bool TouchPosition(List<Position> targets)
+		public bool TouchPosition(Position position, int[] targets)
 		{
-			return true;
+			var minRow = position.Row;
+			var maxRow = minRow + Height;
+
+			for (var l = 0 ;l < Height; l++)
+			{
+				var line = this[l, position.Col];
+
+				if ((line & targets[l + position.Row]) != 0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		/// <summary>Returns true if there is a possibility for the block to
+		/// reach the current row, given the previous one.
+		/// </summary>
+		public virtual bool IsReachable(int currentMirrored, int prevMirrored)
+		{
+			var merged = currentMirrored & prevMirrored;
+			var count = Row.Count[merged];
+
+			return
+				// if more then 5 count there are at least two connected cells.
+				count > 5 ||
+				// at least 2 open entries and 
+				(count > 1 && Row.Row2BlocksConnected.Any(line => (line & merged) != 0));
 		}
 	}
 }

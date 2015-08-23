@@ -1,13 +1,14 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
 {
 	public static class Row
 	{
+		/// <summary>A set of masks with 2 connected block.</summary>
+		public static readonly HashSet<int> Row2BlocksConnected = new HashSet<int>() { 0x0003, 0x0006, 0x000C, 0x0018, 0x0030, 0x0060, 0x00C0, 0x0180, 0x0300 };
 		/// <summary>A set of masks with 7 blocks and one hole.</summary>
 		public static readonly HashSet<int> Row7BlockOneHole = new HashSet<int>() { 0X03F8, 0X03F1, 0X03E3, 0X03C7, 0X038F, 0X031F, 0X023F, 0X007F, };
 		/// <summary>A set of masks with 8 blocks and one hole.</summary>

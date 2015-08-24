@@ -11,6 +11,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public const short DoubleLineClear = 3;
 		public const short TripleLineClear = 6;
 		public const short QuadrupleLineClear = 12;
+		public const short SingleTSpin = 6;
+		public const short DoubleTSpin = 12;
 		public const short PerfectClear = 24;
 
 		public static readonly Field None = new Field(-1, 0, 0, new ushort[0]);
@@ -150,14 +152,30 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					pt += PerfectClear;
 				}
-				else
+				else if(cleared > 0)
 				{
-					switch (cleared)
+					if (block == Block.T[Block.RotationType.Uturn] && 
+						pos.Row > 0 && 
+						(BlockTUturn.TSpinTopMask[pos.Col] & rows[pos.Row -1]) != 0)
 					{
-						case 1: pt += SingleLineClear; break;
-						case 2: pt += DoubleLineClear; break;
-						case 3: pt += TripleLineClear; break;
-						case 4: pt += QuadrupleLineClear; break;
+						if(cleared == 1)
+						{
+							pt+= SingleTSpin;
+						}
+						else
+						{
+							pt+= DoubleTSpin;
+						}
+					}
+					else
+					{
+						switch (cleared)
+						{
+							case 1: pt += SingleLineClear; break;
+							case 2: pt += DoubleLineClear; break;
+							case 3: pt += TripleLineClear; break;
+							case 4: pt += QuadrupleLineClear; break;
+						}
 					}
 				}
 				pt += combo++;

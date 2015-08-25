@@ -10,7 +10,7 @@ namespace AIGames.BlockBattle.Kubisme
 	/// ....
 	/// ....
 	/// </remarks>
-	public class BlockI: Block
+	public class BlockI : Block
 	{
 		public override Position Start { get { return new Position(3, 0); } }
 
@@ -34,7 +34,7 @@ namespace AIGames.BlockBattle.Kubisme
 					yield return column;
 				}
 			}
-			else if(field.RowCount > 0)
+			else if (field.RowCount > 0)
 			{
 				var row = field[0];
 				foreach (var column in Columns)
@@ -79,7 +79,7 @@ namespace AIGames.BlockBattle.Kubisme
 		#region Rotation
 
 		public override Block TurnLeft() { return this[RotationType.Left]; }
-		public override Block TurnRight() { return this[RotationType.Left]; }
+		public override Block TurnRight() { return this[RotationType.Right]; }
 
 		public override Position TurnLeft(Position position) { return new Position(position.Col + 1, position.Row - 1); }
 		public override Position TurnRight(Position position) { return new Position(position.Col + 2, position.Row - 1); }

@@ -11,105 +11,105 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void BlockRotates_O_AllTheSame()
 		{
-			ValidateDefinition("XX..|XX..", 9, Block.O[Block.RotationType.None]);
+			ValidateDefinition("XX..|XX..", 1, 9, Block.O[Block.RotationType.None]);
 		}
 
 		[Test]
 		public void BlockRotates_I_IsValidDefinition()
 		{
-			ValidateDefinition("XXXX",17, Block.I[Block.RotationType.None]);
+			ValidateDefinition("XXXX", 2, 17, Block.I[Block.RotationType.None]);
 		}
 		[Test]
 		public void BlockRotates_ILeft_IsValidDefinition()
 		{
-			ValidateDefinition("X...|X...|X...|X...", 17,Block.I[Block.RotationType.Left]);
+			ValidateDefinition("X...|X...|X...|X...", 2, 17, Block.I[Block.RotationType.Left]);
 		}
 
 		[Test]
 		public void BlockRotates_S_IsValidDefinition()
 		{
-			ValidateDefinition(".XX.|XX..", 17, Block.S[Block.RotationType.None]);
+			ValidateDefinition(".XX.|XX..", 2, 17, Block.S[Block.RotationType.None]);
 		}
 		[Test]
 		public void BlockRotates_SLeft_IsValidDefinition()
 		{
-			ValidateDefinition("X...|XX..|.X..", 17, Block.S[Block.RotationType.Left]);
+			ValidateDefinition("X...|XX..|.X..", 2, 17, Block.S[Block.RotationType.Left]);
 		}
 
 		[Test]
 		public void BlockRotates_Z_IsValidDefinition()
 		{
-			ValidateDefinition("XX..|.XX.", 17, Block.Z[Block.RotationType.None]);
+			ValidateDefinition("XX..|.XX.", 2, 17, Block.Z[Block.RotationType.None]);
 		}
 		[Test]
 		public void BlockRotates_ZLeft_IsValidDefinition()
 		{
-			ValidateDefinition(".X..|XX..|X...", 17, Block.Z[Block.RotationType.Left]);
+			ValidateDefinition(".X..|XX..|X...", 2, 17, Block.Z[Block.RotationType.Left]);
 		}
 
 		[Test]
 		public void BlockRotates_J_IsValidDefinition()
 		{
-			ValidateDefinition("X...|XXX.", 34, Block.J[Block.RotationType.None]);
+			ValidateDefinition("X...|XXX.", 4, 34, Block.J[Block.RotationType.None]);
 		}
 		[Test]
 		public void BlockRotates_JLeft_IsValidDefinition()
 		{
-			ValidateDefinition(".X..|.X..|XX..", 34, Block.J[Block.RotationType.Left]);
+			ValidateDefinition(".X..|.X..|XX..", 4, 34, Block.J[Block.RotationType.Left]);
 		}
 		[Test]
 		public void BlockRotates_J180_IsValidDefinition()
 		{
-			ValidateDefinition("XXX.|..X.", 34, Block.J[Block.RotationType.Uturn]);
+			ValidateDefinition("XXX.|..X.", 4, 34, Block.J[Block.RotationType.Uturn]);
 		}
 		[Test]
 		public void BlockRotates_JRight_IsValidDefinition()
 		{
-			ValidateDefinition("XX..|X...|X...", 34, Block.J[Block.RotationType.Right]);
+			ValidateDefinition("XX..|X...|X...", 4, 34, Block.J[Block.RotationType.Right]);
 		}
 
 		[Test]
 		public void BlockRotates_L_IsValidDefinition()
 		{
-			ValidateDefinition("..X.|XXX.", 34, Block.L[Block.RotationType.None]);
+			ValidateDefinition("..X.|XXX.", 4, 34, Block.L[Block.RotationType.None]);
 		}
 		[Test]
 		public void BlockRotates_LLeft_IsValidDefinition()
 		{
-			ValidateDefinition("XX..|.X..|.X..", 34, Block.L[Block.RotationType.Left]);
+			ValidateDefinition("XX..|.X..|.X..", 4, 34, Block.L[Block.RotationType.Left]);
 		}
 		[Test]
 		public void BlockRotates_L180_IsValidDefinition()
 		{
-			ValidateDefinition("XXX.|X...", 34, Block.L[Block.RotationType.Uturn]);
+			ValidateDefinition("XXX.|X...", 4, 34, Block.L[Block.RotationType.Uturn]);
 		}
 		[Test]
 		public void BlockRotates_LRight_IsValidDefinition()
 		{
-			ValidateDefinition("X...|X...|XX..", 34, Block.L[Block.RotationType.Right]);
+			ValidateDefinition("X...|X...|XX..", 4, 34, Block.L[Block.RotationType.Right]);
 		}
 
 		[Test]
 		public void BlockRotates_T_IsValidDefinition()
 		{
-			ValidateDefinition(".X..|XXX.", 34, Block.T[Block.RotationType.None]);
+			ValidateDefinition(".X..|XXX.", 4, 34, Block.T[Block.RotationType.None]);
 		}
 		[Test]
 		public void BlockRotates_TLeft_IsValidDefinition()
 		{
-			ValidateDefinition(".X..|XX..|.X..", 34, Block.T[Block.RotationType.Left]);
+			ValidateDefinition(".X..|XX..|.X..", 4, 34, Block.T[Block.RotationType.Left]);
 		}
 		[Test]
 		public void BlockRotates_T180_IsValidDefinition()
 		{
-			ValidateDefinition("XXX.|.X..", 34, Block.T[Block.RotationType.Uturn]);
+			ValidateDefinition("XXX.|.X..", 4, 34, Block.T[Block.RotationType.Uturn]);
 		}
 		[Test]
 		public void BlockRotates_TRight_IsValidDefinition()
 		{
-			ValidateDefinition("X...|XX..|X...", 34, Block.T[Block.RotationType.Right]);
+			ValidateDefinition("X...|XX..|X...", 4, 34, Block.T[Block.RotationType.Right]);
 		}
-				
+
 		[Test]
 		public void ThisLineCol_AllPossibleColumns_Matches()
 		{
@@ -166,7 +166,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		{
 			var tps = new PieceType[] { PieceType.I, PieceType.J, PieceType.L, PieceType.O, PieceType.S, PieceType.T, PieceType.Z };
 			var act = tps.Select(tp => Block.Select(tp)).Select(block => block.Name).ToArray();
-			var exp = new string[]{ "I", "J", "L", "O", "S", "T", "Z" };
+			var exp = new string[] { "I", "J", "L", "O", "S", "T", "Z" };
 			CollectionAssert.AreEqual(exp, act);
 		}
 		[Test]
@@ -259,7 +259,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 			CollectionAssert.AreEqual(exp, act);
 		}
 
-		protected void ValidateDefinition(string expStr, int expChildCount, Block org)
+		protected void ValidateDefinition(string expStr, int expVariations, int expChildCount, Block org)
 		{
 			var tp = org.GetType().Name;
 			var name = tp.Substring(5, 1);
@@ -276,6 +276,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 
 			Assert.AreEqual(expStr, org.ToString(), "ToString().");
 			Assert.AreEqual(4, org.Count, "Count should be 4.");
+			Assert.AreEqual(expVariations, org.Variations.Length, "Variations.Length");
 			Assert.AreEqual(expChildCount, org.ChildCount, "ChildCount");
 		}
 	}

@@ -13,11 +13,10 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public static readonly BlockO O = Block.New<BlockO>();
 
-		public static readonly BlockI I = Block.New<BlockI>(new BlockILeft());
+		public static readonly BlockI I = Block.New<BlockI>(new BlockILeft(), new BlockIUturn(), new BlockIRight());
 
-		public static readonly BlockS S = Block.New<BlockS>(new BlockSLeft());
-		public static readonly BlockZ Z = Block.New<BlockZ>(new BlockZLeft());
-
+		public static readonly BlockS S = Block.New<BlockS>(new BlockSLeft(), new BlockSUturn(), new BlockSRight());
+		public static readonly BlockZ Z = Block.New<BlockZ>(new BlockZLeft(), new BlockZUturn(), new BlockZRight());
 
 		public static readonly BlockJ J = Block.New<BlockJ>(new BlockJLeft(), new BlockJUturn(), new BlockJRight());
 		public static readonly BlockL L = Block.New<BlockL>(new BlockLLeft(), new BlockLUturn(), new BlockLRight());
@@ -87,6 +86,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public abstract string Name { get; }
 
 		public virtual RotationType Rotation { get { return RotationType.None; } }
+		public virtual bool RotationOnly { get { return false; } }
 
 		public abstract byte[] Lines { get; }
 
@@ -114,10 +114,11 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Count { get { return Lines.Sum(l => Bits.Count(l)); } }
 
 		public Block[] Variations { get; private set; }
+		protected Block[] RotationVariations { get; private set; }
 
-		public Block this[RotationType rotation]
+		public virtual Block this[RotationType rotation]
 		{
-			get { return Variations[(int)rotation]; }
+			get { return RotationVariations[(int)rotation]; }
 		}
 
 		public abstract Block TurnLeft();
@@ -125,7 +126,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public abstract Position TurnLeft(Position position);
 		public abstract Position TurnRight(Position position);
-		
+
 
 		#region S Z J L T no rotation
 
@@ -456,7 +457,8 @@ namespace AIGames.BlockBattle.Kubisme
 			list.Insert(0, block);
 			foreach (var item in list)
 			{
-				item.Variations = list.ToArray();
+				item.Variations = list.Where(i => !i.RotationOnly).ToArray();
+				item.RotationVariations = list.ToArray();
 			}
 			return block;
 		}
@@ -466,7 +468,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var minRow = position.Row;
 			var maxRow = minRow + Height;
 
-			for (var l = 0 ;l < Height; l++)
+			for (var l = 0; l < Height; l++)
 			{
 				var line = this[l, position.Col];
 

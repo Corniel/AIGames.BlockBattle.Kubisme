@@ -6,6 +6,7 @@
 		<add key="BotStable" value="1024"/>
 		<add key="CopyHighestElo" value="2"/>
 		<add key="CopyHighestScore" value="2"/>
-		<add key="PairingsRandom" value="2"/>
+		<add key="PairingsRandom" value="128"/>
+		<add key="LockFactor" value="2"/>
 	</appSettings>
 </configuration>

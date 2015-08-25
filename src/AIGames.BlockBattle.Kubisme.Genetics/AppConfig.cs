@@ -25,6 +25,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			CopyHighestElo = 2;
 			CopyHighestScore = 3;
+
+			LockFactor = 1000;
 		}
 
 		public int SearchDepth { get; set; }
@@ -42,6 +44,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public int CopyHighestScore { get; set; }
 
 		public int PairingsRandom { get; set; }
+
+		public int LockFactor { get; set; }
 
 		public void UpdateFromConfig()
 		{

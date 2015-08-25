@@ -37,6 +37,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public double PointsAvg { get { return Turns == 0 ? 0 : (double)Points / (double)Turns; } }
 		public double TurnsAvg { get { return Runs == 0 ? 0 : (double)Turns / (double)Runs; } }
 
+		public bool Locked { get; set; }
+
 		public Elo Elo { get; set; }
 		public double K { get; set; }
 

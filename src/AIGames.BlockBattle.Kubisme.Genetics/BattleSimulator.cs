@@ -89,12 +89,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 				lock (lockList)
 				{
-					if (Bots.Count > Capacity)
+					var delete = Bots.Count(bot => !bot.Locked) - Capacity;
+					for (var i = Bots.Count - 1; i > 0 && delete > 0; i--)
 					{
-						for (var i = Bots.Count - 1; i >= Capacity; i--)
+						var bot = Bots[i];
+						if (!bot.Locked)
 						{
-							var bot = Bots[i];
 							Bots.Remove(bot);
+							delete--;
 						}
 					}
 				}
@@ -309,8 +311,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			lock (lockList)
 			{
 				Bots.Sort();
-			}
 
+				if (Bots[0].Runs > AppConfig.Data.BotStable * AppConfig.Data.LockFactor)
+				{
+					Bots[0].Locked = true;
+				}
+			}
+			
 			BestBot = GetHighestElo();
 
 			var bestAvg = GetHighestAvg();
@@ -359,14 +366,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Console.WriteLine(
 					String.Format(
 						CultureInfo.InvariantCulture,
-						"{6,2} {0:0000.0} {4:0.0000}, Runs: {1,5} ({5:0.0}), ID: {2,5}, Parent: {3,5}",
+						"{6,2} {0:0000.0} {4:0.0000}, Runs: {1,5} ({5:000.0}), ID: {2,5}{7}, Parent: {3,5}",
 						bot.Elo, 
 						bot.Runs, 
 						bot.Id,
 						bot.ParentId, 
 						bot.PointsAvg,
 						bot.TurnsAvg,
-						pos));
+						pos,
+						bot.Locked? "*" : " "));
 			}
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.WriteLine();

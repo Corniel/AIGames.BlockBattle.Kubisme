@@ -90,11 +90,28 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				else if (prop.PropertyType == typeof(int[]))
 				{
+					var tp = GetType(prop);
+					var previous = tp.HasFlag(ParameterType.Descending) ? int.MaxValue : int.MinValue;
+
 					int[] vals = (int[])prop.GetValue(org);
 					var copy = vals.ToArray();
 					for (var i = 0; i < copy.Length; i++)
 					{
-						copy[i] = Randomize(vals[i]);
+						var val = Randomize(vals[i]);
+						if (tp.HasFlag(ParameterType.Descending) && val > previous)
+						{
+							val = previous;
+						}
+						else if (tp.HasFlag(ParameterType.Ascending) && val < previous)
+						{
+							val = previous;
+						}
+						if (tp.HasFlag(ParameterType.Positive) && val < 1)
+						{
+							val = 1;
+						}
+						copy[i] = val;
+						previous = val;
 					}
 					prop.SetValue(target, copy);
 				}
@@ -130,6 +147,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Properties[typeof(T)] = props;
 			}
 			return props;
+		}
+
+		private static ParameterType GetType(PropertyInfo prop)
+		{
+			var attr = prop.GetCustomAttribute<ParameterTypeAttribute>();
+			return attr == null ? ParameterType.Default : attr.ParameterType;
 		}
 	}
 }

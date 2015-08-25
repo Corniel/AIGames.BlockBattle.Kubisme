@@ -18,7 +18,9 @@ namespace AIGames.BlockBattle.Kubisme
 			ComboPotential = new int[21];
 		}
 
+		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
 		public int[] FreeCellWeights { get; set; }
+		[ParameterType(ParameterType.Descending)]
 		public int[] ComboPotential { get; set; }
 
 		public int Points { get; set; }

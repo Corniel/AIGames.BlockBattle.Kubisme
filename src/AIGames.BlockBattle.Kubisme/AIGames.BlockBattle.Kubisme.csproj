@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bits.cs" />
+	<Compile Include="Blocks\Block.cs" />
     <Compile Include="Blocks\BlockI.cs" />
     <Compile Include="Blocks\BlockILeft.cs" />
     <Compile Include="Blocks\BlockIRight.cs" />
@@ -84,17 +85,17 @@
     <Compile Include="DecisionMaking\BlockRndNode.cs" />
     <Compile Include="DecisionMaking\BlockRndNodes.cs" />
     <Compile Include="DecisionMaking\BlockRootNode.cs" />
-    <Compile Include="Generation\IFieldGenerator.cs" />
-    <Compile Include="Generation\MoveGenerator.cs" />
-    <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\IBlockNode.cs" />
-    <Compile Include="Generation\IMoveGenerator.cs" />
+    <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMaker.cs" />
-    <Compile Include="Evaluation\IEvaluator.cs" />
+	<Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\IParameters.cs" />
+	<Compile Include="Evaluation\ParameterType.cs" />
     <Compile Include="Evaluation\SimpleEvaluator.cs" />
     <Compile Include="Evaluation\SimpleParameters.cs" />
-    <Compile Include="Blocks\Block.cs" />
+	<Compile Include="Generation\IFieldGenerator.cs" />
+    <Compile Include="Generation\IMoveGenerator.cs" />
+    <Compile Include="Generation\MoveGenerator.cs" />
     <Compile Include="Generation\TempPath.cs" />
     <Compile Include="KubismeBot.cs" />
     <Compile Include="Models\MoveCandiate.cs" />

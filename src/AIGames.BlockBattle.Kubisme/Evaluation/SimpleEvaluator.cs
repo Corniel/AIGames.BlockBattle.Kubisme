@@ -150,6 +150,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var filterBlockades = 0;
 			
 			var lastHoles = 0;
+			var filterLastBlockades = 0;
 			var filterCurrentBlockades = 0;
 			
 			for (var r = field.RowCount - 1; r >= field.FirstFilled; r--)
@@ -163,14 +164,14 @@ namespace AIGames.BlockBattle.Kubisme
 				blockades += Row.Count[blockadesMask];
 
 				// last blockades
-				filterBlockades = lastHoles & row;
+				filterLastBlockades = lastHoles & row;
 
 				// blockade detection.
-				if (filterBlockades != 0 && filterBlockades != filterCurrentBlockades)
+				if (filterLastBlockades != 0 && filterLastBlockades != filterCurrentBlockades)
 				{
 					lastBlockades = 0;
-					filterCurrentBlockades = filterBlockades;
-					lastBlockades = Row.Count[filterBlockades];
+					filterCurrentBlockades = filterLastBlockades;
+					lastBlockades = Row.Count[filterLastBlockades];
 				}
 				else
 				{

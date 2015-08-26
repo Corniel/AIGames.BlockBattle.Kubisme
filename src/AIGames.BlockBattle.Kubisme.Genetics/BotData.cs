@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
 {
@@ -31,6 +32,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public int ParentId { get; set; }
 		public int Runs { get; set; }
 
+		[XmlElement("Pt")]
 		public long Points { get; set; }
 		public long Turns { get; set; }
 

@@ -89,10 +89,10 @@ namespace AIGames.BlockBattle.Kubisme
 				var row = field[r];
 				var rowMirrored = Row.Filled ^ row;
 
-				// We can not enter any empty spot of this row, so exit.
+				// We can not enter any empty spot of this row, so stop searching.
 				if (!current.IsReachable(rowMirrored, prevMirrored))
 				{
-					yield break;
+					break;
 				}
 				prevMirrored = rowMirrored;
 				filterTopColomns |= row;

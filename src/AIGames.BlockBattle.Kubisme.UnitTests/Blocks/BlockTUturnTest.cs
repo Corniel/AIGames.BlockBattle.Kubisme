@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using AIGames.BlockBattle.Kubisme.Communication;
+using AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking;
+using NUnit.Framework;
 using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
@@ -28,7 +30,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void Apply_Top_NoTSpin()
 		{
-			var field = Field.Create(0, 0,@"
+			var field = Field.Create(0, 0, @"
 XXX...XXXX
 .XXX.XXXXX");
 
@@ -107,6 +109,37 @@ XXX...XXXX
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);
+		}
+
+		[Test]
+		public void GetMove_TForTSpin_ClearedField()
+		{
+			var field = Field.Create(0, 2, @"
+..........
+..........
+..X..XX...
+XXX...XXXX
+XXXX.XXXXX");
+
+			var dm = new NodeDecisionMakerTester()
+			{
+				Evaluator = new SimpleEvaluator()
+				{
+					Parameters = SimpleParameters.GetDefault(),
+				},
+				Points = new int[10],
+				Generator = new MoveGenerator(),
+				MaximumDepth = 3,
+			};
+
+			var act = dm.GetMove(field, Block.T, Block.Z, 1);
+			var actField = dm.BestField.ToString();
+
+			var exp = BlockPath.Create(ActionType.Down, ActionType.TurnLeft, ActionType.Down, ActionType.Down, ActionType.TurnLeft);
+			var expField = "..........|..........|..........|..........|..X..XX...";
+
+			Assert.AreEqual(expField, actField);
+			Assert.AreEqual(exp, act);
 		}
 	}
 }

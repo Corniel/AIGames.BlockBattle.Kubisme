@@ -91,29 +91,29 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				else if (prop.PropertyType == typeof(int[]))
 				{
 					var tp = GetType(prop);
-					var previous = tp.HasFlag(ParameterType.Descending) ? int.MaxValue : int.MinValue;
 
 					int[] vals = (int[])prop.GetValue(org);
-					var copy = vals.ToArray();
-					for (var i = 0; i < copy.Length; i++)
+					var copy = new List<int>();
+					for (var i = 0; i < vals.Length; i++)
 					{
 						var val = Randomize(vals[i]);
-						if (tp.HasFlag(ParameterType.Descending) && val > previous)
-						{
-							val = previous;
-						}
-						else if (tp.HasFlag(ParameterType.Ascending) && val < previous)
-						{
-							val = previous;
-						}
 						if (tp.HasFlag(ParameterType.Positive) && val < 1)
 						{
 							val = 1;
 						}
-						copy[i] = val;
-						previous = val;
+						copy.Add(val);
 					}
-					prop.SetValue(target, copy);
+
+					if (tp.HasFlag(ParameterType.Ascending))
+					{
+						copy.Sort();
+					}
+					else if (tp.HasFlag(ParameterType.Descending))
+					{
+						copy = copy.OrderByDescending(v => v).ToList();
+					}
+
+					prop.SetValue(target, copy.ToArray());
 				}
 			}
 			return target;

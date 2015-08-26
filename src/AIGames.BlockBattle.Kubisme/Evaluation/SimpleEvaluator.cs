@@ -50,22 +50,23 @@ namespace AIGames.BlockBattle.Kubisme
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
 
-			int filterFreeCells = Row.Filled;
 			int filterTopColomns = 0;
-			int filterComboPotential = 0;
+			
 			var holes = 0;
 			var wallLeft = 0;
 			var wallRight = 0;
 			var neighborsH = 0;
 			var neighborsV = 0;
-			var comboPotential = 0;
 			ushort previous = 0;
 
+			// Variables for combo potential.
+			var comboPotential = 0;
 			var hasComboPotential = true;
+			var filterComboPotential = 0;
 
 			for (var r = 0; r < field.FirstFilled; r++)
 			{
-				score += 10 * pars.FreeCellWeights[r];
+				score += pars.FreeRowWeights[r];
 			}
 
 			// loop through the rows.
@@ -75,10 +76,6 @@ namespace AIGames.BlockBattle.Kubisme
 
 				var rowMirrored = Row.Filled ^ row;
 				var holesMask = filterTopColomns & rowMirrored;
-
-				filterFreeCells &= rowMirrored;
-
-				score += Row.Count[filterFreeCells] * pars.FreeCellWeights[r];
 				holes += Row.Count[holesMask];
 
 				// Give points for blocks against the wall, that are not under an hole.
@@ -136,7 +133,6 @@ namespace AIGames.BlockBattle.Kubisme
 						filterComboPotential |= row;
 					}
 				}
-
 				filterTopColomns |= row;
 
 				neighborsV += NeighborsVertical[row];

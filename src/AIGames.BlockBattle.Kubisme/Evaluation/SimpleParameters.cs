@@ -14,12 +14,13 @@ namespace AIGames.BlockBattle.Kubisme
 #endif
 		public SimpleParameters()
 		{
-			FreeCellWeights = new int[21];
+			FreeRowWeights = new int[21];
 			ComboPotential = new int[21];
 		}
 
 		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
-		public int[] FreeCellWeights { get; set; }
+		public int[] FreeRowWeights { get; set; }
+
 		[ParameterType(ParameterType.Descending)]
 		public int[] ComboPotential { get; set; }
 
@@ -74,20 +75,20 @@ namespace AIGames.BlockBattle.Kubisme
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// Elo: 1031, Avg: 0,858, Runs: 1533, ID: 7035, Parent: 6931
+			// Elo: 1049, Avg: 0,844, Runs: 1442, ID: 6140, Parent: 5272
 			{
-				FreeCellWeights = new int[] { 41, 42, 25, 12, 9, 11, 0, -1, 6, 0, 12, -1, 2, 10, 0, 4, 4, -2, 0, -10, 14 },
-				ComboPotential = new int[] { 15, 10, 5, -19, 11, -18, 11, -2, 22, -27, 32, 41, -46, -14, 14, -44, 7, -2, 29, -24, -22 },
-				Points = 43,
-				Combo = 17,
-				Holes = -71,
-				Blockades = -9,
-				LastBlockades = -9,
-				WallsLeft = 16,
-				WallsRight = 18,
-				Floor = 9,
-				NeighborsHorizontal = -9,
-				NeighborsVertical = 19,
+				FreeRowWeights = new int[] { 59, 40, 24, 14, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1 },
+				ComboPotential = new int[] { 5, 2, 1, -27, -37, -59, -59, -60, -60, -60, -63, -63, -74, -74, -74, -78, -89, -93, -105, -117, -139 },
+				Points = 13,
+				Combo = 4,
+				Holes = -13,
+				Blockades = 0,
+				LastBlockades = -2,
+				WallsLeft = 3,
+				WallsRight = 3,
+				Floor = 5,
+				NeighborsHorizontal = 0,
+				NeighborsVertical = 3,
 			};
 		}
 	}

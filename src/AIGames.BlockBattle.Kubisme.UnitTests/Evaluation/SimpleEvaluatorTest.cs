@@ -65,7 +65,7 @@ XXX.......";
 
 
 		[Test]
-		public void Test_FreeCells_2()
+		public void Test_FreeRows_1()
 		{
 			var field = @"
 ..........
@@ -76,9 +76,9 @@ XXX.......";
 XXX.......";
 			var pars = new SimpleParameters()
 			{
-				FreeCellWeights = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+				FreeRowWeights = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 			};
-			var expected = 22;
+			var expected = 1;
 
 			Test(field, pars, expected);
 		}
@@ -248,7 +248,7 @@ X..XXX.XXX
 XXX.......";
 			var pars = new SimpleParameters()
 			{
-				ComboPotential = new int[] {  },
+				ComboPotential = new int[0],
 			};
 			var expected = 0;
 

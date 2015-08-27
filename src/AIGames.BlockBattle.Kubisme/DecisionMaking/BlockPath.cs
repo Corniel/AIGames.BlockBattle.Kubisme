@@ -96,7 +96,7 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			else
 			{
-				m1 |= ((uint)move) << (3 * (count - 20));
+				m1 |= ((ulong)move) << (3 * (count - 20));
 			}
 			return new BlockPath(m0, m1, count + 1);
 		}

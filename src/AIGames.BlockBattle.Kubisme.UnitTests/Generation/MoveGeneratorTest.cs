@@ -41,7 +41,7 @@ XXXXX.XXXX
 XX........
 ");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.S,  true).ToList();
+			var candiates = generator.GetMoves(field, Block.S, true).ToList();
 
 			var act = candiates.Select(c => c.ToString()).ToArray();
 			var exp = new string[]

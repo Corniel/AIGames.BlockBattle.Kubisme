@@ -3,6 +3,7 @@
 	public class BlockSUturn : BlockS
 	{
 		public override bool RotationOnly { get { return true; } }
+		public override RotationType Rotation { get { return RotationType.Uturn; } }
 
 		public override Block TurnLeft() { return this[RotationType.Right]; }
 		public override Block TurnRight() { return this[RotationType.Left]; }

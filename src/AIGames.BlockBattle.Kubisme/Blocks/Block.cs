@@ -114,7 +114,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Count { get { return Lines.Sum(l => Bits.Count(l)); } }
 
 		public Block[] Variations { get; private set; }
-		protected Block[] RotationVariations { get; private set; }
+		public Block[] RotationVariations { get; private set; }
 
 		public virtual Block this[RotationType rotation]
 		{

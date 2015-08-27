@@ -114,7 +114,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public static IEnumerable<MoveCandiate> GetPaths(Field field, Block current, int[] targets, int maxRow)
 		{
-			var dones = new bool[current.Variations.Length, field.RowCount + 1, 10];
+			var dones = new bool[current.RotationVariations.Length, field.RowCount + 1, 10];
 			dones[0, current.Start.Row + 1, current.Start.Col] = true;
 			var stack = new Stack<TempPath>();
 			stack.Push(new TempPath(current, current.Start, BlockPath.None));
@@ -163,8 +163,23 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					if(temp.Block.TouchPosition(temp.Position, targets))
 					{
-						var apply = field.Apply(temp.Block, temp.Position);
-						yield return new MoveCandiate(temp.Path, apply);
+						var unique = temp.Block.Variations.Length == temp.Block.RotationVariations.Length;
+
+						// if the block is rotation only, first check if counter part did not arrive already.
+						if (!unique)
+						{
+							var rot_org = (int)temp.Block.Rotation & 1;
+							var rot_acc = rot_org | 2;
+
+							unique = 
+								dones[rot_org, temp.Position.Row + 1, temp.Position.Col] ^ 
+								dones[rot_acc, temp.Position.Row + 1, temp.Position.Col];
+						}
+						if (unique)
+						{
+							var apply = field.Apply(temp.Block, temp.Position);
+							yield return new MoveCandiate(temp.Path, apply);
+						}
 					}
 				}
 				else

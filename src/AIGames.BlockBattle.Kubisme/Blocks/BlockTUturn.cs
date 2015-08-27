@@ -28,6 +28,19 @@ namespace AIGames.BlockBattle.Kubisme
 			0x0280,
 		};
 
+		public static readonly ushort[] TSpinTopBorderMask = new ushort[]
+		{
+			0x0008,
+			0x0011,
+			0x0022,
+			0x0044,
+
+			0x0088,
+			0x0110,
+			0x0220,
+			0x0040,
+		};
+
 		public static readonly ushort[] TSpinRow1Mask = new ushort[]
 		{
 			0X03F8,

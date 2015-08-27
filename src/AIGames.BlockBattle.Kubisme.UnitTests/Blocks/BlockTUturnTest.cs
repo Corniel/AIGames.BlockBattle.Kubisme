@@ -27,6 +27,25 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		}
 
 		[Test]
+		public void TSpinTopBorderMask_None_MasksMatch()
+		{
+			var act = BitsTest.Select(BlockTUturn.TSpinTopBorderMask);
+			var exp = new string[]
+			{
+				"...X......",
+				"X...X.....",
+				".X...X....",
+				"..X...X...",
+
+				"...X...X..",
+				"....X...X.",
+				".....X...X",
+				"......X...",
+			};
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
 		public void TSpinRow1Mask_All_Matches()
 		{
 			var act = BitsTest.Select(BlockTUturn.TSpinRow1Mask);
@@ -91,6 +110,40 @@ XXXX.XXXXX");
 
 			var expField = "..........|..........|..X...X...";
 			var expPt = 3;
+
+			Assert.AreEqual(expField, act.ToString());
+			Assert.AreEqual(expPt, act.Points);
+		}
+
+		[Test]
+		public void Apply_Row1ToMuchSpaceOnTail_NoTSpin()
+		{
+			var field = Field.Create(0, 0, @"
+..X..XX...
+XXX...XXXX
+XXX..XXXXX");
+
+			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
+
+			var expField = "..........|..X..XX...|XXX.XXXXXX";
+			var expPt = 1;
+
+			Assert.AreEqual(expField, act.ToString());
+			Assert.AreEqual(expPt, act.Points);
+		}
+
+		[Test]
+		public void Apply_Row1ToMuchSpaceToMuchSpaceOnHead_NoTSpin()
+		{
+			var field = Field.Create(0, 0, @"
+..X..XX...
+XX....XXXX
+XXXX.XXXXX");
+
+			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
+
+			var expField = "..........|..X..XX...|XX.XXXXXXX";
+			var expPt = 1;
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);

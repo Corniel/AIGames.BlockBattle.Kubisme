@@ -62,5 +62,11 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests
 			var act = Bits.Count((UInt64)128);
 			Assert.AreEqual(exp, act);
 		}
+
+
+		public static string[] Select(IEnumerable<ushort> masks)
+		{
+			return masks.Select(mask => Row.ToString(mask)).ToArray();
+		}
 	}
 }

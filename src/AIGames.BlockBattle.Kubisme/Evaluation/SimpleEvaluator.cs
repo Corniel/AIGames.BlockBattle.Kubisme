@@ -51,7 +51,7 @@ namespace AIGames.BlockBattle.Kubisme
 			score += field.Combo * pars.Combo;
 
 			int filterTopColomns = 0;
-			
+
 			var holes = 0;
 			var wallLeft = 0;
 			var wallRight = 0;
@@ -64,6 +64,10 @@ namespace AIGames.BlockBattle.Kubisme
 			var hasComboPotential = true;
 			var filterComboPotential = 0;
 
+			// Variables for T-Spin potential
+			var hasTSpinPotential = false;
+			var prevCount = 0;
+
 			for (var r = 0; r < field.FirstFilled; r++)
 			{
 				score += pars.FreeRowWeights[r];
@@ -73,6 +77,7 @@ namespace AIGames.BlockBattle.Kubisme
 			for (var r = field.FirstFilled; r < field.RowCount; r++)
 			{
 				var row = field[r];
+				var rowCount = Row.Count[row];
 
 				var rowMirrored = Row.Filled ^ row;
 				var holesMask = filterTopColomns & rowMirrored;
@@ -100,8 +105,6 @@ namespace AIGames.BlockBattle.Kubisme
 				// check for rows who can be filled in a combo.
 				if (hasComboPotential)
 				{
-					var rowCount = Row.Count[row];
-
 					if (rowCount == 7)
 					{
 						if (Row.Row7BlockOneHole.Contains(row | filterComboPotential))
@@ -133,22 +136,39 @@ namespace AIGames.BlockBattle.Kubisme
 						filterComboPotential |= row;
 					}
 				}
+
+				// If no T-Spin potential detected yet, and access to the row.
+				// the previous has to be 7, and the current 9.
+				if (!hasTSpinPotential && filterTopColomns != Row.Filled &&
+					prevCount == 7 && rowCount == 9)
+				{
+					for (var i = 0; i < 8; i++)
+					{
+						if (BlockTUturn.TSpinRow2Mask[i] == row && BlockTUturn.TSpinRow1Mask[i] == previous)
+						{
+							hasTSpinPotential = true;
+							break;
+						}
+					}
+				}
+
 				filterTopColomns |= row;
 
 				neighborsV += NeighborsVertical[row];
 				neighborsH += Row.Count[row & previous];
 				previous = row;
+				prevCount = rowCount;
 			}
 
 			// loop for blockades too.
 			var blockades = 0;
 			var lastBlockades = 0;
 			var filterBlockades = 0;
-			
+
 			var lastHoles = 0;
 			var filterLastBlockades = 0;
 			var filterCurrentBlockades = 0;
-			
+
 			for (var r = field.RowCount - 1; r >= field.FirstFilled; r--)
 			{
 				// blockades
@@ -189,6 +209,11 @@ namespace AIGames.BlockBattle.Kubisme
 				score += (i + 1 + field.Combo) * pars.ComboPotential[i];
 			}
 			score += Row.Count[previous] * pars.Floor;
+
+			if (hasTSpinPotential)
+			{
+				score += pars.TSpinPotential;
+			}
 
 			return score;
 		}

@@ -38,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bits.cs" />
-	<Compile Include="Blocks\Block.cs" />
+    <Compile Include="Blocks\Block.cs" />
     <Compile Include="Blocks\BlockI.cs" />
     <Compile Include="Blocks\BlockILeft.cs" />
     <Compile Include="Blocks\BlockIRight.cs" />
@@ -51,6 +51,7 @@
     <Compile Include="Blocks\BlockSRight.cs" />
     <Compile Include="Blocks\BlockSUturn.cs" />
     <Compile Include="Blocks\BlockT.cs" />
+    <Compile Include="Blocks\BlockTUturn.cs" />
     <Compile Include="Blocks\BlockZ.cs" />
     <Compile Include="Blocks\BlockZLeft.cs" />
     <Compile Include="Blocks\BlockZRight.cs" />
@@ -88,12 +89,12 @@
     <Compile Include="DecisionMaking\IBlockNode.cs" />
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMaker.cs" />
-	<Compile Include="Evaluation\IEvaluator.cs" />
+    <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\IParameters.cs" />
-	<Compile Include="Evaluation\ParameterType.cs" />
+    <Compile Include="Evaluation\ParameterType.cs" />
     <Compile Include="Evaluation\SimpleEvaluator.cs" />
     <Compile Include="Evaluation\SimpleParameters.cs" />
-	<Compile Include="Generation\IFieldGenerator.cs" />
+    <Compile Include="Generation\IFieldGenerator.cs" />
     <Compile Include="Generation\IMoveGenerator.cs" />
     <Compile Include="Generation\MoveGenerator.cs" />
     <Compile Include="Generation\TempPath.cs" />

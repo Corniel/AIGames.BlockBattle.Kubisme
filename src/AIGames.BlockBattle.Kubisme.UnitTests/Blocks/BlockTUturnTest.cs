@@ -1,7 +1,6 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking;
 using NUnit.Framework;
-using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 {
@@ -11,7 +10,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void TSpinTopMask_None_MasksMatch()
 		{
-			var act = BlockTUturn.TSpinTopMask.Select(e => Row.ToString(e)).ToArray();
+			var act = BitsTest.Select(BlockTUturn.TSpinTopMask);
 			var exp = new string[]
 			{
 				"X.X.......",
@@ -23,6 +22,43 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 				".....X.X..",
 				"......X.X.",
 				".......X.X",
+			};
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void TSpinRow1Mask_All_Matches()
+		{
+			var act = BitsTest.Select(BlockTUturn.TSpinRow1Mask);
+			var exp = new string[] 
+			{ 
+				"...XXXXXXX",
+				"X...XXXXXX",
+				"XX...XXXXX",
+				"XXX...XXXX",
+				"XXXX...XXX",
+				"XXXXX...XX",
+				"XXXXXX...X",
+				"XXXXXXX...",
+				
+			};
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void TSpinRow2Mask_All_Matches()
+		{
+			var act = BitsTest.Select(BlockTUturn.TSpinRow2Mask);
+			var exp = new string[] 
+			{ 
+				"X.XXXXXXXX",
+				"XX.XXXXXXX",
+				"XXX.XXXXXX",
+				"XXXX.XXXXX",
+				"XXXXX.XXXX",
+				"XXXXXX.XXX",
+				"XXXXXXX.XX",
+				"XXXXXXXX.X",
 			};
 			CollectionAssert.AreEqual(exp, act);
 		}

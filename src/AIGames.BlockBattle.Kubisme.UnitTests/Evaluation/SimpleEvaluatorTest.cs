@@ -199,7 +199,7 @@ XXX......X";
 		}
 		
 		[Test]
-		public void TestWallsRight_4()
+		public void Test_WallsRight_4()
 		{
 			var field = @"
 ..........
@@ -218,7 +218,7 @@ XXX......X";
 		}
 
 		[Test]
-		public void TestWallsRightNoneOnTheFloor_0()
+		public void Test_WallsRightNoneOnTheFloor_0()
 		{
 			var field = @"
 .........X
@@ -237,7 +237,7 @@ XXX.......";
 		}
 
 		[Test]
-		public void TestComboPotential_0()
+		public void Test_ComboPotential_0()
 		{
 			var field = @"
 .........X
@@ -256,7 +256,7 @@ XXX.......";
 		}
 
 		[Test]
-		public void TestComboPotential_1()
+		public void Test_ComboPotential_1()
 		{
 			var field = @"
 .........X
@@ -274,7 +274,7 @@ XXX.......";
 			Test(field, pars, expected);
 		}
 		[Test]
-		public void TestComboPotential_2()
+		public void Test_ComboPotential_2()
 		{
 			var field = @"
 .........X
@@ -292,7 +292,7 @@ XXX.......";
 			Test(field, pars, expected);
 		}
 		[Test]
-		public void TestComboPotential_3()
+		public void Test_ComboPotential_3()
 		{
 			var field = @"
 .........X
@@ -306,6 +306,63 @@ XXX.......";
 				ComboPotential = new int[] { 0, 0, 1 },
 			};
 			var expected = 3;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_TSpinPotential_0()
+		{
+			var field = @"
+.........X
+........XX
+XXX...XXXX
+XXXXX.XXXX
+...XXXXXXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				TSpinPotential = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_TSpinPotential_1()
+		{
+			var field = @"
+.........X
+........XX
+XXX...XXXX
+XXXX.XXXXX
+...XXXXXXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				TSpinPotential = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_TSpinPotential_unreachable()
+		{
+			var field = @"
+.........X
+...XXX..XX
+XXX...XXXX
+XXXX.XXXXX
+...XXXXXXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				TSpinPotential = 1,
+			};
+			var expected = 0;
 
 			Test(field, pars, expected);
 		}

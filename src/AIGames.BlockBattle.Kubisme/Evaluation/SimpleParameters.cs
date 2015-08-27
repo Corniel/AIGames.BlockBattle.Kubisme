@@ -34,6 +34,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Floor { get; set; }
 		public int NeighborsHorizontal { get; set; }
 		public int NeighborsVertical { get; set; }
+		public int TSpinPotential { get; set; }
 
 		/// <summary>Gets a string representation of the simple evaluator parameters.</summary>
 		/// <remarks>

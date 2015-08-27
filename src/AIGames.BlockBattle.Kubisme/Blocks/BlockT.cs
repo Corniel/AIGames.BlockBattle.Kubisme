@@ -59,49 +59,6 @@ namespace AIGames.BlockBattle.Kubisme
 		#endregion
 	}
 
-	/// <summary>Gets the T block rotated twice.</summary>
-	/// <remarks>
-	/// XXX.
-	/// .X..
-	/// ....
-	/// ....
-	/// </remarks>
-	public class BlockTUturn : BlockT
-	{
-		public static readonly ushort[] TSpinTopMask = new ushort[]
-		{
-			0x0005,
-			0x000A,
-			0x0014,
-			0x0028,
-
-			0x0050,
-			0x00A0,
-			0x0140,
-			0x0280,
-		};
-
-		public override RotationType Rotation { get { return RotationType.Uturn; } }
-
-		public override byte[] Lines { get { return lines; } }
-		private static byte[] lines = new byte[] { 7, 2 };
-
-		public override int Width { get { return 3; } }
-
-		public override IEnumerable<int> GetColumns(Field field) { return GetColumnsJLTUTurn(field); }
-		public override BlockPath GetPath(Field field, int column) { return pathsJLTUturn[column]; }
-
-		#region Rotation
-
-		public override Block TurnLeft() { return this[RotationType.Right]; }
-		public override Block TurnRight() { return this[RotationType.Left]; }
-
-		public override Position TurnLeft(Position position) { return new Position(position.Col + 1, position.Row - 1); }
-		public override Position TurnRight(Position position) { return new Position(position.Col, position.Row - 1); }
-
-		#endregion
-	}
-
 	/// <summary>Gets the T block rotated right.</summary>
 	/// <remarks>
 	/// X...

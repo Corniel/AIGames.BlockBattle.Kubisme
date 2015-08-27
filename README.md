@@ -3,6 +3,11 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 32
+----------
+Fix in path generation for long (30+) paths. Added T-Spin detection and 
+parameters.
+
 Version 31
 ----------
 Fix in path finding. added T-spin point. Changed evaluation; check for free 

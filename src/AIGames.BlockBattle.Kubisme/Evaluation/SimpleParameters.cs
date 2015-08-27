@@ -76,20 +76,21 @@ namespace AIGames.BlockBattle.Kubisme
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// Elo: 1034, Avg: 0,818, Runs: 4009, ID: 330, Parent: 286
+			// Elo: 1064, Avg: 0,907, Runs: 1205, ID: 2323, Parent: 2284
 			{
-				FreeRowWeights = new int[] { 205, 139, 120, 98, 23, 15, 15, 9, 9, 7, 7, 6, 5, 3, 3, 1, 1, 1, 1, 1, 1 },
-				ComboPotential = new int[] { 12, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -2, -2, -2, -4, -4, -10, -36 },
-				Points = 214,
-				Combo = 16,
-				Holes = -29,
+				FreeRowWeights = new int[] { 66, 59, 39, 36, 26, 22, 18, 16, 16, 10, 10, 9, 9, 1, 1, 1, 1, 1, 1, 1, 1 },
+				ComboPotential = new int[] { 33, 10, 9, 6, 3, 1, 1, 1, -2, -9, -10, -10, -14, -21, -22, -23, -26, -33, -40, -49, -61 },
+				Points = 73,
+				Combo = 20,
+				Holes = -84,
 				Blockades = -1,
-				LastBlockades = -3,
-				WallsLeft = 14,
-				WallsRight = 11,
-				Floor = 19,
-				NeighborsHorizontal = 10,
-				NeighborsVertical = 12,
+				LastBlockades = -12,
+				WallsLeft = 21,
+				WallsRight = 18,
+				Floor = 9,
+				NeighborsHorizontal = -4,
+				NeighborsVertical = 14,
+				TSpinPotential = 22,
 			};
 		}
 	}

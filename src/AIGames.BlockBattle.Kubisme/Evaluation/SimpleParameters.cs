@@ -87,21 +87,24 @@ namespace AIGames.BlockBattle.Kubisme
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// Elo: 1018, Avg: 0,939, Runs: 3432, ID: 2777, Parent: 2639
+			// Elo: 1022, Avg: 0.905, Runs: 4635, ID: 3267, Parent: 3219
 			{
-				FreeRowWeights = new int[] { 260, 151, 59, 27, 26, 24, 19, 18, 14, 13, 9, 7, 3, 1, 1, 1, 1, 1, 1, 1, 1 },
-				ComboPotential = new int[] { 18, 6, 2, 1, -3, -3, -4, -7, -9, -11, -16, -17, -17, -18, -20, -24, -27, -36, -47, -51, -54 },
-				Points = 76,
-				Combo = 20,
-				Holes = -85,
-				Blockades = -1,
-				LastBlockades = -8,
-				WallsLeft = 23,
-				WallsRight = 21,
-				Floor = 5,
-				NeighborsHorizontal = -2,
-				NeighborsVertical = 14,
-				TSpinPotential = 39,
+				FreeRowWeights = new int[] { 264, 252, 57, 41, 41, 30, 30, 25, 24, 24, 22, 19, 14, 14, 13, 13, 10, 7, 7, 5, 4 },
+				UnreachableWeights = new int[] { -26, -42, -45, -65, -79, -80, -83, -86, -91, -93, -96, -104, -107, -108, -110, -124, -126, -133, -133, -147, -160 },
+				ReachableRange = new int[] { 40, 20, 14, 12, 11, 10, 10, 10, 9, 8, 7, 4, -1, -2, -9, -15, -15, -17, -17, -30, -68 },
+				ComboPotential = new int[] { 22, 16, 8, 1, 1, -1, -2, -5, -7, -8, -8, -8, -9, -10, -15, -19, -20, -22, -31, -66, -66 },
+				UnreachableWeightsFactor = 11,
+				Points = 51,
+				Combo = 31,
+				Holes = -108,
+				Blockades = 0,
+				LastBlockades = -10,
+				WallsLeft = 35,
+				WallsRight = 33,
+				Floor = 47,
+				NeighborsHorizontal = -14,
+				NeighborsVertical = 21,
+				TSpinPotential = 51,
 			};
 		}
 	}

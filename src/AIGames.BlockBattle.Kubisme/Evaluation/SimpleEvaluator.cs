@@ -58,6 +58,12 @@ namespace AIGames.BlockBattle.Kubisme
 			var neighborsH = 0;
 			var neighborsV = 0;
 			ushort previous = 0;
+			
+			// Variables for unreachable garbage.
+			int reachableMask = Row.Filled;
+
+			var lineIsReachable = true;
+			var unreachble = field.FirstFilled;
 
 			// Variables for combo potential.
 			var comboPotential = 0;
@@ -100,6 +106,17 @@ namespace AIGames.BlockBattle.Kubisme
 				else
 				{
 					wallRight = 0;
+				}
+
+				// Check if the line is still reachable.
+				if (lineIsReachable)
+				{
+					reachableMask &= rowMirrored;
+					lineIsReachable = reachableMask != 0;
+					if (!lineIsReachable)
+					{
+						unreachble = r;
+					}
 				}
 
 				// check for rows who can be filled in a combo.
@@ -203,6 +220,8 @@ namespace AIGames.BlockBattle.Kubisme
 			score += lastBlockades * pars.LastBlockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
+			score += pars.UnreachableWeights[field.RowCount - unreachble];
+			score += pars.ReachableRange[unreachble - field.FirstFilled];
 
 			for (var i = 0; i < comboPotential; i++)
 			{

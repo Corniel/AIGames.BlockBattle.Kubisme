@@ -20,5 +20,6 @@ namespace AIGames.BlockBattle.Kubisme
 		Ascending = 1,
 		Descending = 2,
 		Positive = 4,
+		Negative = 8,
 	}
 }

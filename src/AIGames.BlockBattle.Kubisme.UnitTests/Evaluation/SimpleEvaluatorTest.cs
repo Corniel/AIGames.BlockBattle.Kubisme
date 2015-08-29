@@ -368,6 +368,65 @@ XXX.......";
 		}
 
 		[Test]
+		public void Test_2Unreachable_2()
+		{
+			var field = @"
+.........X
+........XX
+XXX...XXXX
+XXXX.XXXXX
+...XXXXXXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				UnreachableWeights = new int[] { 0, 1, 2 },
+			};
+			var expected = 2;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_5UnreachableWithHole_5()
+		{
+			var field = @"
+....X....X
+.....XX.XX
+XXXX..XXXX
+XX...XXXXX
+XXX.XXXXXX
+XXX.XXXXXX
+XXXXXX.XXX";
+			var pars = new SimpleParameters()
+			{
+				UnreachableWeights = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 },
+			};
+			var expected = 5;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_ReachableRange_4()
+		{
+			var field = @"
+.........X
+........XX
+XXX...XXXX
+XXXX.XXXXX
+...XXXXXXX
+XXX.......";
+			var pars = new SimpleParameters()
+			{
+				ReachableRange = new int[] { 0, 1, 2, 3, 4 },
+			};
+			var expected = 4;
+
+			Test(field, pars, expected);
+		}
+
+
+		[Test]
 		public void LostScore_None_Negative()
 		{
 			var evaluator = new SimpleEvaluator();

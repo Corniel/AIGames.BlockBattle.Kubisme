@@ -15,14 +15,25 @@ namespace AIGames.BlockBattle.Kubisme
 		public SimpleParameters()
 		{
 			FreeRowWeights = new int[21];
+			UnreachableWeights = new int[21];
+			ReachableRange = new int[21];
 			ComboPotential = new int[21];
 		}
 
 		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
 		public int[] FreeRowWeights { get; set; }
 
+		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
+		public int[] UnreachableWeights { get; set; }
+
+		[ParameterType(ParameterType.Descending)]
+		public int[] ReachableRange { get; set; }
+
 		[ParameterType(ParameterType.Descending)]
 		public int[] ComboPotential { get; set; }
+
+		[ParameterType(ParameterType.Positive)]
+		public int UnreachableWeightsFactor { get; set; }
 
 		public int Points { get; set; }
 		public int Combo { get; set; }

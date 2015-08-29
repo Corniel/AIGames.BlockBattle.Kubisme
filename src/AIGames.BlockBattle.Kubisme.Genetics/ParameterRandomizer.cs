@@ -78,9 +78,20 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			foreach (var prop in props)
 			{
+				var tp = GetType(prop);
+
 				if (prop.PropertyType == typeof(int))
 				{
 					int val = Randomize((int)prop.GetValue(org));
+
+					if (tp.HasFlag(ParameterType.Positive) && val < 1)
+					{
+						val = 1;
+					}
+					else if (tp.HasFlag(ParameterType.Negative) && val >= 0)
+					{
+						val = -1;
+					}
 					prop.SetValue(target, val);
 				}
 				else if (prop.PropertyType == typeof(bool))
@@ -90,17 +101,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				else if (prop.PropertyType == typeof(int[]))
 				{
-					var tp = GetType(prop);
-
 					int[] vals = (int[])prop.GetValue(org);
 					var copy = new List<int>();
 					for (var i = 0; i < vals.Length; i++)
 					{
 						var val = Randomize(vals[i]);
-						if (tp.HasFlag(ParameterType.Positive) && val < 1)
-						{
-							val = 1;
-						}
 						copy.Add(val);
 					}
 
@@ -111,6 +116,31 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					else if (tp.HasFlag(ParameterType.Descending))
 					{
 						copy = copy.OrderByDescending(v => v).ToList();
+					}
+
+					if (tp.HasFlag(ParameterType.Positive))
+					{
+						var min = copy.Min();
+
+						if (min < 1)
+						{
+							for (var i = 0; i < copy.Count; i++)
+							{
+								copy[i] += 1 - min;
+							}
+						}
+					}
+					else if (tp.HasFlag(ParameterType.Negative))
+					{
+						var max = copy.Max();
+
+						if (max >= 0)
+						{
+							for (var i = 0; i < copy.Count; i++)
+							{
+								copy[i] -= 1 + max;
+							}
+						}
 					}
 
 					prop.SetValue(target, copy.ToArray());

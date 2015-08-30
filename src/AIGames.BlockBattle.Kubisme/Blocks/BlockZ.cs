@@ -25,7 +25,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public override Block TurnLeft() { return this[RotationType.Left]; }
 		public override Block TurnRight() { return this[RotationType.Right]; }
 
-		public override Position TurnLeft(Position position) { return new Position(position.Col + 1, position.Row); }
-		public override Position TurnRight(Position position) { return new Position(position.Col, position.Row); }
+		public override Position TurnLeft(Position position) { return new Position(position.Col, position.Row); }
+		public override Position TurnRight(Position position) { return new Position(position.Col + 1, position.Row); }
 	}
 }

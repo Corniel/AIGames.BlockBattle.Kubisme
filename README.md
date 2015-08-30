@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 35
+----------
+Fix for positions of S and Z block after rotation left and right.
+
 Version 34
 ----------
 Detaction for unreachble lines (mainly garbage) and the reachables.

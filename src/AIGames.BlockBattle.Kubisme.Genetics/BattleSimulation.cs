@@ -58,8 +58,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				field0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
 				field1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
 
-				var t0 = field0.Points / 6;
-				var t1 = field1.Points / 6;
+				var t0 = field0.Points >> 2;
+				var t1 = field1.Points >> 2;
 
 				if (t0 > g0)
 				{

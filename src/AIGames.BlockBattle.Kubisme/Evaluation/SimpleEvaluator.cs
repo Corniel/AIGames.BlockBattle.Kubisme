@@ -220,7 +220,12 @@ namespace AIGames.BlockBattle.Kubisme
 			score += lastBlockades * pars.LastBlockades;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
-			score += pars.UnreachableWeights[field.RowCount - unreachble];
+
+			var iMax = field.RowCount - unreachble;
+			for (var i = 0; i < iMax; i++)
+			{
+				score += pars.UnreachableWeights[i];
+			}
 			score += pars.ReachableRange[unreachble - field.FirstFilled];
 
 			for (var i = 0; i < comboPotential; i++)

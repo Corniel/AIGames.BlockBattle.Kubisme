@@ -32,9 +32,6 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending)]
 		public int[] ComboPotential { get; set; }
 
-		[ParameterType(ParameterType.Positive)]
-		public int UnreachableWeightsFactor { get; set; }
-
 		public int Points { get; set; }
 		public int Combo { get; set; }
 		public int Holes { get; set; }
@@ -87,24 +84,23 @@ namespace AIGames.BlockBattle.Kubisme
 		public static SimpleParameters GetDefault()
 		{
 			return new SimpleParameters()
-			// Elo: 1022, Avg: 0.905, Runs: 4635, ID: 3267, Parent: 3219
+			// Elo: 1030, Avg: 0,891, Runs: 1475, ID: 13202, Parent: 13077
 			{
-				FreeRowWeights = new int[] { 264, 252, 57, 41, 41, 30, 30, 25, 24, 24, 22, 19, 14, 14, 13, 13, 10, 7, 7, 5, 4 },
-				UnreachableWeights = new int[] { -26, -42, -45, -65, -79, -80, -83, -86, -91, -93, -96, -104, -107, -108, -110, -124, -126, -133, -133, -147, -160 },
-				ReachableRange = new int[] { 40, 20, 14, 12, 11, 10, 10, 10, 9, 8, 7, 4, -1, -2, -9, -15, -15, -17, -17, -30, -68 },
-				ComboPotential = new int[] { 22, 16, 8, 1, 1, -1, -2, -5, -7, -8, -8, -8, -9, -10, -15, -19, -20, -22, -31, -66, -66 },
-				UnreachableWeightsFactor = 11,
-				Points = 51,
-				Combo = 31,
-				Holes = -108,
+				FreeRowWeights = new int[] { 50, 49, 41, 30, 27, 26, 24, 24, 20, 18, 16, 11, 10, 9, 9, 6, 5, 5, 4, 3, 1 },
+				UnreachableWeights = new int[] { -1, -2, -11, -11, -12, -13, -13, -22, -25, -26, -35, -36, -40, -48, -51, -61, -66, -66, -75, -78, -96 },
+				ReachableRange = new int[] { 41, 36, 32, 26, 18, 18, 15, 5, 1, -2, -8, -11, -13, -13, -24, -25, -27, -33, -43, -49, -66 },
+				ComboPotential = new int[] { 13, 7, 5, 3, 2, 0, -5, -6, -8, -8, -11, -11, -18, -19, -22, -23, -33, -39, -42, -50, -79 },
+				Points = 28,
+				Combo = 9,
+				Holes = -75,
 				Blockades = 0,
-				LastBlockades = -10,
-				WallsLeft = 35,
-				WallsRight = 33,
-				Floor = 47,
-				NeighborsHorizontal = -14,
-				NeighborsVertical = 21,
-				TSpinPotential = 51,
+				LastBlockades = -9,
+				WallsLeft = 23,
+				WallsRight = 24,
+				Floor = 4,
+				NeighborsHorizontal = -10,
+				NeighborsVertical = 15,
+				TSpinPotential = 49,
 			};
 		}
 	}

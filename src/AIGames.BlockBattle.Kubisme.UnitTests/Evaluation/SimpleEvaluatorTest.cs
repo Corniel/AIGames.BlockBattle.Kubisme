@@ -76,7 +76,7 @@ XXX.......";
 XXX.......";
 			var pars = new SimpleParameters()
 			{
-				FreeRowWeights = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+				FreeRowWeights = new int[] { 1 },
 			};
 			var expected = 1;
 
@@ -118,6 +118,22 @@ XXX.......";
 				Holes = 1,
 			};
 			var expected = 16;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_HoleWithDiagonalAccess_1()
+		{
+			var field = @"
+..........
+.XX.......
+.X.X......";
+			var pars = new SimpleParameters()
+			{
+				Holes = 1,
+			};
+			var expected = 1;
 
 			Test(field, pars, expected);
 		}
@@ -379,7 +395,7 @@ XXXX.XXXXX
 XXX.......";
 			var pars = new SimpleParameters()
 			{
-				UnreachableWeights = new int[] { 0, 1, 2 },
+				UnreachableWeights = new int[] { 1, 1 },
 			};
 			var expected = 2;
 
@@ -399,7 +415,7 @@ XXX.XXXXXX
 XXXXXX.XXX";
 			var pars = new SimpleParameters()
 			{
-				UnreachableWeights = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 },
+				UnreachableWeights = new int[] { 1, 1, 1, 1, 1 },
 			};
 			var expected = 5;
 

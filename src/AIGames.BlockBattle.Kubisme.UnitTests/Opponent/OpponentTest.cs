@@ -28,7 +28,7 @@ XXXX...XXX
 XXXXX.XXXX
 XXXXXXX.XX");
 
-			var act = generator.Create(turn, field, Block.I, Block.T);
+			var act = generator.Create(turn, field, Block.I, Block.T, 2);
 
 		}
 	}

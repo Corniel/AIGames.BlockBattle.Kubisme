@@ -22,7 +22,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Generator = Generator,
 				Current = current,
 				Next = next,
-				Opponent = new AIGames.BlockBattle.Kubisme.Opponent(round, field),
+				Opponent = new AIGames.BlockBattle.Kubisme.Opponent(round, field, 8),
 			};
 			Root = new BlockRootNode(field);
 

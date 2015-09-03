@@ -9,9 +9,9 @@
 
 		public MoveGenerator Generator { get; protected set; }
 
-		public Opponent Create(int turn, Field field, Block current, Block next)
+		public Opponent Create(int turn, Field field, Block current, Block next, int depth)
 		{
-			var opponent = new Opponent(turn, field);
+			var opponent = new Opponent(turn, field, depth);
 			opponent.States[0] = new OpponentState(field.Points, 0, field.FirstFilled, 0, field.RowCount);
 			opponent.States[1] = new OpponentState(field.Points, 0, field.FirstFilled, 0, 20 - (turn + 1) / 20);
 

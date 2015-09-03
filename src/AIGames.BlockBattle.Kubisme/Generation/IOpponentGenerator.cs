@@ -2,6 +2,6 @@
 {
 	public interface IOpponentGenerator
 	{
-		Opponent Create(int turn, Field field, Block current, Block next);
+		Opponent Create(int turn, Field field, Block current, Block next, int depth);
 	}
 }

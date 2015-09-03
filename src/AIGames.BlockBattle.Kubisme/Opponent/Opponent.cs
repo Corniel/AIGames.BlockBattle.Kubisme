@@ -8,11 +8,11 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public class Opponent
 	{
-		public Opponent(int turn, Field field)
+		public Opponent(int turn, Field field ,int depth)
 		{
 			this.Turn = turn;
 			this.Field = field;
-			this.States = new OpponentState[16];
+			this.States = new OpponentState[depth + 1];
 		}
 
 		public int Turn { get; protected set; }

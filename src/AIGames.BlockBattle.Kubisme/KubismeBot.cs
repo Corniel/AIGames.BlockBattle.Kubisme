@@ -59,7 +59,7 @@ namespace AIGames.BlockBattle.Kubisme
 				DecisionMaker.MaximumDepth = 6;
 			}
 
-			var opponent = Predictor.Create(State.Round, Opponent, Current, Next); ;
+			var opponent = Predictor.Create(State.Round, Opponent, Current, Next, Math.Min(16, DecisionMaker.MaximumDepth));
 			((ComplexEvaluator)DecisionMaker.Evaluator).Opponent = opponent;
 			((ComplexEvaluator)DecisionMaker.Evaluator).Initial = Field;
 

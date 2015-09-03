@@ -11,8 +11,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private AppConfig()
 		{
-			SearchDepth = 2;
-
 			EloInitial = 1000d;
 			KInitial = 12;
 			KMinimum = 2;
@@ -28,10 +26,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			LockFactor = 1000;
 		}
-
-		public int SearchDepth { get; set; }
-
-
+				
 		public double EloInitial { get; set; }
 		public double KInitial { get; set; }
 		public double KMinimum { get; set; }

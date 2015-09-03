@@ -4,9 +4,8 @@
 	{
 		IEvaluator Evaluator { get; set; }
 		IMoveGenerator Generator { get; set; }
-		int[] Points { get; set; }
 		Field BestField { get; }
 
-		BlockPath GetMove(Field field, Block current, Block next, int round);
+		BlockPath GetMove(Field field, Opponent opponent, Block current, Block next, int round);
 	}
 }

@@ -5,13 +5,16 @@
 		public BattleBot() { }
 
 		public NodeDecisionMaker DecisionMaker { get; protected set; }
-		public PointsPredictor Predictor { get; protected set; }
+		public IOpponentGenerator Predictor { get; protected set; }
 
 		public Field GetResponse(Field own, Field other, Block current, Block next, int round)
 		{
-			DecisionMaker.Points = Predictor.GetPoints(other, current, next);
+			var opponent = Predictor.Create(round, other, current, next);
 
-			var path = DecisionMaker.GetMove(own, current, next, round);
+			((ComplexEvaluator)DecisionMaker.Evaluator).Opponent = opponent;
+			((ComplexEvaluator)DecisionMaker.Evaluator).Initial = own;
+
+			var path = DecisionMaker.GetMove(own, opponent, current, next, round);
 			if (path.Equals(BlockPath.None))
 			{
 				return Field.None;
@@ -19,14 +22,14 @@
 			return DecisionMaker.BestField;
 		}
 
-		public static BattleBot Create(SimpleParameters pars)
+		public static BattleBot Create(ComplexParameters pars)
 		{
 			return new BattleBot()
 			{
-				Predictor = new PointsPredictor(),
+				Predictor = new OpponentGenerator(),
 				DecisionMaker = new NodeDecisionMaker()
 				{
-					Evaluator = new SimpleEvaluator()
+					Evaluator = new ComplexEvaluator()
 					{
 						Parameters = pars,
 					},

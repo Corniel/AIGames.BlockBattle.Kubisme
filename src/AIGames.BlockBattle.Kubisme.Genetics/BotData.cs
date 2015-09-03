@@ -15,7 +15,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			K = AppConfig.Data.KInitial;
 		}
 
-		public BotData(int id, SimpleParameters pars): this()
+		public BotData(int id, ComplexParameters pars) : this()
 		{
 			Id = id;
 			Pars = pars;
@@ -26,7 +26,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			ParentId = parent.Id;
 		}
 
-		public SimpleParameters Pars { get; set; }
+		public ComplexParameters Pars { get; set; }
 
 		public int Id { get; set; }
 		public int ParentId { get; set; }
@@ -66,7 +66,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Id, ParentId, Elo, Runs, PointsAvg, TurnsAvg);
 		}
 
-		private static readonly PropertyInfo[] Props = typeof(SimpleParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+		private static readonly PropertyInfo[] Props = typeof(ComplexParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 		
 		public string ParametersToString()
 		{

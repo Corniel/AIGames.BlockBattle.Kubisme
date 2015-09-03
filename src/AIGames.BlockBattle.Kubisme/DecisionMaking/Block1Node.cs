@@ -17,7 +17,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		protected override BlockRndNode Create(byte depth, Field field, ApplyParameters pars)
 		{
-			var score = pars.Evaluator.GetScore(field);
+			var score = pars.Evaluator.GetScore(field, Depth);
 			return new BlockRndNode(field,  depth, score);
 		}
 

@@ -67,7 +67,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				if (Bots.Count < 2)
 				{
-					Bots.Add(new BotData(++LastId, SimpleParameters.GetDefault()));
+					Bots.Add(new BotData(++LastId, ComplexParameters.GetDefault()));
 					BestBot = GetHighestElo();
 					Bots.Add(new BotData(++LastId, BestBot, Randomizer));
 				}

@@ -12,7 +12,6 @@ namespace AIGames.BlockBattle.Kubisme
 			MaximumDuration = TimeSpan.MaxValue;
 		}
 
-		public int[] Points { get; set; }
 		public TimeSpan MaximumDuration { get; set; }
 		public int MaximumDepth { get; set; }
 		public IEvaluator Evaluator { get; set; }
@@ -21,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public ApplyParameters Pars { get; protected set; }
 		public Field BestField { get; protected set; }
 
-		public virtual BlockPath GetMove(Field field, Block current, Block next, int round)
+		public virtual BlockPath GetMove(Field field, Opponent opponent, Block current, Block next, int round)
 		{
 			Pars = new ApplyParameters()
 			{
@@ -32,7 +31,7 @@ namespace AIGames.BlockBattle.Kubisme
 				Generator = Generator,
 				Current = current,
 				Next = next,
-				Points = Points,
+				Opponent = opponent,
 			};
 			Root = new BlockRootNode(field);
 
@@ -47,13 +46,13 @@ namespace AIGames.BlockBattle.Kubisme
 		[ExcludeFromCodeCoverage]
 		public string GetLog()
 		{
-			var parameters = (SimpleParameters)Evaluator.Parameters;
+			var parameters = (ComplexParameters)Evaluator.Parameters;
 
 			return string.Format(
 				CultureInfo.InvariantCulture,
 				"Round {3:00}, Points: {0:00}  {1:0.000}  {2}",
 				BestField.Points,
-				Root.Score / (double)parameters.Points,
+				Root.Score / 100.0m,
 				Pars,
 				Pars.Round);
 		}

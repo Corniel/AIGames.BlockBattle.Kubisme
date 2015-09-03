@@ -89,6 +89,8 @@
     <Compile Include="DecisionMaking\IBlockNode.cs" />
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMaker.cs" />
+    <Compile Include="Evaluation\ComplexParameters.cs" />
+    <Compile Include="Evaluation\ComplexEvaluator.cs" />
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\IParameters.cs" />
     <Compile Include="Evaluation\ParameterType.cs" />
@@ -96,14 +98,17 @@
     <Compile Include="Evaluation\SimpleParameters.cs" />
     <Compile Include="Generation\IFieldGenerator.cs" />
     <Compile Include="Generation\IMoveGenerator.cs" />
+    <Compile Include="Generation\IOpponentGenerator.cs" />
     <Compile Include="Generation\MoveGenerator.cs" />
+    <Compile Include="Generation\OpponentGenerator.cs" />
     <Compile Include="Generation\TempPath.cs" />
     <Compile Include="KubismeBot.cs" />
     <Compile Include="Models\MoveCandiate.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Field.cs" />
     <Compile Include="Models\Row.cs" />
-    <Compile Include="Opponent\PointsPredictor.cs" />
+    <Compile Include="Opponent\Opponent.cs" />
+    <Compile Include="Opponent\OpponentState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Troschuetz.Random\MT19937Generator.cs" />

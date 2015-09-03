@@ -48,6 +48,7 @@
     <Compile Include="Blocks\BlockTUturnTest.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMakerTester.cs" />
     <Compile Include="Genetics\ParameterRandomizerTest.cs" />
+    <Compile Include="Opponent\OpponentTest.cs" />
     <Compile Include="TestData.cs" />
     <EmbeddedResource Include="Communication\input.version0016.txt" />
     <EmbeddedResource Include="Communication\input.version0017.txt" />
@@ -67,12 +68,9 @@
     <Compile Include="Generation\MoveGeneratorGetFieldsTest.cs" />
     <Compile Include="Generation\MoveGeneratorGetMovesTest.cs" />
     <Compile Include="Generation\MoveGeneratorTest.cs" />
-    <Compile Include="Genetics\SimpleParametersCollectionTest.cs" />
     <Compile Include="Blocks\BlockTest.cs" />
-    <Compile Include="Models\DecisionMakerTest.cs" />
     <Compile Include="Models\FieldTest.cs" />
     <Compile Include="Models\RowTest.cs" />
-    <Compile Include="Opponent\PointsPredictorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

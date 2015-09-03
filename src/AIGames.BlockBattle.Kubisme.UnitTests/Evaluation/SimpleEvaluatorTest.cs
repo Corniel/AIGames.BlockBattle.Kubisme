@@ -471,7 +471,7 @@ XXX.......";
 		{
 			var field = Field.Create(0, 0, str);
 			var evaluator = new SimpleEvaluator() { Parameters = pars };
-			var actual = evaluator.GetScore(field);
+			var actual = evaluator.GetScore(field, 0);
 			Assert.AreEqual(expected, actual);
 		}
 	}

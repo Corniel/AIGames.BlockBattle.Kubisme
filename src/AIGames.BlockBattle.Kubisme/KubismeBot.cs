@@ -13,18 +13,18 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			DecisionMaker = new NodeDecisionMaker()
 			{
-				Evaluator = new SimpleEvaluator()
+				Evaluator = new ComplexEvaluator()
 				{
-					Parameters = SimpleParameters.GetDefault(),
+					Parameters = ComplexParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 6,
 				MaximumDuration = TimeSpan.FromMilliseconds(700),
 			};
-			Predictor = new PointsPredictor();
+			Predictor = new OpponentGenerator();
 		}
 		public NodeDecisionMaker DecisionMaker { get; set; }
-		public PointsPredictor Predictor { get; set; }
+		public IOpponentGenerator Predictor { get; set; }
 		public Settings Settings { get; set; }
 		public GameState State { get; set; }
 		public Field Field { get; set; }
@@ -59,9 +59,11 @@ namespace AIGames.BlockBattle.Kubisme
 				DecisionMaker.MaximumDepth = 6;
 			}
 
-			DecisionMaker.Points = Predictor.GetPoints(Opponent, Current, Next);
+			var opponent = Predictor.Create(State.Round, Opponent, Current, Next); ;
+			((ComplexEvaluator)DecisionMaker.Evaluator).Opponent = opponent;
+			((ComplexEvaluator)DecisionMaker.Evaluator).Initial = Field;
 
-			var path = DecisionMaker.GetMove(Field, Current, Next, State.Round);
+			var path = DecisionMaker.GetMove(Field, opponent, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());
 
 			var response = new BotResponse()

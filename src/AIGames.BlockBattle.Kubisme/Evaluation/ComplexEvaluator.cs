@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace AIGames.BlockBattle.Kubisme
 {
-	public class SimpleEvaluator : IEvaluator
+	public class ComplexEvaluator : IEvaluator
 	{
 		/// <summary>Mask pos 0 and 9;</summary>
 		public const ushort MaskWallLeft = 0X0001;
 		public const ushort MaskWallRight = 0X0200;
 
 		private static readonly byte[] NeighborsVertical = new byte[Row.Locked + 1];
-		static SimpleEvaluator()
+		static ComplexEvaluator()
 		{
 			for (ushort i = Row.Empty; i <= Row.Filled; i++)
 			{
@@ -28,6 +27,7 @@ namespace AIGames.BlockBattle.Kubisme
 				NeighborsVertical[i] = (byte)count;
 			}
 		}
+	
 		[ExcludeFromCodeCoverage]
 		public IParameters Parameters
 		{
@@ -37,18 +37,75 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			set
 			{
-				pars = value as SimpleParameters;
+				pars = value as ComplexParameters;
 			}
 		}
+		protected ComplexParameters pars { get; set; }
 
-		protected SimpleParameters pars { get; set; }
+		public Field Initial { get; set; }
+		public Opponent Opponent { get; set; }
 
-		/// <summary>Gets a score only based on characters of the current state.</summary>
+		public int WinScore { get { return short.MaxValue; } }
+		public int DrawScore { get { return 0; } }
+		public int LostScore { get { return short.MinValue; } }
+
 		public int GetScore(Field field, int depth)
 		{
 			var score = 0;
-			score += field.Points * pars.Points;
+			// Points for static evaluation.
+			score += pars.GarbagePotential[field.Points & 3];
 			score += field.Combo * pars.Combo;
+
+			#region Free row counting
+
+			var oppo = Opponent.States[depth];
+
+			// Handle oppo scores.
+			var garbage = (field.Points >> 2) - (field.Points >> 2);
+
+			var oppoFreeRows = oppo.FirstFilled - garbage;
+
+			// The oppo has now rows anymore, we win. :)
+			if (oppoFreeRows < 0)
+			{
+				score += WinScore - depth - oppoFreeRows;
+			}
+			else
+			{
+				for (var r = 0; r < oppoFreeRows; r++)
+				{
+					score += pars.OppoFreeRows[r];
+				}
+			}
+
+			// We have free rows.
+			for (var r = 0; r < field.FirstFilled; r++)
+			{
+				score += pars.OwnFreeRows[r];
+			}
+
+			// Apply the score for the difference too.
+			var difFreeRows = field.FirstFilled - oppoFreeRows;
+
+			if (difFreeRows >= 0)
+			{
+				for (var r = 0; r < difFreeRows; r++)
+				{
+
+					score += pars.DifFreeRows[r];
+				}
+			}
+			else
+			{
+				for (var r = 0; r < -difFreeRows; r++)
+				{
+
+					score -= pars.DifFreeRows[r];
+				}
+			}
+			#endregion
+
+			#region Filled row logic
 
 			int filterTopColomns = 0;
 
@@ -58,7 +115,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var neighborsH = 0;
 			var neighborsV = 0;
 			ushort previous = 0;
-			
+
 			// Variables for unreachable garbage.
 			int reachableMask = Row.Filled;
 
@@ -73,11 +130,6 @@ namespace AIGames.BlockBattle.Kubisme
 			// Variables for T-Spin potential
 			var hasTSpinPotential = false;
 			var prevCount = 0;
-
-			for (var r = 0; r < field.FirstFilled; r++)
-			{
-				score += pars.FreeRowWeights[r];
-			}
 
 			// loop through the rows.
 			for (var r = field.FirstFilled; r < field.RowCount; r++)
@@ -177,7 +229,38 @@ namespace AIGames.BlockBattle.Kubisme
 				prevCount = rowCount;
 			}
 
-			// loop for blockades too.
+			score += holes * pars.Holes;
+			score += wallLeft * pars.WallsLeft;
+			score += wallRight * pars.WallsRight;
+			score += neighborsH * pars.NeighborsHorizontal;
+			score += neighborsV * pars.NeighborsVertical;
+
+			// Ad points for the combo potential there is.
+			for (var c = 0; c < comboPotential; c++)
+			{
+				score += (c + 1 + field.Combo) * pars.ComboPotential[c];
+			}
+
+			// Points for the reachable lines and the unreachable underneath them.
+			var rMax = field.RowCount - unreachble;
+			for (var r = 0; r < rMax; r++)
+			{
+				score += pars.Unreachables[r];
+			}
+			score += pars.Reachables[unreachble - field.FirstFilled];
+
+
+			score += Row.Count[previous] * pars.Floor;
+
+			if (hasTSpinPotential)
+			{
+				score += pars.TSpinPotential;
+			}
+
+			#endregion
+
+			#region Blockades
+
 			var blockades = 0;
 			var lastBlockades = 0;
 			var filterBlockades = 0;
@@ -213,37 +296,11 @@ namespace AIGames.BlockBattle.Kubisme
 				lastHoles = mirrored;
 			}
 
-			score += wallLeft * pars.WallsLeft;
-			score += wallRight * pars.WallsRight;
-			score += holes * pars.Holes;
 			score += blockades * pars.Blockades;
 			score += lastBlockades * pars.LastBlockades;
-			score += neighborsH * pars.NeighborsHorizontal;
-			score += neighborsV * pars.NeighborsVertical;
-
-			var iMax = field.RowCount - unreachble;
-			for (var i = 0; i < iMax; i++)
-			{
-				score += pars.UnreachableWeights[i];
-			}
-			score += pars.ReachableRange[unreachble - field.FirstFilled];
-
-			for (var i = 0; i < comboPotential; i++)
-			{
-				score += (i + 1 + field.Combo) * pars.ComboPotential[i];
-			}
-			score += Row.Count[previous] * pars.Floor;
-
-			if (hasTSpinPotential)
-			{
-				score += pars.TSpinPotential;
-			}
+			#endregion
 
 			return score;
 		}
-
-		public int WinScore { get { return short.MaxValue; } }
-		public int DrawScore { get { return 0; } }
-		public int LostScore { get { return short.MinValue; } }
 	}
 }

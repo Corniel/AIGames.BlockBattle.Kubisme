@@ -49,14 +49,12 @@
     <Compile Include="BattleSimulation.cs" />
     <Compile Include="BattleSimulator.cs" />
     <Compile Include="Conversion\EloTypeConverter.cs" />
-    <Compile Include="DecisionMaking\SimpleDecisionMaker.cs" />
     <Compile Include="Elo.cs" />
     <Compile Include="EloExtensions.cs" />
     <Compile Include="FieldVisualizer.cs" />
     <Compile Include="ParameterRandomizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialization\SimpleParametersCollection.cs" />
     <Compile Include="Serialization\SimulationBotCollection.cs" />
     <Compile Include="BotData.cs" />
   </ItemGroup>

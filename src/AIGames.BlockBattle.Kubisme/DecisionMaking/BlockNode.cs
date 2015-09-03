@@ -81,7 +81,7 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public static Field Apply(Field field, int depth, ApplyParameters pars)
 		{
-			var garbage = PointsPredictor.GetGarbageCount(pars.Points, depth);
+			var garbage = pars.Opponent.States[depth].Garbage;
 			if ((pars.Round + depth) % 20 == 0)
 			{
 				field = field.LockRow();

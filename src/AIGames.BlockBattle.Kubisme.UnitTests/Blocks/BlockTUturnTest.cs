@@ -216,7 +216,6 @@ XXXX.XXXXX");
 				{
 					Parameters = SimpleParameters.GetDefault(),
 				},
-				Points = new int[10],
 				Generator = new MoveGenerator(),
 				MaximumDepth = 3,
 			};

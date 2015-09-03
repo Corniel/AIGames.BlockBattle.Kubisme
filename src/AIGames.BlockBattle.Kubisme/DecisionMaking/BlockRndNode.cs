@@ -37,7 +37,7 @@ namespace AIGames.BlockBattle.Kubisme
 						{
 							if (!pars.HasTimeLeft) { return; }
 
-							var score = pars.Evaluator.GetScore(field);
+							var score = pars.Evaluator.GetScore(field, Depth);
 							var child = new BlockRndNode(BlockNode.Apply(field, Depth, pars), Depth, score);
 							pars.Evaluations++;
 							nodes.Add(child);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 {
@@ -10,7 +6,12 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 	{
 		public List<string> Logs = new List<string>();
 
-		public override BlockPath GetMove(Field field, Block current, Block next, int round)
+		public BlockPath GetMove(Field field, Block current, Block next, int round)
+		{
+			return GetMove(field, null, current, next, round);
+		}
+
+		public override BlockPath GetMove(Field field, AIGames.BlockBattle.Kubisme.Opponent opponent, Block current, Block next, int round)
 		{
 			Pars = new ApplyParameters()
 			{
@@ -21,7 +22,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Generator = Generator,
 				Current = current,
 				Next = next,
-				Points = Points,
+				Opponent = new AIGames.BlockBattle.Kubisme.Opponent(round, field),
 			};
 			Root = new BlockRootNode(field);
 

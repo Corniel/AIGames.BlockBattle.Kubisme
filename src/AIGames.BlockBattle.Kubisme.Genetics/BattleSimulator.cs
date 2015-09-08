@@ -53,6 +53,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return Bots.Where(bot => bot.Runs > Stable).OrderByDescending(bot => bot.PointsAvg).FirstOrDefault();
 		}
+		public BotData GetHighestTurnsAvg()
+		{
+			return Bots.Where(bot => bot.Runs > Stable).OrderByDescending(bot => bot.TurnsAvg).FirstOrDefault();
+		}
 
 		public ConcurrentQueue<BattlePairing> Results { get; protected set; }
 
@@ -130,6 +134,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					Copy(pairings, AppConfig.Data.CopyHighestScore, bestAvg);
 					pairings.AddRange(PairOther(bestAvg));
+				}
+				// The bot that lives the longest deserves also extra attention.
+				var bestTurn = GetHighestTurnsAvg();
+				if (bestTurn != null)
+				{
+					Copy(pairings, AppConfig.Data.CopyHighestTurnsAvg, bestTurn);
+					pairings.AddRange(PairOther(bestTurn));
 				}
 				
 				// Run also random matches.
@@ -321,12 +332,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			BestBot = GetHighestElo();
 
 			var bestAvg = GetHighestAvg();
+			var bestTurn = GetHighestTurnsAvg();
 
 			Console.Clear();
 			var max = Math.Min(Console.WindowHeight - 2, Bots.Count);
 			var bestId = BestBot.Id;
-			var bestParent = BestBot.ParentId;
+			
 			var avgParent = bestAvg == null ? -1 : bestAvg.Id;
+			var turnParent = bestTurn == null ? -1 : bestTurn.Id;
 
 			for (var pos = 1; pos <= max; pos++)
 			{
@@ -337,24 +350,26 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				else if (bot == bestAvg)
 				{
-					Console.ForegroundColor = ConsoleColor.Blue;
+					Console.ForegroundColor = ConsoleColor.Red;
 				}
+				else if (bot == bestTurn)
+				{
+					Console.ForegroundColor = ConsoleColor.Cyan;
+				}
+
 				else if (bot.ParentId == bestId)
 				{
 					Console.ForegroundColor = ConsoleColor.Green;
 				}
 				else if (bot.ParentId == avgParent)
 				{
-					Console.ForegroundColor = ConsoleColor.Cyan;
-				}
-				else if (bot.Id == bestParent)
-				{
-					Console.ForegroundColor = ConsoleColor.Red;
-				}
-				else if (bot.ParentId == bestParent)
-				{
 					Console.ForegroundColor = ConsoleColor.Magenta;
 				}
+				else if (bot.ParentId == turnParent)
+				{
+					Console.ForegroundColor = ConsoleColor.Blue;
+				}
+
 				else if (bot.Runs > Stable)
 				{
 					Console.ForegroundColor = ConsoleColor.White;

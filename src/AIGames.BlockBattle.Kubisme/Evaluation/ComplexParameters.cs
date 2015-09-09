@@ -41,6 +41,7 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Ascending | ParameterType.Positive)]
 		public int[] DifFreeRows { get; set; }
 
+		public int Points { get; set; }
 		public int Combo { get; set; }
 
 		public int Holes { get; set; }

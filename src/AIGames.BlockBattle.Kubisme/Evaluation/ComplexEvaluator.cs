@@ -54,6 +54,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var score = 0;
 			// Points for static evaluation.
 			score += pars.GarbagePotential[field.Points & 3];
+			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
 
 			#region Free row counting
@@ -72,36 +73,20 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			else
 			{
-				for (var r = 0; r < oppoFreeRows; r++)
-				{
-					score += pars.OppoFreeRows[r];
-				}
+				score += pars.OppoFreeRows[field.FirstFilled];
 			}
-
-			// We have free rows.
-			for (var r = 0; r < field.FirstFilled; r++)
-			{
-				score += pars.OwnFreeRows[r];
-			}
+			score += pars.OwnFreeRows[field.FirstFilled];
 
 			// Apply the score for the difference too.
 			var difFreeRows = field.FirstFilled - oppoFreeRows;
 
 			if (difFreeRows >= 0)
 			{
-				for (var r = 0; r < difFreeRows; r++)
-				{
-
-					score += pars.DifFreeRows[r];
-				}
+				score += pars.DifFreeRows[difFreeRows];
 			}
 			else
 			{
-				for (var r = 0; r < -difFreeRows; r++)
-				{
-
-					score -= pars.DifFreeRows[r];
-				}
+				score -= pars.DifFreeRows[-difFreeRows];
 			}
 			#endregion
 

@@ -259,6 +259,21 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 			CollectionAssert.AreEqual(exp, act);
 		}
 
+
+		[Test]
+		public void SubsetOf2_All_AllUnique()
+		{
+			Assert.AreEqual(7 * 6, Block.SubsetsOf2.Length);
+			CollectionAssert.AllItemsAreUnique(Block.SubsetsOf2);
+		}
+
+		[Test]
+		public void SubsetOf3_All_AllUnique()
+		{
+			Assert.AreEqual(7 * 6 * 5, Block.SubsetsOf3.Length);
+			CollectionAssert.AllItemsAreUnique(Block.SubsetsOf3);
+		}
+
 		protected void ValidateDefinition(string expStr, int expVariations, int expChildCount, Block org)
 		{
 			var tp = org.GetType().Name;

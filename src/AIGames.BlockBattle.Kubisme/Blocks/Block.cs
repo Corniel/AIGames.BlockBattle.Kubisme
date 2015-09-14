@@ -44,51 +44,35 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public static readonly Block[][] SubsetsOf2 = new Block[][]
 		{
-			new Block[]{O, I}, new Block[]{O, S}, new Block[]{O, Z}, new Block[]{O, J}, new Block[]{O, L}, new Block[]{O, T}, 
-			new Block[]{T, I}, new Block[]{T, S}, new Block[]{T, Z}, new Block[]{T, J}, new Block[]{T, L},
-			new Block[]{L, I}, new Block[]{L, S}, new Block[]{L, Z}, new Block[]{L, J},
-			new Block[]{J, I}, new Block[]{J, S}, new Block[]{J, Z},
-			new Block[]{Z, I}, new Block[]{Z, S},
-			new Block[]{S, I}, 
+			new Block[]{I, J}, new Block[]{I, L}, new Block[]{I, O}, new Block[]{I, S}, new Block[]{I, T}, new Block[]{I, Z},
+			new Block[]{J, L}, new Block[]{J, O}, new Block[]{J, S}, new Block[]{J, T}, new Block[]{J, Z},
+			new Block[]{L, O}, new Block[]{L, S}, new Block[]{L, T}, new Block[]{L, Z},
+			new Block[]{O, S}, new Block[]{O, T}, new Block[]{O, Z}, 
+			new Block[]{S, T}, new Block[]{S, Z},
+			new Block[]{T, Z},
 		};
 
 		public static readonly Block[][] SubsetsOf3 = new Block[][]
 		{
-			new Block[]{O, T, I}, new Block[]{O, T, S}, new Block[]{O, T, Z}, new Block[]{O, T, J}, new Block[]{O, T, L},
-			new Block[]{O, L, I}, new Block[]{O, L, S}, new Block[]{O, L, Z}, new Block[]{O, L, J},
-			new Block[]{O, J, I}, new Block[]{O, J, S}, new Block[]{O, J, Z},
-			new Block[]{O, Z, I}, new Block[]{O, Z, S},
-			new Block[]{O, S, I}, 
+			new Block[]{I, J, L}, new Block[]{I, J, O}, new Block[]{I, J, S}, new Block[]{I, J, T}, new Block[]{I, J, Z},
+			new Block[]{I, L, O}, new Block[]{I, L, S}, new Block[]{I, L, T}, new Block[]{I, L, Z},
+			new Block[]{I, O, S}, new Block[]{I, O, T}, new Block[]{I, O, Z},
+			new Block[]{I, S, T}, new Block[]{I, S, Z},
+			new Block[]{I, T, Z},
 
-			new Block[]{T, O, I}, new Block[]{T, O, S}, new Block[]{T, O, Z}, new Block[]{T, O, J}, new Block[]{T, O, L},
-			new Block[]{T, L, I}, new Block[]{T, L, S}, new Block[]{T, L, Z}, new Block[]{T, L, J},
-			new Block[]{T, J, I}, new Block[]{T, J, S}, new Block[]{T, J, Z},
-			new Block[]{T, Z, I}, new Block[]{T, Z, S},
-			new Block[]{T, S, I}, 
+			new Block[]{J, L, O}, new Block[]{J, L, S}, new Block[]{J, L, T}, new Block[]{J, L, Z},
+			new Block[]{J, O, S}, new Block[]{J, O, T}, new Block[]{J, O, Z},
+			new Block[]{J, S, T}, new Block[]{J, S, Z},
+			new Block[]{J, T, Z},
 
-			new Block[]{L, O, I}, new Block[]{L, O, S}, new Block[]{L, O, Z}, new Block[]{L, O, J}, new Block[]{L, O, T}, 
-			new Block[]{L, T, I}, new Block[]{L, T, S}, new Block[]{L, T, Z}, new Block[]{L, T, J},
-			new Block[]{L, J, I}, new Block[]{L, J, S}, new Block[]{L, J, Z},
-			new Block[]{L, Z, I}, new Block[]{L, Z, S},
-			new Block[]{L, S, I}, 
+			new Block[]{L, O, S}, new Block[]{L, O, T}, new Block[]{L, O, Z},
+			new Block[]{L, S, T}, new Block[]{L, S, Z},
+			new Block[]{L, T, Z},
 
-			new Block[]{J, O, I}, new Block[]{J, O, S}, new Block[]{J, O, Z}, new Block[]{J, O, L}, new Block[]{J, O, T}, 
-			new Block[]{J, T, I}, new Block[]{J, T, S}, new Block[]{J, T, Z}, new Block[]{J, T, L},
-			new Block[]{J, L, I}, new Block[]{J, L, S}, new Block[]{J, L, Z}, 
-			new Block[]{J, Z, I}, new Block[]{J, Z, S},
-			new Block[]{J, S, I}, 
+			new Block[]{O, S, T}, new Block[]{O, S, Z},
+			new Block[]{O, T, Z},
 
-			new Block[]{Z, O, I}, new Block[]{Z, O, S}, new Block[]{Z, O, J}, new Block[]{Z, O, L}, new Block[]{Z, O, T}, 
-			new Block[]{Z, T, I}, new Block[]{Z, T, S}, new Block[]{Z, T, J}, new Block[]{Z, T, L},
-			new Block[]{Z, L, I}, new Block[]{Z, L, S}, new Block[]{Z, L, J},
-			new Block[]{Z, J, I}, new Block[]{Z, J, S},
-			new Block[]{Z, S, I}, 
-
-			new Block[]{S, O, I}, new Block[]{S, O, Z}, new Block[]{S, O, J}, new Block[]{S, O, L}, new Block[]{S, O, T}, 
-			new Block[]{S, T, I}, new Block[]{S, T, Z}, new Block[]{S, T, J}, new Block[]{S, T, L},
-			new Block[]{S, L, I}, new Block[]{S, L, Z}, new Block[]{S, L, J},
-			new Block[]{S, J, I}, new Block[]{S, J, Z},
-			new Block[]{S, Z, I},
+			new Block[]{S, T, Z},
 		};
 
 		protected Block()

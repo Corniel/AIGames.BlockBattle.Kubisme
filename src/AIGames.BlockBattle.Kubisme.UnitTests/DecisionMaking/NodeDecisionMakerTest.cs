@@ -3,7 +3,7 @@ using System;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 {
-	public class NodeDescisionMakerTest
+	public class NodeDecisionMakerTest
 	{
 		[Test, Category(Category.IntegrationTest)]
 		public void GetMove_None_LogResults()
@@ -36,7 +36,7 @@ XXXX.XXXXX");
 					Parameters = SimpleParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 9,
+				MaximumDepth = 10,
 			};
 
 			dm.GetMove(field, Block.T, Block.Z, 1);

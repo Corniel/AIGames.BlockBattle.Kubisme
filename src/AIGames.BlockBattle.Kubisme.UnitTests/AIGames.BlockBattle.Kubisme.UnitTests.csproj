@@ -59,7 +59,7 @@
     <Compile Include="Communication\InstructionTest.cs" />
     <Compile Include="Communication\MoveInstructionTest.cs" />
     <Compile Include="DecisionMaking\BlockPathTest.cs" />
-    <Compile Include="DecisionMaking\NodeDescisionMakerTest.cs" />
+    <Compile Include="DecisionMaking\NodeDecisionMakerTest.cs" />
     <Compile Include="DecisionMaking\PerformanceTest.cs" />
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Deployoment\DeployerTest.cs" />

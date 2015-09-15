@@ -22,7 +22,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public readonly short Points;
 		public readonly byte Combo;
 		public readonly byte FirstFilled;
-		private readonly int Hash;
 
 		public Field(short pt, byte combo, byte freeRows, params ushort[] rs)
 		{
@@ -30,15 +29,6 @@ namespace AIGames.BlockBattle.Kubisme
 			Points = pt;
 			Combo = combo;
 			FirstFilled = freeRows;
-
-			var h = pt & 3;
-			h |= combo << 2;
-			h |= pt << 5;
-			for (var i = rows.Length - 1; i >= 0; i--)
-			{
-				h ^= rows[i] << i;
-			}
-			Hash = h;
 		}
 
 		public Field(short pt, byte combo, params ushort[] rs) :
@@ -229,7 +219,20 @@ namespace AIGames.BlockBattle.Kubisme
 
 		#region IEquatable
 
-		public override int GetHashCode() { return Hash; }
+		/// <summary>Gets the hash.</summary>
+		/// <remarks>
+		/// No pre-computation, as it slows down the search speed 10 times.
+		/// </remarks>
+		public override int GetHashCode()
+		{
+			var h = Points & 3;
+			h |= Combo << 2;
+			for (var i = rows.Length - 1; i >= 0; i--)
+			{
+				h ^= rows[i] << i;
+			}
+			return h;
+		}
 
 		public override bool Equals(object obj)
 		{
@@ -239,7 +242,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public bool Equals(Field other)
 		{
 			if (
-				this.Hash == other.Hash &&
 				this.Points == other.Points &&
 				this.Combo == other.Combo &&
 				this.FirstFilled == other.FirstFilled)

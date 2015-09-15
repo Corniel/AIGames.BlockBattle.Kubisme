@@ -11,11 +11,24 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public ApplyParameters()
 		{
+			const int size = 16;
 			sw = Stopwatch.StartNew();
 			MaximumDepth = int.MaxValue;
-			Points = new int[10];
+			Points = new int[size];
 			Rnd = new MT19937Generator();
+			Blocks = new Block[size][];
+
+			for (var i = 0; i < 4; i++)
+			{
+				Blocks[i] = Block.SubsetsOf3[Rnd.Next(Block.SubsetsOf3.Length)];
+			}
+			for (var i = 4; i < size; i++)
+			{
+				Blocks[i] = Block.SubsetsOf2[Rnd.Next(Block.SubsetsOf2.Length)];
+			}
 		}
+
+		public Block[][] Blocks { get; protected set; }
 
 		public int[] Points { get; set; }
 		public int Round { get; set; }

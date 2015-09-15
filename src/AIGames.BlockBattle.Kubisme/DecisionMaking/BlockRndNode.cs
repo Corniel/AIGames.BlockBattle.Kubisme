@@ -9,7 +9,6 @@ namespace AIGames.BlockBattle.Kubisme
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	public class BlockRndNode : IBlockNode
 	{
-		public static readonly int[] TestNodes = new int[] { 1, 4 };
 		public const int BranchingFactor = 2;
 
 		public BlockRndNode(Field field, byte depth, int score)
@@ -22,6 +21,13 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public List<BlockRndNodes> Children { get; protected set; }
 
+		/// <summary>Applies the search on the current node.</summary>
+		/// <param name="depth">
+		/// The maximum depth to search.
+		/// </param>
+		/// <param name="pars">
+		/// The parameters needed to apply the search.
+		/// </param>
 		public void Apply(byte depth, ApplyParameters pars)
 		{
 			if (depth > Depth && depth <= pars.MaximumDepth && pars.HasTimeLeft)
@@ -30,57 +36,46 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					Children = new List<BlockRndNodes>();
 
-					foreach(var block in Block.All)
+					foreach(var block in pars.Blocks[Depth])
 					{
 						var nodes = new BlockRndNodes(block);
 						foreach (var field in pars.Generator.GetFields(Field, block, false))
 						{
 							if (!pars.HasTimeLeft) { return; }
 
-							var score = pars.Evaluator.GetScore(field, Depth);
-							var child = new BlockRndNode(BlockNode.Apply(field, Depth, pars), Depth, score);
-							pars.Evaluations++;
+							var child = Create(field, pars);
 							nodes.Add(child);
 						}
-						nodes.Sort();
 						Children.Add(nodes);
 					}
 				}
 				else
 				{
-					if (Children.Count == 7)
+					foreach (var nodes in Children)
 					{
-						foreach (var test in TestNodes)
+						foreach (var child in nodes.Take(BranchingFactor))
 						{
-							var nodes = Children[test];
-							foreach (var child in nodes.Take(BranchingFactor))
-							{
-								child.Apply(depth, pars);
-							}
-							nodes.Sort();
+							child.Apply(depth, pars);
 						}
+						nodes.Sort();
 					}
-					else
-					{
-						foreach (var nodes in Children)
-						{
-							foreach (var child in nodes.Take(BranchingFactor))
-							{
-								child.Apply(depth, pars);
-							}
-							nodes.Sort();
-						}
-					}
-					Children.Sort();
 				}
-				Score = ScoreField;
+				Score = 0;
 				foreach (var nodes in Children)
 				{
 					Score += nodes.Score;
 				}
-				// Divide by 8.
-				Score >>= 3;
+				// Divide by 2.
+				Score >>= 1;
 			}
+		}
+
+		protected BlockRndNode Create(Field field, ApplyParameters pars)
+		{
+			var applied = BlockNode.Apply(field, Depth, pars);
+			var score = pars.Evaluator.GetScore(applied, Depth);
+			pars.Evaluations++;
+			return new BlockRndNode(applied, Depth, score);
 		}
 
 		public byte Depth { get; protected set; }

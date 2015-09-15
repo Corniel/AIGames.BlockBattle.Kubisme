@@ -82,6 +82,7 @@
     <Compile Include="DecisionMaking\Block1Node.cs" />
     <Compile Include="DecisionMaking\BlockNode.cs" />
     <Compile Include="DecisionMaking\BlockNodes.cs" />
+    <Compile Include="DecisionMaking\BlockNode_.cs" />
     <Compile Include="DecisionMaking\BlockPath.cs" />
     <Compile Include="DecisionMaking\BlockRndNode.cs" />
     <Compile Include="DecisionMaking\BlockRndNodes.cs" />

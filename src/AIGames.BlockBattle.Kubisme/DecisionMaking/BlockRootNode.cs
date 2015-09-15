@@ -13,6 +13,13 @@ namespace AIGames.BlockBattle.Kubisme
 		public BlockPath BestMove { get { return Children == null || Children.Count == 0 ? BlockPath.None : Children[0].Path; } }
 		public Field BestField { get { return Children == null || Children.Count == 0 ? Field.Empty : Children[0].Field; } }
 
+		/// <summary>Applies the search on the current node.</summary>
+		/// <param name="depth">
+		/// The maximum depth to search.
+		/// </param>
+		/// <param name="pars">
+		/// The parameters needed to apply the search.
+		/// </param>
 		public override void Apply(byte depth, ApplyParameters pars)
 		{
 			if (depth > Depth && depth <= pars.MaximumDepth && pars.HasTimeLeft)
@@ -25,8 +32,7 @@ namespace AIGames.BlockBattle.Kubisme
 					foreach (var candidate in pars.Generator.GetMoves(Field, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }
-						Block1Node child = Create(Depth, BlockNode.Apply(candidate.Field, Depth, pars), candidate.Path, pars);
-						pars.Evaluations++;
+						Block1Node child = Create(candidate.Field, candidate.Path, pars);
 						Children.Add(child);
 					}
 				}
@@ -49,12 +55,14 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 		}
 
-		protected Block1Node Create(byte depth, Field field, BlockPath path, ApplyParameters pars)
+		protected Block1Node Create(Field field, BlockPath path, ApplyParameters pars)
 		{
-			var score = pars.Evaluator.GetScore(field, depth);
-			return new Block1Node(field, path, score, pars.Next.BranchingFactor1);
+			var applied = BlockNode.Apply(field, Depth, pars);
+			var score = pars.Evaluator.GetScore(applied, Depth);
+			pars.Evaluations++;
+			return new Block1Node(applied, path, score, pars.Next.BranchingFactor1);
 		}
-		protected override Block1Node Create(byte depth, Field field, ApplyParameters pars) { throw new NotImplementedException(); }
+		protected override Block1Node Create(Field field, ApplyParameters pars) { throw new NotImplementedException(); }
 
 		protected override Block GetBlock(ApplyParameters pars) { return pars.Current; }
 	}

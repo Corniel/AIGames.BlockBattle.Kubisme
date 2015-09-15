@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
 {
-	public struct Field
+	public struct Field : IEquatable<Field>
 	{
 		public const short SingleLineClear = 1;
 		public const short DoubleLineClear = 3;
@@ -22,6 +22,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public readonly short Points;
 		public readonly byte Combo;
 		public readonly byte FirstFilled;
+		private readonly int Hash;
 
 		public Field(short pt, byte combo, byte freeRows, params ushort[] rs)
 		{
@@ -29,6 +30,15 @@ namespace AIGames.BlockBattle.Kubisme
 			Points = pt;
 			Combo = combo;
 			FirstFilled = freeRows;
+
+			var h = pt & 3;
+			h |= combo << 2;
+			h |= pt << 5;
+			for (var i = rows.Length - 1; i >= 0; i--)
+			{
+				h ^= rows[i] << i;
+			}
+			Hash = h;
 		}
 
 		public Field(short pt, byte combo, params ushort[] rs) :
@@ -71,7 +81,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public TestResult Test(Block block, int col, int row)
 		{
 			var rowMax = block.Lines.Length - 1 + row;
-			
+
 			// Not fit, block lower than bottom.
 			if (rowMax >= RowCount) { return TestResult.False; }
 
@@ -92,7 +102,7 @@ namespace AIGames.BlockBattle.Kubisme
 					// overlap with the row below.
 					hasFloor = (floor & line) != 0;
 				}
-				
+
 				var current = rows[r];
 				var merged = current & line;
 
@@ -104,7 +114,7 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			return hasFloor && row >= 0 ? TestResult.True : TestResult.Retry;
 		}
-		
+
 		public Field Apply(Block block, Position pos)
 		{
 			var rs = new ushort[rows.Length];
@@ -152,25 +162,25 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					pt += PerfectClear;
 				}
-				else if(cleared > 0)
+				else if (cleared > 0)
 				{
-					if (block == Block.T[Block.RotationType.Uturn] && 
+					if (block == Block.T[Block.RotationType.Uturn] &&
 						// Not on the top row.
-						pos.Row > 0 && 
+						pos.Row > 0 &&
 						// At least one blockade
-						(BlockTUturn.TSpinTopMask[pos.Col] & rows[pos.Row -1]) != 0 &&
+						(BlockTUturn.TSpinTopMask[pos.Col] & rows[pos.Row - 1]) != 0 &&
 						// The head of the T should be a perfect fit.
 						(BlockTUturn.TSpinTopBorderMask[pos.Col] & rows[pos.Row]) == BlockTUturn.TSpinTopBorderMask[pos.Col] &&
 						// The tail of the T should be a perfect fit.
 						(BlockTUturn.TSpinTopMask[pos.Col] & rows[pos.Row + 1]) == BlockTUturn.TSpinTopMask[pos.Col])
 					{
-						if(cleared == 1)
+						if (cleared == 1)
 						{
-							pt+= SingleTSpin;
+							pt += SingleTSpin;
 						}
 						else
 						{
-							pt+= DoubleTSpin;
+							pt += DoubleTSpin;
 						}
 					}
 					else
@@ -200,7 +210,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var copyCount = RowCount - count;
 			Array.Copy(garbage, 0, rs, copyCount, count);
 			Array.Copy(rows, count, rs, 0, copyCount);
-			
+
 			var free = FirstFilled - count;
 			return new Field(Points, Combo, (byte)free, rs);
 		}
@@ -217,6 +227,34 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public override string ToString() { return String.Join("|", Rows); }
 
+		#region IEquatable
+
+		public override int GetHashCode() { return Hash; }
+
+		public override bool Equals(object obj)
+		{
+			return Equals((Field)obj);
+		}
+
+		public bool Equals(Field other)
+		{
+			if (
+				this.Hash == other.Hash &&
+				this.Points == other.Points &&
+				this.Combo == other.Combo &&
+				this.FirstFilled == other.FirstFilled)
+			{
+				for (var i = rows.Length - 1; i >= 0; i--)
+				{
+					if (this.rows[i] != other.rows[i]) { return false; }
+				}
+				return true;
+			}
+			return false;
+		}
+
+		#endregion
+
 		public string[] Rows
 		{
 			get
@@ -228,7 +266,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public static Field Create(GameState state, PlayerName name)
 		{
 			var rows = new ushort[state[name].Field.GetLength(0)];
-			
+
 			for (var r = 0; r < rows.GetLength(0); r++)
 			{
 				var row = Row.Create(state, name, r);
@@ -256,5 +294,7 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			return new Field((short)pt, (byte)combo, rows);
 		}
+
+
 	}
 }

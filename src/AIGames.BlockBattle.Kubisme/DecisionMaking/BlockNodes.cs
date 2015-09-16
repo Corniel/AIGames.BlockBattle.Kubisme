@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
@@ -24,23 +25,30 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			var score = pars.Evaluator.LostScore;
 
-			foreach (var child in this.Take(branchingFactor))
-			{
-				var searchDepth = depth;
+			var lastIndex = Math.Min(Count, branchingFactor);
 
-				// divide by 64.
-				var delta = (this[0].Score - child.Score) >> 6;
-				if (depth >= delta)
+			for (var i = 0; i < lastIndex; i++)
+			{
+				var child = this[i];
+
+				// divide by 128.
+				var delta = (this[0].Score - child.Score) >> 7;
+				var searchDepth = depth - delta;
+
+				if (searchDepth >= depth)
 				{
-					searchDepth -= (byte)delta;
+					child.Apply((byte)searchDepth, pars);
 				}
-				child.Apply(searchDepth, pars);
+				else
+				{
+					lastIndex = i - 1;
+					break;
+				}
 			}
 
 			if (Count > 0)
 			{
-				Sort();
-
+				Sort(lastIndex);
 				score = this[0].Score;
 			}
 			return score;
@@ -58,6 +66,29 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 			}
 			Add(child);
+		}
+
+		/// <summary>Sorts the list.</summary>
+		/// <remarks>
+		/// This is an optimized form of bubble search.
+		/// Because most of the list keeps it order, it is the optimal approach.
+		/// </remarks>
+		protected void Sort(int lastIndex)
+		{
+			for (var index = lastIndex; index >= 0; index--)
+			{
+				var val = this[index].Score;
+
+				for (var swap = index + 1; swap < Count; swap++)
+				{
+					var other = this[swap];
+
+					if (val >= other.Score) { break; }
+
+					this[swap] = this[swap - 1];
+					this[swap - 1] = other;
+				}
+			}
 		}
 	}
 }

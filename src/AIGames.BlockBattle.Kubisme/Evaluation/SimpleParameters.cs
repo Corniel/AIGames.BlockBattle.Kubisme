@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme
 			ComboPotential = new int[21];
 		}
 
-		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
+		[ParameterType(ParameterType.Ascending | ParameterType.Positive)]
 		public int[] FreeRowWeights { get; set; }
 
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]

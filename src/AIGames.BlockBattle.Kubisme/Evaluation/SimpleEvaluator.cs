@@ -49,6 +49,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var score = 0;
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
+			score += pars.FreeRowWeights[field.FirstFilled];
 
 			int filterTopColomns = 0;
 
@@ -73,11 +74,6 @@ namespace AIGames.BlockBattle.Kubisme
 			// Variables for T-Spin potential
 			var hasTSpinPotential = false;
 			var prevCount = 0;
-
-			for (var r = 0; r < field.FirstFilled; r++)
-			{
-				score += pars.FreeRowWeights[r];
-			}
 
 			// loop through the rows.
 			for (var r = field.FirstFilled; r < field.RowCount; r++)
@@ -221,11 +217,7 @@ namespace AIGames.BlockBattle.Kubisme
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
 
-			var iMax = field.RowCount - unreachble;
-			for (var i = 0; i < iMax; i++)
-			{
-				score += pars.UnreachableWeights[i];
-			}
+			score += pars.UnreachableWeights[field.RowCount - unreachble];
 			score += pars.ReachableRange[unreachble - field.FirstFilled];
 
 			for (var i = 0; i < comboPotential; i++)

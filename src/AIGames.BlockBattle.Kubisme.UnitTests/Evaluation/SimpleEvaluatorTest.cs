@@ -76,7 +76,7 @@ XXX.......";
 XXX.......";
 			var pars = new SimpleParameters()
 			{
-				FreeRowWeights = new int[] { 1 },
+				FreeRowWeights = new int[] { 0, 1 },
 			};
 			var expected = 1;
 
@@ -395,7 +395,7 @@ XXXX.XXXXX
 XXX.......";
 			var pars = new SimpleParameters()
 			{
-				UnreachableWeights = new int[] { 1, 1 },
+				UnreachableWeights = new int[] { 0, 1, 2 },
 			};
 			var expected = 2;
 
@@ -415,7 +415,7 @@ XXX.XXXXXX
 XXXXXX.XXX";
 			var pars = new SimpleParameters()
 			{
-				UnreachableWeights = new int[] { 1, 1, 1, 1, 1 },
+				UnreachableWeights = new int[] { 0, 1, 2, 3, 4, 5 },
 			};
 			var expected = 5;
 

@@ -56,7 +56,7 @@ namespace AIGames.BlockBattle.Kubisme
 				CultureInfo.InvariantCulture,
 				"Round {3:00}, Points: {0:00}  {1:0.000}  {2}",
 				BestField.Points,
-				Root.Score / 100.0m,
+				Root.Score / (double)parameters.Points,
 				Pars,
 				Pars.Round);
 		}

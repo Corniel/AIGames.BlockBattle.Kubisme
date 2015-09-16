@@ -47,6 +47,9 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int RowCount { get { return rows.Length; } }
 
+		/// <summary>Returns true if the field is a none field.</summary>
+		public bool IsNone { get { return Points == None.Points; } }
+
 		[ExcludeFromCodeCoverage]
 		public ushort this[int row] { get { return rows[row]; } }
 
@@ -296,7 +299,5 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			return new Field((short)pt, (byte)combo, rows);
 		}
-
-
 	}
 }

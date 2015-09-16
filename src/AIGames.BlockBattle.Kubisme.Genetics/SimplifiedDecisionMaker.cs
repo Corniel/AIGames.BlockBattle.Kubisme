@@ -1,4 +1,5 @@
 ﻿using Troschuetz.Random.Generators;
+using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
 {
@@ -31,7 +32,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			Evaluator.Opponent = oppo;
 			Evaluator.Initial = own;
 
-			foreach (var depth1 in MoveGenerator.GetFields(own, current, true))
+			var depth1s = MoveGenerator.GetFields(own, current, true)
+				.OrderByDescending(f => Evaluator.GetScore(f, 1))
+#if DEBUG
+				.ToList()
+#endif
+				;
+
+
+			foreach (var depth1 in depth1s.Take(current.BranchingFactor0))
 			{
 				var applied1 = depth1;
 				if (round > 21 && round % 20 == 2)
@@ -43,6 +52,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					var garbage = Row.GetGarbage(oppo.States[1].Garbage, Rnd);
 					applied1 = applied1.Garbage(garbage);
 				}
+				if (applied1.IsNone) { continue; }
 
 				foreach (var depth2 in MoveGenerator.GetFields(applied1, next, true))
 				{

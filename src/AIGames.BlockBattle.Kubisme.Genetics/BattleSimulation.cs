@@ -56,7 +56,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			while(s0 && s1)
 			{
 				field0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
+				s0 = !field0.IsNone;
+				
+				if (!s0) { break; }
+					
 				field1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
+				s1 = !field1.IsNone;
 
 				var t0 = field0.Points >> 2;
 				var t1 = field1.Points >> 2;
@@ -75,9 +80,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Turns0.Add(field0);
 				Turns1.Add(field1);
 
-				s0 = field0.Points != Field.None.Points;
-				s1 = field1.Points != Field.None.Points;
-
 				current = next;
 				next = Block.All[rnd.Next(Block.All.Length)];
 			}
@@ -94,8 +96,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var result = new Result()
 			{
 				Turns = Turns0.Count,
-				Points0 = Turns0[Turns0.Count - 1].Points == Field.None.Points ? Turns0[Turns0.Count - 2].Points : Turns0[Turns0.Count - 1].Points,
-				Points1 = Turns1[Turns1.Count - 1].Points == Field.None.Points ? Turns1[Turns1.Count - 2].Points : Turns1[Turns1.Count - 1].Points,
+				Points0 = Turns0[Turns0.Count - 1].IsNone ? Turns0[Turns0.Count - 2].Points : Turns0[Turns0.Count - 1].Points,
+				Points1 = Turns1[Turns1.Count - 1].IsNone ? Turns1[Turns1.Count - 2].Points : Turns1[Turns1.Count - 1].Points,
 				Outcome = Outcome.Draw,
 			};
 

@@ -29,7 +29,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			while (Pars.Depth < Pars.MaximumDepth && Pars.HasTimeLeft)
 			{
 				Root.Apply(++Pars.Depth, Pars);
-				Logs.Add(Pars.ToString());
+				var log = string.Format("{0:0.00} {1}: {2}", Root.Children[0].Score/(double)100, Pars, Root.BestMove);
+				Logs.Add(log);
 			}
 			BestField = Root.BestField;
 			return Root.BestMove;

@@ -19,7 +19,7 @@ namespace AIGames.BlockBattle.Kubisme
 			this.ScoreField = score;
 		}
 
-		public List<BlockRndNodes> Children { get; protected set; }
+		public List<BlockNodes<BlockRndNode>> Children { get; protected set; }
 
 		/// <summary>Applies the search on the current node.</summary>
 		/// <param name="depth">
@@ -34,17 +34,17 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				if (Children == null)
 				{
-					Children = new List<BlockRndNodes>();
+					Children = new List<BlockNodes<BlockRndNode>>();
 
 					foreach(var block in pars.Blocks[Depth])
 					{
-						var nodes = new BlockRndNodes(block);
+						var nodes = new BlockNodes<BlockRndNode>(block);
 						foreach (var field in pars.Generator.GetFields(Field, block, false))
 						{
 							if (!pars.HasTimeLeft) { return; }
 
 							var child = Create(field, pars);
-							nodes.Add(child);
+							nodes.InsertSorted(child);
 						}
 						Children.Add(nodes);
 					}
@@ -53,11 +53,7 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					foreach (var nodes in Children)
 					{
-						foreach (var child in nodes.Take(BranchingFactor))
-						{
-							child.Apply(depth, pars);
-						}
-						nodes.Sort();
+						nodes.Apply(depth, pars, BranchingFactor);
 					}
 				}
 				Score = 0;

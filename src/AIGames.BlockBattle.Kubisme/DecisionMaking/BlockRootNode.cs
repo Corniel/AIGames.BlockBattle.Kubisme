@@ -33,24 +33,12 @@ namespace AIGames.BlockBattle.Kubisme
 					{
 						if (!pars.HasTimeLeft) { return; }
 						Block1Node child = Create(candidate.Field, candidate.Path, pars);
-						Children.Add(child);
+						Children.InsertSorted(child);
 					}
 				}
 				else
 				{
-					foreach (var child in Children.Take(BranchingFactor))
-					{
-						child.Apply(depth, pars);
-					}
-				}
-				if (Children.Count == 0)
-				{
-					Score = pars.Evaluator.LostScore;
-				}
-				else
-				{
-					Children.Sort();
-					Score = Children[0].Score;
+					Score = Children.Apply(depth, pars, BranchingFactor);
 				}
 			}
 		}

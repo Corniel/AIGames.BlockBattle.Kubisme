@@ -40,6 +40,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			var field0 = Field.Empty;
 			var field1 = Field.Empty;
+			var out0 = Field.Empty;
+			var out1 = Field.Empty;
 
 			var current = Block.All[rnd.Next(Block.All.Length)];
 			var next = Block.All[rnd.Next(Block.All.Length)];
@@ -55,13 +57,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			while(s0 && s1)
 			{
-				field0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
-				s0 = !field0.IsNone;
-				
-				if (!s0) { break; }
-					
-				field1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
-				s1 = !field1.IsNone;
+				out0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
+				out1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
+
+				field0 = out0;
+				field1 = out1;
 
 				var t0 = field0.Points >> 2;
 				var t1 = field1.Points >> 2;
@@ -76,6 +76,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					field0 = field0.Garbage(Row.GetGarbage(t1 - g1, rnd));
 					g1 = t1;
 				}
+
+				s0 = !field0.IsNone;
+				s1 = !field1.IsNone;
 
 				Turns0.Add(field0);
 				Turns1.Add(field1);

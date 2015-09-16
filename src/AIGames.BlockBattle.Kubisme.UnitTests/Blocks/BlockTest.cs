@@ -263,15 +263,34 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void SubsetOf2_All_AllUnique()
 		{
-			Assert.AreEqual(7 * 6, Block.SubsetsOf2.Length);
-			CollectionAssert.AllItemsAreUnique(Block.SubsetsOf2);
+			var expected = 7 * 6 / (2 * 1);
+			var actual = Block.SubsetsOf2;
+
+			AssertSubset(expected, actual);
 		}
 
 		[Test]
 		public void SubsetOf3_All_AllUnique()
 		{
-			Assert.AreEqual(7 * 6 * 5, Block.SubsetsOf3.Length);
-			CollectionAssert.AllItemsAreUnique(Block.SubsetsOf3);
+			var expected = 7 * 6  * 5/ (3 * 2 * 1);
+			var actual = Block.SubsetsOf3;
+
+			AssertSubset(expected, actual);
+		}
+		private static void AssertSubset(int expected, Block[][] actual)
+		{
+			Assert.AreEqual(expected, actual.Length);
+
+			var collection = actual
+				.Select(subset => String.Join(", ", subset
+					.OrderBy(item => item.Name)
+					.Select(item => item.Name)));
+
+			foreach (var subset in collection)
+			{
+				Console.WriteLine(subset);
+			}
+			CollectionAssert.AllItemsAreUnique(collection);
 		}
 
 		protected void ValidateDefinition(string expStr, int expVariations, int expChildCount, Block org)

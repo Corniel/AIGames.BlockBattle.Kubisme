@@ -30,6 +30,8 @@ namespace AIGames.BlockBattle.Kubisme
 		/// </param>
 		public void Apply(byte depth, ApplyParameters pars)
 		{
+			if (Field.IsNone) { Score = pars.Evaluator.LostScore + depth; return; }
+
 			if (depth > Depth && depth <= pars.MaximumDepth && pars.HasTimeLeft)
 			{
 				if (Children == null)

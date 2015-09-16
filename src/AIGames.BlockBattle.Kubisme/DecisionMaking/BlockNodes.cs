@@ -75,6 +75,7 @@ namespace AIGames.BlockBattle.Kubisme
 		/// </remarks>
 		protected void Sort(int lastIndex)
 		{
+			lastIndex = Math.Min(Count - 1, lastIndex);
 			for (var index = lastIndex; index >= 0; index--)
 			{
 				var val = this[index].Score;

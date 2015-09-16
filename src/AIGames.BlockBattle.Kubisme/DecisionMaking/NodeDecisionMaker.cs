@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
 {
 	public class NodeDecisionMaker : IDecisionMaker
 	{
-		public NodeDecisionMaker()
+		public NodeDecisionMaker(MT19937Generator rnd)
 		{
 			MaximumDepth = int.MaxValue;
 			MaximumDuration = TimeSpan.MaxValue;
+			Rnd = rnd;
 		}
 
 		public TimeSpan MaximumDuration { get; set; }
 		public int MaximumDepth { get; set; }
+		public MT19937Generator Rnd { get; set; }
+
 		public IEvaluator Evaluator { get; set; }
 		public IMoveGenerator Generator { get; set; }
 		public BlockRootNode Root { get; protected set; }
@@ -22,7 +26,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public virtual BlockPath GetMove(Field field, Opponent opponent, Block current, Block next, int round)
 		{
-			Pars = new ApplyParameters()
+			Pars = new ApplyParameters(Rnd)
 			{
 				Round = round,
 				MaximumDuration = MaximumDuration,

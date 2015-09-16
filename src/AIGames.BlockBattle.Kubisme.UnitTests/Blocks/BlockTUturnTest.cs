@@ -1,6 +1,7 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking;
 using NUnit.Framework;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 {

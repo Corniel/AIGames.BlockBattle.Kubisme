@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 {
@@ -19,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 		{
 			using (var platform = new ConsolePlatformTester("input.version0007.txt"))
 			{
-				platform.DoRun(new KubismeBot());
+				platform.DoRun(new KubismeBot(new MT19937Generator(17)));
 			}
 		}
 

@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 {
 	public class NodeDecisionMakerTester : NodeDecisionMaker
 	{
+		public NodeDecisionMakerTester()
+			: base(new MT19937Generator(17)) { }
+
 		public List<string> Logs = new List<string>();
 
 		public BlockPath GetMove(Field field, Block current, Block next, int round)
@@ -13,7 +17,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 
 		public override BlockPath GetMove(Field field, AIGames.BlockBattle.Kubisme.Opponent opponent, Block current, Block next, int round)
 		{
-			Pars = new ApplyParameters()
+			Pars = new ApplyParameters(Rnd)
 			{
 				Round = round,
 				MaximumDuration = MaximumDuration,

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 {
@@ -36,7 +37,7 @@ XXXX.XXXXX");
 					Parameters = SimpleParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 10,
+				MaximumDepth = 11,
 			};
 
 			dm.GetMove(field, Block.T, Block.Z, 1);
@@ -78,7 +79,7 @@ XXXX.XXXXX");
 					Parameters = SimpleParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 10,
+				MaximumDepth = 12,
 			};
 
 			dm.GetMove(field, Block.T, Block.T, 1);

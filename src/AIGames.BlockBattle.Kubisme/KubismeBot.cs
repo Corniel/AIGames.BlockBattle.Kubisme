@@ -3,15 +3,17 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme
 {
 	[DebuggerDisplay("{DebuggerDisplay}")]
 	public class KubismeBot : IBot
 	{
-		public KubismeBot()
+		public KubismeBot() : this(new MT19937Generator(17)) { }
+		public KubismeBot(MT19937Generator rnd)
 		{
-			DecisionMaker = new NodeDecisionMaker()
+			DecisionMaker = new NodeDecisionMaker(rnd)
 			{
 				Evaluator = new ComplexEvaluator()
 				{

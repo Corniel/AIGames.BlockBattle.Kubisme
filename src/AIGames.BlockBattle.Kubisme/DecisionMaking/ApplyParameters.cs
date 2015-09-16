@@ -9,13 +9,13 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		private readonly Stopwatch sw;
 
-		public ApplyParameters()
+		public ApplyParameters(MT19937Generator rnd)
 		{
 			const int size = 16;
 			sw = Stopwatch.StartNew();
 			MaximumDepth = int.MaxValue;
 			Points = new int[size];
-			Rnd = new MT19937Generator();
+			Rnd = rnd;
 			Blocks = new Block[size][];
 
 			for (var i = 0; i < 4; i++)

@@ -1,4 +1,6 @@
-﻿namespace AIGames.BlockBattle.Kubisme
+﻿using Troschuetz.Random.Generators;
+
+namespace AIGames.BlockBattle.Kubisme
 {
 	public interface IDecisionMaker
 	{

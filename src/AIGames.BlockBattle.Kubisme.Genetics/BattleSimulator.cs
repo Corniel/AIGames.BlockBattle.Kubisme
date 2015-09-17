@@ -108,7 +108,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					if(bot.Runs < Stable)
 					{
-						pairings.AddRange(PairOther(bot));
+						var c = bot.Elo > BestBot.Elo ? 3 : 1;
+						for (var i = 0; i < c; i++)
+						{
+							pairings.AddRange(PairOther(bot));
+						}
 					}
 					if (bot == BestBot)
 					{

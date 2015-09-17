@@ -11,7 +11,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public override byte Depth { get { return 0; } }
 
 		public BlockPath BestMove { get { return Children == null || Children.Count == 0 ? BlockPath.None : Children[0].Path; } }
-		public Field BestField { get { return Children == null || Children.Count == 0 ? Field.Empty : Children[0].Field; } }
+		public Field BestField { get { return Children == null || Children.Count == 0 ? Field.None : Children[0].Field; } }
 
 		/// <summary>Applies the search on the current node.</summary>
 		/// <param name="depth">

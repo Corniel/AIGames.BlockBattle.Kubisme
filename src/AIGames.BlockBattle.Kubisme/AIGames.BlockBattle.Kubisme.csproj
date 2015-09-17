@@ -94,8 +94,6 @@
     <Compile Include="Evaluation\IEvaluator.cs" />
     <Compile Include="Evaluation\IParameters.cs" />
     <Compile Include="Evaluation\ParameterType.cs" />
-    <Compile Include="Evaluation\SimpleEvaluator.cs" />
-    <Compile Include="Evaluation\SimpleParameters.cs" />
     <Compile Include="Generation\IFieldGenerator.cs" />
     <Compile Include="Generation\IMoveGenerator.cs" />
     <Compile Include="Generation\IOpponentGenerator.cs" />

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AIGames.BlockBattle.Kubisme.UnitTests.Opponent
+namespace AIGames.BlockBattle.Kubisme.UnitTests
 {
 	[TestFixture]
 	public class OpponentTest

@@ -47,6 +47,7 @@
     <Compile Include="Blocks\BlockRotationTest.cs" />
     <Compile Include="Blocks\BlockTUturnTest.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMakerTester.cs" />
+    <Compile Include="Evaluation\OpponentStub.cs" />
     <Compile Include="Genetics\ParameterRandomizerTest.cs" />
     <Compile Include="Opponent\OpponentTest.cs" />
     <Compile Include="TestData.cs" />
@@ -63,8 +64,8 @@
     <Compile Include="DecisionMaking\PerformanceTest.cs" />
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Deployoment\DeployerTest.cs" />
-    <Compile Include="Evaluation\SimpleEvaluatorTest.cs" />
-    <Compile Include="Evaluation\SimpleParametersTest.cs" />
+    <Compile Include="Evaluation\ComplexEvaluatorTest.cs" />
+    <Compile Include="Evaluation\ComplexParametersTest.cs" />
     <Compile Include="Generation\MoveGeneratorGetFieldsTest.cs" />
     <Compile Include="Generation\MoveGeneratorGetMovesTest.cs" />
     <Compile Include="Generation\MoveGeneratorTest.cs" />

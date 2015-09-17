@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AIGames.BlockBattle.Kubisme.UnitTests.Evaluation;
+using System.Collections.Generic;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
@@ -12,10 +13,10 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 
 		public BlockPath GetMove(Field field, Block current, Block next, int round)
 		{
-			return GetMove(field, null, current, next, round);
+			return GetMove(field, new OpponentStub(), current, next, round);
 		}
 
-		public override BlockPath GetMove(Field field, AIGames.BlockBattle.Kubisme.Opponent opponent, Block current, Block next, int round)
+		public override BlockPath GetMove(Field field, Opponent opponent, Block current, Block next, int round)
 		{
 			Pars = new ApplyParameters(Rnd)
 			{
@@ -26,7 +27,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Generator = Generator,
 				Current = current,
 				Next = next,
-				Opponent = new AIGames.BlockBattle.Kubisme.Opponent(round, field, 16),
+				Opponent = opponent,
 			};
 			Root = new BlockRootNode(field);
 

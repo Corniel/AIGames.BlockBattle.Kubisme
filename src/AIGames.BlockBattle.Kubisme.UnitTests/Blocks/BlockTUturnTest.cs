@@ -1,5 +1,6 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking;
+using AIGames.BlockBattle.Kubisme.UnitTests.Evaluation;
 using NUnit.Framework;
 using Troschuetz.Random.Generators;
 
@@ -213,9 +214,14 @@ XXXX.XXXXX");
 
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new SimpleEvaluator()
+				Evaluator = new ComplexEvaluator()
 				{
-					Parameters = SimpleParameters.GetDefault(),
+					Parameters = new  ComplexParameters()
+					{
+						Points = 100,
+						Holes = -100,
+					},
+					Opponent = new OpponentStub(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 3,

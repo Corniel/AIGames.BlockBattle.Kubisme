@@ -4,7 +4,7 @@ using System.Linq;
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 {
 	[TestFixture]
-	public class SimpleEvaluatorTest
+	public class ComplexEvaluatorTest
 	{
 		[Test]
 		public void Test_Blockades_21()
@@ -16,7 +16,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 XXX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				Blockades = 1,
 			};
@@ -35,7 +35,7 @@ XXX.......";
 XXX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				LastBlockades = 1,
 			};
@@ -54,7 +54,7 @@ XXX.......";
 XXX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				LastBlockades = 1,
 			};
@@ -65,7 +65,7 @@ XXX.......";
 
 
 		[Test]
-		public void Test_FreeRows_1()
+		public void Test_OwnFreeRows_1()
 		{
 			var field = @"
 ..........
@@ -74,9 +74,10 @@ XXX.......";
 .XX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
-				FreeRowWeights = new int[] { 0, 1 },
+				Free = 1,
+				OwnFreeRows = new int[] { 0, 1 },
 			};
 			var expected = 1;
 
@@ -94,7 +95,7 @@ XXX.......";
 XXX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				Floor = 1,
 			};
@@ -113,7 +114,7 @@ XXX.......";
 XXX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				Holes = 1,
 			};
@@ -129,7 +130,7 @@ XXX.......";
 ..........
 .XX.......
 .X.X......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				Holes = 1,
 			};
@@ -148,7 +149,7 @@ XXX.......";
 XXX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				NeighborsHorizontal = 1,
 			};
@@ -167,7 +168,7 @@ XXX.......";
 XXX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				NeighborsVertical = 1,
 			};
@@ -186,7 +187,7 @@ XXX.......";
 XXX...X.XX
 X..XXX.XXX
 XXX......X";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				WallsLeft = 1,
 			};
@@ -205,7 +206,7 @@ XXX......X";
 XXX...X.XX
 ...XXX.XXX
 XXX......X";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				WallsLeft = 1,
 			};
@@ -224,7 +225,7 @@ XXX......X";
 XXX...X.XX
 X..XXX.XXX
 XXX......X";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				WallsRight = 1,
 			};
@@ -243,7 +244,7 @@ XXX......X";
 XXX...X.XX
 X..XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				WallsRight = 1,
 			};
@@ -262,7 +263,7 @@ XXX.......";
 XXX...XXXX
 X..XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				ComboPotential = new int[0],
 			};
@@ -281,7 +282,7 @@ XXX..XXXXX
 XXX.X.XXXX
 X..XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				ComboPotential = new int[] { 1 },
 			};
@@ -299,7 +300,7 @@ XXX..XXXXX
 XXX...XXXX
 X..XXX.XXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				ComboPotential = new int[] { 0, 1 },
 			};
@@ -317,7 +318,7 @@ XXX..XXXXX
 XXX...XXXX
 ...XXXXXXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				ComboPotential = new int[] { 0, 0, 1 },
 			};
@@ -336,7 +337,7 @@ XXX...XXXX
 XXXXX.XXXX
 ...XXXXXXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				TSpinPotential = 1,
 			};
@@ -355,7 +356,7 @@ XXX...XXXX
 XXXX.XXXXX
 ...XXXXXXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				TSpinPotential = 1,
 			};
@@ -374,7 +375,7 @@ XXX...XXXX
 XXXX.XXXXX
 ...XXXXXXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
 				TSpinPotential = 1,
 			};
@@ -393,9 +394,9 @@ XXX...XXXX
 XXXX.XXXXX
 ...XXXXXXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
-				UnreachableWeights = new int[] { 0, 1, 2 },
+				Unreachables = new int[] { 0, 1, 2 },
 			};
 			var expected = 2;
 
@@ -403,7 +404,7 @@ XXX.......";
 		}
 
 		[Test]
-		public void Test_5UnreachableWithHole_5()
+		public void Test_5UnreachablesWithHole_5()
 		{
 			var field = @"
 ....X....X
@@ -413,9 +414,9 @@ XX...XXXXX
 XXX.XXXXXX
 XXX.XXXXXX
 XXXXXX.XXX";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
-				UnreachableWeights = new int[] { 0, 1, 2, 3, 4, 5 },
+				Unreachables = new int[] { 0, 1, 2, 3, 4, 5 },
 			};
 			var expected = 5;
 
@@ -423,7 +424,7 @@ XXXXXX.XXX";
 		}
 
 		[Test]
-		public void Test_ReachableRange_4()
+		public void Test_Reachables_4()
 		{
 			var field = @"
 .........X
@@ -432,9 +433,9 @@ XXX...XXXX
 XXXX.XXXXX
 ...XXXXXXX
 XXX.......";
-			var pars = new SimpleParameters()
+			var pars = new ComplexParameters()
 			{
-				ReachableRange = new int[] { 0, 1, 2, 3, 4 },
+				Reachables = new int[] { 0, 1, 2, 3, 4 },
 			};
 			var expected = 4;
 
@@ -445,7 +446,7 @@ XXX.......";
 		[Test]
 		public void LostScore_None_Negative()
 		{
-			var evaluator = new SimpleEvaluator();
+			var evaluator = new ComplexEvaluator();
 			var act = evaluator.LostScore;
 			var exp = short.MinValue;
 			Assert.AreEqual(exp, act);
@@ -453,7 +454,7 @@ XXX.......";
 		[Test]
 		public void WinScore_None_Postive()
 		{
-			var evaluator = new SimpleEvaluator();
+			var evaluator = new ComplexEvaluator();
 			var act = evaluator.WinScore;
 			var exp = short.MaxValue;
 			Assert.AreEqual(exp, act);
@@ -461,16 +462,20 @@ XXX.......";
 		[Test]
 		public void DrawScore_None_RoundZero()
 		{
-			var evaluator = new SimpleEvaluator();
+			var evaluator = new ComplexEvaluator();
 			var act = evaluator.DrawScore;
 			var exp = 0;
 			Assert.AreEqual(exp, act);
 		}
 
-		private static void Test(string str, SimpleParameters pars, int expected)
+		private static void Test(string str, ComplexParameters pars, int expected)
 		{
 			var field = Field.Create(0, 0, str);
-			var evaluator = new SimpleEvaluator() { Parameters = pars };
+			var evaluator = new ComplexEvaluator()
+			{
+				Parameters = pars,
+				Opponent = new OpponentStub(),
+			};
 			var actual = evaluator.GetScore(field, 0);
 			Assert.AreEqual(expected, actual);
 		}

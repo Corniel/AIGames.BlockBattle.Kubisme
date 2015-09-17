@@ -32,9 +32,9 @@ XXXXXXXX.X
 XXXX.XXXXX");
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new SimpleEvaluator()
+				Evaluator = new ComplexEvaluator()
 				{
-					Parameters = SimpleParameters.GetDefault(),
+					Parameters = ComplexParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 11,
@@ -74,9 +74,9 @@ XXXXXXXX.X
 XXXX.XXXXX");
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new SimpleEvaluator()
+				Evaluator = new ComplexEvaluator()
 				{
-					Parameters = SimpleParameters.GetDefault(),
+					Parameters = ComplexParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 12,

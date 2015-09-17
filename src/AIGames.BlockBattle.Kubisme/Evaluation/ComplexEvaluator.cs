@@ -73,20 +73,20 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			else
 			{
-				score += pars.OppoFreeRows[field.FirstFilled];
+				score += pars.Free * pars.OppoFreeRows[field.FirstFilled];
 			}
-			score += pars.OwnFreeRows[field.FirstFilled];
+			score += pars.Free * pars.OwnFreeRows[field.FirstFilled];
 
 			// Apply the score for the difference too.
 			var difFreeRows = field.FirstFilled - oppoFreeRows;
 
 			if (difFreeRows >= 0)
 			{
-				score += pars.DifFreeRows[difFreeRows];
+				score += pars.Free * pars.DifFreeRows[difFreeRows];
 			}
 			else
 			{
-				score -= pars.DifFreeRows[-difFreeRows];
+				score -= pars.Free * pars.DifFreeRows[-difFreeRows];
 			}
 			#endregion
 
@@ -227,13 +227,8 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 
 			// Points for the reachable lines and the unreachable underneath them.
-			var rMax = field.RowCount - unreachble;
-			for (var r = 0; r < rMax; r++)
-			{
-				score += pars.Unreachables[r];
-			}
+			score += pars.Unreachables[field.RowCount - unreachble];
 			score += pars.Reachables[unreachble - field.FirstFilled];
-
 
 			score += Row.Count[previous] * pars.Floor;
 

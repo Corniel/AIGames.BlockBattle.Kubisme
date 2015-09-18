@@ -55,10 +55,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var g0 = 0;
 			var g1 = 0;
 
+			int turns = 1;
+
 			while(s0 && s1)
 			{
-				out0 = b0.GetResponse(field0, field1, current, next, Turns0.Count + 1);
-				out1 = b1.GetResponse(field1, field0, current, next, Turns1.Count + 1);
+				out0 = b0.GetResponse(field0, field1, current, next, turns);
+				out1 = b1.GetResponse(field1, field0, current, next, turns);
 
 				field0 = out0;
 				field1 = out1;
@@ -75,6 +77,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					field0 = field0.Garbage(Row.GetGarbage(t1 - g1, rnd));
 					g1 = t1;
+				}
+
+				if (turns++ % 20 == 0)
+				{
+					field0 = field0.LockRow();
+					field1 = field1.LockRow();
 				}
 
 				s0 = !field0.IsNone;
@@ -94,7 +102,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				dir.Create();
 				visualiser.Draw(Turns0, Turns1, dir);
 			}
-
 
 			var result = new Result()
 			{

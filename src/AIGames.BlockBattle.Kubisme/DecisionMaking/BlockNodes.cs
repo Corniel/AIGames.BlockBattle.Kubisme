@@ -23,16 +23,20 @@ namespace AIGames.BlockBattle.Kubisme
 		/// </param>
 		public int Apply(byte depth, ApplyParameters pars, int branchingFactor)
 		{
-			var score = pars.Evaluator.LostScore;
+			if (Count == 0)
+			{
+				return pars.Evaluator.LostScore;
+			}
 
 			var lastIndex = Math.Min(Count, branchingFactor);
 
+			var max = this[0].Score;
 			for (var i = 0; i < lastIndex; i++)
 			{
 				var child = this[i];
 
 				// divide by 128.
-				var delta = (this[0].Score - child.Score) >> 7;
+				var delta = (max - child.Score) >> 7;
 				var searchDepth = depth - delta;
 
 				if (searchDepth >= depth)
@@ -45,13 +49,8 @@ namespace AIGames.BlockBattle.Kubisme
 					break;
 				}
 			}
-
-			if (Count > 0)
-			{
-				Sort(lastIndex);
-				score = this[0].Score;
-			}
-			return score;
+			Sort(lastIndex);
+			return this[0].Score;
 		}
 
 		/// <summary>Inserts the children sorted.</summary>
@@ -91,5 +90,7 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 			}
 		}
+
+		public bool Empty() { return Count == 0; }
 	}
 }

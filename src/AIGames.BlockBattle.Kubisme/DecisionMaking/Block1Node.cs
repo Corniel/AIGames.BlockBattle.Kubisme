@@ -25,15 +25,17 @@ namespace AIGames.BlockBattle.Kubisme
 		/// </param>
 		public override void Apply(byte depth, ApplyParameters pars)
 		{
-			if (Field.IsNone) { Score = pars.Evaluator.LostScore + depth; return; }
-
 			if (depth > Depth && depth <= pars.MaximumDepth && pars.HasTimeLeft)
 			{
 				if (Children == null)
 				{
 					var block = GetBlock(pars);
 					Children = new BlockNodes<BlockRndNode>(block);
-					foreach (var field in pars.Generator.GetFields(Field, block, true))
+
+					var applied = BlockNode.Apply(Field, Depth, pars);
+					if (applied.IsNone) { Score = pars.Evaluator.LostScore + depth; return; }
+
+					foreach (var field in pars.Generator.GetFields(applied, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }
 						var child = Create(field, pars);
@@ -42,6 +44,7 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				else
 				{
+					if (Children.Empty()) { return; }
 					Score = Children.Apply(depth, pars, BranchingFactor);
 				}
 			}
@@ -49,10 +52,9 @@ namespace AIGames.BlockBattle.Kubisme
 
 		protected override BlockRndNode Create(Field field, ApplyParameters pars)
 		{
-			var applied = BlockNode.Apply(field, Depth, pars);
-			var score = pars.Evaluator.GetScore(applied, Depth);
+			var score = pars.Evaluator.GetScore(field, Depth);
 			pars.Evaluations++;
-			return new BlockRndNode(applied, Depth, score);
+			return new BlockRndNode(field, Depth, score);
 		}
 
 		protected override Block GetBlock(ApplyParameters pars) { return pars.Next; }

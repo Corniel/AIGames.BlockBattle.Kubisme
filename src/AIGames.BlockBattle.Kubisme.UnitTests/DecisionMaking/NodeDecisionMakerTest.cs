@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using AIGames.BlockBattle.Kubisme.UnitTests.Evaluation;
+using NUnit.Framework;
 using System;
-using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 {
@@ -35,9 +35,10 @@ XXXX.XXXXX");
 				Evaluator = new ComplexEvaluator()
 				{
 					Parameters = ComplexParameters.GetDefault(),
+					Opponent = new OpponentStub(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 11,
+				MaximumDepth = 10,
 			};
 
 			dm.GetMove(field, Block.T, Block.Z, 1);
@@ -77,9 +78,40 @@ XXXX.XXXXX");
 				Evaluator = new ComplexEvaluator()
 				{
 					Parameters = ComplexParameters.GetDefault(),
+					Opponent = new OpponentStub(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 12,
+				MaximumDepth = 9,
+			};
+
+			dm.GetMove(field, Block.T, Block.T, 1);
+
+			foreach (var log in dm.Logs)
+			{
+				Console.WriteLine(log);
+			}
+		}
+
+		[Test, Category(Category.IntegrationTest)]
+		public void GetMove_1LinesLeft_LogResults()
+		{
+			var field = Field.Create(0, 0, @"
+..........
+XXXX.XXXXX
+XXXXX.XXXX
+XXXX.XXXXX
+X.XXXXXXXX
+XXXXXXXX.X
+XXXX.XXXXX");
+			var dm = new NodeDecisionMakerTester()
+			{
+				Evaluator = new ComplexEvaluator()
+				{
+					Parameters = ComplexParameters.GetDefault(),
+					Opponent = new OpponentStub(),
+				},
+				Generator = new MoveGenerator(),
+				MaximumDepth = 11,
 			};
 
 			dm.GetMove(field, Block.T, Block.T, 1);

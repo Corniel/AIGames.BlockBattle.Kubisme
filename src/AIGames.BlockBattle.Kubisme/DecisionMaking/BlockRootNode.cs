@@ -45,10 +45,9 @@ namespace AIGames.BlockBattle.Kubisme
 
 		protected Block1Node Create(Field field, BlockPath path, ApplyParameters pars)
 		{
-			var applied = BlockNode.Apply(field, Depth, pars);
-			var score = pars.Evaluator.GetScore(applied, Depth);
+			var score = pars.Evaluator.GetScore(field, Depth);
 			pars.Evaluations++;
-			return new Block1Node(applied, path, score, pars.Next.BranchingFactor1);
+			return new Block1Node(field, path, score, pars.Next.BranchingFactor1);
 		}
 		protected override Block1Node Create(Field field, ApplyParameters pars) { throw new NotImplementedException(); }
 

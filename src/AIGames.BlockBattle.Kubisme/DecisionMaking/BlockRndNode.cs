@@ -30,8 +30,6 @@ namespace AIGames.BlockBattle.Kubisme
 		/// </param>
 		public void Apply(byte depth, ApplyParameters pars)
 		{
-			if (Field.IsNone) { Score = pars.Evaluator.LostScore + depth; return; }
-
 			if (depth > Depth && depth <= pars.MaximumDepth && pars.HasTimeLeft)
 			{
 				if (Children == null)
@@ -45,8 +43,12 @@ namespace AIGames.BlockBattle.Kubisme
 						{
 							if (!pars.HasTimeLeft) { return; }
 
-							var child = Create(field, pars);
-							nodes.InsertSorted(child);
+							var applied = BlockNode.Apply(field, Depth, pars);
+							if (!applied.IsNone)
+							{
+								var child = Create(applied, pars);
+								nodes.InsertSorted(child);
+							}
 						}
 						Children.Add(nodes);
 					}
@@ -70,10 +72,9 @@ namespace AIGames.BlockBattle.Kubisme
 
 		protected BlockRndNode Create(Field field, ApplyParameters pars)
 		{
-			var applied = BlockNode.Apply(field, Depth, pars);
-			var score = pars.Evaluator.GetScore(applied, Depth);
+			var score = pars.Evaluator.GetScore(field, Depth);
 			pars.Evaluations++;
-			return new BlockRndNode(applied, Depth, score);
+			return new BlockRndNode(field, Depth, score);
 		}
 
 		public byte Depth { get; protected set; }

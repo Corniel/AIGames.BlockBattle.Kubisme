@@ -55,6 +55,9 @@ namespace AIGames.BlockBattle.Kubisme
 		public int NeighborsHorizontal { get; set; }
 		public int NeighborsVertical { get; set; }
 		public int Floor { get; set; }
+
+		/// <summary>Reachable lines, without combo bonus.</summary>
+		public int PseudoGarbage { get; set; }
 		
 		public int TSpinPotential { get; set; }
 
@@ -108,25 +111,28 @@ namespace AIGames.BlockBattle.Kubisme
 		public static ComplexParameters GetDefault()
 		{
 			return new ComplexParameters()
-			// Elo: 1625, Avg: 0,628, Runs: 6261, ID: 6406, Parent: 6339
+			// Elo: 1030, Avg: 0,663, Runs: 4461, ID: 4385, Parent: 4098
 			{
-				GarbagePotential = new int[] { 7, 21, 30, 53 },
-				OwnFreeRows = new int[] { 27, 55, 61, 61, 69, 69, 71, 73, 78, 78, 80, 83, 84, 87, 93, 109, 110, 116, 134, 148, 153 },
-				OppoFreeRows = new int[] { -4, -34, -45, -59, -66, -78, -79, -84, -88, -96, -96, -105, -108, -110, -114, -114, -115, -115, -116, -118, -153 },
-				DifFreeRows = new int[] { 13, 17, 23, 25, 34, 57, 57, 61, 66, 66, 76, 78, 81, 81, 85, 92, 98, 131, 144, 146, 168 },
-				Combo = 77,
-				Holes = -174,
-				WallsLeft = 53,
-				WallsRight = 30,
-				NeighborsHorizontal = -15,
-				NeighborsVertical = 22,
-				Floor = 171,
-				TSpinPotential = 90,
-				ComboPotential = new int[] { 76, 36, 30, 28, 28, 27, 22, 20, 19, 6, 1, -1, -17, -21, -23, -26, -33, -33, -49, -59, -61 },
-				Unreachables = new int[] { -6, -13, -14, -23, -27, -29, -31, -37, -45, -50, -53, -53, -57, -60, -65, -73, -75, -86, -86, -94, -129 },
-				Reachables = new int[] { 41, 35, 34, 33, 32, 12, 2, -5, -11, -16, -20, -22, -29, -41, -51, -56, -68, -69, -69, -73, -106 },
-				Blockades = -3,
-				LastBlockades = -6,
+				GarbagePotential = new int[] { 18, 27, 29, 38 },
+				OwnFreeRows = new int[] { 1, 11, 53, 53, 59, 59, 62, 68, 74, 75, 86, 91, 104, 109, 119, 123, 124, 125, 134, 136, 153 },
+				OppoFreeRows = new int[] { -6, -7, -12, -15, -18, -27, -28, -42, -42, -53, -56, -65, -66, -70, -72, -90, -95, -99, -105, -110, -128 },
+				DifFreeRows = new int[] { 7, 7, 12, 26, 33, 33, 41, 45, 49, 52, 56, 58, 61, 67, 82, 91, 96, 103, 115, 138, 168 },
+				Free = 1,
+				Points = 99,
+				Combo = 32,
+				Holes = -71,
+				WallsLeft = 20,
+				WallsRight = 20,
+				NeighborsHorizontal = -8,
+				NeighborsVertical = 20,
+				Floor = -11,
+				PseudoGarbage = 0,
+				TSpinPotential = 56,
+				ComboPotential = new int[] { 13, 12, 2, -1, -3, -4, -5, -5, -6, -11, -15, -17, -28, -28, -28, -31, -43, -53, -59, -67, -73 },
+				Unreachables = new int[] { -1, -5, -42, -50, -51, -60, -60, -61, -63, -67, -75, -86, -97, -102, -112, -113, -117, -122, -137, -150, -171 },
+				Reachables = new int[] { 39, 38, 38, 36, 31, 29, 20, 19, 17, 16, 5, 2, -4, -6, -17, -37, -41, -57, -59, -71, -78 },
+				Blockades = -1,
+				LastBlockades = -8,
 			};
 		}
 	}

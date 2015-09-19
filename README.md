@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 38
+----------
+Changed branching, used a fixed number of blocks for ply 3 and deeper.
+
 Version 37
 ----------
 Radically change in evaluation the position. Move focus on the position relative to the opponent. 
@@ -21,7 +25,7 @@ Detection for unreachable lines (mainly garbage) and the reachables.
 
 Version 33
 ----------
-Bugfix for paths of I,S, and Z blocks. Tweaked detection for T-Spin.
+Bug fix for paths of I,S, and Z blocks. Tweaked detection for T-Spin.
 
 Version 32
 ----------

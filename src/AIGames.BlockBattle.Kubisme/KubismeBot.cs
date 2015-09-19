@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme
 					Parameters = ComplexParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 6,
+				MaximumDepth = 10,
 				MaximumDuration = TimeSpan.FromMilliseconds(700),
 			};
 			Predictor = new OpponentGenerator();
@@ -54,11 +54,11 @@ namespace AIGames.BlockBattle.Kubisme
 
 			if (time.TotalMilliseconds < 5000)
 			{
-				DecisionMaker.MaximumDepth = 5;
+				DecisionMaker.MaximumDepth = 8;
 			}
 			else
 			{
-				DecisionMaker.MaximumDepth = 6;
+				DecisionMaker.MaximumDepth = 10;
 			}
 
 			var opponent = Predictor.Create(State.Round, Opponent, Current, Next, Math.Min(16, DecisionMaker.MaximumDepth));

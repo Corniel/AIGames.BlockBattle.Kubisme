@@ -111,28 +111,28 @@ namespace AIGames.BlockBattle.Kubisme
 		public static ComplexParameters GetDefault()
 		{
 			return new ComplexParameters()
-			// Elo: 1030, Avg: 0,663, Runs: 4461, ID: 4385, Parent: 4098
+			// Elo: 1029, Avg: 0,661, Runs: 7922, ID: 1040, Parent: 1016
 			{
-				GarbagePotential = new int[] { 18, 27, 29, 38 },
-				OwnFreeRows = new int[] { 1, 11, 53, 53, 59, 59, 62, 68, 74, 75, 86, 91, 104, 109, 119, 123, 124, 125, 134, 136, 153 },
-				OppoFreeRows = new int[] { -6, -7, -12, -15, -18, -27, -28, -42, -42, -53, -56, -65, -66, -70, -72, -90, -95, -99, -105, -110, -128 },
-				DifFreeRows = new int[] { 7, 7, 12, 26, 33, 33, 41, 45, 49, 52, 56, 58, 61, 67, 82, 91, 96, 103, 115, 138, 168 },
+				GarbagePotential = new int[] { 1, 4, 20, 32 },
+				OwnFreeRows = new int[] { 1, 30, 46, 53, 61, 61, 61, 63, 68, 69, 74, 76, 77, 77, 79, 82, 85, 86, 88, 92, 98 },
+				OppoFreeRows = new int[] { -1, -3, -8, -17, -20, -22, -28, -29, -32, -33, -38, -40, -41, -41, -43, -47, -51, -56, -63, -73, -95 },
+				DifFreeRows = new int[] { 5, 7, 23, 25, 32, 36, 37, 38, 47, 47, 50, 51, 51, 54, 57, 58, 63, 69, 75, 81, 93 },
 				Free = 1,
-				Points = 99,
-				Combo = 32,
-				Holes = -71,
+				Points = 13,
+				Combo = 7,
+				Holes = -122,
 				WallsLeft = 20,
-				WallsRight = 20,
-				NeighborsHorizontal = -8,
-				NeighborsVertical = 20,
-				Floor = -11,
-				PseudoGarbage = 0,
-				TSpinPotential = 56,
-				ComboPotential = new int[] { 13, 12, 2, -1, -3, -4, -5, -5, -6, -11, -15, -17, -28, -28, -28, -31, -43, -53, -59, -67, -73 },
-				Unreachables = new int[] { -1, -5, -42, -50, -51, -60, -60, -61, -63, -67, -75, -86, -97, -102, -112, -113, -117, -122, -137, -150, -171 },
-				Reachables = new int[] { 39, 38, 38, 36, 31, 29, 20, 19, 17, 16, 5, 2, -4, -6, -17, -37, -41, -57, -59, -71, -78 },
-				Blockades = -1,
-				LastBlockades = -8,
+				WallsRight = 24,
+				NeighborsHorizontal = -22,
+				NeighborsVertical = 21,
+				Floor = 14,
+				PseudoGarbage = -2,
+				TSpinPotential = 31,
+				ComboPotential = new int[] { 24, 12, 8, 5, 4, 4, 3, 0, 0, -1, -1, -2, -4, -7, -8, -8, -11, -31, -34, -50, -63 },
+				Unreachables = new int[] { -3, -10, -21, -29, -31, -39, -40, -40, -41, -44, -51, -51, -51, -55, -58, -59, -61, -64, -68, -73, -76 },
+				Reachables = new int[] { 83, 34, 22, 16, 8, 8, 2, -3, -4, -5, -6, -7, -8, -9, -14, -18, -20, -24, -29, -43, -64 },
+				Blockades = 2,
+				LastBlockades = -13,
 			};
 		}
 	}

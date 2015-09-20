@@ -3,9 +3,13 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
-Version 38
+Version 39
 ----------
 Changed branching, used a fixed number of blocks for ply 3 and deeper.
+
+Version 38
+----------
+Due to disk space issues on the server, this compilation failed.
 
 Version 37
 ----------

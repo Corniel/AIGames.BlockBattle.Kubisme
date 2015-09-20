@@ -37,7 +37,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 		}
 
 		/// <summary>Runs it all.</summary>
-		public void DoRun(IBot bot)
+		public virtual void DoRun(IBot bot)
 		{
 			if (bot == null) { throw new ArgumentNullException("bot"); }
 			DoRun(bot, Instruction.Read(this.Reader));

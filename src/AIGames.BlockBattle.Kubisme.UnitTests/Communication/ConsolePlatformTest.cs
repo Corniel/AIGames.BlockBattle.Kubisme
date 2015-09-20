@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 		{
 			using (var platform = new ConsolePlatformTester("input.version0007.txt"))
 			{
-				platform.DoRun(new KubismeBot(new MT19937Generator(17)));
+				platform.DoRun(new KubismeBot());
 			}
 		}
 
@@ -64,6 +64,15 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 		public void DoRun_Round0021_NoExceptions()
 		{
 			using (var platform = new ConsolePlatformTester("input.version0021.txt"))
+			{
+				platform.DoRun(new KubismeBot());
+			}
+		}
+
+		[Test]
+		public void DoRun_Round0039_NoExceptions()
+		{
+			using (var platform = new ConsolePlatformTester("input.version0039.txt"))
 			{
 				platform.DoRun(new KubismeBot());
 			}

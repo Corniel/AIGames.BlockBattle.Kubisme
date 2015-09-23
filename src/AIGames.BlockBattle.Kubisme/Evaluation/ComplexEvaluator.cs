@@ -82,11 +82,11 @@ namespace AIGames.BlockBattle.Kubisme
 
 			if (difFreeRows >= 0)
 			{
-				score +=  pars.DifFreeRows[difFreeRows];
+				score -= pars.DifFreeRows[difFreeRows];
 			}
 			else
 			{
-				score -=  pars.DifFreeRows[-difFreeRows];
+				score += pars.DifFreeRows[-difFreeRows];
 			}
 			#endregion
 

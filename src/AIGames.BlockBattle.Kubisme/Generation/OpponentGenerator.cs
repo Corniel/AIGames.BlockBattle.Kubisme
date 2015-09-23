@@ -55,9 +55,11 @@
 			var points = opponent.States[1].Points;
 			var combo = opponent.States[1].Combo;
 
+			combo++;
+
 			for (var i = 2; i < opponent.States.Length; i++)
 			{
-				points += ++combo;
+				points += combo;
 				var garbage = (points >> 2) - (prev.Points >> 2);
 				var rows = 20 - (turn + 1 + i) / 20;
 				var firstFilled = prev.FirstFilled + 1;
@@ -73,6 +75,7 @@
 
 				opponent.States[i] = new OpponentState(points, garbage, firstFilled, combo, rows);
 				prev = opponent.States[i];
+				combo = 1;
 			}
 			
 			return opponent;

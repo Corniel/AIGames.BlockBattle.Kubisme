@@ -73,20 +73,20 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			else
 			{
-				score += pars.Free * pars.OppoFreeRows[field.FirstFilled];
+				score += pars.OppoFreeRows[field.FirstFilled];
 			}
-			score += pars.Free * pars.OwnFreeRows[field.FirstFilled];
+			score += pars.OwnFreeRows[field.FirstFilled];
 
 			// Apply the score for the difference too.
 			var difFreeRows = field.FirstFilled - oppoFreeRows;
 
 			if (difFreeRows >= 0)
 			{
-				score += pars.Free * pars.DifFreeRows[difFreeRows];
+				score +=  pars.DifFreeRows[difFreeRows];
 			}
 			else
 			{
-				score -= pars.Free * pars.DifFreeRows[-difFreeRows];
+				score -=  pars.DifFreeRows[-difFreeRows];
 			}
 			#endregion
 
@@ -100,8 +100,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var neighborsH = 0;
 			var neighborsV = 0;
 			ushort previous = 0;
-			var pseudoGarbage = 0;
-
+			
 			// Variables for unreachable garbage.
 			int reachableMask = Row.Filled;
 
@@ -191,10 +190,6 @@ namespace AIGames.BlockBattle.Kubisme
 						filterComboPotential |= row;
 					}
 				}
-				if (!hasComboPotential)
-				{
-					pseudoGarbage++;
-				}
 
 				// If no T-Spin potential detected yet, and access to the row.
 				// the previous has to be 7, and the current 9.
@@ -224,7 +219,6 @@ namespace AIGames.BlockBattle.Kubisme
 			score += wallRight * pars.WallsRight;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
-			score += pseudoGarbage * pars.PseudoGarbage;
 
 			// Ad points for the combo potential there is.
 			for (var c = 0; c < comboPotential; c++)

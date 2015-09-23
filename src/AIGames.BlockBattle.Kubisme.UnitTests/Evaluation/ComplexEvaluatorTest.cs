@@ -22,7 +22,7 @@ XXX.......";
 			};
 			var expected = 21;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -41,7 +41,7 @@ XXX.......";
 			};
 			var expected = 1;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -60,7 +60,7 @@ XXX.......";
 			};
 			var expected = 3;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 
@@ -76,12 +76,11 @@ XXX.......";
 XXX.......";
 			var pars = new ComplexParameters()
 			{
-				Free = 1,
-				OwnFreeRows = new int[] { 0, 1 },
+				OwnFreeRowsCalc = new int[] { 0, 1 },
 			};
 			var expected = 1;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 
@@ -101,7 +100,7 @@ XXX.......";
 			};
 			var expected = 3;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -120,7 +119,7 @@ XXX.......";
 			};
 			var expected = 16;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -136,7 +135,7 @@ XXX.......";
 			};
 			var expected = 1;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -155,7 +154,7 @@ XXX.......";
 			};
 			var expected = 6;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -174,7 +173,7 @@ XXX.......";
 			};
 			var expected = 15;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -193,7 +192,7 @@ XXX......X";
 			};
 			var expected = 3;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -212,7 +211,7 @@ XXX......X";
 			};
 			var expected = 1;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 		
 		[Test]
@@ -231,7 +230,7 @@ XXX......X";
 			};
 			var expected = 4;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -250,7 +249,7 @@ XXX.......";
 			};
 			var expected = 0;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -269,7 +268,7 @@ XXX.......";
 			};
 			var expected = 0;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -288,7 +287,7 @@ XXX.......";
 			};
 			var expected = 1;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 		[Test]
 		public void Test_ComboPotential_2()
@@ -306,7 +305,7 @@ XXX.......";
 			};
 			var expected = 2;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 		[Test]
 		public void Test_ComboPotential_3()
@@ -324,7 +323,7 @@ XXX.......";
 			};
 			var expected = 3;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -343,7 +342,7 @@ XXX.......";
 			};
 			var expected = 0;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -362,7 +361,7 @@ XXX.......";
 			};
 			var expected = 1;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -381,7 +380,7 @@ XXX.......";
 			};
 			var expected = 0;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -400,7 +399,7 @@ XXX.......";
 			};
 			var expected = 2;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -420,7 +419,7 @@ XXXXXX.XXX";
 			};
 			var expected = 5;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 		[Test]
@@ -439,7 +438,7 @@ XXX.......";
 			};
 			var expected = 4;
 
-			Test(field, pars, expected);
+			Test(field, pars.Calculate(), expected);
 		}
 
 

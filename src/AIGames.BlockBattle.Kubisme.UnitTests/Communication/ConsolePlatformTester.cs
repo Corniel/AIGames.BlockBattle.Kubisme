@@ -15,12 +15,11 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 			base.DoRun(bot);
 
 			var log = Logger.ToString();
-			if (!String.IsNullOrEmpty(log))
+			Console.Error.Write(log);
+			if (log.Contains("Exception"))
 			{
-				Console.Error.Write(log);
-				Assert.Fail(log);
+				Assert.Fail("The log output contains at least on exception.");
 			}
-
 		}
 		
 		private static TextReader LoadInput(string path)

@@ -25,7 +25,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					MaximumDepth = 2,
 					Evaluator = new ComplexEvaluator()
 					{
-						Parameters = pars,
+						Parameters = pars.Calculate(),
 					},
 					Generator = new MoveGenerator(),
 				}

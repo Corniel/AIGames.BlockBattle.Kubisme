@@ -16,10 +16,10 @@ namespace AIGames.BlockBattle.Kubisme
 		public ComplexParameters()
 		{
 			GarbagePotential = new int[4];
-			
-			OwnFreeRows = new int[21];
-			OppoFreeRows = new int[21];
-			DifFreeRows = new int[21];
+
+			OwnFreeRowsCalc = new int[22];
+			OppoFreeRowsCalc = new int[22];
+			DifFreeRowsCalc = new int[22];
 
 			ComboPotential = new int[21];
 			Unreachables = new int[21];
@@ -31,22 +31,22 @@ namespace AIGames.BlockBattle.Kubisme
 		public int[] GarbagePotential { get; set; }
 
 		/// <summary>The more free rows the we have, the better it is.</summary>
-		[ParameterType(ParameterType.Ascending | ParameterType.Positive)]
-		public int[] OwnFreeRows { get; set; }
-
+		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
+		public int[] OwnFreeRowsCalc { get; set; }
+	
 		/// <summary>The more free rows the opponent has, the worse it is.</summary>
-		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
-		public int[] OppoFreeRows { get; set; }
+		[ParameterType(ParameterType.Ascending | ParameterType.Negative)]
+		public int[] OppoFreeRowsCalc { get; set; }
 
 		[ParameterType(ParameterType.Ascending | ParameterType.Positive)]
-		public int[] DifFreeRows { get; set; }
+		public int[] DifFreeRowsCalc { get; set; }
 
 		[ParameterType(ParameterType.Positive)]
-		public int Free { get; set; }
-
 		public int Points { get; set; }
+		
 		public int Combo { get; set; }
 
+		[ParameterType(ParameterType.Negative)]
 		public int Holes { get; set; }
 
 		public int WallsLeft { get; set; }
@@ -55,9 +55,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int NeighborsHorizontal { get; set; }
 		public int NeighborsVertical { get; set; }
 		public int Floor { get; set; }
-
-		/// <summary>Reachable lines, without combo bonus.</summary>
-		public int PseudoGarbage { get; set; }
 		
 		public int TSpinPotential { get; set; }
 
@@ -68,8 +65,40 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending)]
 		public int[] Reachables { get; set; }
 
+		[ParameterType(ParameterType.Negative)]
 		public int Blockades { get; set; }
+		[ParameterType(ParameterType.Negative)]
 		public int LastBlockades { get; set; }
+
+		public int[] OwnFreeRows { get { return m_OwnFreeRows; } }
+		private int[] m_OwnFreeRows;
+		public int[] OppoFreeRows { get{return m_OppoFreeRows;}}
+		private int[] m_OppoFreeRows;
+		public int[] DifFreeRows { get { return m_DifFreeRows; } }
+		private int[] m_DifFreeRows;
+
+		public ComplexParameters Calculate()
+		{
+			m_OwnFreeRows = new int[OwnFreeRowsCalc.Length];
+			m_OppoFreeRows = new int[OppoFreeRowsCalc.Length];
+			m_DifFreeRows = new int[DifFreeRowsCalc.Length];
+
+			CopyArrayValues(OwnFreeRowsCalc, m_OwnFreeRows);
+			CopyArrayValues(OppoFreeRowsCalc, m_OppoFreeRows);
+			CopyArrayValues(DifFreeRowsCalc, m_DifFreeRows);
+
+			return this;
+		}
+
+		private void CopyArrayValues(int[] source, int[] target)
+		{
+			var sum = 0;
+			for (var i = 0; i < source.Length; i++)
+			{
+				sum += source[i];
+				target[i] = sum;
+			}
+		}
 
 		/// <summary>Gets a string representation of the simple evaluator parameters.</summary>
 		/// <remarks>
@@ -110,14 +139,13 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public static ComplexParameters GetDefault()
 		{
-			return new ComplexParameters()
+			var pars = new ComplexParameters()
 			// Elo: 1029, Avg: 0,661, Runs: 7922, ID: 1040, Parent: 1016
 			{
 				GarbagePotential = new int[] { 1, 4, 20, 32 },
-				OwnFreeRows = new int[] { 1, 30, 46, 53, 61, 61, 61, 63, 68, 69, 74, 76, 77, 77, 79, 82, 85, 86, 88, 92, 98 },
-				OppoFreeRows = new int[] { -1, -3, -8, -17, -20, -22, -28, -29, -32, -33, -38, -40, -41, -41, -43, -47, -51, -56, -63, -73, -95 },
-				DifFreeRows = new int[] { 5, 7, 23, 25, 32, 36, 37, 38, 47, 47, 50, 51, 51, 54, 57, 58, 63, 69, 75, 81, 93 },
-				Free = 1,
+				OwnFreeRowsCalc = new int[] { 1, 30, 46, 53, 61, 61, 61, 63, 68, 69, 74, 76, 77, 77, 79, 82, 85, 86, 88, 92, 98, 110 },
+				OppoFreeRowsCalc = new int[] { -1, -3, -8, -17, -20, -22, -28, -29, -32, -33, -38, -40, -41, -41, -43, -47, -51, -56, -63, -73, -95, -110 },
+				DifFreeRowsCalc = new int[] { 5, 7, 23, 25, 32, 36, 37, 38, 47, 47, 50, 51, 51, 54, 57, 58, 63, 69, 75, 81, 93, 110 },
 				Points = 13,
 				Combo = 7,
 				Holes = -122,
@@ -126,7 +154,6 @@ namespace AIGames.BlockBattle.Kubisme
 				NeighborsHorizontal = -22,
 				NeighborsVertical = 21,
 				Floor = 14,
-				PseudoGarbage = -2,
 				TSpinPotential = 31,
 				ComboPotential = new int[] { 24, 12, 8, 5, 4, 4, 3, 0, 0, -1, -1, -2, -4, -7, -8, -8, -11, -31, -34, -50, -63 },
 				Unreachables = new int[] { -3, -10, -21, -29, -31, -39, -40, -40, -41, -44, -51, -51, -51, -55, -58, -59, -61, -64, -68, -73, -76 },
@@ -134,6 +161,9 @@ namespace AIGames.BlockBattle.Kubisme
 				Blockades = 2,
 				LastBlockades = -13,
 			};
+
+
+			return pars.Calculate();
 		}
 	}
 }

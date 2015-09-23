@@ -173,7 +173,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			PropertyInfo[] props;
 			if (!Properties.TryGetValue(typeof(T), out props))
 			{
-				props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+				props = typeof(T)
+					.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+					.Where(prop => prop.CanWrite)
+					.ToArray();
+
 				Properties[typeof(T)] = props;
 			}
 			return props;

@@ -75,6 +75,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					BestBot = GetHighestElo();
 					Bots.Add(new BotData(++LastId, BestBot, Randomizer));
 				}
+				foreach (var bot in Bots)
+				{
+					bot.Pars.Calculate();
+				}
 			}
 
 			GetRandomPairings(AppConfig.Data.PairingsRandom);

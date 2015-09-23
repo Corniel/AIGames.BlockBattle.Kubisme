@@ -66,7 +66,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Id, ParentId, Elo, Runs, PointsAvg, TurnsAvg);
 		}
 
-		private static readonly PropertyInfo[] Props = typeof(ComplexParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+		private static readonly PropertyInfo[] Props = typeof(ComplexParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
 		
 		public string ParametersToString()
 		{

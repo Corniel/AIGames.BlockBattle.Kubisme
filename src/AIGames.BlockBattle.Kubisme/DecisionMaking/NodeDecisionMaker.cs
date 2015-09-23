@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Troschuetz.Random.Generators;
@@ -26,6 +27,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public virtual BlockPath GetMove(Field field, Opponent opponent, Block current, Block next, int round)
 		{
+			Logs.Clear();
 			Pars = new ApplyParameters(Rnd)
 			{
 				Round = round,
@@ -42,6 +44,10 @@ namespace AIGames.BlockBattle.Kubisme
 			while (Pars.Depth < Pars.MaximumDepth && Pars.HasTimeLeft)
 			{
 				Root.Apply(++Pars.Depth, Pars);
+				
+				var parameters = (ComplexParameters)Evaluator.Parameters;
+				var log = string.Format("{0:0.00} {1}: {2}", Root.Score / (double)parameters.Points, Pars, Root.BestMove);
+				Logs.Add(log);
 			}
 			BestField = Root.BestField;
 			return Root.BestMove;
@@ -54,11 +60,11 @@ namespace AIGames.BlockBattle.Kubisme
 
 			return string.Format(
 				CultureInfo.InvariantCulture,
-				"Round {3:00}, Points: {0:00}  {1:0.000}  {2}",
+				"Round {0:00}, Points: {1:00}\r\n{2}",
+				Pars.Round,
 				BestField.Points,
-				Root.Score / (double)parameters.Points,
-				Pars,
-				Pars.Round);
+				String.Join("\r\n", Logs));
 		}
+		private List<String> Logs = new List<string>();
 	}
 }

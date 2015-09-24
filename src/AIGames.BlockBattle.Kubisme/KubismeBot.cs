@@ -49,17 +49,13 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public BotResponse GetResponse(TimeSpan time)
 		{
-			var ms = Math.Min(time.TotalMilliseconds / 3, 700);
-			DecisionMaker.MaximumDuration = TimeSpan.FromMinutes(ms);
-
-			if (time.TotalMilliseconds < 5000)
-			{
-				DecisionMaker.MaximumDepth = 8;
-			}
-			else
-			{
-				DecisionMaker.MaximumDepth = 10;
-			}
+			// Take 1/3 of the thinking time up to 1.2 seconds.
+			var max = Math.Min(time.TotalMilliseconds / 3, 1200);
+			// Take 500 ms or if you're really getting out of time 3/4 of the max.
+			var min = Math.Min(500, (max * 3) / 4);
+			
+			DecisionMaker.MaximumDuration = TimeSpan.FromMilliseconds(max);
+			DecisionMaker.MinimumDuration = TimeSpan.FromMilliseconds(min);
 
 			var opponent = Predictor.Create(State.Round, Opponent, Current, Next, Math.Min(16, DecisionMaker.MaximumDepth));
 			((ComplexEvaluator)DecisionMaker.Evaluator).Opponent = opponent;

@@ -11,10 +11,12 @@ namespace AIGames.BlockBattle.Kubisme
 		public NodeDecisionMaker(MT19937Generator rnd)
 		{
 			MaximumDepth = int.MaxValue;
+			MinimumDuration = TimeSpan.Zero;
 			MaximumDuration = TimeSpan.MaxValue;
 			Rnd = rnd;
 		}
 
+		public TimeSpan MinimumDuration { get; set; }
 		public TimeSpan MaximumDuration { get; set; }
 		public int MaximumDepth { get; set; }
 		public MT19937Generator Rnd { get; set; }
@@ -41,7 +43,7 @@ namespace AIGames.BlockBattle.Kubisme
 			};
 			Root = new BlockRootNode(field);
 
-			while (Pars.Depth < Pars.MaximumDepth && Pars.HasTimeLeft)
+			while (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration)
 			{
 				Root.Apply(++Pars.Depth, Pars);
 				

@@ -140,26 +140,29 @@ namespace AIGames.BlockBattle.Kubisme
 		public static ComplexParameters GetDefault()
 		{
 			var pars = new ComplexParameters()
-			// Elo: 1034, Avg: 0,645, Runs: 1338, ID: 1718, Parent: 1685
+			// Elo: 1028, Avg: 0,648, Runs: 3795, ID: 1405, Parent: 1364
 			{
-				GarbagePotential = new int[] { 2, 11, 16, 20 },
-				OwnFreeRowsCalc = new int[] { 98, 84, 76, 73, 58, 57, 51, 50, 45, 44, 42, 41, 40, 39, 39, 35, 32, 31, 30, 21, 3, 2 },
-				OppoFreeRowsCalc = new int[] { -114, -108, -94, -93, -91, -83, -81, -79, -77, -77, -75, -73, -73, -69, -67, -49, -47, -41, -40, -33, -24, -1 },
-				DifFreeRowsCalc = new int[] { 1, 29, 30, 34, 37, 37, 39, 42, 50, 50, 50, 50, 58, 59, 59, 70, 71, 81, 86, 89, 101, 141 },
-				Points = 35,
-				Combo = 45,
-				Holes = -52,
-				WallsLeft = 12,
-				WallsRight = 15,
-				NeighborsHorizontal = -4,
-				NeighborsVertical = 10,
-				Floor = -4,
-				TSpinPotential = 48,
-				ComboPotential = new int[] { 22, 9, 7, 7, 5, 5, 2, 2, 1, 0, -4, -5, -6, -7, -7, -12, -12, -18, -24, -25, -29 },
-				Unreachables = new int[] { -1, -2, -5, -8, -10, -24, -26, -27, -27, -28, -31, -33, -36, -37, -38, -39, -39, -44, -45, -45, -49 },
-				Reachables = new int[] { 28, 27, 17, 15, 15, 9, 9, 8, 2, -7, -7, -8, -14, -14, -20, -36, -51, -52, -63, -64, -65 },
+				GarbagePotential = new int[] { 13, 14, 41, 42 },
+				OwnFreeRowsCalc = new int[] { 152, 109, 106, 96, 77, 62, 61, 61, 59, 57, 57, 46, 46, 43, 39, 38, 34, 34, 24, 20, 10, 4 },
+				OppoFreeRowsCalc = new int[] { -106, -99, -83, -74, -71, -71, -68, -68, -66, -64, -62, -61, -58, -55, -49, -48, -46, -40, -23, -22, -3, -1 },
+				DifFreeRowsCalc = new int[] { 1, 1, 3, 27, 29, 35, 37, 41, 41, 41, 42, 45, 46, 50, 57, 72, 73, 78, 78, 80, 90, 90 },
+				Points = 42,
+				Combo = 12,
+				Holes = -104,
+				WallsLeft = 28,
+				WallsRight = 28,
+				NeighborsHorizontal = -24,
+				NeighborsVertical = 24,
+				Floor = -1,
+				TSpinPotential = 93,
+				ComboPotential = new int[] { 28, 26, 23, 22, 16, 12, 9, 6, 5, 2, 1, -2, -2, -7, -9, -10, -11, -11, -17, -18, -19 },
+				Unreachables = new int[] { -23, -28, -30, -31, -36, -40, -44, -45, -50, -51, -52, -55, -58, -60, -66, -78, -83, -83, -85, -89, -103 },
+				Reachables = new int[] { 69, 55, 35, 35, 33, 29, 16, 15, 12, 8, 6, 3, 1, -1, -12, -18, -23, -29, -32, -34, -65 },
 				Blockades = -1,
-				LastBlockades = -1,
+				LastBlockades = -10,
+				//OwnFreeRows = new int[] { 152, 261, 367, 463, 540, 602, 663, 724, 783, 840, 897, 943, 989, 1032, 1071, 1109, 1143, 1177, 1201, 1221, 1231, 1235 },
+				//OppoFreeRows = new int[] { -106, -205, -288, -362, -433, -504, -572, -640, -706, -770, -832, -893, -951, -1006, -1055, -1103, -1149, -1189, -1212, -1234, -1237, -1238 },
+				//DifFreeRows = new int[] { 1, 2, 5, 32, 61, 96, 133, 174, 215, 256, 298, 343, 389, 439, 496, 568, 641, 719, 797, 877, 967, 1057 },
 			};
 			return pars.Calculate();
 		}

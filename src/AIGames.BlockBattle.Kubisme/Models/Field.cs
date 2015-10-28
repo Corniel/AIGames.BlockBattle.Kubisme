@@ -7,13 +7,13 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public struct Field : IEquatable<Field>
 	{
-		public const short SingleLineClear = 1;
+		public const short SingleLineClear = 0;
 		public const short DoubleLineClear = 3;
 		public const short TripleLineClear = 6;
-		public const short QuadrupleLineClear = 12;
-		public const short SingleTSpin = 6;
-		public const short DoubleTSpin = 12;
-		public const short PerfectClear = 24;
+		public const short QuadrupleLineClear = 10;
+		public const short SingleTSpin = 5;
+		public const short DoubleTSpin = 10;
+		public const short PerfectClear = 18;
 
 		public static readonly Field None = new Field(-1, 0, 0, new ushort[0]);
 		public static readonly Field Empty = Field.Create(0, 0, @"..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........");
@@ -187,7 +187,11 @@ namespace AIGames.BlockBattle.Kubisme
 						}
 					}
 				}
-				pt += combo++;
+				// only if points are earned, combo is added and increased.
+				if (pt > Points)
+				{
+					pt += combo++;
+				}
 			}
 			return new Field(pt, combo, free, rs);
 		}

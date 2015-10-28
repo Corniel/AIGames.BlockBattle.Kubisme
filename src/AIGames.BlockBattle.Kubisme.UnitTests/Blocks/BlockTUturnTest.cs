@@ -94,7 +94,7 @@ XXX...XXXX
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 0));
 
 			var expField = "..........|.XXXXXXXXX";
-			var expPt = 1;
+			var expPt = 0;
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);
@@ -128,7 +128,7 @@ XXX..XXXXX");
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
 			var expField = "..........|..X..XX...|XXX.XXXXXX";
-			var expPt = 1;
+			var expPt = 0;
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);
@@ -145,7 +145,7 @@ XXXX.XXXXX");
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
 			var expField = "..........|..X..XX...|XX.XXXXXXX";
-			var expPt = 1;
+			var expPt = 0;
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);
@@ -162,7 +162,7 @@ XXXX.XXXXX");
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
 			var expField = "..........|..........|..X..XX...";
-			var expPt = 12;
+			var expPt = 10;
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);
@@ -179,7 +179,7 @@ XXXX.XXXXX");
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
 			var expField = "..........|..X..XX...|.XXXXXXXXX";
-			var expPt = 6;
+			var expPt = 5;
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);
@@ -196,7 +196,7 @@ XXX...XXXX
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
 			var expField = "..........|..X..XX...|.XXXXXXXXX";
-			var expPt = 6;
+			var expPt = 5;
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);

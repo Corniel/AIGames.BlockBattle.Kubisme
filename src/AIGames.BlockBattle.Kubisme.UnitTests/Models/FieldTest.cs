@@ -119,10 +119,10 @@ XXXXXX.XX.
 			var field = Field.Create(0, 0, "..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|........XX|.XX.....XX|XX......XX|XXXX....XX");
 
 			var act = field.Apply(Block.I, new Position(4, 19));
-			AssertField("..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|........XX|.XX.....XX|XX......XX", 1, 1, 17, act);
+			AssertField("..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|........XX|.XX.....XX|XX......XX", 0, 0, 17, act);
 		}
 		[Test]
-		public void Apply_FullClear_Adds24Points()
+		public void Apply_FullClear_Adds18Points()
 		{
 			var field = Field.Create(6, 0, @"
 ..........
@@ -130,10 +130,10 @@ XXXXXX.XX.
 XX.XXXXXXX");
 
 			var act = field.Apply(Block.J[Block.RotationType.Uturn], new Position(0, 1));
-			AssertField("..........|..........|..........", 30, 1, 3, act);
+			AssertField("..........|..........|..........", 24, 1, 3, act);
 		}
 		[Test]
-		public void Apply_SingleClearWithCombo1_Adds2Points()
+		public void Apply_SingleClearWithCombo1_Adds0Points()
 		{
 			var field = Field.Create(8, 1, @"
 ..........
@@ -141,7 +141,7 @@ XX.XXXXXXX");
 .XXXXXXXXX");
 
 			var act = field.Apply(Block.L[Block.RotationType.Uturn], new Position(0, 1));
-			AssertField("..........|..........|XXX.XXXXXX", 10, 2, 2, act);
+			AssertField("..........|..........|XXX.XXXXXX", 8, 1, 2, act);
 		}
 		[Test]
 		public void Apply_DoubleClear0_Adds3Points()
@@ -167,7 +167,7 @@ XX.XXXXXXX");
 			AssertField("..........|..........|..........|X.........", 10, 1, 3, act);
 		}
 		[Test]
-		public void Apply_QuadrupleClear_Adds12Points()
+		public void Apply_QuadrupleClear_Adds10Points()
 		{
 			var field = Field.Create(8, 0, @"
 XX.......X
@@ -177,7 +177,7 @@ XXXXX.XXXX
 XXXXX.XXXX");
 
 			var act = field.Apply(Block.I[Block.RotationType.Left], new Position(5, 1));
-			AssertField("..........|..........|..........|..........|XX.......X", 20, 1, 4, act);
+			AssertField("..........|..........|..........|..........|XX.......X", 18, 1, 4, act);
 		}
 		[Test]
 		public void Apply_WithNegativeColumnPosition_Successful()
@@ -191,14 +191,8 @@ XX.XXXXXXX");
 
 			var block = Block.T[Block.RotationType.Right];
 			var act = field.Apply(block, new Position(0, 1));
-			var exp = Field.Create(1, 1, @"
-..........
-..........
-X.........
-XX....X..X
-XX.XXXXXXX");
 			Console.WriteLine(act);
-			AssertField(exp.ToString(), 1, 1, 2, act);
+			AssertField("..........|..........|X.........|XX....X..X|XX.XXXXXXX", 0, 0, 2, act);
 		}
 
 		[Test]

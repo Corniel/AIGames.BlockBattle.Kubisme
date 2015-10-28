@@ -73,7 +73,7 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			else
 			{
-				score += pars.OppoFreeRows[field.FirstFilled];
+				score += pars.OppoFreeRows[oppoFreeRows];
 			}
 			score += pars.OwnFreeRows[field.FirstFilled];
 

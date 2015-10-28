@@ -11,7 +11,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public NodeDecisionMaker(MT19937Generator rnd)
 		{
 			MaximumDepth = int.MaxValue;
-			MinimumDuration = TimeSpan.Zero;
+			MinimumDuration = TimeSpan.MaxValue;
 			MaximumDuration = TimeSpan.MaxValue;
 			Rnd = rnd;
 		}

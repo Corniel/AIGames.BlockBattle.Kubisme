@@ -23,6 +23,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			File = new FileInfo("parameters.xml");
 			Capacity = AppConfig.Data.BotCapacity;
 			Stable = AppConfig.Data.BotStable;
+			SearchDepth = AppConfig.Data.SearchDepth;
 
 			Rnd = rnd;
 			Randomizer = new ParameterRandomizer(rnd);
@@ -37,6 +38,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public int Capacity { get; set; }
 		public int Simulations { get; set; }
 		public int Stable { get; set; }
+		public int SearchDepth { get; set; }
 
 		public MT19937Generator Rnd { get; set; }
 		public ParameterRandomizer Randomizer { get; set; }
@@ -314,7 +316,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					LastId);
 			}
 
-			var simulation = new BattleSimulation(bot0, bot1);
+			var simulation = new BattleSimulation(bot0, bot1, SearchDepth);
 			var result = simulation.Run(rnd, LogGames);
 
 			Results.Enqueue(new BattlePairing(bot0, bot1) { Result = result });

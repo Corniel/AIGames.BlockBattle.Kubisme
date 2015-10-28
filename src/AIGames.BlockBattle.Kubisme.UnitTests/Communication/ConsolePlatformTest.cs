@@ -86,5 +86,14 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 				platform.DoRun(new KubismeBot());
 			}
 		}
+
+		[Test]
+		public void DoRun_Round0041_NoExceptions()
+		{
+			using (var platform = new ConsolePlatformTester("input.version0041.txt"))
+			{
+				platform.DoRun(new KubismeBot());
+			}
+		}
 	}
 }

@@ -35,6 +35,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public int BotCapacity { get; set; }
 		public int BotStable { get; set; }
+		public int SearchDepth { get; set; }
 
 		public int CopyHighestElo { get; set; }
 		public int CopyHighestScore { get; set; }

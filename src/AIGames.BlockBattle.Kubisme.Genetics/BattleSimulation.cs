@@ -22,19 +22,21 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			public int Points1 { get; set; }
 		}
 
-		public BattleSimulation(BotData bot0, BotData bot1)
+		public BattleSimulation(BotData bot0, BotData bot1, int depth)
 		{
 			Turns0 = new List<Field>();
 			Turns1 = new List<Field>();
 
 			Bot0 = bot0;
 			Bot1 = bot1;
+			SearchDepth = depth;
 		}
 		public List<Field> Turns0 { get; set; }
 		public List<Field> Turns1 { get; set; }
 
 		public BotData Bot0 { get; set; }
 		public BotData Bot1 { get; set; }
+		public int SearchDepth { get; set; }
 
 		public Result Run(MT19937Generator rnd, bool logGames)
 		{
@@ -46,8 +48,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var current = Block.All[rnd.Next(Block.All.Length)];
 			var next = Block.All[rnd.Next(Block.All.Length)];
 
-			var b0 = BattleBot.Create(rnd, Bot0.Pars);
-			var b1 = BattleBot.Create(rnd, Bot1.Pars);
+			var b0 = BattleBot.Create(rnd, Bot0.Pars, SearchDepth);
+			var b1 = BattleBot.Create(rnd, Bot1.Pars, SearchDepth);
 
 			var s0 = true;
 			var s1 = true;

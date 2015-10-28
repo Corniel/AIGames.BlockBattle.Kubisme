@@ -67,17 +67,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				field0 = out0;
 				field1 = out1;
 
-				var t0 = field0.Points >> 2;
-				var t1 = field1.Points >> 2;
+				var t0 = field0.Points / 3;
+				var t1 = field1.Points / 3;
 
 				if (t0 > g0)
 				{
-					field1 = field1.Garbage(Row.GetGarbage(t0 - g0, rnd));
+					field1 = field1.Garbage(Row.GetGarbage(t0 - g0, g0 * 3, rnd));
 					g0 = t0;
 				}
 				if (t1 > g1)
 				{
-					field0 = field0.Garbage(Row.GetGarbage(t1 - g1, rnd));
+					field0 = field0.Garbage(Row.GetGarbage(t1 - g1, g1 * 3, rnd));
 					g1 = t1;
 				}
 

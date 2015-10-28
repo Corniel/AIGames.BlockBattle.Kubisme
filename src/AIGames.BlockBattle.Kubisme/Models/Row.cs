@@ -28,8 +28,10 @@ namespace AIGames.BlockBattle.Kubisme
 			0X01FF,
 		};
 
+		public static readonly ushort[] Garbage2 = GetGarbage2();
+
 		public static readonly byte[] Count = GetCount();
-		
+
 		public static readonly ushort[] Flag = new ushort[]{
 			0x0001,
 			0x0002,
@@ -79,18 +81,16 @@ namespace AIGames.BlockBattle.Kubisme
 			return row;
 		}
 
-		public static ushort[] GetGarbage(int count, MT19937Generator rnd)
+		public static ushort[] GetGarbage(int count, int pointsOld, MT19937Generator rnd)
 		{
 			var garbage = new ushort[count];
 
-			var prev = -1;
+			var single = ((pointsOld / 3) & 1) == 0;
+
 			for (var i = 0; i < count; i++)
 			{
-				var index = rnd.Next(i == 0 ? 10 : 9);
-				// 9 is not assigned, so move the to that one.
-				if (index == prev) { index = 9; }
-				garbage[i] = Garbage[index];
-				prev = index;
+				garbage[i] = single ? Garbage[rnd.Next(10)] : Garbage2[rnd.Next(45)];
+				single = !single;
 			}
 			return garbage;
 		}
@@ -115,6 +115,21 @@ namespace AIGames.BlockBattle.Kubisme
 				cnt[r] = (byte)Bits.Count(r);
 			}
 			return cnt;
+		}
+
+		private static ushort[] GetGarbage2()
+		{
+			var garbage = new ushort[9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1];
+			var index = 0;
+			for (var r = 0; r < 10; r++)
+			{
+				for (var i = r + 1; i < 10; i++)
+				{
+					var g = Garbage[i] & Garbage[r];
+					garbage[index++] = (ushort)g;
+				}
+			}
+			return garbage;
 		}
 	}
 }

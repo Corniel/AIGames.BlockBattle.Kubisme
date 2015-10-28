@@ -13,7 +13,8 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			if (garbage > 0)
 			{
-				return field.Garbage(Row.GetGarbage(garbage, pars.Rnd));
+				var ptOld = depth == 0 ? 0 : pars.Opponent.States[depth - 1].Points;
+				return field.Garbage(Row.GetGarbage(garbage, ptOld, pars.Rnd));
 			}
 			return field;
 		}

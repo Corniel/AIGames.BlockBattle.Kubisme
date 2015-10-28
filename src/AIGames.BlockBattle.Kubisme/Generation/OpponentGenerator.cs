@@ -47,8 +47,8 @@
 				}
 			}
 
-			opponent.States[0] = opponent.States[0].SetGarbage((opponent.States[0].Points >> 2) - (field.Points >> 2));
-			opponent.States[1] = opponent.States[1].SetGarbage((opponent.States[1].Points >> 2) - (opponent.States[0].Points >> 2));
+			opponent.States[0] = opponent.States[0].SetGarbage((opponent.States[0].Points / 3) - (field.Points / 3));
+			opponent.States[1] = opponent.States[1].SetGarbage((opponent.States[1].Points / 3) - (opponent.States[0].Points / 3));
 
 			var prev = opponent.States[1];
 
@@ -60,7 +60,7 @@
 			for (var i = 2; i < opponent.States.Length; i++)
 			{
 				points += combo;
-				var garbage = (points >> 2) - (prev.Points >> 2);
+				var garbage = (points / 3) - (prev.Points / 3);
 				var rows = 20 - (turn + 1 + i) / 20;
 				var firstFilled = prev.FirstFilled + 1;
 

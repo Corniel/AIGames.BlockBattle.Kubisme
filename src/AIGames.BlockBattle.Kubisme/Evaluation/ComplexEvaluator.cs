@@ -62,7 +62,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var oppo = Opponent.States[depth];
 
 			// Handle oppo scores.
-			var garbage = (field.Points >> 2) - (field.Points >> 2);
+			var garbage = (field.Points / 3) - (field.Points / 3);
 
 			var oppoFreeRows = oppo.FirstFilled - garbage;
 

@@ -63,7 +63,6 @@
     <Compile Include="Deployoment\Deployer.cs" />
     <Compile Include="Deployoment\DeployerTest.cs" />
     <Compile Include="Evaluation\ComplexEvaluatorTest.cs" />
-    <Compile Include="Evaluation\ComplexParametersTest.cs" />
     <Compile Include="Generation\MoveGeneratorGetFieldsTest.cs" />
     <Compile Include="Generation\MoveGeneratorGetMovesTest.cs" />
     <Compile Include="Generation\MoveGeneratorTest.cs" />

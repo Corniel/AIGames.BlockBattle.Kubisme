@@ -15,24 +15,26 @@ namespace AIGames.BlockBattle.Kubisme
 		public const short DoubleTSpin = 10;
 		public const short PerfectClear = 18;
 
-		public static readonly Field None = new Field(-1, 0, 0, new ushort[0]);
-		public static readonly Field Empty = Field.Create(0, 0, @"..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........");
+		public static readonly Field None = new Field(-1, 0, 0, 0, new ushort[0]);
+		public static readonly Field Empty = new Field(0, 0, 0, 0, new ushort[20]);
 
 		private readonly ushort[] rows;
 		public readonly short Points;
 		public readonly byte Combo;
+		public readonly byte Skips;
 		public readonly byte FirstFilled;
 
-		public Field(short pt, byte combo, byte freeRows, params ushort[] rs)
+		public Field(short pt, byte combo, byte skips, byte freeRows, params ushort[] rs)
 		{
-			rows = rs;
 			Points = pt;
 			Combo = combo;
+			Skips = skips;
 			FirstFilled = freeRows;
+			rows = rs;
 		}
 
-		public Field(short pt, byte combo, params ushort[] rs) :
-			this(pt, combo, GetFirstNoneEmptyRow(rs), rs) { }
+		public Field(short pt, byte combo, byte skips, params ushort[] rs) :
+			this(pt, combo, skips, GetFirstNoneEmptyRow(rs), rs) { }
 
 		private static byte GetFirstNoneEmptyRow(ushort[] rows)
 		{
@@ -115,6 +117,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 			short pt = Points;
 			byte combo = Combo;
+			byte skips = Skips;
 			// the current position, and if the block is higher, pick that one.
 			byte free = (byte)Math.Min(FirstFilled, pos.Row);
 			short cleared = 0;
@@ -174,6 +177,7 @@ namespace AIGames.BlockBattle.Kubisme
 						else
 						{
 							pt += DoubleTSpin;
+							skips++;
 						}
 					}
 					else
@@ -183,7 +187,7 @@ namespace AIGames.BlockBattle.Kubisme
 							case 1: pt += SingleLineClear; break;
 							case 2: pt += DoubleLineClear; break;
 							case 3: pt += TripleLineClear; break;
-							case 4: pt += QuadrupleLineClear; break;
+							case 4: pt += QuadrupleLineClear; skips++; break;
 						}
 					}
 				}
@@ -193,7 +197,7 @@ namespace AIGames.BlockBattle.Kubisme
 					pt += combo++;
 				}
 			}
-			return new Field(pt, combo, free, rs);
+			return new Field(pt, combo, skips, free, rs);
 		}
 
 		/// <summary>Returns a field, with garbage rows.</summary>
@@ -286,12 +290,12 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				rows[r] = row;
 			}
-			var field = new Field((short)state[name].Points, (byte)state[name].Combo, rows);
+			var field = new Field((short)state[name].Points, (byte)state[name].Combo, (byte)state[name].Skips, rows);
 
 			return field;
 		}
 
-		public static Field Create(int pt, int combo, string str)
+		public static Field Create(int pt, int combo, int skips, string str)
 		{
 			var lines = str.Split(new String[] { "|", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 			var rows = new ushort[lines.Length];
@@ -301,7 +305,7 @@ namespace AIGames.BlockBattle.Kubisme
 				var row = Row.Create(lines[r].Trim());
 				rows[r] = row;
 			}
-			return new Field((short)pt, (byte)combo, rows);
+			return new Field((short)pt, (byte)combo,(byte)skips, rows);
 		}
 	}
 }

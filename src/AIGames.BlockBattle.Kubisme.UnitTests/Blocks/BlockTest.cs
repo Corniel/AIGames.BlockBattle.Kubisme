@@ -127,7 +127,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetMinRow_TOnFieldOf3_1()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........");
@@ -139,7 +139,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetMinRow_TOnFilledFieldOf3_0()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 .........X
 ........XX
 .......XX.");
@@ -151,7 +151,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetMaxRow_TOnFieldOf3_1()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........");

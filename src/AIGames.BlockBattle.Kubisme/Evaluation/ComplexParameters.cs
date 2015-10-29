@@ -45,6 +45,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Points { get; set; }
 		
 		public int Combo { get; set; }
+		public int Skips { get; set; }
 
 		[ParameterType(ParameterType.Negative)]
 		public int Holes { get; set; }

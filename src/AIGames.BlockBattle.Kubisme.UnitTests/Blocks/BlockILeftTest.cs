@@ -9,7 +9,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetColumns_FieldWith3Rows_0Columns()
 		{
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var act = Block.I[Block.RotationType.Left].GetColumns(field).ToArray();
 			var exp = new int[0];
 			CollectionAssert.AreEqual(exp, act);
@@ -19,7 +19,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetColumns_FieldWith5Rows_10Columns()
 		{
-			var field = Field.Create(0, 0, "...........|...........|...........|...........|.X.....XX..");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........|...........|.X.....XX..");
 			var act = Block.I[Block.RotationType.Left].GetColumns(field).ToArray();
 			var exp = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 			CollectionAssert.AreEqual(exp, act);
@@ -29,7 +29,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetColumns_FieldWith5RowsWithBlockades_6Columns()
 		{
-			var field = Field.Create(0, 0, "...........|...........|...........|.X.X...X...|.X.....XX..");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........|.X.X...X...|.X.....XX..");
 			var act = Block.I[Block.RotationType.Left].GetColumns(field).ToArray();
 			var exp = new int[] { 2, 4, 5, 6, 8, 9 };
 			CollectionAssert.AreEqual(exp, act);

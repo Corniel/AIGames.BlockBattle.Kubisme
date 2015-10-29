@@ -12,7 +12,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		[Test]
 		public void GetMoves_AlmostFilledField_21candidates()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 XXXX.XX...
@@ -36,7 +36,7 @@ XXXXX.XXXX
 		[Test]
 		public void GetMoves_WithMoveUnder_6candidates()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 .XX.......
 XX........
 ");
@@ -60,7 +60,7 @@ XX........
 		[Test]
 		public void GetMoves_()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 .......XXX
 .........X
 .........X
@@ -84,7 +84,7 @@ XXXXXX.XXX");
 		[Test]
 		public void GetPath_HolesReachable_PathEndingWithDownLeft()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........
@@ -98,7 +98,7 @@ XXXXXX..X.
 		[Test]
 		public void GetReachableHoles_HolesNotReachable_False()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........
@@ -116,7 +116,7 @@ XXXXXX.XX.
 		[Test]
 		public void GetReachableHoles_HolesReachable_4()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........
@@ -138,7 +138,7 @@ XXXXXX..X.
 		[Test]
 		public void GetReachableHoles_HolesNotReachableBecauseTurn_False()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........
@@ -155,7 +155,7 @@ XXXXXX..X.
 		[Test]
 		public void GetPaths_ToTwoHoles_Found()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........
@@ -190,7 +190,7 @@ XXXXXX..X.
 		[Test]
 		public void GetPaths_LongPath_LongValidPath()
 		{
-			var field = Field.Create(0, 0,@"
+			var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........

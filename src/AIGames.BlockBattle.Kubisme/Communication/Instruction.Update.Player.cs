@@ -13,6 +13,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 				{
 					case "row_points": return RowPointsInstruction.Parse(name, splited);
 					case "combo": return ComboInstruction.Parse(name, splited);
+					case "skips": return SkipsInstruction.Parse(name, splited);
 					case "field": return FieldInstruction.Parse(name, splited);
 				}
 			}

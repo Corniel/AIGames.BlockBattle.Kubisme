@@ -51,11 +51,12 @@ namespace AIGames.BlockBattle.Kubisme
 		public int GetScore(Field field, int depth)
 		{
 			var score = 0;
+
 			// Points for static evaluation.
-			
 			score += pars.GarbagePotential[field.Points % 3];
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
+			score += field.Skips * pars.Skips;
 			score += pars.OwnFreeRows[field.FirstFilled];
 
 			#region Filled row logic
@@ -188,7 +189,7 @@ namespace AIGames.BlockBattle.Kubisme
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
 
-			// Ad points for the combo potential there is.
+			// Add points for the combo potential there is.
 			for (var c = 0; c < comboPotential; c++)
 			{
 				score += (c + 1 + field.Combo) * pars.ComboPotential[c];

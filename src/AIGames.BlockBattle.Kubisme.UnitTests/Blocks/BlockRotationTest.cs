@@ -10,7 +10,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnLeft_O_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........");
 			var exp = new string[]
 			{
 				"XX........|XX........",
@@ -25,7 +25,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnRight_O_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........");
 			var exp = new string[]
 			{
 				"XX........|XX........",
@@ -42,7 +42,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnLeft_I_AreEqual()
 		{
 			var position = new Position(0, 1);
-			var field = Field.Create(0, 0, "...........|...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........|...........");
 			var exp = new string[]
 			{
 				"..........|XXXX......|..........|..........",
@@ -57,7 +57,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnRight_I_AreEqual()
 		{
 			var position = new Position(0, 1);
-			var field = Field.Create(0, 0, "...........|...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........|...........");
 			var exp = new string[]
 			{
 				"..........|XXXX......|..........|..........",
@@ -65,7 +65,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 				"..........|..........|XXXX......|..........",
 				".X........|.X........|.X........|.X........",
 				"..........|XXXX......|..........|..........",
-			}; 
+			};
 			TurnRight(exp, Block.I, position, field);
 		}
 
@@ -74,7 +74,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnLeft_S_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				".XX.......|XX........|..........",
@@ -89,7 +89,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnRight_S_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				".XX.......|XX........|..........",
@@ -105,7 +105,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnLeft_Z_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 			"XX........|.XX.......|..........",
@@ -120,7 +120,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnRight_Z_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 			"XX........|.XX.......|..........",
@@ -138,7 +138,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnLeft_J_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				"X.........|XXX.......|..........",
@@ -153,7 +153,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnRight_J_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				"X.........|XXX.......|..........",
@@ -169,7 +169,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnLeft_L_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				"..X.......|XXX.......|..........",
@@ -184,7 +184,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnRight_L_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				"..X.......|XXX.......|..........",
@@ -200,7 +200,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnLeft_T_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				".X........|XXX.......|..........",
@@ -215,7 +215,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		public void TurnRight_T_AreEqual()
 		{
 			var position = new Position(0, 0);
-			var field = Field.Create(0, 0, "...........|...........|...........");
+			var field = Field.Create(0, 0, 0, "...........|...........|...........");
 			var exp = new string[]
 			{
 				".X........|XXX.......|..........",
@@ -242,7 +242,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 				Console.WriteLine(apply.Replace("|", Environment.NewLine));
 				Console.WriteLine();
 			}
-			
+
 			foreach (var f in act)
 			{
 				Console.WriteLine('"' + f + '"' + ',');

@@ -87,7 +87,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void Apply_Top_NoTSpin()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 XXX...XXXX
 .XXX.XXXXX");
 
@@ -103,7 +103,7 @@ XXX...XXXX
 		[Test]
 		public void Apply_Row1_NoTSpin()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..X...X...
 XXX...XXXX
 XXXX.XXXXX");
@@ -120,7 +120,7 @@ XXXX.XXXXX");
 		[Test]
 		public void Apply_Row1ToMuchSpaceOnTail_NoTSpin()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..X..XX...
 XXX...XXXX
 XXX..XXXXX");
@@ -137,7 +137,7 @@ XXX..XXXXX");
 		[Test]
 		public void Apply_Row1ToMuchSpaceToMuchSpaceOnHead_NoTSpin()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..X..XX...
 XX....XXXX
 XXXX.XXXXX");
@@ -154,7 +154,7 @@ XXXX.XXXXX");
 		[Test]
 		public void Apply_Row1_WithDoubleTSpin()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..X..XX...
 XXX...XXXX
 XXXX.XXXXX");
@@ -171,7 +171,7 @@ XXXX.XXXXX");
 		[Test]
 		public void Apply_Row1Clear1_WithDoubleTSpin()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..X..XX...
 .XX...XXXX
 XXXX.XXXXX");
@@ -188,7 +188,7 @@ XXXX.XXXXX");
 		[Test]
 		public void Apply_Row1Clear2_WithDoubleTSpin()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0, @"
 ..X..XX...
 XXX...XXXX
 .XXX.XXXXX");
@@ -205,7 +205,7 @@ XXX...XXXX
 		[Test]
 		public void GetMove_TForTSpin_ClearedField()
 		{
-			var field = Field.Create(0, 2, @"
+			var field = Field.Create(0, 2, 0, @"
 ..........
 ..........
 ..X..XX...

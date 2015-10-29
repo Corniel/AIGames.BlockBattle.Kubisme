@@ -9,9 +9,9 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetColumns_FieldWith1Row_7Columns()
 		{
-			var field = Field.Create(0, 0, "...........");
+			var field = Field.Create(0, 0, 0, "...........");
 			var act = Block.I.GetColumns(field).ToArray();
-			var exp = new int[]{ 0, 1, 2, 3, 4, 5, 6 };
+			var exp = new int[] { 0, 1, 2, 3, 4, 5, 6 };
 			CollectionAssert.AreEqual(exp, act);
 
 		}
@@ -19,7 +19,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void GetColumns_FieldWith1RowsWithBlockades_3Columns()
 		{
-			var field = Field.Create(0, 0, "..X......X");
+			var field = Field.Create(0, 0, 0, "..X......X");
 			var act = Block.I.GetColumns(field).ToArray();
 			var exp = new int[] { 3, 4, 5 };
 			CollectionAssert.AreEqual(exp, act);

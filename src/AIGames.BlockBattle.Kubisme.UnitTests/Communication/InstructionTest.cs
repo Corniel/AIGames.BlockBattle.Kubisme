@@ -84,6 +84,15 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 		}
 
 		[Test]
+		public void Parse_SkipsInstruction_Player2Skips13()
+		{
+			var act = Instruction.Parse("update player2 skips 13");
+			var exp = new SkipsInstruction(PlayerName.Player2, 13);
+
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
 		public void Parse_FieldInstruction_Player2Array()
 		{
 			var act = Instruction.Parse("update player2 field 0,1,2,2;0,0,0,2;3,3,3,3");

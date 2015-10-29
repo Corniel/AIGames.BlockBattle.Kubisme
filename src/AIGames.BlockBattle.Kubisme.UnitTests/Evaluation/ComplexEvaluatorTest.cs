@@ -469,7 +469,7 @@ XXX.......";
 
 		private static void Test(string str, ComplexParameters pars, int expected)
 		{
-			var field = Field.Create(0, 0, str);
+			var field = Field.Create(0, 0, 0, str);
 			var evaluator = new ComplexEvaluator()
 			{
 				Parameters = pars,

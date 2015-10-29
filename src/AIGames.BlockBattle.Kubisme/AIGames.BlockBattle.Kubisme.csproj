@@ -65,6 +65,7 @@
     <Compile Include="Communication\Instruction.Settings.cs" />
     <Compile Include="Communication\Instruction.Settings.YourBot.cs" />
     <Compile Include="Communication\Instruction.Update.cs" />
+    <Compile Include="Communication\Instruction.Update.Player.Skips.cs" />
     <Compile Include="Communication\Instruction.Update.Player.Combo.cs" />
     <Compile Include="Communication\Instruction.Update.Player.Field.cs" />
     <Compile Include="Communication\Instruction.Update.Player.RowPoints.cs" />

@@ -9,7 +9,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 		[Test, Category(Category.IntegrationTest)]
 		public void GetMove_With_LogResults()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0,0, @"
 ..........
 ..........
 ..........
@@ -51,7 +51,7 @@ XXXX.XXXXX");
 		[Test, Category(Category.IntegrationTest)]
 		public void GetMove_6LinesGarbage_LogResults()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0, 0,@"
 ..........
 ..........
 ..........
@@ -93,7 +93,7 @@ XXXX.XXXXX");
 		[Test, Category(Category.IntegrationTest)]
 		public void GetMove_1LinesLeft_LogResults()
 		{
-			var field = Field.Create(0, 0, @"
+			var field = Field.Create(0, 0,0, @"
 ..........
 XXXX.XXXXX
 XXXXX.XXXX

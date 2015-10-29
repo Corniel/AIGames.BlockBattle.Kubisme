@@ -50,6 +50,7 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 		{
 			public int Points { get; set; }
 			public int Combo { get; set; }
+			public int Skips { get; set; }
 			public int[,] Field { get; set; }
 		}
 
@@ -80,6 +81,13 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 					state[inst.Name].Combo = inst.Points;
 				}
 			},
+			{
+				typeof(SkipsInstruction), (instruction, state) =>
+				{
+					var inst = (SkipsInstruction)instruction;
+					state[inst.Name].Skips = inst.Skips;
+				}
+			},
 			{ 
 				typeof(FieldInstruction), (instruction, state) =>
 				{
@@ -104,7 +112,5 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 				typeof(NextPieceInstruction), (instruction, state) => { state.NextPiece = ((NextPieceInstruction)instruction).Piece; }
 			},
 		};
-
-		
 	}
 }

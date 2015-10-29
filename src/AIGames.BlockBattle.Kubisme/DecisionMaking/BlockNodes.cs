@@ -9,7 +9,10 @@ namespace AIGames.BlockBattle.Kubisme
 		public BlockNodes(Block block) : base(block.ChildCount + 2) { }
 
 		/// <summary>Gets the score of the best (first) node.</summary>
-		public int Score { get { return Count == 0 ? short.MinValue : this[0].Score; } }
+		public int GetScore(int depth)
+		{
+			return Count == 0 ? short.MinValue + depth : this[0].Score;
+		}
 
 		/// <summary>Applies the search on the child nodes.</summary>
 		/// <param name="depth">
@@ -21,12 +24,9 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <param name="branchingFactor">
 		/// The maximum branching factor.
 		/// </param>
-		public int Apply(byte depth, ApplyParameters pars, int branchingFactor)
+		public void Apply(byte depth, ApplyParameters pars, int branchingFactor)
 		{
-			if (Count == 0)
-			{
-				return pars.Evaluator.LostScore;
-			}
+			if (Count == 0) { return; }
 
 			var lastIndex = Math.Min(Count, branchingFactor);
 
@@ -50,7 +50,6 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 			}
 			Sort(lastIndex);
-			return this[0].Score;
 		}
 
 		/// <summary>Inserts the children sorted.</summary>

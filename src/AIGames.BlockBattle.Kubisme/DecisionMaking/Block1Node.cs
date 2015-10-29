@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Linq;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AIGames.BlockBattle.Kubisme
 {
+	[DebuggerDisplay("{DebuggerDisplay}")]
 	public class Block1Node : BlockNode<BlockRndNode>
 	{
 		public Block1Node(Field field, BlockPath path, int score, int branchingfactor)
@@ -33,20 +35,22 @@ namespace AIGames.BlockBattle.Kubisme
 					Children = new BlockNodes<BlockRndNode>(block);
 
 					var applied = BlockNode.Apply(Field, Depth, pars);
-					if (applied.IsNone) { Score = pars.Evaluator.LostScore + depth; return; }
-
-					foreach (var field in pars.Generator.GetFields(applied, block, true))
+					if (!applied.IsNone)
 					{
-						if (!pars.HasTimeLeft) { return; }
-						var child = Create(field, pars);
-						Children.InsertSorted(child);
+						foreach (var field in pars.Generator.GetFields(applied, block, true))
+						{
+							if (!pars.HasTimeLeft) { return; }
+							var child = Create(field, pars);
+							Children.InsertSorted(child);
+						}
 					}
 				}
 				else
 				{
 					if (Children.Empty()) { return; }
-					Score = Children.Apply(depth, pars, BranchingFactor);
+					Children.Apply(depth, pars, BranchingFactor);
 				}
+				Score = Children.GetScore(Depth);
 			}
 		}
 
@@ -58,5 +62,14 @@ namespace AIGames.BlockBattle.Kubisme
 		}
 
 		protected override Block GetBlock(ApplyParameters pars) { return pars.Next; }
+
+		[DebuggerBrowsable(DebuggerBrowsableState.Never), ExcludeFromCodeCoverage]
+		private string DebuggerDisplay
+		{
+			get
+			{
+				return String.Format("{0:#,##0}, Depth: {1}, Children: {2}, Path: {3}", Score, Depth, Children == null ? 0 : Children.Count, Path);
+			}
+		}
 	}
 }

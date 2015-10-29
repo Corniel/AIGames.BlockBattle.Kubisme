@@ -16,7 +16,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public const short PerfectClear = 18;
 
 		public static readonly Field None = new Field(-1, 0, 0, 0, new ushort[0]);
-		public static readonly Field Empty = new Field(0, 0, 0, 0, new ushort[20]);
+		public static readonly Field Empty = new Field(0, 0, 0, 20, new ushort[20]);
 
 		private readonly ushort[] rows;
 		public readonly short Points;

@@ -309,31 +309,6 @@ XXX.......";
 			Test(field, pars, expected);
 		}
 		
-		[Test]
-		public void LostScore_None_Negative()
-		{
-			var evaluator = new ComplexEvaluator();
-			var act = evaluator.LostScore;
-			var exp = short.MinValue;
-			Assert.AreEqual(exp, act);
-		}
-		[Test]
-		public void WinScore_None_Postive()
-		{
-			var evaluator = new ComplexEvaluator();
-			var act = evaluator.WinScore;
-			var exp = short.MaxValue;
-			Assert.AreEqual(exp, act);
-		}
-		[Test]
-		public void DrawScore_None_RoundZero()
-		{
-			var evaluator = new ComplexEvaluator();
-			var act = evaluator.DrawScore;
-			var exp = 0;
-			Assert.AreEqual(exp, act);
-		}
-
 		private static void Test(string str, ComplexParameters pars, int expected)
 		{
 			var field = Field.Create(0, 0, 0, str);

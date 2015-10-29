@@ -96,18 +96,19 @@ namespace AIGames.BlockBattle.Kubisme
 			// Elo: 1728, Avg: 0,478, Runs: 2158, ID: 200, Parent: 168
 			{
 				GarbagePotential = new int[] { 0, 1, 2 },
-				FreeRows = new int[] { 1, 2, 4, 8, 16, 32, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 128, 256, 512, 1024, 2048 },
-				Points = 100,
-				Combo = 10,
-				Holes = -100,
-				WallsLeft = 20,
-				WallsRight = 20,
-				NeighborsHorizontal = -20,
-				NeighborsVertical = 20,
-				Floor = 20,
-				TSpinPotential = 100,
-				Blockades = -10,
-				LastBlockades = -20,
+				//FreeRows = new int[] { 1, 2, 4, 8, 16, 32, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 128, 256, 512, 1024, 2048 },
+				//Points = 100,
+				//Combo = 10,
+				FirstFilled = 10,
+				Holes = -1,
+				//WallsLeft = 20,
+				//WallsRight = 20,
+				//NeighborsHorizontal = -20,
+				//NeighborsVertical = 20,
+				//Floor = 20,
+				//TSpinPotential = 100,
+				//Blockades = -10,
+				//LastBlockades = -20,
 			};
 			return pars;
 		}

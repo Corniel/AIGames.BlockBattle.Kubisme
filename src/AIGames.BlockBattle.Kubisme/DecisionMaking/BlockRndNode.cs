@@ -63,7 +63,7 @@ namespace AIGames.BlockBattle.Kubisme
 				Score = 0;
 				foreach (var nodes in Children)
 				{
-					Score += nodes.Score;
+					Score += nodes.GetScore(Depth);
 				}
 				// Divide by 2.
 				Score >>= 1;

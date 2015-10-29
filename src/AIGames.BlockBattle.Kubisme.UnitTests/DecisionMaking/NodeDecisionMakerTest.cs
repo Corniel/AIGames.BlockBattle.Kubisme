@@ -9,7 +9,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 		[Test, Category(Category.IntegrationTest)]
 		public void GetMove_With_LogResults()
 		{
-			var field = Field.Create(0, 0,0, @"
+			var field = Field.Create(0, 0, 1, @"
 ..........
 ..........
 ..........
@@ -41,6 +41,32 @@ XXXX.XXXXX");
 			};
 
 			dm.GetMove(field, Block.T, Block.Z, 1);
+
+			foreach (var log in dm.Logs)
+			{
+				Console.WriteLine(log);
+			}
+		}
+
+		[Test, Category(Category.IntegrationTest)]
+		public void GetMove_SmallBoard_LogResults()
+		{
+			var field = Field.Create(8, 1, 1, @"
+..........
+..........
+..........
+XXXXX.....");
+			var dm = new NodeDecisionMakerTester()
+			{
+				Evaluator = new ComplexEvaluator()
+				{
+					Parameters = ComplexParameters.GetDefault(),
+				},
+				Generator = new MoveGenerator(),
+				MaximumDepth = 10,
+			};
+
+			dm.GetMove(field, Block.O, Block.Z, 1);
 
 			foreach (var log in dm.Logs)
 			{

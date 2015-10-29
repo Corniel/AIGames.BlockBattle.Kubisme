@@ -43,11 +43,7 @@ namespace AIGames.BlockBattle.Kubisme
 		protected ComplexParameters pars { get; set; }
 
 		public Field Initial { get; set; }
-
-		public int WinScore { get { return short.MaxValue; } }
-		public int DrawScore { get { return 0; } }
-		public int LostScore { get { return short.MinValue; } }
-
+		
 		public int GetScore(Field field, int depth)
 		{
 			var score = 0;

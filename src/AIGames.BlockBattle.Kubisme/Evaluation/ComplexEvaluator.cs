@@ -53,7 +53,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			var score = 0;
 			// Points for static evaluation.
-			score += pars.GarbagePotential[field.Points & 3];
+			score += pars.GarbagePotential[field.Points % 3];
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
 

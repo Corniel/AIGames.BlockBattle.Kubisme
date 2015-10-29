@@ -226,6 +226,14 @@ namespace AIGames.BlockBattle.Kubisme
 			return new Field(Points, Combo, (byte)free, rs);
 		}
 
+		/// <summary>Skips a block.</summary>
+		public Field SkipBlock()
+		{
+			var rs = new ushort[rows.Length];
+			Array.Copy(rows, 0, rs, 0, rs.Length);
+			return new Field(Points, 0, (byte)(Skips - 1), rs);
+		}
+
 		public override string ToString() { return String.Join("|", Rows); }
 
 		#region IEquatable

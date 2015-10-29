@@ -1,5 +1,4 @@
-﻿
-namespace AIGames.BlockBattle.Kubisme.Communication
+﻿namespace AIGames.BlockBattle.Kubisme.Communication
 {
 	public enum ActionType
 	{
@@ -10,5 +9,6 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 		TurnLeft = 4,
 		TurnRight = 5,
 		Drop = 6,
+		Skips = 7,
 	}
 }

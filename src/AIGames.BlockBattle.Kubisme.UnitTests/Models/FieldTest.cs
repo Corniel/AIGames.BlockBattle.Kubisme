@@ -217,6 +217,16 @@ XXXX.XXXXX");
 		}
 
 		[Test]
+		public void SkipBlock_None_SkipOf3()
+		{
+			var exp = "..X..XX...|XXX...XXXX|XXXX.XXXXX";
+			var field = Field.Create(1, 2, 4, exp);
+
+			var act = field.SkipBlock();
+			AssertField(exp, 1, 0, 3, 0, act);
+		}
+
+		[Test]
 		public void Garbage_TwoRows_AppliedSuccessful()
 		{
 			var field = Field.Create(0, 0, 0, @"

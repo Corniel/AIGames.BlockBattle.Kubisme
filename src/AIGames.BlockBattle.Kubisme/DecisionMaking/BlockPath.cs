@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -15,6 +13,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public static readonly BlockPath Left = BlockPath.Create(ActionType.TurnLeft);
 		public static readonly BlockPath Right = BlockPath.Create(ActionType.TurnRight);
 		public static readonly BlockPath Uturn = BlockPath.Create(ActionType.TurnLeft, ActionType.TurnLeft);
+		public static readonly BlockPath Skips = BlockPath.Create(ActionType.Skips);
 
 		private BlockPath(ulong m0, ulong m1, int count)
 		{

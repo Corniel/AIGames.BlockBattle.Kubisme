@@ -5,7 +5,7 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public class MoveGenerator : IMoveGenerator
 	{
-		public IEnumerable<Field> GetFields(Field field, Block current,  bool searchNoDrops)
+		public IEnumerable<Field> GetFields(Field field, Block current, bool searchNoDrops)
 		{
 			if (searchNoDrops)
 			{
@@ -36,6 +36,10 @@ namespace AIGames.BlockBattle.Kubisme
 						}
 					}
 				}
+			}
+			if (field.Skips > 0)
+			{
+				yield return field.SkipBlock();
 			}
 		}
 
@@ -70,6 +74,10 @@ namespace AIGames.BlockBattle.Kubisme
 						}
 					}
 				}
+			}
+			if (field.Skips > 0)
+			{
+				yield return new MoveCandiate(BlockPath.Skips, field.SkipBlock());
 			}
 		}
 
@@ -126,7 +134,7 @@ namespace AIGames.BlockBattle.Kubisme
 				if (temp.Position.Row > maxRow) { continue; }
 
 				var test = field.Test(temp.Block, temp.Position);
-				
+
 				// No reason the investigate
 				if (test == Field.TestResult.False) { continue; }
 
@@ -154,14 +162,14 @@ namespace AIGames.BlockBattle.Kubisme
 
 				if (temp.Position.Col > 0 && !dones[(int)temp.Block.Rotation, temp.Position.Row + 1, temp.Position.Col - 1])
 				{
-					dones[(int)temp.Block.Rotation, temp.Position.Row + 1, temp.Position.Col  - 1] = true;
+					dones[(int)temp.Block.Rotation, temp.Position.Row + 1, temp.Position.Col - 1] = true;
 					stack.Push(temp.Left());
 				}
 
 				// we have a fit.
 				if (test == Field.TestResult.True)
 				{
-					if(temp.Block.TouchPosition(temp.Position, targets))
+					if (temp.Block.TouchPosition(temp.Position, targets))
 					{
 						var unique = temp.Block.Variations.Length == temp.Block.RotationVariations.Length;
 
@@ -171,8 +179,8 @@ namespace AIGames.BlockBattle.Kubisme
 							var rot_org = (int)temp.Block.Rotation & 1;
 							var rot_acc = rot_org | 2;
 
-							unique = 
-								dones[rot_org, temp.Position.Row + 1, temp.Position.Col] ^ 
+							unique =
+								dones[rot_org, temp.Position.Row + 1, temp.Position.Col] ^
 								dones[rot_acc, temp.Position.Row + 1, temp.Position.Col];
 						}
 						if (unique)
@@ -184,7 +192,7 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				else
 				{
-					if(!dones[(int)temp.Block.Rotation, temp.Position.Row + 2, temp.Position.Col])
+					if (!dones[(int)temp.Block.Rotation, temp.Position.Row + 2, temp.Position.Col])
 					{
 						dones[(int)temp.Block.Rotation, temp.Position.Row + 2, temp.Position.Col] = true;
 						stack.Push(temp.Down());

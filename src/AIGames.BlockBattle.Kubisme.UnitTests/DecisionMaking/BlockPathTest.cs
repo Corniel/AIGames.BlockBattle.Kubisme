@@ -8,6 +8,17 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 	public class BlockPathTest
 	{
 		[Test]
+		public void Skips_1Item_AreEqual()
+		{
+			var exp = new ActionType[] { ActionType.Skips };
+			var act = BlockPath.Skips;
+
+			Assert.AreEqual(1, act.Count, "Count");
+			CollectionAssert.AreEqual(exp, act.Moves.ToArray());
+			Assert.AreEqual("skips", act.ToString());
+		}
+
+		[Test]
 		public void Create_5Items_AreEqual()
 		{
 			var exp = new ActionType[] { ActionType.Left, ActionType.Right, ActionType.Down, ActionType.TurnLeft, ActionType.TurnRight };

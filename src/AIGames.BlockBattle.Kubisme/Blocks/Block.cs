@@ -94,15 +94,6 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			ColumnMinimum = Columns[0];
 			ColumnMaximum = Columns[Columns.Length - 1];
-
-			switch (Rotation)
-			{
-				case RotationType.Left: InitialPath = BlockPath.Left; break;
-				case RotationType.Uturn: InitialPath = BlockPath.Uturn; break;
-				case RotationType.Right: InitialPath = BlockPath.Right; break;
-				case RotationType.None:
-				default: InitialPath = BlockPath.None; break;
-			}
 		}
 
 		public enum RotationType
@@ -141,8 +132,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public virtual int BranchingFactor1 { get { return 10; } }
 
 		public readonly Position[] Touches;
-
-		public readonly BlockPath InitialPath;
 
 		public int Count { get { return Lines.Sum(l => Bits.Count(l)); } }
 

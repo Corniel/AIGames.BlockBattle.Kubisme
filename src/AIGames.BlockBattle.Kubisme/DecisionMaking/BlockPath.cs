@@ -12,9 +12,6 @@ namespace AIGames.BlockBattle.Kubisme
 		private const UInt64 Mask = 0x0FFFFFFFFFFFFFFF;
 
 		public static readonly BlockPath None = default(BlockPath);
-		public static readonly BlockPath Left = BlockPath.Create(ActionType.TurnLeft);
-		public static readonly BlockPath Right = BlockPath.Create(ActionType.TurnRight);
-		public static readonly BlockPath Uturn = BlockPath.Create(ActionType.TurnLeft, ActionType.TurnLeft);
 		public static readonly BlockPath Skips = BlockPath.Create(ActionType.Skips);
 
 		private BlockPath(ulong m0, ulong m1, int count)

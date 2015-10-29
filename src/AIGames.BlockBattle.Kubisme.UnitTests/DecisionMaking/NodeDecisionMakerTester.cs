@@ -10,13 +10,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			: base(new MT19937Generator(17)) { }
 
 		public List<string> Logs = new List<string>();
-
-		public BlockPath GetMove(Field field, Block current, Block next, int round)
-		{
-			return GetMove(field, new OpponentStub(), current, next, round);
-		}
-
-		public override BlockPath GetMove(Field field, Opponent opponent, Block current, Block next, int round)
+		
+		public override BlockPath GetMove(Field field, Block current, Block next, int round)
 		{
 			Pars = new ApplyParameters(Rnd)
 			{
@@ -27,7 +22,6 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Generator = Generator,
 				Current = current,
 				Next = next,
-				Opponent = opponent,
 			};
 			Root = new BlockRootNode(field);
 

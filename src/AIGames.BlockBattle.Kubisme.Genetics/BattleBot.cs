@@ -1,17 +1,15 @@
 ﻿using Troschuetz.Random.Generators;
+
 namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class BattleBot
 	{
 		public BattleBot() { }
 		public NodeDecisionMaker DecisionMaker { get; protected set; }
-		public OpponentGenerator OpponentGenerator { get; protected set; }
 
 		public Field GetResponse(Field own, Field other, Block current, Block next, int round)
 		{
-			var opponent = OpponentGenerator.Create(round, other, current, next, DecisionMaker.MaximumDepth);
-			((ComplexEvaluator)DecisionMaker.Evaluator).Opponent = opponent;
-			var move = DecisionMaker.GetMove(own, opponent, current, next, round);
+			var move = DecisionMaker.GetMove(own, current, next, round);
 			return DecisionMaker.BestField;
 		}
 
@@ -19,7 +17,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new BattleBot()
 			{
-				OpponentGenerator = new OpponentGenerator(),
 				DecisionMaker = new NodeDecisionMaker(rnd)
 				{
 					MaximumDepth = maxDepth,

@@ -35,7 +35,6 @@ XXXX.XXXXX");
 				Evaluator = new ComplexEvaluator()
 				{
 					Parameters = ComplexParameters.GetDefault(),
-					Opponent = new OpponentStub(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 10,
@@ -78,7 +77,6 @@ XXXX.XXXXX");
 				Evaluator = new ComplexEvaluator()
 				{
 					Parameters = ComplexParameters.GetDefault(),
-					Opponent = new OpponentStub(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 9,
@@ -108,7 +106,6 @@ XXXX.XXXXX");
 				Evaluator = new ComplexEvaluator()
 				{
 					Parameters = ComplexParameters.GetDefault(),
-					Opponent = new OpponentStub(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 11,

@@ -23,10 +23,8 @@ namespace AIGames.BlockBattle.Kubisme
 				MaximumDepth = 10,
 				MaximumDuration = TimeSpan.FromMilliseconds(700),
 			};
-			Predictor = new OpponentGenerator();
 		}
 		public NodeDecisionMaker DecisionMaker { get; set; }
-		public IOpponentGenerator Predictor { get; set; }
 		public Settings Settings { get; set; }
 		public GameState State { get; set; }
 		public Field Field { get; set; }
@@ -57,11 +55,9 @@ namespace AIGames.BlockBattle.Kubisme
 			DecisionMaker.MaximumDuration = TimeSpan.FromMilliseconds(max);
 			DecisionMaker.MinimumDuration = TimeSpan.FromMilliseconds(min);
 
-			var opponent = Predictor.Create(State.Round, Opponent, Current, Next, Math.Min(16, DecisionMaker.MaximumDepth));
-			((ComplexEvaluator)DecisionMaker.Evaluator).Opponent = opponent;
 			((ComplexEvaluator)DecisionMaker.Evaluator).Initial = Field;
 
-			var path = DecisionMaker.GetMove(Field, opponent, Current, Next, State.Round);
+			var path = DecisionMaker.GetMove(Field, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());
 
 			var response = new BotResponse()

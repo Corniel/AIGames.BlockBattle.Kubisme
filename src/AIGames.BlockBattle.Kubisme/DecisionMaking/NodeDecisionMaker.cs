@@ -27,7 +27,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public ApplyParameters Pars { get; protected set; }
 		public Field BestField { get; protected set; }
 
-		public virtual BlockPath GetMove(Field field, Opponent opponent, Block current, Block next, int round)
+		public virtual BlockPath GetMove(Field field, Block current, Block next, int round)
 		{
 			Logs.Clear();
 			Pars = new ApplyParameters(Rnd)
@@ -39,7 +39,6 @@ namespace AIGames.BlockBattle.Kubisme
 				Generator = Generator,
 				Current = current,
 				Next = next,
-				Opponent = opponent,
 			};
 			Root = new BlockRootNode(field);
 

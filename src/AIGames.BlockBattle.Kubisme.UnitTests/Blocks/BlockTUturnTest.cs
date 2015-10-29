@@ -221,7 +221,6 @@ XXXX.XXXXX");
 						Points = 100,
 						Holes = -100,
 					}.Calculate(),
-					Opponent = new OpponentStub(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 3,

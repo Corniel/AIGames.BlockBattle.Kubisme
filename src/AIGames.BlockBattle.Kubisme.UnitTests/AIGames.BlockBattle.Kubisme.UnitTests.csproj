@@ -47,9 +47,7 @@
     <Compile Include="Blocks\BlockRotationTest.cs" />
     <Compile Include="Blocks\BlockTUturnTest.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMakerTester.cs" />
-    <Compile Include="Evaluation\OpponentStub.cs" />
     <Compile Include="Genetics\ParameterRandomizerTest.cs" />
-    <Compile Include="Opponent\OpponentTest.cs" />
     <Compile Include="TestData.cs" />
     <EmbeddedResource Include="Communication\input.version0016.txt" />
     <EmbeddedResource Include="Communication\input.version0017.txt" />

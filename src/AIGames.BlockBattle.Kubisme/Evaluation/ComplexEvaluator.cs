@@ -43,7 +43,6 @@ namespace AIGames.BlockBattle.Kubisme
 		protected ComplexParameters pars { get; set; }
 
 		public Field Initial { get; set; }
-		public Opponent Opponent { get; set; }
 
 		public int WinScore { get { return short.MaxValue; } }
 		public int DrawScore { get { return 0; } }
@@ -53,42 +52,11 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			var score = 0;
 			// Points for static evaluation.
+			
 			score += pars.GarbagePotential[field.Points % 3];
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
-
-			#region Free row counting
-
-			var oppo = Opponent.States[depth];
-
-			// Handle oppo scores.
-			var garbage = (field.Points / 3) - (field.Points / 3);
-
-			var oppoFreeRows = oppo.FirstFilled - garbage;
-
-			// The oppo has now rows anymore, we win. :)
-			if (oppoFreeRows < 0)
-			{
-				score += WinScore - depth - oppoFreeRows;
-			}
-			else
-			{
-				score += pars.OppoFreeRows[oppoFreeRows];
-			}
 			score += pars.OwnFreeRows[field.FirstFilled];
-
-			// Apply the score for the difference too.
-			var difFreeRows = field.FirstFilled - oppoFreeRows;
-
-			if (difFreeRows >= 0)
-			{
-				score -= pars.DifFreeRows[difFreeRows];
-			}
-			else
-			{
-				score += pars.DifFreeRows[-difFreeRows];
-			}
-			#endregion
 
 			#region Filled row logic
 

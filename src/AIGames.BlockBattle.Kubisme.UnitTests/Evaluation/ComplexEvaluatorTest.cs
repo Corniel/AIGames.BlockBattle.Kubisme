@@ -473,7 +473,6 @@ XXX.......";
 			var evaluator = new ComplexEvaluator()
 			{
 				Parameters = pars,
-				Opponent = new OpponentStub(),
 			};
 			var actual = evaluator.GetScore(field, 0);
 			Assert.AreEqual(expected, actual);

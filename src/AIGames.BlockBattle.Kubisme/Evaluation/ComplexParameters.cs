@@ -72,20 +72,11 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] OwnFreeRows { get { return m_OwnFreeRows; } }
 		private int[] m_OwnFreeRows;
-		public int[] OppoFreeRows { get{return m_OppoFreeRows;}}
-		private int[] m_OppoFreeRows;
-		public int[] DifFreeRows { get { return m_DifFreeRows; } }
-		private int[] m_DifFreeRows;
 
 		public ComplexParameters Calculate()
 		{
 			m_OwnFreeRows = new int[OwnFreeRowsCalc.Length];
-			m_OppoFreeRows = new int[OppoFreeRowsCalc.Length];
-			m_DifFreeRows = new int[DifFreeRowsCalc.Length];
-
 			CopyArrayValues(OwnFreeRowsCalc, m_OwnFreeRows);
-			CopyArrayValues(OppoFreeRowsCalc, m_OppoFreeRows);
-			CopyArrayValues(DifFreeRowsCalc, m_DifFreeRows);
 
 			return this;
 		}

@@ -57,7 +57,8 @@ namespace AIGames.BlockBattle.Kubisme
 			score += field.Points * pars.Points;
 			score += field.Combo * pars.Combo;
 			score += field.Skips * pars.Skips;
-			score += pars.OwnFreeRows[field.FirstFilled];
+			score += field.FirstFilled * pars.FirstFilled;
+			score += pars.FreeRows[field.FirstFilled];
 
 			#region Filled row logic
 
@@ -70,17 +71,6 @@ namespace AIGames.BlockBattle.Kubisme
 			var neighborsV = 0;
 			ushort previous = 0;
 			
-			// Variables for unreachable garbage.
-			int reachableMask = Row.Filled;
-
-			var lineIsReachable = true;
-			var unreachble = field.FirstFilled;
-
-			// Variables for combo potential.
-			var comboPotential = 0;
-			var hasComboPotential = true;
-			var filterComboPotential = 0;
-
 			// Variables for T-Spin potential
 			var hasTSpinPotential = false;
 			var prevCount = 0;
@@ -114,52 +104,6 @@ namespace AIGames.BlockBattle.Kubisme
 					wallRight = 0;
 				}
 
-				// Check if the line is still reachable.
-				if (lineIsReachable)
-				{
-					reachableMask &= rowMirrored;
-					lineIsReachable = reachableMask != 0;
-					if (!lineIsReachable)
-					{
-						unreachble = r;
-					}
-				}
-
-				// check for rows who can be filled in a combo.
-				if (hasComboPotential)
-				{
-					if (rowCount == 7)
-					{
-						if (Row.Row7BlockOneHole.Contains(row | filterComboPotential))
-						{
-							comboPotential++;
-						}
-						else
-						{
-							hasComboPotential = false;
-						}
-					}
-					else if (rowCount == 8)
-					{
-						if (Row.Row8BlockOneHole.Contains(row | filterComboPotential))
-						{
-							comboPotential++;
-						}
-						else
-						{
-							hasComboPotential = false;
-						}
-					}
-					else if (rowCount == 9)
-					{
-						hasComboPotential = false;
-					}
-					else
-					{
-						filterComboPotential |= row;
-					}
-				}
-
 				// If no T-Spin potential detected yet, and access to the row.
 				// the previous has to be 7, and the current 9.
 				if (!hasTSpinPotential && filterTopColomns != Row.Filled &&
@@ -188,16 +132,6 @@ namespace AIGames.BlockBattle.Kubisme
 			score += wallRight * pars.WallsRight;
 			score += neighborsH * pars.NeighborsHorizontal;
 			score += neighborsV * pars.NeighborsVertical;
-
-			// Add points for the combo potential there is.
-			for (var c = 0; c < comboPotential; c++)
-			{
-				score += (c + 1 + field.Combo) * pars.ComboPotential[c];
-			}
-
-			// Points for the reachable lines and the unreachable underneath them.
-			score += pars.Unreachables[field.RowCount - unreachble];
-			score += pars.Reachables[unreachble - field.FirstFilled];
 
 			score += Row.Count[previous] * pars.Floor;
 

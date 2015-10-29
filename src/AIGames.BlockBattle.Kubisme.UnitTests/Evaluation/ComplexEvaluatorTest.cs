@@ -22,7 +22,7 @@ XXX.......";
 			};
 			var expected = 21;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -41,7 +41,7 @@ XXX.......";
 			};
 			var expected = 1;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -60,7 +60,7 @@ XXX.......";
 			};
 			var expected = 3;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 
@@ -76,11 +76,11 @@ XXX.......";
 XXX.......";
 			var pars = new ComplexParameters()
 			{
-				OwnFreeRowsCalc = new int[] { 0, 1 },
+				FreeRows = new int[] { 0, 1 },
 			};
 			var expected = 1;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 
@@ -100,7 +100,7 @@ XXX.......";
 			};
 			var expected = 3;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -119,7 +119,7 @@ XXX.......";
 			};
 			var expected = 16;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -135,7 +135,7 @@ XXX.......";
 			};
 			var expected = 1;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -154,7 +154,7 @@ XXX.......";
 			};
 			var expected = 6;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -173,7 +173,7 @@ XXX.......";
 			};
 			var expected = 15;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -192,7 +192,7 @@ XXX......X";
 			};
 			var expected = 3;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -211,7 +211,7 @@ XXX......X";
 			};
 			var expected = 1;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 		
 		[Test]
@@ -230,7 +230,7 @@ XXX......X";
 			};
 			var expected = 4;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -249,81 +249,7 @@ XXX.......";
 			};
 			var expected = 0;
 
-			Test(field, pars.Calculate(), expected);
-		}
-
-		[Test]
-		public void Test_ComboPotential_0()
-		{
-			var field = @"
-.........X
-..X.......
-.X.XXXXXXX
-XXX...XXXX
-X..XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				ComboPotential = new int[0],
-			};
-			var expected = 0;
-
-			Test(field, pars.Calculate(), expected);
-		}
-
-		[Test]
-		public void Test_ComboPotential_1()
-		{
-			var field = @"
-.........X
-..X.......
-XXX..XXXXX
-XXX.X.XXXX
-X..XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				ComboPotential = new int[] { 1 },
-			};
-			var expected = 1;
-
-			Test(field, pars.Calculate(), expected);
-		}
-		[Test]
-		public void Test_ComboPotential_2()
-		{
-			var field = @"
-.........X
-..X.......
-XXX..XXXXX
-XXX...XXXX
-X..XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				ComboPotential = new int[] { 0, 1 },
-			};
-			var expected = 2;
-
-			Test(field, pars.Calculate(), expected);
-		}
-		[Test]
-		public void Test_ComboPotential_3()
-		{
-			var field = @"
-.........X
-........XX
-XXX..XXXXX
-XXX...XXXX
-...XXXXXXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				ComboPotential = new int[] { 0, 0, 1 },
-			};
-			var expected = 3;
-
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -342,7 +268,7 @@ XXX.......";
 			};
 			var expected = 0;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -361,7 +287,7 @@ XXX.......";
 			};
 			var expected = 1;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
 
 		[Test]
@@ -380,68 +306,9 @@ XXX.......";
 			};
 			var expected = 0;
 
-			Test(field, pars.Calculate(), expected);
+			Test(field, pars, expected);
 		}
-
-		[Test]
-		public void Test_2Unreachable_2()
-		{
-			var field = @"
-.........X
-........XX
-XXX...XXXX
-XXXX.XXXXX
-...XXXXXXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				Unreachables = new int[] { 0, 1, 2 },
-			};
-			var expected = 2;
-
-			Test(field, pars.Calculate(), expected);
-		}
-
-		[Test]
-		public void Test_5UnreachablesWithHole_5()
-		{
-			var field = @"
-....X....X
-.....XX.XX
-XXXX..XXXX
-XX...XXXXX
-XXX.XXXXXX
-XXX.XXXXXX
-XXXXXX.XXX";
-			var pars = new ComplexParameters()
-			{
-				Unreachables = new int[] { 0, 1, 2, 3, 4, 5 },
-			};
-			var expected = 5;
-
-			Test(field, pars.Calculate(), expected);
-		}
-
-		[Test]
-		public void Test_Reachables_4()
-		{
-			var field = @"
-.........X
-........XX
-XXX...XXXX
-XXXX.XXXXX
-...XXXXXXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				Reachables = new int[] { 0, 1, 2, 3, 4 },
-			};
-			var expected = 4;
-
-			Test(field, pars.Calculate(), expected);
-		}
-
-
+		
 		[Test]
 		public void LostScore_None_Negative()
 		{

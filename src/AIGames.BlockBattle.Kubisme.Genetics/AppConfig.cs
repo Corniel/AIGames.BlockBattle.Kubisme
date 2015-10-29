@@ -26,12 +26,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			CopyHighestTurnsAvg = 1;
 
 			LockFactor = 4;
+			Rows = 20;
 		}
 				
 		public double EloInitial { get; set; }
 		public double KInitial { get; set; }
 		public double KMinimum { get; set; }
 		public double KMultiplier { get; set; }
+		public int Rows { get; set; }
 
 		public int BotCapacity { get; set; }
 		public int BotStable { get; set; }

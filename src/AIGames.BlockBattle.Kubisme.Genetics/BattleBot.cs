@@ -7,7 +7,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BattleBot() { }
 		public NodeDecisionMaker DecisionMaker { get; protected set; }
 
-		public Field GetResponse(Field own, Field other, Block current, Block next, int round)
+		public Field GetResponse(Field own, Block current, Block next, int round)
 		{
 			var move = DecisionMaker.GetMove(own, current, next, round);
 			return DecisionMaker.BestField;

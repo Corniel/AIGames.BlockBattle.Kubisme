@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AIGames.BlockBattle.Kubisme.Genetics</RootNamespace>
-    <AssemblyName>AIGames.BlockBattle.Kubisme.Genetics</AssemblyName>
+    <AssemblyName>KubismeGenetics</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

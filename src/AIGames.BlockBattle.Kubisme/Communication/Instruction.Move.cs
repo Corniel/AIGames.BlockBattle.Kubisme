@@ -10,7 +10,13 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 		public MoveInstruction(params ActionType[] actions)
 		{
 			Actions = new List<ActionType>();
-			if (actions.Length != 0)
+
+			if (actions.Length == 1 && actions[0] == ActionType.Skip)
+			{
+				// skip is a move on its own.
+				Actions.Add(ActionType.Skip);
+			}
+			else if (actions.Length != 0)
 			{
 				var skip = true;
 
@@ -20,7 +26,9 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 					var action = actions[i];
 
 					skip &= action == ActionType.Down || action == ActionType.Drop;
-					if (!skip)
+					
+					// Skip and none should not be sent.
+					if (!skip && action != ActionType.Skip && action != ActionType.None)
 					{
 						Actions.Insert(0, action);
 					}

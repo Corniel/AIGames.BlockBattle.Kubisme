@@ -77,7 +77,7 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			if (field.Skips > 0)
 			{
-				yield return new MoveCandiate(BlockPath.Skips, field.SkipBlock());
+				yield return new MoveCandiate(BlockPath.Skip, field.SkipBlock());
 			}
 		}
 

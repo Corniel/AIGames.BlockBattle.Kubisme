@@ -12,7 +12,7 @@ namespace AIGames.BlockBattle.Kubisme
 		private const UInt64 Mask = 0x0FFFFFFFFFFFFFFF;
 
 		public static readonly BlockPath None = default(BlockPath);
-		public static readonly BlockPath Skips = BlockPath.Create(ActionType.Skips);
+		public static readonly BlockPath Skip = BlockPath.Create(ActionType.Skip);
 
 		private BlockPath(ulong m0, ulong m1, int count)
 		{

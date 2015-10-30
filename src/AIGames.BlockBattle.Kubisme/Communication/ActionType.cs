@@ -9,6 +9,6 @@
 		TurnLeft = 4,
 		TurnRight = 5,
 		Drop = 6,
-		Skips = 7,
+		Skip = 7,
 	}
 }

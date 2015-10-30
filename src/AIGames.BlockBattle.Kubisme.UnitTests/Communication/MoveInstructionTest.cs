@@ -45,5 +45,15 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 
 			Assert.AreEqual(exp, act);
 		}
+
+		[Test]
+		public void Ctor_Skip_Skip()
+		{
+			var instruction = new MoveInstruction(ActionType.Skip);
+			var act = instruction.ToString();
+			var exp = "skip";
+
+			Assert.AreEqual(exp, act);
+		}
 	}
 }

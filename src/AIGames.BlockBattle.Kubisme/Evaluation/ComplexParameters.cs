@@ -93,22 +93,23 @@ namespace AIGames.BlockBattle.Kubisme
 		public static ComplexParameters GetDefault()
 		{
 			var pars = new ComplexParameters()
-			// Elo: 1728, Avg: 0,478, Runs: 2158, ID: 200, Parent: 168
+			// Elo: 1579, Avg: 0,184, Runs: 578, ID: 1078, Parent: 1051
 			{
-				GarbagePotential = new int[] { 0, 1, 2 },
-				//FreeRows = new int[] { 1, 2, 4, 8, 16, 32, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 128, 256, 512, 1024, 2048 },
-				//Points = 100,
-				//Combo = 10,
-				FirstFilled = 10,
-				Holes = -1,
-				//WallsLeft = 20,
-				//WallsRight = 20,
-				//NeighborsHorizontal = -20,
-				//NeighborsVertical = 20,
-				//Floor = 20,
-				//TSpinPotential = 100,
-				//Blockades = -10,
-				//LastBlockades = -20,
+				GarbagePotential = new int[] { 13, 16, 74 },
+				FreeRows = new int[] { -99, -92, -90, -88, -84, -84, -82, -80, -77, -73, -73, -70, -67, -67, -64, -60, -55, -55, -54, -52, -38, -10 },
+				FirstFilled = 21,
+				Points = 20,
+				Combo = 24,
+				Skips = 29,
+				Holes = -23,
+				WallsLeft = 3,
+				WallsRight = 3,
+				NeighborsHorizontal = 1,
+				NeighborsVertical = 2,
+				Floor = 0,
+				TSpinPotential = 47,
+				Blockades = -1,
+				LastBlockades = -1,
 			};
 			return pars;
 		}

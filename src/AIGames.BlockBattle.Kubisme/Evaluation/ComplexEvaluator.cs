@@ -67,7 +67,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var neighborsV = 0;
 			ushort previous = 0;
 
-			var unreachbleFound = false;
+			var unreachableFound = false;
 			
 			// Variables for T-Spin potential
 			var hasTSpinPotential = false;
@@ -124,10 +124,10 @@ namespace AIGames.BlockBattle.Kubisme
 				previous = row;
 				prevCount = rowCount;
 
-				// We found an unreachble spot.
-				if (!unreachbleFound && filterTopColomns == Row.Filled)
+				// We found an unreachable spot.
+				if (!unreachableFound && filterTopColomns == Row.Filled)
 				{
-					unreachbleFound = true;
+					unreachableFound = true;
 					var unreachables = field.RowCount - r;
 
 					score += unreachables * pars.UnreachableFactor;

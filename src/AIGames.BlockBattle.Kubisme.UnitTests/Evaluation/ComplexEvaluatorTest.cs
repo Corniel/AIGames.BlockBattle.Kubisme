@@ -121,7 +121,6 @@ XXX.......";
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void Test_HoleWithDiagonalAccess_1()
 		{
@@ -156,7 +155,6 @@ XXX.......";
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void Test_NeighborsVertical_15()
 		{
@@ -194,7 +192,6 @@ XXX......X";
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void Test_WallsLeftWithInterception_1()
 		{
@@ -213,7 +210,7 @@ XXX......X";
 
 			Test(field, pars, expected);
 		}
-		
+
 		[Test]
 		public void Test_WallsRight_4()
 		{
@@ -232,7 +229,6 @@ XXX......X";
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void Test_WallsRightNoneOnTheFloor_0()
 		{
@@ -270,7 +266,6 @@ XXX.......";
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void Test_TSpinPotential_1()
 		{
@@ -289,7 +284,6 @@ XXX.......";
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void Test_TSpinPotential_unreachable()
 		{
@@ -325,7 +319,6 @@ XXX.......";
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void Test_Unreachables_0Rows()
 		{
@@ -339,6 +332,53 @@ XXX.......";
 				UnreachableFactor = 1,
 			};
 			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void OBlockPlacement_OneRowFree_0Matches()
+		{
+			var field = @"
+..........
+XXXX.XXXXX
+...X.XXXXX";
+			var pars = new ComplexParameters()
+			{
+				OBlockPlacement = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void OBlockPlacement_NoSpots_0Matches()
+		{
+			var field = @"
+..........
+..........
+X.XX...X..
+...X.X.XX.";
+			var pars = new ComplexParameters()
+			{
+				OBlockPlacement = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void OBlockPlacement_OneSpot_1Matches()
+		{
+			var field = @"
+..........
+X.XX...X..
+...X.XXXX.";
+			var pars = new ComplexParameters()
+			{
+				OBlockPlacement = 1,
+			};
+			var expected = 1;
 
 			Test(field, pars, expected);
 		}

@@ -68,6 +68,8 @@ namespace AIGames.BlockBattle.Kubisme
 			ushort previous = 0;
 
 			var unreachableFound = false;
+
+			var oBlockPlacement = false;
 			
 			// Variables for T-Spin potential
 			var hasTSpinPotential = false;
@@ -117,22 +119,35 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 				}
 
-				filterTopColomns |= row;
-
 				neighborsV += NeighborsVertical[row];
 				neighborsH += Row.Count[row & previous];
 				previous = row;
 				prevCount = rowCount;
 
+				if (!unreachableFound && !oBlockPlacement && r > 1)
+				{
+					var reachableBlock = row & (filterTopColomns ^ Row.Filled);
+
+					// Two blocks concatenated
+					if (Row.HasRow2BlocksConnected(reachableBlock, Row.Count[reachableBlock]))
+					{
+						oBlockPlacement = true;
+						score += pars.OBlockPlacement;
+					}
+				}
+
 				// We found an unreachable spot.
 				if (!unreachableFound && filterTopColomns == Row.Filled)
 				{
 					unreachableFound = true;
-					var unreachables = field.RowCount - r;
+					var unreachables = field.RowCount - r + 1;
 
 					score += unreachables * pars.UnreachableFactor;
 					score += pars.Unreachables[unreachables];
 				}
+
+				// Update the filter top columns.
+				filterTopColomns |= row;
 			}
 
 			score += holes * pars.Holes;

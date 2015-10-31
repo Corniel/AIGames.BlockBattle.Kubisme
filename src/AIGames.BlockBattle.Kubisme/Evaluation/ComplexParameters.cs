@@ -60,6 +60,9 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Negative)]
 		public int LastBlockades { get; set; }
 
+		[ParameterType(ParameterType.Positive)]
+		public int OBlockPlacement { get; set; }
+
 		/// <summary>Gets a string representation of the simple evaluator parameters.</summary>
 		/// <remarks>
 		/// Apparently, this code does not compile under Mono. As it is only for

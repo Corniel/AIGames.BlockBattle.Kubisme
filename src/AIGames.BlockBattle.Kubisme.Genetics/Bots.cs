@@ -278,7 +278,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public void Save(Stream stream)
 		{
 			var collection = new SimulationBotCollection();
-			collection.AddRange(Values);
+			collection.AddRange(ByElo());
 			collection.Save(stream);
 		}
 

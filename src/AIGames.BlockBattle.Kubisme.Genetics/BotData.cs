@@ -26,8 +26,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			ParentId = parent.Id;
 		}
 
-		public ComplexParameters Pars { get; set; }
-
 		public int Id { get; set; }
 		public int ParentId { get; set; }
 		public int Runs { get; set; }
@@ -36,6 +34,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public long Points { get; set; }
 		public long Turns { get; set; }
 
+		public bool IsStable { get { return Runs >= AppConfig.Data.BotStable; } }
+		public bool ShouldBeLocked { get { return Runs >= AppConfig.Data.BotStable * AppConfig.Data.LockFactor; } }
+
 		public double PointsAvg { get { return Turns == 0 ? 0 : (double)Points / (double)Turns; } }
 		public double TurnsAvg { get { return Runs == 0 ? 0 : (double)Turns / (double)Runs; } }
 
@@ -43,6 +44,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public Elo Elo { get; set; }
 		public double K { get; set; }
+
+		public ComplexParameters Pars { get; set; }
 
 		public void UpdateK()
 		{

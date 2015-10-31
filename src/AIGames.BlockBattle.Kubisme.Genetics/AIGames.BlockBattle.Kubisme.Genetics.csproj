@@ -48,6 +48,7 @@
     <Compile Include="BattlePairing.cs" />
     <Compile Include="BattleSimulation.cs" />
     <Compile Include="BattleSimulator.cs" />
+    <Compile Include="Bots.cs" />
     <Compile Include="Conversion\EloTypeConverter.cs" />
     <Compile Include="Elo.cs" />
     <Compile Include="EloExtensions.cs" />

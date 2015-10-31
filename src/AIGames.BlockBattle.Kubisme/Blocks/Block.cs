@@ -509,12 +509,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			var merged = currentMirrored & prevMirrored;
 			var count = Row.Count[merged];
-
-			return
-				// if more then 5 count there are at least two connected cells.
-				count > 5 ||
-				// at least 2 open entries and 
-				(count > 1 && Row.Row2BlocksConnected.Any(line => (line & merged) != 0));
+			return Row.HasRow2BlocksConnected(merged, count);
 		}
 	}
 }

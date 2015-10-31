@@ -95,6 +95,18 @@ namespace AIGames.BlockBattle.Kubisme
 			return garbage;
 		}
 
+		public static bool HasRow2BlocksConnected(int row, int count)
+		{
+			// if more then 5 blocks there are at least two connected.
+			if (count > 5) { return true; }
+			// if there are less then 2 blocks there obviously are none.
+			if (count < 2) { return false; }
+			foreach (var mask in Row2BlocksConnected)
+			{
+				if ((row & mask) == mask) { return true; }
+			}
+			return false;
+		}
 
 		public static string ToString(ushort row)
 		{

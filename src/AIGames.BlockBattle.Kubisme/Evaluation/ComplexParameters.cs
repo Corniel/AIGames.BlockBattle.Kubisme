@@ -17,6 +17,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			GarbagePotential = new int[3];
 			FreeRows = new int[22];
+			Unreachables = new int[22];
 		}
 
 		/// <summary>A value that corrects for the time it takes for creating new garbage.</summary>
@@ -29,6 +30,12 @@ namespace AIGames.BlockBattle.Kubisme
 
 		[ParameterType(ParameterType.Positive)]
 		public int FirstFilled { get; set; }
+
+		/// <summary>The less Unreachable.</summary>
+		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
+		public int[] Unreachables { get; set; }
+		[ParameterType(ParameterType.Negative)]
+		public int UnreachableFactor { get; set; }
 
 		[ParameterType(ParameterType.Positive)]
 		public int Points { get; set; }

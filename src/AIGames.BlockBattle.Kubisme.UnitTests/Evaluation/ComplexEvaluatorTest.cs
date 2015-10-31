@@ -308,7 +308,41 @@ XXX.......";
 
 			Test(field, pars, expected);
 		}
-		
+
+		[Test]
+		public void Test_Unreachables_2Rows()
+		{
+			var field = @"
+..........
+XXXX.XXXXX
+...XXXXXXX
+XXX.......";
+			var pars = new ComplexParameters()
+			{
+				UnreachableFactor = 1,
+			};
+			var expected = 2;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Test_Unreachables_0Rows()
+		{
+			var field = @"
+..........
+XXXX.XXXXX
+...X.XXXXX
+XXX.......";
+			var pars = new ComplexParameters()
+			{
+				UnreachableFactor = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+
 		private static void Test(string str, ComplexParameters pars, int expected)
 		{
 			var field = Field.Create(0, 0, 0, str);

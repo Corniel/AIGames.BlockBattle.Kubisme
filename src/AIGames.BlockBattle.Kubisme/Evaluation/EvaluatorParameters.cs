@@ -31,6 +31,10 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Points for each cell that is connected to a wall.</summary>
 		public int Walls { get; set; }
 
+		/// <summary>Points for a potential Tetris.</summary>
+		[ParameterType(ParameterType.Positive)]
+		public int TetrisPotential { get; set; }
+
 		/// <summary>Points for the different number of groups per reachable hole.</summary>
 		/// <remarks>
 		/// Index 0 is never called.

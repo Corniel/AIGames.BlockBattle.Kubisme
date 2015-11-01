@@ -25,6 +25,7 @@
 			// counters
 			var holes = 0;
 			var walls = 0;
+			var tetrisCount = 0;
 
 			var maskColumnOpen = (int)Row.Filled;
 			var maskColumnClosed = 0;
@@ -41,12 +42,14 @@
 				// No reachable cells left.
 				if (reachbleEmptyCells== 0) { break; }
 
+				var rowCount = Row.Count[row];
+				var groups = Row.Groups[row];
+
 				// Add points for empty reachable cells.
 				var emptyCellCount = Row.Count[reachbleEmptyCells];
 				score += emptyCellCount * Pars.EmptyCells[rowNr];
 
 				// Add points for grouping
-				var groups = Row.Groups[row];
 				score += Pars.Groups[groups];
 
 				// Count holes.
@@ -55,6 +58,11 @@
 				// Count walls.
 				if ((rowMirror & MaskWallLeft) == 0) { walls++; }
 				if ((rowMirror & MaskWallRight) == 0) { walls++; }
+
+				// Detect Tetris-score.
+				// It should end with at least 4 reachable nine-rows.
+				if (rowCount == 9) { tetrisCount++; }
+				else { tetrisCount = 0; }
 
 				// apply row to closed and open columns.
 				maskColumnClosed |= row;
@@ -65,9 +73,12 @@
 			// Evaluation for unreachable.
 			score += Pars.UnreachableRowsCalc[field.RowCount - rowNr];
 
-			// Add counters.
+			// Add scores based on counters.
 			score += holes * Pars.Holes;
 			score += walls * Pars.Walls;
+
+			if (tetrisCount > 3) { score += Pars.TetrisPotential; }
+
 
 			return score;
 		}

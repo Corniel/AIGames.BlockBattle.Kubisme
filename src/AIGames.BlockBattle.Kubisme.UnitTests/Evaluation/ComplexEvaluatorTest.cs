@@ -143,7 +143,44 @@ XXX.......";
 
 			Test(field, pars, expected);
 		}
-		
+
+		[Test]
+		public void TetrisPotential_TunnleOf5WithHickup_0()
+		{
+			var field = @"
+..........
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXX.XX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TetrisPotential = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TetrisPotential_TunnleOf4_1()
+		{
+			var field = @"
+..........
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TetrisPotential = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
 
 		private static void Test(string str, EvaluatorParameters pars, int expected)
 		{

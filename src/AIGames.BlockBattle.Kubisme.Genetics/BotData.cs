@@ -18,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData(int id, EvaluatorParameters pars) : this()
 		{
 			Id = id;
-			Pars = pars;
+			Pars = pars.Calc();
 		}
 		public BotData(int id, BotData parent, ParameterRandomizer rnd)
 			: this(id, rnd.Randomize(parent.Pars))

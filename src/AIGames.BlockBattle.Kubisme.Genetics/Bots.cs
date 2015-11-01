@@ -40,6 +40,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			foreach (var item in items)
 			{
+				item.Pars.Calc();
 				TryAdd(item.Id, item);
 			}
 			lock (locker)

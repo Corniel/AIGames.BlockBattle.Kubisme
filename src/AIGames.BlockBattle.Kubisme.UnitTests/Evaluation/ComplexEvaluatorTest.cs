@@ -7,20 +7,20 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 	public class ComplexEvaluatorTest
 	{
 		[Test]
-		public void FreeFields_FieldWitholes_10c9c2c1c1c1()
+		public void FreeFields_FieldWitholes_10c9c2c1c1()
 		{
 			var field = @"
 ..........
-.....X.....
+.....X....
 .X.XXXXXXX
 .XX...X.XX
 ...XXX.XXX
 XXX.......";
 			var pars = new EvaluatorParameters()
 			{
+				EmptyRowCount = 10,
 				EmptyCells = new int[] 
 				{
-					1000000, 
 					100000,
 					10000,
 					1000,
@@ -29,7 +29,7 @@ XXX.......";
 					1,
 				},
 			};
-			var expected = 10921110;
+			var expected = 1092110;
 
 			Test(field, pars, expected);
 		}

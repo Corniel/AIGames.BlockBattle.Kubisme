@@ -43,7 +43,8 @@
 				if (reachbleEmptyCells== 0) { break; }
 
 				var rowCount = Row.Count[row];
-				var groups = Row.Groups[row];
+				// Groups of empty cells.
+				var groups = Row.Groups[rowMirror];
 
 				// Add points for empty reachable cells.
 				var emptyCellCount = Row.Count[reachbleEmptyCells];

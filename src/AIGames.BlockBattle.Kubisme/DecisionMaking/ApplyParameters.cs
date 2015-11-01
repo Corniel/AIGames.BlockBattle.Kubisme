@@ -39,7 +39,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public TimeSpan Elapsed { get { return sw.Elapsed; } }
 
 		public IMoveGenerator Generator { get; set; }
-		public IEvaluator Evaluator { get; set; }
+		public Evaluator Evaluator { get; set; }
 		public MT19937Generator Rnd { get; set; }
 
 		public Block Current { get; set; }

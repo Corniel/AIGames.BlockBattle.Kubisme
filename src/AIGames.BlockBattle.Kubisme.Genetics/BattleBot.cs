@@ -13,16 +13,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			return DecisionMaker.BestField;
 		}
 
-		public static BattleBot Create(MT19937Generator rnd, ComplexParameters pars, int maxDepth)
+		public static BattleBot Create(MT19937Generator rnd, EvaluatorParameters pars, int maxDepth)
 		{
 			return new BattleBot()
 			{
 				DecisionMaker = new NodeDecisionMaker(rnd)
 				{
 					MaximumDepth = maxDepth,
-					Evaluator = new ComplexEvaluator()
+					Evaluator = new Evaluator()
 					{
-						Parameters = pars,
+						Pars = pars,
 					},
 					Generator = new MoveGenerator(),
 				}

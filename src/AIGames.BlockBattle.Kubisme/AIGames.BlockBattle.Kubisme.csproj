@@ -90,10 +90,8 @@
     <Compile Include="DecisionMaking\IBlockNode.cs" />
     <Compile Include="DecisionMaking\IDecisionMaker.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMaker.cs" />
-    <Compile Include="Evaluation\ComplexParameters.cs" />
-    <Compile Include="Evaluation\ComplexEvaluator.cs" />
-    <Compile Include="Evaluation\IEvaluator.cs" />
-    <Compile Include="Evaluation\IParameters.cs" />
+    <Compile Include="Evaluation\EvaluatorParameters.cs" />
+    <Compile Include="Evaluation\Evaluator.cs" />
     <Compile Include="Evaluation\ParameterType.cs" />
     <Compile Include="Generation\IFieldGenerator.cs" />
     <Compile Include="Generation\IMoveGenerator.cs" />

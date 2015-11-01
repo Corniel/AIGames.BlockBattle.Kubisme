@@ -202,7 +202,7 @@ XXX...XXXX
 			Assert.AreEqual(expPt, act.Points);
 		}
 
-		[Test]
+		[Test, Category(Category.Evaluation)]
 		public void GetMove_TForTSpin_ClearedField()
 		{
 			var field = Field.Create(0, 2, 0, @"
@@ -214,13 +214,12 @@ XXXX.XXXXX");
 
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new ComplexEvaluator()
+				Evaluator = new Evaluator()
 				{
-					Parameters = new  ComplexParameters()
+					Pars = new  EvaluatorParameters()
 					{
 						Points = 100,
-						Holes = -100,
-					},
+					}.Calc(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 3,

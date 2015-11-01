@@ -3,179 +3,64 @@ using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 {
-	[TestFixture]
+	[TestFixture, Category(Category.Evaluation)]
 	public class ComplexEvaluatorTest
 	{
 		[Test]
-		public void Test_Blockades_21()
+		public void FreeFields_FieldWitholes_10c9c2c1c1c1()
 		{
 			var field = @"
 ..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				Blockades = 1,
-			};
-			var expected = 21;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Test_LastBlockades_1()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				LastBlockades = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Test_LastBlockadesComplex_3()
-		{
-			var field = @"
-..X.......
-..XX......
-.X..XXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				LastBlockades = 1,
-			};
-			var expected = 3;
-
-			Test(field, pars, expected);
-		}
-
-
-		[Test]
-		public void Test_OwnFreeRows_1()
-		{
-			var field = @"
-..........
-..X.......
+.....X.....
 .X.XXXXXXX
 .XX...X.XX
 ...XXX.XXX
 XXX.......";
-			var pars = new ComplexParameters()
+			var pars = new EvaluatorParameters()
 			{
-				FreeRows = new int[] { 0, 1 },
+				EmptyCells = new int[] 
+				{
+					1000000, 
+					100000,
+					10000,
+					1000,
+					100,
+					10,
+					1,
+				},
 			};
+			var expected = 10921110;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void Holes_FieldWithUnreachableRow_1()
+		{
+			var field = @"
+..........
+..X.......
+.X.XXXXXXX
+XXX...X.XX";
+			var pars = new EvaluatorParameters() { Holes = 1 };
 			var expected = 1;
 
 			Test(field, pars, expected);
 		}
-
-
 		[Test]
-		public void Test_Floor_3()
+		public void Holes_SimpleField_1()
 		{
 			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				Floor = 1,
-			};
-			var expected = 3;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Test_Holes_16()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				Holes = 1,
-			};
-			var expected = 16;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Test_HoleWithDiagonalAccess_1()
-		{
-			var field = @"
-..........
 .XX.......
 .X.X......";
-			var pars = new ComplexParameters()
-			{
-				Holes = 1,
-			};
+			var pars = new EvaluatorParameters() { Holes = 1 };
 			var expected = 1;
 
 			Test(field, pars, expected);
 		}
 
 		[Test]
-		public void Test_NeighborsHorizontal_6()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				NeighborsHorizontal = 1,
-			};
-			var expected = 6;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Test_NeighborsVertical_15()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				NeighborsVertical = 1,
-			};
-			var expected = 15;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Test_WallsLeft_3()
+		public void Walls_1ReachbleRight_1()
 		{
 			var field = @"
 ..........
@@ -184,211 +69,88 @@ XXX.......";
 XXX...X.XX
 X..XXX.XXX
 XXX......X";
-			var pars = new ComplexParameters()
+			var pars = new EvaluatorParameters()
 			{
-				WallsLeft = 1,
-			};
-			var expected = 3;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Test_WallsLeftWithInterception_1()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-...XXX.XXX
-XXX......X";
-			var pars = new ComplexParameters()
-			{
-				WallsLeft = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Test_WallsRight_4()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-X..XXX.XXX
-XXX......X";
-			var pars = new ComplexParameters()
-			{
-				WallsRight = 1,
-			};
-			var expected = 4;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Test_WallsRightNoneOnTheFloor_0()
-		{
-			var field = @"
-.........X
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-X..XXX.XXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				WallsRight = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Test_TSpinPotential_0()
-		{
-			var field = @"
-.........X
-........XX
-XXX...XXXX
-XXXXX.XXXX
-...XXXXXXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				TSpinPotential = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Test_TSpinPotential_1()
-		{
-			var field = @"
-.........X
-........XX
-XXX...XXXX
-XXXX.XXXXX
-...XXXXXXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				TSpinPotential = 1,
+				Walls = 1,
 			};
 			var expected = 1;
 
 			Test(field, pars, expected);
 		}
 		[Test]
-		public void Test_TSpinPotential_unreachable()
+		public void Walls_2ReachbleLeft_2()
 		{
 			var field = @"
-.........X
-...XXX..XX
-XXX...XXXX
-XXXX.XXXXX
-...XXXXXXX
-XXX.......";
-			var pars = new ComplexParameters()
+..........
+X.X.......
+XX.XXXXXX.
+XXX...X.XX
+X..XXX.XXX
+XXX......X";
+			var pars = new EvaluatorParameters()
 			{
-				TSpinPotential = 1,
+				Walls = 1,
+			};
+			var expected =2;
+
+			Test(field, pars, expected);
+		}
+
+
+		[Test]
+		public void Unreachables_0Rows_0()
+		{
+			var field = @"
+..........
+...X.XXXXX
+XXX.......";
+			var pars = new EvaluatorParameters()
+			{
+				UnreachableStaffle = 1,
 			};
 			var expected = 0;
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
-		public void Test_Unreachables_2Rows()
+		public void Unreachables_1Rows_1()
+		{
+			var field = @"
+..........
+...X.XXXXX
+XXX.XXX...";
+			var pars = new EvaluatorParameters()
+			{
+				UnreachableStaffle = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void Unreachables_2Rows_2()
 		{
 			var field = @"
 ..........
 XXXX.XXXXX
 ...XXXXXXX
 XXX.......";
-			var pars = new ComplexParameters()
+			var pars = new EvaluatorParameters()
 			{
-				UnreachableFactor = 1,
+				UnreachableStaffle = 1,
 			};
 			var expected = 2;
 
 			Test(field, pars, expected);
 		}
-		[Test]
-		public void Test_Unreachables_0Rows()
-		{
-			var field = @"
-..........
-XXXX.XXXXX
-...X.XXXXX
-XXX.......";
-			var pars = new ComplexParameters()
-			{
-				UnreachableFactor = 1,
-			};
-			var expected = 0;
+		
 
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void OBlockPlacement_OneRowFree_0Matches()
-		{
-			var field = @"
-..........
-XXXX.XXXXX
-...X.XXXXX";
-			var pars = new ComplexParameters()
-			{
-				OBlockPlacement = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void OBlockPlacement_NoSpots_0Matches()
-		{
-			var field = @"
-..........
-..........
-X.XX...X..
-...X.X.XX.";
-			var pars = new ComplexParameters()
-			{
-				OBlockPlacement = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void OBlockPlacement_OneSpot_1Matches()
-		{
-			var field = @"
-..........
-X.XX...X..
-...X.XXXX.";
-			var pars = new ComplexParameters()
-			{
-				OBlockPlacement = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		private static void Test(string str, ComplexParameters pars, int expected)
+		private static void Test(string str, EvaluatorParameters pars, int expected)
 		{
 			var field = Field.Create(0, 0, 0, str);
-			var evaluator = new ComplexEvaluator()
+			var evaluator = new Evaluator()
 			{
-				Parameters = pars,
+				Pars = pars.Calc(),
 			};
 			var actual = evaluator.GetScore(field, 0);
 			Assert.AreEqual(expected, actual);

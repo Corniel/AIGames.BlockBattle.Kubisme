@@ -21,7 +21,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public int MaximumDepth { get; set; }
 		public MT19937Generator Rnd { get; set; }
 
-		public IEvaluator Evaluator { get; set; }
+		public Evaluator Evaluator { get; set; }
 		public IMoveGenerator Generator { get; set; }
 		public BlockRootNode Root { get; protected set; }
 		public ApplyParameters Pars { get; protected set; }
@@ -45,8 +45,8 @@ namespace AIGames.BlockBattle.Kubisme
 			while (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration)
 			{
 				Root.Apply(++Pars.Depth, Pars);
-				
-				var parameters = (ComplexParameters)Evaluator.Parameters;
+
+				var parameters = Evaluator.Pars;
 				var log = string.Format("{0:0.00} {1}: {2}", Root.Score / (double)parameters.Points, Pars, Root.BestMove);
 				Logs.Add(log);
 			}
@@ -57,7 +57,7 @@ namespace AIGames.BlockBattle.Kubisme
 		[ExcludeFromCodeCoverage]
 		public string GetLog()
 		{
-			var parameters = (ComplexParameters)Evaluator.Parameters;
+			var parameters = Evaluator.Pars;
 
 			return string.Format(
 				CultureInfo.InvariantCulture,

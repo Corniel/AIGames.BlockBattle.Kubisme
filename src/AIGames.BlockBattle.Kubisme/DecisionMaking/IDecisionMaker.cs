@@ -4,7 +4,7 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public interface IDecisionMaker
 	{
-		IEvaluator Evaluator { get; set; }
+		Evaluator Evaluator { get; set; }
 		IMoveGenerator Generator { get; set; }
 		Field BestField { get; }
 

@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		protected int Capacity { get { return AppConfig.Data.BotCapacity; } }
 		protected int PairingsRandom { get { return AppConfig.Data.PairingsRandom; } }
 
-		public BotData Add(ComplexParameters parameters)
+		public BotData Add(EvaluatorParameters parameters)
 		{
 			var id = GetNewId();
 			var bot = new BotData(id, parameters);

@@ -15,9 +15,9 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			DecisionMaker = new NodeDecisionMaker(rnd)
 			{
-				Evaluator = new ComplexEvaluator()
+				Evaluator = new Evaluator()
 				{
-					Parameters = ComplexParameters.GetDefault(),
+					Pars = EvaluatorParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 10,
@@ -55,7 +55,7 @@ namespace AIGames.BlockBattle.Kubisme
 			DecisionMaker.MaximumDuration = TimeSpan.FromMilliseconds(max);
 			DecisionMaker.MinimumDuration = TimeSpan.FromMilliseconds(min);
 
-			((ComplexEvaluator)DecisionMaker.Evaluator).Initial = Field;
+			((Evaluator)DecisionMaker.Evaluator).Initial = Field;
 
 			var path = DecisionMaker.GetMove(Field, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());

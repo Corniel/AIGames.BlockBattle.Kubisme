@@ -36,6 +36,7 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <remarks>
 		/// Index 0 is never called.
 		/// </remarks>
+		[ParameterType(ParameterType.Descending)]
 		public int[] Groups { get; set; }
 
 		[ParameterType(ParameterType.Positive)]
@@ -71,7 +72,6 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			return this;
 		}
-		
 
 		public static EvaluatorParameters GetDefault()
 		{
@@ -84,9 +84,8 @@ namespace AIGames.BlockBattle.Kubisme
 				Points = 75,
 				Combo = 27,
 				Skips = 10,
-				Walls = 5,
 				TetrisPotential = 41,
-				Groups = new int[] { 7, 29, -5, -23, -22, 37 },
+				Groups = new int[] { 30, 29, -5, -23, -24, -37 },
 				EmptyRowCount = 10,
 				EmptyCellStaffle = 3,
 				EmptyCells = new int[] { 30, 15, 7, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 1 },

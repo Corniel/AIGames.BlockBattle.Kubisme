@@ -19,6 +19,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		protected int Capacity { get { return AppConfig.Data.BotCapacity; } }
 		protected int PairingsRandom { get { return AppConfig.Data.PairingsRandom; } }
+		protected Elo Bottom { get { return AppConfig.Data.EloBottom; } }
 
 		public BotData Add(EvaluatorParameters parameters)
 		{
@@ -55,7 +56,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public void Shrink()
 		{
-			var ids = new int[0];
+			var ids = new List<int>();
 			lock (locker)
 			{
 				var sorted = ByElo().ToList();
@@ -69,9 +70,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					.Skip(Capacity)
 					.Where(item => !item.Locked)
 					.Select(item => item.Id)
-					.ToArray();
+					.ToList();
 			}
-			foreach(var id in ids)
+			foreach (var id in ids)
 			{
 				BotData bot;
 				TryRemove(id, out bot);
@@ -132,6 +133,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public void Process(ConcurrentQueue<BattlePairing> results)
 		{
+			var ids = new List<int>();
 			lock (locker)
 			{
 				BattlePairing pairing;
@@ -194,6 +196,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					bot.Elo -= dif;
 				}
+
+
+				// Add elo's that are to low too.
+				ids = ByElo()
+					.Skip(2)
+					.Where(item => !item.Locked && item.Elo < Bottom)
+					.Select(item => item.Id)
+					.ToList();
+			}
+			foreach (var id in ids)
+			{
+				BotData bot;
+				TryRemove(id, out bot);
 			}
 		}
 

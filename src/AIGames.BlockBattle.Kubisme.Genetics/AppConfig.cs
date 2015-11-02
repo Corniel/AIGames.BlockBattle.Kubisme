@@ -12,6 +12,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private AppConfig()
 		{
 			EloInitial = 1600d;
+			EloBottom = 1500d;
 			KInitial = 12;
 			KMinimum = 2;
 			KMultiplier = 0.97;
@@ -25,11 +26,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			CopyHighestScore = 1;
 			CopyHighestTurnsAvg = 1;
 
-			LockFactor = 4;
+			LockFactor = 10;
 			Rows = 20;
 		}
 				
 		public double EloInitial { get; set; }
+		public double EloBottom { get; set; }
 		public double KInitial { get; set; }
 		public double KMinimum { get; set; }
 		public double KMultiplier { get; set; }

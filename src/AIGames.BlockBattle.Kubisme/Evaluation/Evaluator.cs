@@ -63,6 +63,22 @@
 			}
 			var unreachables = field.RowCount - rowNr;
 
+			// If we have an unreachable track the max distance to its holes.
+			if (unreachables > 0)
+			{
+				var unreachableHoles = field[rowNr] ^ Row.Filled;
+				int maxRowNr = rowNr;
+				for (var i = rowNr - 1; i >= field.FirstFilled; i--)
+				{
+					// we have a hit, update.
+					if ((field[i] & unreachableHoles) != 0)
+					{
+						maxRowNr = i;
+					}
+				}
+				score += (rowNr - maxRowNr) * Pars.UnreachableDistance;
+			}
+
 			// Evaluation for unreachable.
 			score += Pars.UnreachableRowsCalc[unreachables];
 

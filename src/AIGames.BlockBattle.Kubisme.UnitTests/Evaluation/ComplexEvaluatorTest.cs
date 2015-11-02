@@ -107,6 +107,55 @@ XXX.......";
 		}
 
 		[Test]
+		public void UnreachableDistance_None_0()
+		{
+			var field = @"
+..........
+...XX.....
+XXXX..XXXX";
+			var pars = new EvaluatorParameters()
+			{
+				UnreachableDistance = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void UnreachableDistance_Single_1()
+		{
+			var field = @"
+..........
+...XX.....
+XXXX.XXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				UnreachableDistance = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void UnreachableDistance_Complex_3()
+		{
+			var field = @"
+........X.
+....X...X.
+...XXX..X.
+...X...XX.
+XXXX.XXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				UnreachableDistance = 1,
+			};
+			var expected = 3;
+
+			Test(field, pars, expected);
+		}
+		
+		[Test]
 		public void TetrisPotential_TunnleOf5WithHickup_0()
 		{
 			var field = @"

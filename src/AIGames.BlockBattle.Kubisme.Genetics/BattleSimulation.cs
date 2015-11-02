@@ -86,7 +86,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					g1 = t1;
 				}
 
-				if (turns++ % 20 == 0)
+				if ((turns++ & 15) == 15)
 				{
 					field0 = field0.LockRow();
 					field1 = field1.LockRow();

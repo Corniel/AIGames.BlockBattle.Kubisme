@@ -2,10 +2,6 @@
 {
 	public class Evaluator
 	{
-		/// <summary>Mask pos 0 and 9;</summary>
-		public const ushort MaskWallLeft = 0X0001;
-		public const ushort MaskWallRight = 0X0200;
-
 		public EvaluatorParameters Pars { get; set; }
 
 		public Field Initial { get; set; }
@@ -24,7 +20,6 @@
 
 			// counters
 			var holes = 0;
-			var walls = 0;
 			var tetrisCount = 0;
 
 			var maskColumnOpen = (int)Row.Filled;
@@ -56,10 +51,6 @@
 				// Count holes.
 				holes += Row.Count[maskColumnClosed & rowMirror];
 
-				// Count walls.
-				if ((rowMirror & MaskWallLeft) == 0) { walls++; }
-				if ((rowMirror & MaskWallRight) == 0) { walls++; }
-
 				// Detect Tetris-score.
 				// It should end with at least 4 reachable nine-rows.
 				if (rowCount == 9) { tetrisCount++; }
@@ -70,13 +61,13 @@
 				maskColumnOpen = maskColumnClosed ^ Row.Filled;
 				rowNr++;
 			}
+			var unreachables = field.RowCount - rowNr;
 
 			// Evaluation for unreachable.
-			score += Pars.UnreachableRowsCalc[field.RowCount - rowNr];
+			score += Pars.UnreachableRowsCalc[unreachables];
 
 			// Add scores based on counters.
 			score += holes * Pars.Holes;
-			score += walls * Pars.Walls;
 
 			if (tetrisCount > 3) { score += Pars.TetrisPotential; }
 

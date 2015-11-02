@@ -60,44 +60,6 @@ XXX...X.XX";
 		}
 
 		[Test]
-		public void Walls_1ReachbleRight_1()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX
-X..XXX.XXX
-XXX......X";
-			var pars = new EvaluatorParameters()
-			{
-				Walls = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Walls_2ReachbleLeft_2()
-		{
-			var field = @"
-..........
-X.X.......
-XX.XXXXXX.
-XXX...X.XX
-X..XXX.XXX
-XXX......X";
-			var pars = new EvaluatorParameters()
-			{
-				Walls = 1,
-			};
-			var expected =2;
-
-			Test(field, pars, expected);
-		}
-
-
-		[Test]
 		public void Unreachables_0Rows_0()
 		{
 			var field = @"

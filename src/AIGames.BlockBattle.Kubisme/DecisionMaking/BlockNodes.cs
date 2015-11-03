@@ -8,9 +8,13 @@ namespace AIGames.BlockBattle.Kubisme
 		public BlockNodes(Block block) : base(block.ChildCount + 2) { }
 
 		/// <summary>Gets the score of the best (first) node.</summary>
-		public int GetScore(int depth)
+		public int GetScore(IBlockNode node)
 		{
-			return Empty() ? short.MinValue + depth : this[0].Score;
+			if (Empty())
+			{
+				return EvaluatorParameters.LosingScore + (node.Depth << 3);
+			}
+			return this[0].Score;
 		}
 
 		/// <summary>Applies the search on the child nodes.</summary>

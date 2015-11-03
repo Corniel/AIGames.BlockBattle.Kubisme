@@ -50,7 +50,7 @@ namespace AIGames.BlockBattle.Kubisme
 					if (Children.Empty()) { return; }
 					Children.Apply(depth, pars, BranchingFactor);
 				}
-				Score = Children.GetScore(Depth);
+				Score = Children.GetScore(this);
 			}
 		}
 

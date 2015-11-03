@@ -5,6 +5,8 @@ namespace AIGames.BlockBattle.Kubisme
 	[Serializable]
 	public class EvaluatorParameters
 	{
+		public const int LosingScore = short.MinValue;
+
 		public EvaluatorParameters()
 		{
 			Unreachables = new int[22];

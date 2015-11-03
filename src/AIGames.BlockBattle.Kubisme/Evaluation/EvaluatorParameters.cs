@@ -35,6 +35,8 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Positive)]
 		public int DoublePotentialJLT { get; set; }
 		[ParameterType(ParameterType.Positive)]
+		public int DoublePotentialTSZ { get; set; }
+		[ParameterType(ParameterType.Positive)]
 		public int DoublePotentialO { get; set; }
 		[ParameterType(ParameterType.Positive)]
 		public int DoublePotentialI { get; set; }

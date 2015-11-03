@@ -239,6 +239,39 @@ XX.XXXXXXX
 		}
 
 		[Test]
+		public void DoublePotentialTSZ_TFitWithHole_0()
+		{
+			var field = @"
+..........
+XX..XXXXXX
+XX.XXXXXX.
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialTSZ = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialTSZ_TFit_1()
+		{
+			var field = @"
+..........
+XX..XXXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialTSZ = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
 		public void DoublePotentialO_OWithHole_0()
 		{
 			var field = @"

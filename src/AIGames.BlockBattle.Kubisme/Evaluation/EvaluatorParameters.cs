@@ -56,8 +56,6 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>The less Unreachable.</summary>
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] Unreachables { get; set; }
-		[ParameterType(ParameterType.Negative)]
-		public int UnreachableStaffle { get; set; }
 
 		public EvaluatorParameters Calc()
 		{
@@ -75,7 +73,7 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				m_UnreachableRows[i] = m_UnreachableRows[i - 1];
 				m_UnreachableRows[i] += Unreachables[i - 1];
-				m_UnreachableRows[i] += UnreachableStaffle;
+				m_UnreachableRows[i] += Holes;
 			}
 			return this;
 		}
@@ -88,7 +86,6 @@ namespace AIGames.BlockBattle.Kubisme
 				EmptyRowCount = 10,
 				EmptyCellStaffle = 1,
 				Holes = -100,
-				UnreachableStaffle = -50,
 			};
 			return pars.Calc();
 		}

@@ -42,7 +42,11 @@ XXX.......";
 ..X.......
 .X.XXXXXXX
 XXX...X.XX";
-			var pars = new EvaluatorParameters() { Holes = 1 };
+			var pars = new EvaluatorParameters()
+			{
+				Holes = 1,
+				Unreachables = new int[] { -1, -1, -1, -1, -1, -1 },
+			};
 			var expected = 1;
 
 			Test(field, pars, expected);
@@ -53,7 +57,11 @@ XXX...X.XX";
 			var field = @"
 .XX.......
 .X.X......";
-			var pars = new EvaluatorParameters() { Holes = 1 };
+			var pars = new EvaluatorParameters()
+			{
+				Holes = 1,
+				Unreachables = new int[] { -1, -1, -1, -1, -1, -1 },
+			};
 			var expected = 1;
 
 			Test(field, pars, expected);
@@ -68,7 +76,8 @@ XXX...X.XX";
 XXX.......";
 			var pars = new EvaluatorParameters()
 			{
-				UnreachableStaffle = 1,
+				Holes = 0,
+				Unreachables = new int[] { 1, 1, 1, 1, 1, 1 },
 			};
 			var expected = 0;
 
@@ -83,7 +92,8 @@ XXX.......";
 XXX.XXX...";
 			var pars = new EvaluatorParameters()
 			{
-				UnreachableStaffle = 1,
+				Holes = 0,
+				Unreachables = new int[] { 1, 1, 1, 1, 1, 1 },
 			};
 			var expected = 1;
 
@@ -99,9 +109,34 @@ XXXX.XXXXX
 XXX.......";
 			var pars = new EvaluatorParameters()
 			{
-				UnreachableStaffle = 1,
+				Holes = 0,
+				Unreachables = new int[] { 1, 1, 1, 1, 1, 1 },
 			};
 			var expected = 2;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void SingleGroupBonus_AllKindOfRows_1111()
+		{
+			var field = @"
+..........
+.........X
+........XX
+.......XXX
+......XXXX
+.....XXXXX
+....XXXXXX
+...XXXXXXX
+..XXXXXXXX
+.XXXXXXXXX
+XXXXXXXX..";
+			var pars = new EvaluatorParameters()
+			{
+				SingleGroupBonus = new int[] { 1, 10, 100, 1000 },
+			};
+			var expected = 1111;
 
 			Test(field, pars, expected);
 		}

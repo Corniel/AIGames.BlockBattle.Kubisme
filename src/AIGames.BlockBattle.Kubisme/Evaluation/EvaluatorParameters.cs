@@ -10,6 +10,7 @@ namespace AIGames.BlockBattle.Kubisme
 			Unreachables = new int[22];
 			EmptyCells = new int[22];
 			Groups = new int[6];
+			SingleGroupBonus = new int[4];
 		}
 
 		public int[] EmptyRowsCalc { get { return m_FreeRows; } }
@@ -31,6 +32,12 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Points for a potential Tetris.</summary>
 		[ParameterType(ParameterType.Positive)]
 		public int TetrisPotential { get; set; }
+
+		/// <summary>Rows with a single (empty cell) group, of at least 6 cells filled,
+		/// get a bonus, as they can be cleared easily.
+		/// </summary>
+		[ParameterType(ParameterType.Positive)]
+		public int[] SingleGroupBonus { get; set; }
 
 		/// <summary>Points for the different number of groups per reachable hole.</summary>
 		/// <remarks>
@@ -78,19 +85,10 @@ namespace AIGames.BlockBattle.Kubisme
 			var pars = new EvaluatorParameters()
 			// Elo: 1655, Avg: 0.197, Runs: 17968, ID: 947, Parent: 907
 			{
-				//EmptyRowsCalc = new int[] { 0, 590, 930, 1010, 1070, 1120, 1160, 1200, 1240, 1280, 1320, 1360, 1400, 1430, 1460, 1490, 1520, 1550, 1580, 1610, 1630, 1650 },
-				//UnreachableRowsCalc = new int[] { 0, -8, -18, -29, -51, -76, -101, -127, -158, -190, -224, -258, -293, -329, -378, -427, -476, -527, -587, -648, -717, -788 },
-				Holes = -78,
-				Points = 107,
-				Combo = 40,
-				Skips = 12,
-				TetrisPotential = 34,
-				Groups = new int[] { 30, 26, -10, -23, -33, -37 },
 				EmptyRowCount = 10,
 				EmptyCellStaffle = 1,
-				EmptyCells = new int[] { 58, 33, 7, 5, 4, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1 },
-				Unreachables = new int[] { -7, -9, -10, -21, -24, -24, -25, -30, -31, -33, -33, -34, -35, -48, -48, -48, -50, -59, -60, -68, -70, -75 },
-				UnreachableStaffle = -1,
+				Holes = -100,
+				UnreachableStaffle = -50,
 			};
 			return pars.Calc();
 		}

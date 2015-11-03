@@ -37,9 +37,16 @@
 				// No reachable cells left.
 				if (reachbleEmptyCells== 0) { break; }
 
+				var rowHoles =  Row.Count[maskColumnClosed & rowMirror];
 				var rowCount = Row.Count[row];
 				// Groups of empty cells.
 				var groups = Row.Groups[rowMirror];
+
+				// Get bonuses for lines that can potentially be cleared by one block.
+				if (groups == 1 && rowCount >= 6)
+				{
+					score += Pars.SingleGroupBonus[rowCount - 6];
+				}
 
 				// Add points for empty reachable cells.
 				var emptyCellCount = Row.Count[reachbleEmptyCells];
@@ -49,7 +56,7 @@
 				score += Pars.Groups[groups];
 
 				// Count holes.
-				holes += Row.Count[maskColumnClosed & rowMirror];
+				holes += rowHoles;
 
 				// Detect Tetris-score.
 				// It should end with at least 4 reachable nine-rows.

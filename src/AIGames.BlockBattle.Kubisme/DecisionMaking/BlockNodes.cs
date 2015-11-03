@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -11,7 +10,7 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Gets the score of the best (first) node.</summary>
 		public int GetScore(int depth)
 		{
-			return Count == 0 ? short.MinValue + depth : this[0].Score;
+			return Empty() ? short.MinValue + depth : this[0].Score;
 		}
 
 		/// <summary>Applies the search on the child nodes.</summary>
@@ -26,30 +25,33 @@ namespace AIGames.BlockBattle.Kubisme
 		/// </param>
 		public void Apply(byte depth, ApplyParameters pars, int branchingFactor)
 		{
-			if (Count == 0) { return; }
+			if (Empty() || depth == 0) { return; }
 
-			var lastIndex = Math.Min(Count, branchingFactor);
+			var threshold = this[Math.Min(Count, branchingFactor) - 1].Score;
+			var depthMin1 = (byte)(depth - 1);
+			var dephtMin1Threshold = threshold + pars.Evaluator.Pars.Holes;
 
-			var max = this[0].Score;
-			for (var i = 0; i < lastIndex; i++)
+			foreach (var child in this)
 			{
-				var child = this[i];
+				// Only checks moves that are not worse than the threshold.
+				if (child.Score < threshold) { break; }
 
-				// divide by 128.
-				var delta = (max - child.Score) >> 7;
-				var searchDepth = depth - delta;
-
-				if (searchDepth >= depth)
+				if (child.Score > dephtMin1Threshold)
 				{
-					child.Apply((byte)searchDepth, pars);
+					child.Apply(depth, pars);
 				}
 				else
 				{
-					lastIndex = i - 1;
-					break;
+					child.Apply(depthMin1, pars);
+				}
+
+				// we find a lower move, look for others that are potentially better.
+				if (child.Score < threshold)
+				{
+					threshold = child.Score;
 				}
 			}
-			Sort(lastIndex);
+			base.Sort();
 		}
 
 		/// <summary>Inserts the children sorted.</summary>
@@ -70,10 +72,11 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <remarks>
 		/// This is an optimized form of bubble search.
 		/// Because most of the list keeps it order, it is the optimal approach.
+		/// 
+		/// If the branching factor is higher, it's slower.
 		/// </remarks>
 		protected void Sort(int lastIndex)
 		{
-			lastIndex = Math.Min(Count - 1, lastIndex);
 			for (var index = lastIndex; index >= 0; index--)
 			{
 				var val = this[index].Score;

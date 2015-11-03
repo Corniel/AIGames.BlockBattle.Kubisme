@@ -28,10 +28,6 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Positive)]
 		public int Skips { get; set; }
 
-		/// <summary>The minimum distance to an unreachable hole.</summary>
-		[ParameterType(ParameterType.Negative)]
-		public int UnreachableDistance { get; set; }
-
 		/// <summary>Points for a potential Tetris.</summary>
 		[ParameterType(ParameterType.Positive)]
 		public int TetrisPotential { get; set; }
@@ -88,7 +84,6 @@ namespace AIGames.BlockBattle.Kubisme
 				Points = 107,
 				Combo = 40,
 				Skips = 12,
-				UnreachableDistance = -5,
 				TetrisPotential = 34,
 				Groups = new int[] { 30, 26, -10, -23, -33, -37 },
 				EmptyRowCount = 10,

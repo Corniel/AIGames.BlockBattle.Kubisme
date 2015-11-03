@@ -31,15 +31,23 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Positive)]
 		public int Skips { get; set; }
 
-		/// <summary>Points for a potential Tetris.</summary>
-		[ParameterType(ParameterType.Positive)]
-		public int TetrisPotential { get; set; }
+		
 
 		[ParameterType(ParameterType.Positive)]
 		public int DoublePotentialJLT { get; set; }
 
 		[ParameterType(ParameterType.Positive)]
 		public int DoublePotentialO { get; set; }
+
+		[ParameterType(ParameterType.Positive)]
+		public int DoublePotentialI { get; set; }
+
+		[ParameterType(ParameterType.Positive)]
+		public int TripplePotentialI { get; set; }
+
+		/// <summary>Points for a potential Tetris.</summary>
+		[ParameterType(ParameterType.Positive)]
+		public int TetrisPotential { get; set; }
 
 		[ParameterType(ParameterType.Positive)]
 		public int TSpinPontential { get; set; }

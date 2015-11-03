@@ -142,44 +142,6 @@ XXXXXXXX..";
 		}
 
 		[Test]
-		public void TetrisPotential_TunnleOf5WithHickup_0()
-		{
-			var field = @"
-..........
-XX.XXXXXXX
-XX.XXXXXXX
-XX.XXXXXXX
-XX.XXXX.XX
-XX.XXXXXXX
-XXX..X.XX.";
-			var pars = new EvaluatorParameters()
-			{
-				TetrisPotential = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void TetrisPotential_TunnleOf4_1()
-		{
-			var field = @"
-..........
-XX.XXXXXXX
-XX.XXXXXXX
-XX.XXXXXXX
-XX.XXXXXXX
-XXX..X.XX.";
-			var pars = new EvaluatorParameters()
-			{
-				TetrisPotential = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
 		public void DoublePotentialJLT_JFitWithHole_0()
 		{
 			var field = @"
@@ -310,7 +272,7 @@ X..XXXXXXX
 			Test(field, pars, expected);
 		}
 		[Test]
-		public void oublePotentialO_OFit_1()
+		public void DoublePotentialO_OFit_1()
 		{
 			var field = @"
 ..........
@@ -321,6 +283,124 @@ XX.XXXXXXX
 			var pars = new EvaluatorParameters()
 			{
 				DoublePotentialO = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+
+		[Test]
+		public void DoublePotentialI_TunnelOf5WithHickup_0()
+		{
+			var field = @"
+..........
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXX.XX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialI = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialI_TunnelOf3_1()
+		{
+			var field = @"
+..........
+..........
+XX.XXX.XXX
+XX.XX.XXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialI = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void TripplePotentialI_TunnelOf5WithHickup_0()
+		{
+			var field = @"
+..........
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXX.XX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TripplePotentialI = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TripplePotentialI_TunnelOf3_1()
+		{
+			var field = @"
+..........
+..........
+XX.XXX.XXX
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TripplePotentialI = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void TetrisPotential_TunnelOf5WithHickup_0()
+		{
+			var field = @"
+..........
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXX.XX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TetrisPotential = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TetrisPotential_TunnelOf4_1()
+		{
+			var field = @"
+..........
+..........
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TetrisPotential = 1,
 			};
 			var expected = 1;
 

@@ -34,11 +34,11 @@
 				var rowMirror = row ^ Row.Filled;
 
 				var reachbleEmptyCells = rowMirror & maskColumnOpen;
-				
-				// No reachable cells left.
-				if (reachbleEmptyCells== 0) { break; }
 
-				var rowHoles =  Row.Count[maskColumnClosed & rowMirror];
+				// No reachable cells left.
+				if (reachbleEmptyCells == 0) { break; }
+
+				var rowHoles = Row.Count[maskColumnClosed & rowMirror];
 				var rowCount = Row.Count[row];
 				// Groups of empty cells.
 				var groups = Row.Groups[rowMirror];
@@ -66,38 +66,46 @@
 					// holes are added (all reachable).
 					if (rowCount == 8 && groups == 1 && rowHoles == 0 && row == field[rowNr - 1])
 					{
-						score+= Pars.DoublePotentialO;
+						score += Pars.DoublePotentialO;
 					}
 					else if (rowCount == 9)
 					{
-						var prev = field[rowNr - 1];
-						var prevMirror = field[rowNr - 1] ^ Row.Filled;
-						if (Row.Count[prevMirror] == 3 && Row.Groups[prevMirror] == 1)
+						// Detect Tetris-score.
+						// It should end with at least 4 reachable nine-rows.
+						tetrisCount++;
+
+						// If Tetris count is 2 of bigger, the previous one was 9.
+						if (tetrisCount == 1)
 						{
-							if ((prevMirror & maskColumnClosedPrev) == 0)
+							var prev = field[rowNr - 1];
+							var prevMirror = field[rowNr - 1] ^ Row.Filled;
+							if (Row.Count[prevMirror] == 3 && Row.Groups[prevMirror] == 1)
 							{
-								score += Pars.DoublePotentialJLT;
-							}
-							// Potential T-spin.
-							else if (rowNr > 2 && field.FirstFilled < rowNr - 1)
-							{
-								for (var col = 0; col < 8; col++)
+								if ((prevMirror & maskColumnClosedPrev) == 0)
 								{
-									if (BlockTUturn.TSpinRow2Mask[col] == row)
+									score += Pars.DoublePotentialJLT;
+								}
+								// Potential T-spin.
+								else if (rowNr > 2 && field.FirstFilled < rowNr - 1)
+								{
+									for (var col = 0; col < 8; col++)
 									{
-										if (BlockTUturn.TSpinRow1Mask[col] == prev)
+										if (BlockTUturn.TSpinRow2Mask[col] == row)
 										{
-											var top = field[rowNr - 2];
-											var maskTSpinTop = BlockTUturn.TSpinTopMask[col];
-											var match = top & maskTSpinTop;
-											// Note, we don't have to check for the center blockade.
-											// If that was the case, the current line would be unreachable.
-											if (match != 0 && match != maskTSpinTop)
+											if (BlockTUturn.TSpinRow1Mask[col] == prev)
 											{
-												score += Pars.TSpinPontential;
+												var top = field[rowNr - 2];
+												var maskTSpinTop = BlockTUturn.TSpinTopMask[col];
+												var match = top & maskTSpinTop;
+												// Note, we don't have to check for the center blockade.
+												// If that was the case, the current line would be unreachable.
+												if (match != 0 && match != maskTSpinTop)
+												{
+													score += Pars.TSpinPontential;
+												}
 											}
+											break;
 										}
-										break;
 									}
 								}
 							}
@@ -105,10 +113,8 @@
 					}
 				}
 
-				// Detect Tetris-score.
-				// It should end with at least 4 reachable nine-rows.
-				if (rowCount == 9) { tetrisCount++; }
-				else { tetrisCount = 0; }
+				// reset Tetris count.
+				if (rowCount != 9) { tetrisCount = 0; }
 
 				// apply row to closed and open columns.
 				maskColumnClosedPrev = maskColumnClosed;
@@ -124,7 +130,9 @@
 			// Add scores based on counters.
 			score += holes * Pars.Holes;
 
-			if (tetrisCount > 3) { score += Pars.TetrisPotential; }
+			if (tetrisCount == 2) { score += Pars.DoublePotentialI; }
+			else if (tetrisCount == 3) { score += Pars.TripplePotentialI; }
+			else if (tetrisCount > 3) { score += Pars.TetrisPotential; }
 
 
 			return score;

@@ -6,7 +6,7 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Applies garbage and locks to the field.</summary>
 		public static Field Apply(Field field, int depth, ApplyParameters pars)
 		{
-			if (((pars.Round + depth) & 15) == 15)
+			if ((pars.Round + depth) % 15 == 0)
 			{
 				field = field.LockRow();
 			}

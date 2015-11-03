@@ -35,6 +35,12 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Positive)]
 		public int TetrisPotential { get; set; }
 
+		[ParameterType(ParameterType.Positive)]
+		public int DoublePotentialJLT { get; set; }
+
+		[ParameterType(ParameterType.Positive)]
+		public int TSpinPontential { get; set; }
+
 		/// <summary>Rows with a single (empty cell) group, of at least 6 cells filled,
 		/// get a bonus, as they can be cleared easily.
 		/// </summary>

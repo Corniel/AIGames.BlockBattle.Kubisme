@@ -179,6 +179,173 @@ XXX..X.XX.";
 			Test(field, pars, expected);
 		}
 
+		[Test]
+		public void DoublePotentialJLT_JFitWithHole_0()
+		{
+			var field = @"
+..........
+...XXXXXXX
+XX.XXXXXX.
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialJLT = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialJLT_JFit_1()
+		{
+			var field = @"
+..........
+...XXXXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialJLT = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialJLT_LFitWithHole_0()
+		{
+			var field = @"
+..........
+XX...XXXXX
+XX.XXXXXX.
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialJLT = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialJLT_LFit_1()
+		{
+			var field = @"
+..........
+XX...XXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialJLT = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialJLT_TFitWithHole_0()
+		{
+			var field = @"
+..........
+X...XXXXXX
+XX.XXXXXX.
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialJLT = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialJLT_TFit_1()
+		{
+			var field = @"
+..........
+X...XXXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialJLT = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+
+		[Test]
+		public void TSpinPontential_TFitWithHole_0()
+		{
+			var field = @"
+..........
+.X........
+X...XXXXXX
+XX.XXXXXX.
+";
+			var pars = new EvaluatorParameters()
+			{
+				TSpinPontential = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TSpinPontential_TFitWithToBlocades_0()
+		{
+			var field = @"
+..........
+.X.X......
+X...XXXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				TSpinPontential = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TSpinPontential_TFitWithCenterBlocades_0()
+		{
+			var field = @"
+..........
+.XX.......
+X...XXXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				TSpinPontential = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TSpinPontential_TFit_1()
+		{
+			var field = @"
+..........
+...X......
+X...XXXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				TSpinPontential = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
 		private static void Test(string str, EvaluatorParameters pars, int expected)
 		{
 			var field = Field.Create(0, 0, 0, str);

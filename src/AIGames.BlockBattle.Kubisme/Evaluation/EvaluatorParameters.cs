@@ -39,6 +39,9 @@ namespace AIGames.BlockBattle.Kubisme
 		public int DoublePotentialJLT { get; set; }
 
 		[ParameterType(ParameterType.Positive)]
+		public int DoublePotentialO { get; set; }
+
+		[ParameterType(ParameterType.Positive)]
 		public int TSpinPontential { get; set; }
 
 		/// <summary>Rows with a single (empty cell) group, of at least 6 cells filled,

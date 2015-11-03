@@ -278,6 +278,56 @@ XX.XXXXXXX
 
 
 		[Test]
+		public void DoublePotentialO_OWithHole_0()
+		{
+			var field = @"
+..........
+X..XXXXXXX
+X..XXXXXX.
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialO = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void DoublePotentialO_OWithBlocade_0()
+		{
+			var field = @"
+.X........
+X..XXXXXXX
+X..XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialO = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void oublePotentialO_OFit_1()
+		{
+			var field = @"
+..........
+X..XXXXXXX
+X..XXXXXXX
+XX.XXXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				DoublePotentialO = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
 		public void TSpinPontential_TFitWithHole_0()
 		{
 			var field = @"

@@ -60,36 +60,45 @@
 				holes += rowHoles;
 
 				// Detect T-spin and double clearance (T, L, J) potential.
-				if (rowCount == 9 && rowNr > 1)
+				if (rowNr > 1)
 				{
-					var prev = field[rowNr - 1];
-					var prevMirror = field[rowNr - 1] ^ Row.Filled;
-					if (Row.Count[prevMirror] == 3 && Row.Groups[prevMirror] == 1)
+					// if 1 group, and 8, and the previous row is identical and no
+					// holes are added (all reachable).
+					if (rowCount == 8 && groups == 1 && rowHoles == 0 && row == field[rowNr - 1])
 					{
-						if ((prevMirror & maskColumnClosedPrev) == 0)
+						score+= Pars.DoublePotentialO;
+					}
+					else if (rowCount == 9)
+					{
+						var prev = field[rowNr - 1];
+						var prevMirror = field[rowNr - 1] ^ Row.Filled;
+						if (Row.Count[prevMirror] == 3 && Row.Groups[prevMirror] == 1)
 						{
-							score += Pars.DoublePotentialJLT;
-						}
-						// Potential T-spin.
-						else if (rowNr > 2 && field.FirstFilled < rowNr - 1)
-						{
-							for (var col = 0; col < 8; col++)
+							if ((prevMirror & maskColumnClosedPrev) == 0)
 							{
-								if (BlockTUturn.TSpinRow2Mask[col] == row)
+								score += Pars.DoublePotentialJLT;
+							}
+							// Potential T-spin.
+							else if (rowNr > 2 && field.FirstFilled < rowNr - 1)
+							{
+								for (var col = 0; col < 8; col++)
 								{
-									if (BlockTUturn.TSpinRow1Mask[col] == prev)
+									if (BlockTUturn.TSpinRow2Mask[col] == row)
 									{
-										var top = field[rowNr - 2];
-										var maskTSpinTop = BlockTUturn.TSpinTopMask[col];
-										var match = top & maskTSpinTop;
-										// Note, we don't have to check for the center blockade.
-										// If that was the case, the current line would be unreachable.
-										if (match != 0 && match != maskTSpinTop)
+										if (BlockTUturn.TSpinRow1Mask[col] == prev)
 										{
-											score += Pars.TSpinPontential;
+											var top = field[rowNr - 2];
+											var maskTSpinTop = BlockTUturn.TSpinTopMask[col];
+											var match = top & maskTSpinTop;
+											// Note, we don't have to check for the center blockade.
+											// If that was the case, the current line would be unreachable.
+											if (match != 0 && match != maskTSpinTop)
+											{
+												score += Pars.TSpinPontential;
+											}
 										}
+										break;
 									}
-									break;
 								}
 							}
 						}

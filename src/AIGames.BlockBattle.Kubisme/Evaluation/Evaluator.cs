@@ -6,6 +6,12 @@
 
 		public Field Initial { get; set; }
 
+		/// <summary>Gets the (static) score of a field.</summary>
+		/// <remarks>
+		/// Normally, this function should be split in several sub methods. But as 
+		/// this is the most executed code of the all AI, speed is everything. The
+		/// penalty for calling a method is small, but here, we don't want to spoil it.
+		/// </remarks>
 		public int GetScore(Field field, int depth)
 		{
 			var score = 0;
@@ -110,6 +116,16 @@
 								}
 							}
 						}
+						// We'd like to detect a J/L triple.
+						else if (tetrisCount > 1)
+						{
+							var prevMirror = field[rowNr - tetrisCount] ^ Row.Filled;
+							// One hole, and 8 filled cells.
+							if (Row.Groups[prevMirror] == 1 && Row.Count[prevMirror] == 2)
+							{
+								score += Pars.TriplePotentialJL;
+							}
+						}
 					}
 				}
 
@@ -131,7 +147,7 @@
 			score += holes * Pars.Holes;
 
 			if (tetrisCount == 2) { score += Pars.DoublePotentialI; }
-			else if (tetrisCount == 3) { score += Pars.TripplePotentialI; }
+			else if (tetrisCount == 3) { score += Pars.TriplePotentialI; }
 			else if (tetrisCount > 3) { score += Pars.TetrisPotential; }
 
 

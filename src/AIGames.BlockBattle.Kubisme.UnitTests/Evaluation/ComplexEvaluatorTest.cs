@@ -238,7 +238,6 @@ XX.XXXXXXX
 			Test(field, pars, expected);
 		}
 
-
 		[Test]
 		public void DoublePotentialO_OWithHole_0()
 		{
@@ -289,7 +288,6 @@ XX.XXXXXXX
 			Test(field, pars, expected);
 		}
 
-
 		[Test]
 		public void DoublePotentialI_TunnelOf5WithHickup_0()
 		{
@@ -330,7 +328,7 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void TripplePotentialI_TunnelOf5WithHickup_0()
+		public void TriplePotentialI_TunnelOf5WithHickup_0()
 		{
 			var field = @"
 ..........
@@ -342,14 +340,14 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TripplePotentialI = 1,
+				TriplePotentialI = 1,
 			};
 			var expected = 0;
 
 			Test(field, pars, expected);
 		}
 		[Test]
-		public void TripplePotentialI_TunnelOf3_1()
+		public void TriplePotentialI_TunnelOf3_1()
 		{
 			var field = @"
 ..........
@@ -361,7 +359,64 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TripplePotentialI = 1,
+				TriplePotentialI = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+
+		[Test]
+		public void TriplePotentialJL_TunnelOf4WithHickup_0()
+		{
+			var field = @"
+..........
+XX..XXXXXX
+XX.XXXXXXX
+XX.XX.XXXX
+XX.XXXX.XX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TriplePotentialJL = 1,
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TriplePotentialJL_TunnelOf3WithJ_1()
+		{
+			var field = @"
+..........
+..........
+XX..XXXXXX
+XX.XXXXXXX
+XX.XXXXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TriplePotentialJL = 1,
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void TriplePotentialJL_TunnelOf3WithL_1()
+		{
+			var field = @"
+..........
+..........
+XXX..XXXXX
+XXXX.XXXXX
+XXXX.XXXXX
+XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				TriplePotentialJL = 1,
 			};
 			var expected = 1;
 

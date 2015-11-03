@@ -159,7 +159,7 @@ XX.XXXXXXX");
 			AssertField(exp, 10, 1, 0, 2, act);
 		}
 		[Test]
-		public void Apply_TrippleClear_Adds6Points()
+		public void Apply_TripleClear_Adds6Points()
 		{
 			var field = Field.Create(4, 0, 0, @"
 ..........

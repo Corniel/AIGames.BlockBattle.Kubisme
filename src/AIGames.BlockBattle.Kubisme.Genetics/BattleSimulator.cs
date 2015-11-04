@@ -209,14 +209,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					writer.WriteLine();
 				}
 			}
-			using (var writer = new StreamWriter("ratings.txt", false))
-			{
-				int pos = 1;
-				foreach (var bot in sorted)
-				{
-					writer.WriteLine("{5,2} {0:0000.0} {4:0.0000}, Runs: {1,5}, ID: {2,5}, Parent: {3,5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, pos++);
-				}
-			}
 		}
 	}
 }

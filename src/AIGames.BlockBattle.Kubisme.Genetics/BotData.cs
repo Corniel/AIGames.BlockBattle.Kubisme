@@ -24,10 +24,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			: this(id, rnd.Randomize(parent.Pars))
 		{
 			ParentId = parent.Id;
+			Generation = parent.Generation + 1;
 		}
 
 		public int Id { get; set; }
 		public int ParentId { get; set; }
+		[XmlElement("Gen")]
+		public int Generation { get; set; }
 		public int Runs { get; set; }
 
 		[XmlElement("Pt")]

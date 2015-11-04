@@ -13,11 +13,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		/// <summary>A set of masks with 2 connected block.</summary>
 		public static readonly HashSet<int> Row2BlocksConnected = new HashSet<int>() { 0x0003, 0x0006, 0x000C, 0x0018, 0x0030, 0x0060, 0x00C0, 0x0180, 0x0300 };
-		/// <summary>A set of masks with 7 blocks and one hole.</summary>
-		public static readonly HashSet<int> Row7BlockOneHole = new HashSet<int>() { 0X03F8, 0X03F1, 0X03E3, 0X03C7, 0X038F, 0X031F, 0X023F, 0X007F, };
-		/// <summary>A set of masks with 8 blocks and one hole.</summary>
-		public static readonly HashSet<int> Row8BlockOneHole = new HashSet<int>() { 0X03FC, 0X03F9, 0X03F3, 0X03E7, 0X03CF, 0X039F, 0X033F, 0X027F, 0X00FF, };
-
+	
 		public static readonly ushort[] Flag = new ushort[]{
 			0x0001,
 			0x0002,

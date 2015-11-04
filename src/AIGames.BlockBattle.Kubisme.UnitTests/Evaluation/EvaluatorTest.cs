@@ -4,7 +4,7 @@ using System.Linq;
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 {
 	[TestFixture, Category(Category.Evaluation)]
-	public class ComplexEvaluatorTest
+	public class EvaluatorTest
 	{
 		[Test]
 		public void Holes_FieldWithUnreachableRow_1()
@@ -532,6 +532,44 @@ XX.XXXXXXX
 				TSpinPontential = 1,
 			};
 			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void ComboPotential_NotReachable_0()
+		{
+			var field = @"
+..........
+XX.X......
+X...XXXXXX
+XX..XXXXXX
+XX..XXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				Combos = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void ComboPotential_Blockade_2()
+		{
+			var field = @"
+..........
+X......X..
+X...XXXXXX
+XX.XXX.XXX
+XX..XXXXXX
+";
+			var pars = new EvaluatorParameters()
+			{
+				Combos = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+			};
+			var expected = 2;
 
 			Test(field, pars, expected);
 		}

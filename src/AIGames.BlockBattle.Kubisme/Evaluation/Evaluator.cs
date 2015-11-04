@@ -27,6 +27,8 @@
 			// counters
 			var holes = 0;
 			var tetrisCount = 0;
+			var comboPotential = 0;
+			var hasComboPotential = true;
 
 			var maskColumnOpen = (int)Row.Filled;
 			var maskColumnClosed = 0;
@@ -60,6 +62,19 @@
 
 				// Count holes.
 				holes += rowHoles;
+
+				if (hasComboPotential)
+				{
+					// If there is only one empty cell to go through, its over.
+					if (rowCount == 9 || Row.Count[rowMirror & maskColumnOpen] < 2) 
+					{
+						hasComboPotential = false;
+					}
+					else if (rowCount > 6 && groups == 1)
+					{
+						comboPotential++;
+					}
+				}
 
 				// Detect T-spin and double clearance (T, L, J) potential.
 				if (rowNr > 1)
@@ -153,6 +168,7 @@
 
 			// Add scores based on counters.
 			score += holes * Pars.Holes;
+			score += Pars.ComboPotential[field.Combo, comboPotential];
 
 			if (tetrisCount == 2) { score += Pars.DoublePotentialI; }
 			else if (tetrisCount == 3) { score += Pars.TriplePotentialI; }

@@ -11,8 +11,10 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			Unreachables = new int[22];
 			EmptyRows = new int[22];
+			Combos = new int[22];
 			Groups = new int[6];
 			SingleGroupBonus = new int[4];
+			ComboPotential = new int[16, 32];
 		}
 
 		public int[] EmptyRowsCalc { get { return m_EmptyRows; } }
@@ -26,8 +28,20 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Holes { get; set; }
 		[ParameterType(ParameterType.Positive)]
 		public int Points { get; set; }
-		[ParameterType(ParameterType.Positive)]
-		public int Combo { get; set; }
+		
+		
+		/// <summary>Factor for current combo's.</summary>
+		public int Combo { get { return Combos[0]; } }
+		/// <summary>Genetics input.</summary>
+		[ParameterType(ParameterType.Descending)]
+		public int[] Combos { get; set; }
+
+		/// <summary>Gets the combo potential given the current combo value (x) and the the counter (y).</summary>
+		/// <remarks>
+		/// 16 x 32
+		/// </remarks>
+		public int[,] ComboPotential { get; set; }
+
 		[ParameterType(ParameterType.Positive)]
 		public int Skips { get; set; }
 
@@ -88,6 +102,16 @@ namespace AIGames.BlockBattle.Kubisme
 				m_UnreachableRows[i] += Unreachables[i - 1];
 				// On average, 1.5 hole per unreachable.
 				m_UnreachableRows[i] += Holes + Holes >> 1;
+			}
+
+			for (var combo = 0; combo < 16; combo++)
+			{
+				var score = 0;
+				for (var potential = 1; potential < 32; potential++)
+				{
+					score += (combo + 1 + potential) * Combos[potential];
+					ComboPotential[combo, potential] = score;
+				}
 			}
 			return this;
 		}

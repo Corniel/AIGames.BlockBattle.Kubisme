@@ -6,14 +6,12 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Applies garbage and locks to the field.</summary>
 		public static Field Apply(Field field, int depth, ApplyParameters pars)
 		{
-			if ((pars.Round + depth) % 15 == 0)
+			// Lock a row every 15 turns. 
+			// Alternatively Just to create some garbage. We use a lock because adding
+			// a garbage line adds to much randomness to the outcome.
+			if ((pars.Round + depth) % 15 == 0 || (depth & 1) == 1)
 			{
-				field = field.LockRow();
-			}
-			// Just to create some garbage, add it 'randomly'.
-			if ((depth & 1) == 1)
-			{
-				return field.Garbage(Row.GetGarbage(1, field.Points, pars.Rnd));
+				return field.LockRow();
 			}
 			return field;
 		}

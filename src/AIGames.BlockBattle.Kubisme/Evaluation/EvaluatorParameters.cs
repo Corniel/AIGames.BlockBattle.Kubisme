@@ -86,7 +86,8 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				m_UnreachableRows[i] = m_UnreachableRows[i - 1];
 				m_UnreachableRows[i] += Unreachables[i - 1];
-				m_UnreachableRows[i] += Holes;
+				// On average, 1.5 hole per unreachable.
+				m_UnreachableRows[i] += Holes + Holes >> 1;
 			}
 			return this;
 		}

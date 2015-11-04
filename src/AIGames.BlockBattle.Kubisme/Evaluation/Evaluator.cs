@@ -55,10 +55,6 @@
 					score += Pars.SingleGroupBonus[rowCount - 6];
 				}
 
-				// Add points for empty reachable cells.
-				var emptyCellCount = Row.Count[reachbleEmptyCells];
-				score += emptyCellCount * Pars.EmptyCells[rowNr];
-
 				// Add points for grouping
 				score += Pars.Groups[groups];
 

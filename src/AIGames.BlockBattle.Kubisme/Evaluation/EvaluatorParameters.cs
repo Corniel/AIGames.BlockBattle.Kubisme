@@ -10,13 +10,13 @@ namespace AIGames.BlockBattle.Kubisme
 		public EvaluatorParameters()
 		{
 			Unreachables = new int[22];
-			EmptyCells = new int[22];
+			EmptyRows = new int[22];
 			Groups = new int[6];
 			SingleGroupBonus = new int[4];
 		}
 
-		public int[] EmptyRowsCalc { get { return m_FreeRows; } }
-		private int[] m_FreeRows;
+		public int[] EmptyRowsCalc { get { return m_EmptyRows; } }
+		private int[] m_EmptyRows;
 
 		public int[] UnreachableRowsCalc { get { return m_UnreachableRows; } }
 		private int[] m_UnreachableRows;
@@ -30,7 +30,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Combo { get; set; }
 		[ParameterType(ParameterType.Positive)]
 		public int Skips { get; set; }
-
 
 		[ParameterType(ParameterType.Positive)]
 		public int DoublePotentialJLT { get; set; }
@@ -59,18 +58,13 @@ namespace AIGames.BlockBattle.Kubisme
 		public int[] SingleGroupBonus { get; set; }
 
 		/// <summary>Points for the different number of groups per reachable hole.</summary>
-		/// <remarks>
-		/// Index 0 is never called.
-		/// </remarks>
 		[ParameterType(ParameterType.Descending)]
 		public int[] Groups { get; set; }
 
-		[ParameterType(ParameterType.Positive)]
-		public int EmptyRowCount { get; set; }
-		[ParameterType(ParameterType.Positive)]
-		public int EmptyCellStaffle { get; set; }
+		public int EmptyRowStaffle { get { return Groups[0]; } }
+
 		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
-		public int[] EmptyCells { get; set; }
+		public int[] EmptyRows { get; set; }
 
 		/// <summary>The less Unreachable.</summary>
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
@@ -78,13 +72,13 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public EvaluatorParameters Calc()
 		{
-			m_FreeRows = new int[EmptyCells.Length];
+			m_EmptyRows = new int[EmptyRows.Length];
 
-			for (var i = 1; i < m_FreeRows.Length; i++)
+			for (var i = 1; i < m_EmptyRows.Length; i++)
 			{
-				m_FreeRows[i] = m_FreeRows[i - 1];
-				m_FreeRows[i] += EmptyCells[i - 1] * EmptyRowCount;
-				m_FreeRows[i] += EmptyCellStaffle * EmptyRowCount;
+				m_EmptyRows[i] = m_EmptyRows[i - 1];
+				m_EmptyRows[i] += EmptyRows[i - 1];
+				m_EmptyRows[i] += EmptyRowStaffle;
 			}
 
 			m_UnreachableRows = new int[Unreachables.Length];
@@ -100,23 +94,11 @@ namespace AIGames.BlockBattle.Kubisme
 		public static EvaluatorParameters GetDefault()
 		{
 			var pars = new EvaluatorParameters()
-			// Elo: 1655, Avg: 0.197, Runs: 17968, ID: 947, Parent: 907
 			{
-				EmptyRowCount = 10,
-				EmptyCellStaffle = 1,
-				Holes = -100,
+				Groups = new int[] { 2, 1, 0, -1, -2, -3 },
+				Holes = -1,
 			};
 			return pars.Calc();
-		}
-
-		public static EvaluatorParameters GetInitial()
-		{
-			return new EvaluatorParameters()
-			{
-				EmptyRowCount = 10,
-				EmptyCellStaffle = 1,
-				Holes = -100,
-			}.Calc();
 		}
 	}
 }

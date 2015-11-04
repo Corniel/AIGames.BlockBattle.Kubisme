@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -40,6 +41,7 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <remarks>
 		/// 16 x 32
 		/// </remarks>
+		[XmlIgnore]
 		public int[,] ComboPotential { get; set; }
 
 		[ParameterType(ParameterType.Positive)]
@@ -107,7 +109,7 @@ namespace AIGames.BlockBattle.Kubisme
 			for (var combo = 0; combo < 16; combo++)
 			{
 				var score = 0;
-				for (var potential = 1; potential < 32; potential++)
+				for (var potential = 1; potential < Combos.Length; potential++)
 				{
 					score += (combo + 1 + potential) * Combos[potential];
 					ComboPotential[combo, potential] = score;

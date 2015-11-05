@@ -24,18 +24,31 @@ namespace AIGames.BlockBattle.Kubisme
 		public readonly byte Skips;
 		public readonly byte FirstFilled;
 
-		public Field(short pt, byte combo, byte skips, byte freeRows, params ushort[] rs)
+		/// <summary>Initiates a new instance of a Block Battle Field.</summary>
+		/// <param name="points">
+		/// The scored points.
+		/// </param>
+		/// <param name="combo">
+		/// The combo bonus counter.
+		/// </param>
+		/// <param name="skips">
+		/// The number of skips that can be applied.
+		/// </param>
+		/// <param name="firstFilled">
+		/// The first filled row.
+		/// </param>
+		/// <param name="rs">
+		/// An array of UInt16's representing the rows.
+		/// </param>
+		public Field(short points, byte combo, byte skips, byte firstFilled, params ushort[] rs)
 		{
-			Points = pt;
+			Points = points;
 			Combo = combo;
 			Skips = skips;
-			FirstFilled = freeRows;
+			FirstFilled = firstFilled;
 			rows = rs;
 		}
-
-		public Field(short pt, byte combo, byte skips, params ushort[] rs) :
-			this(pt, combo, skips, GetFirstNoneEmptyRow(rs), rs) { }
-
+		
 		private static byte GetFirstNoneEmptyRow(ushort[] rows)
 		{
 			for (byte r = 0; r < rows.Length; r++)
@@ -213,7 +226,7 @@ namespace AIGames.BlockBattle.Kubisme
 			Array.Copy(rows, count, rs, 0, copyCount);
 
 			var free = FirstFilled - count;
-			return new Field(Points, Combo, (byte)free, rs);
+			return new Field(Points, Combo, Skips, (byte)free, rs);
 		}
 
 		/// <summary>Returns a field, with a locked row.</summary>
@@ -223,7 +236,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var rs = new ushort[rows.Length - 1];
 			Array.Copy(rows, 1, rs, 0, rs.Length);
 			var free = FirstFilled - 1;
-			return new Field(Points, Combo, (byte)free, rs);
+			return new Field(Points, Combo, Skips, (byte)free, rs);
 		}
 
 		/// <summary>Skips a block.</summary>
@@ -231,7 +244,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			var rs = new ushort[rows.Length];
 			Array.Copy(rows, 0, rs, 0, rs.Length);
-			return new Field(Points, 0, (byte)(Skips - 1), rs);
+			return new Field(Points, 0, (byte)(Skips - 1), FirstFilled, rs);
 		}
 
 		public override string ToString() { return String.Join("|", Rows); }
@@ -276,6 +289,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		#endregion
 
+		/// <summary>For debug purposed a calculated set of rows.</summary>
 		public string[] Rows
 		{
 			get
@@ -298,7 +312,7 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				rows[r] = row;
 			}
-			var field = new Field((short)state[name].Points, (byte)state[name].Combo, (byte)state[name].Skips, rows);
+			var field = new Field((short)state[name].Points, (byte)state[name].Combo, (byte)state[name].Skips, GetFirstNoneEmptyRow(rows), rows);
 
 			return field;
 		}
@@ -313,7 +327,7 @@ namespace AIGames.BlockBattle.Kubisme
 				var row = Row.Create(lines[r].Trim());
 				rows[r] = row;
 			}
-			return new Field((short)pt, (byte)combo,(byte)skips, rows);
+			return new Field((short)pt, (byte)combo, (byte)skips, GetFirstNoneEmptyRow(rows), rows);
 		}
 	}
 }

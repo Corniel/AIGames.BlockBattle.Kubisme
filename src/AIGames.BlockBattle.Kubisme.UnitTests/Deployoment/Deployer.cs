@@ -113,12 +113,14 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 			typeof(System.Int32).Assembly,
 			typeof(System.Linq.Enumerable).Assembly,
 			typeof(System.Text.RegularExpressions.Regex).Assembly,
+			typeof(System.Xml.XmlDocument).Assembly,
 		};
 		private static readonly Assembly[] CompileAssembliesRelease = new Assembly[]
 		{
 			typeof(System.Int32).Assembly,
 			typeof(System.Linq.Enumerable).Assembly,
 			typeof(System.Text.RegularExpressions.Regex).Assembly,
+			typeof(System.Xml.XmlDocument).Assembly,
 		};
 
 		/// <summary>Zips the C# files to the zip directory.</summary>

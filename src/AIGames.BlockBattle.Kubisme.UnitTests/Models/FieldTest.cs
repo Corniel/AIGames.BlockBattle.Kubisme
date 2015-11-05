@@ -1,6 +1,7 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using NUnit.Framework;
 using System;
+using System.Text;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 {
@@ -14,7 +15,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ..........
 .......XX.
 ");
-			AssertField("..........|.......XX.", 0, 0, 17, 1, act);
+			AssertField("..........|.......XX.", 0, 0, 17, act);
 		}
 		[Test]
 		public void Create_FromState_InitializedField()
@@ -35,7 +36,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 				},
 			};
 			var act = Field.Create(state, PlayerName.Player2);
-			AssertField("..........|........X.|.......XX.", 10, 12, 0, 1, act);
+			AssertField("..........|........X.|.......XX.", 10, 12, 0, act);
 		}
 
 		[Test]
@@ -59,7 +60,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ........X.
 .......XX.");
 			var act = field.LockRow();
-			AssertField("........X.|.......XX.", 10, 3, 17, 0, act);
+			AssertField("........X.|.......XX.", 10, 3, 17, act);
 		}
 		[Test]
 		public void LockRow_FieldWithouEmptyRpws_NoneField()
@@ -82,7 +83,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ");
 			var act = field.Apply(Block.S, new Position(5, 2));
 			var exp = "..........|..........|......XX..|.....XXXX.";
-			AssertField(exp, 0, 0, 17, 2, act);
+			AssertField(exp, 0, 0, 17, act);
 		}
 		[Test]
 		public void Apply_I_Added()
@@ -95,7 +96,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 ");
 			var act = field.Apply(Block.I, new Position(0, 3));
 			var exp = "..........|..........|..........|XXXX...XX.";
-			AssertField(exp, 0, 0, 17, 3, act);
+			AssertField(exp, 0, 0, 17, act);
 		}
 		[Test]
 		public void Apply_Ir_Added()
@@ -111,7 +112,7 @@ XXXXXX.XX.
 ");
 			var act = field.Apply(Block.I.Variations[1], new Position(6, 3));
 			var exp = "..........|..........|..........|..........|..........|XXXXX.XXX.|XXXXXXXXX.";
-			AssertField(exp, 15, 1, 17, 5, act);
+			AssertField(exp, 15, 1, 16, act);
 		}
 		[Test]
 		public void Apply_IClearRow_Added()
@@ -120,7 +121,7 @@ XXXXXX.XX.
 
 			var act = field.Apply(Block.I, new Position(4, 19));
 			var exp = "..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|..........|........XX|.XX.....XX|XX......XX";
-			AssertField(exp, 0, 0, 2, 17, act);
+			AssertField(exp, 0, 0, 2, act);
 		}
 		[Test]
 		public void Apply_FullClear_Adds18Points()
@@ -132,7 +133,7 @@ XX.XXXXXXX");
 
 			var act = field.Apply(Block.J[Block.RotationType.Uturn], new Position(0, 1));
 			var exp = "..........|..........|..........";
-			AssertField(exp, 24, 1, 17, 3, act);
+			AssertField(exp, 24, 1, 17, act);
 		}
 		[Test]
 		public void Apply_SingleClearWithCombo1_Adds0Points()
@@ -144,7 +145,7 @@ XX.XXXXXXX");
 
 			var act = field.Apply(Block.L[Block.RotationType.Uturn], new Position(0, 1));
 			var exp = "..........|..........|XXX.XXXXXX";
-			AssertField(exp, 8, 1, 17, 2, act);
+			AssertField(exp, 8, 1, 17, act);
 		}
 		[Test]
 		public void Apply_DoubleClear0_Adds3Points()
@@ -156,7 +157,7 @@ XX.XXXXXXX");
 
 			var act = field.Apply(Block.L[Block.RotationType.Uturn], new Position(0, 1));
 			var exp = "..........|..........|.........X";
-			AssertField(exp, 10, 1, 17, 2, act);
+			AssertField(exp, 10, 1, 17, act);
 		}
 		[Test]
 		public void Apply_TripleClear_Adds6Points()
@@ -169,7 +170,7 @@ XX.XXXXXXX");
 
 			var act = field.Apply(Block.I[Block.RotationType.Left], new Position(0, 0));
 			var exp = "..........|..........|..........|X.........";
-			AssertField(exp, 10, 1, 17, 3, act);
+			AssertField(exp, 10, 1, 17, act);
 		}
 		[Test]
 		public void Apply_QuadrupleClear_Adds10Points()
@@ -183,7 +184,7 @@ XXXXX.XXXX");
 
 			var act = field.Apply(Block.I[Block.RotationType.Left], new Position(5, 1));
 			var exp = "..........|..........|..........|..........|XX.......X";
-			AssertField(exp, 18, 1, 18, 4, act);
+			AssertField(exp, 18, 1, 18, act);
 		}
 		[Test]
 		public void Apply_WithNegativeColumnPosition_Successful()
@@ -199,7 +200,7 @@ XX.XXXXXXX");
 			var act = field.Apply(block, new Position(0, 1));
 			Console.WriteLine(act);
 			var exp = "..........|..........|X.........|XX....X..X|XX.XXXXXXX";
-			AssertField(exp, 0, 0, 17, 2, act);
+			AssertField(exp, 0, 0, 17, act);
 		}
 
 		[Test]
@@ -213,7 +214,7 @@ XXXX.XXXXX");
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
 			var exp = "..........|..........|..X..XX...";
-			AssertField(exp, 10, 1, 18, 2, act);
+			AssertField(exp, 10, 1, 18, act);
 		}
 
 		[Test]
@@ -223,7 +224,7 @@ XXXX.XXXXX");
 			var field = Field.Create(1, 2, 4, exp);
 
 			var act = field.SkipBlock();
-			AssertField(exp, 1, 0, 3, 0, act);
+			AssertField(exp, 1, 0, 3, act);
 		}
 
 		[Test]
@@ -238,7 +239,7 @@ XX.XXXXXXX");
 
 			var act = field.Garbage(Row.Garbage[0], Row.Garbage[1]);
 			var exp = "......X..X|.XXXXXXXXX|XX.XXXXXXX|.XXXXXXXXX|X.XXXXXXXX";
-			AssertField(exp, 0, 0, 17, 0, act);
+			AssertField(exp, 0, 0, 17, act);
 		}
 		[Test]
 		public void Garage_OneRow_NoSpace()
@@ -299,17 +300,49 @@ XX....XX.X");
 			Assert.AreEqual(exp, act);
 		}
 
-		private static void AssertField(string str, int points, int combo, int skips, int freeRows, Field act)
+		private static void AssertField(string str, int points, int combo, int skips, Field act)
 		{
-			Assert.AreEqual(str, act.ToString());
-			Assert.AreEqual(points, act.Points, "Points");
-			Assert.AreEqual(combo, act.Combo, "Combo");
-			Assert.AreEqual(skips, act.Skips, "Skips");
-			Assert.AreEqual(freeRows, act.FirstFilled, "Free rows");
+			var exp = Field.Create(points, combo, skips, str);
+			Assert.AreEqual(new TestField(exp), new TestField(act));
 		}
 		private static void AssertFieldisNone(Field act)
 		{
-			AssertField("", -1, 0, 0, 0, act);
+			Assert.AreEqual(new TestField(Field.None), new TestField(act));
+		}
+	}
+
+	internal struct TestField: IEquatable<TestField>
+	{
+		private readonly Field Field;
+		
+		public TestField(Field field)
+		{
+			Field = field;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return base.Equals((TestField)obj);
+		}
+		public bool Equals(TestField other)
+		{
+			return
+				Field.Points == other.Field.Points &&
+				Field.Combo == other.Field.Combo &&
+				Field.Skips == other.Field.Skips &&
+				Field.FirstFilled == other.Field.FirstFilled &&
+				Field.ToString() == other.Field.ToString();
+		}
+		public override int GetHashCode() { return ToString().GetHashCode(); }
+
+		public override string ToString()
+		{
+			return string.Format("Points: {0}, Combo: {1}, Skips: {2}, FirstedFilled: {3}, Rows: {4}",
+				Field.Points,
+				Field.Combo,
+				Field.Skips,
+				Field.FirstFilled,
+				Field);
 		}
 	}
 }

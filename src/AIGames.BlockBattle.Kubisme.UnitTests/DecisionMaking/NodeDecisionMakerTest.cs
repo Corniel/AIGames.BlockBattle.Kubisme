@@ -105,7 +105,7 @@ XXXX.XXXXX");
 					Pars = EvaluatorParameters.GetDefault(),
 				},
 				Generator = new MoveGenerator(),
-				MaximumDepth = 9,
+				MaximumDepth = 7,
 			};
 
 			dm.GetMove(field, Block.T, Block.T, 1);

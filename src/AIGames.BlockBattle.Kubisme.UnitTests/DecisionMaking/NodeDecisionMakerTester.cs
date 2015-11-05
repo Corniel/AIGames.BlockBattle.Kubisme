@@ -22,6 +22,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Generator = Generator,
 				Current = current,
 				Next = next,
+				FirstFilled = field.FirstFilled,
 			};
 			Root = new BlockRootNode(field);
 

@@ -44,8 +44,14 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public Block Current { get; set; }
 		public Block Next { get; set; }
-		public int Evaluations{ get; set; }
+		public int Evaluations { get; set; }
 		public byte Depth { get; set; }
+
+		/// <summary>The initial value of first filled.</summary>
+		/// <remarks>
+		/// Used to generate garbage during calculations.
+		/// </remarks>
+		public int FirstFilled { get; set; }
 
 		[ExcludeFromCodeCoverage]
 		public override string ToString()

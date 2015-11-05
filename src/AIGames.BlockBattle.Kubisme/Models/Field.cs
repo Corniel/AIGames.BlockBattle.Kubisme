@@ -239,6 +239,34 @@ namespace AIGames.BlockBattle.Kubisme
 			return new Field(Points, Combo, Skips, (byte)free, rs);
 		}
 
+		/// <summary>Simulates garbage.</summary>
+		/// <param name="initialFirstFilled">
+		/// The initial first field (not necessarily equal to this field).
+		/// </param>
+		/// <remarks>
+		/// Removes basically, 1 row less than space available (to start with)
+		/// with a minimum of 1 and a maximum of 4.
+		/// </remarks>
+		public Field SimulateGarbage(int initialFirstFilled)
+		{
+			var lck = 1;
+			switch (initialFirstFilled)
+			{
+				case 0:
+				case 1:
+				case 2: break; 
+				case 03: lck = 2; break;
+				case 04: lck = 3; break;
+				default: lck = 4; break;
+			}
+			if (lck >= FirstFilled) { return None; }
+
+			var rs = new ushort[rows.Length - lck];
+			Array.Copy(rows, lck, rs, 0, rs.Length);
+			var free = FirstFilled - lck;
+			return new Field(Points, Combo, Skips, (byte)free, rs);
+		}
+
 		/// <summary>Skips a block.</summary>
 		public Field SkipBlock()
 		{

@@ -39,6 +39,7 @@ namespace AIGames.BlockBattle.Kubisme
 				Generator = Generator,
 				Current = current,
 				Next = next,
+				FirstFilled = field.FirstFilled,
 			};
 			Root = new BlockRootNode(field);
 

@@ -112,7 +112,7 @@ XXXXXX.XX.
 ");
 			var act = field.Apply(Block.I.Variations[1], new Position(6, 3));
 			var exp = "..........|..........|..........|..........|..........|XXXXX.XXX.|XXXXXXXXX.";
-			AssertField(exp, 15, 1, 16, act);
+			AssertField(exp, 15, 1, 17, act);
 		}
 		[Test]
 		public void Apply_IClearRow_Added()

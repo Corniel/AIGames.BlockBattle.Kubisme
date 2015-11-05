@@ -29,8 +29,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Holes { get; set; }
 		[ParameterType(ParameterType.Positive)]
 		public int Points { get; set; }
-		
-		
+
+
 		/// <summary>Factor for current combo's.</summary>
 		public int Combo { get { return Combos[0]; } }
 		/// <summary>Genetics input.</summary>
@@ -118,12 +118,43 @@ namespace AIGames.BlockBattle.Kubisme
 			return this;
 		}
 
+		/// <summary>Gets the default parameters.</summary>
+		/// <remarks>
+		/// Input for the genetics algorithm and used by the 'real' bot.
+		/// 
+		/// <code>
+		/// var pars = new EvaluatorParameters()
+		/// {
+		///     Groups = new int[] { 2, 1, 0, -1, -2, -3 },
+		///     Holes = -1,
+		/// ;
+		/// </code>
+		/// </remarks>
 		public static EvaluatorParameters GetDefault()
 		{
 			var pars = new EvaluatorParameters()
+			// Elo: 1635, Avg: 0,500, Runs: 1311, ID: 3114, Parent: 3044
 			{
-				Groups = new int[] { 2, 1, 0, -1, -2, -3 },
-				Holes = -1,
+				//EmptyRowsCalc = new int[] { 0,199,386,517,645,770,893,1001,1107,1207,1302,1395,1486,1571,1655,1739,1822,1904,1983,2062,2136,2207 },
+				//UnreachableRowsCalc = new int[] { 0,-160,-346,-544,-750,-958,-1172,-1397,-1625,-1858,-2092,-2330,-2568,-2807,-3052,-3310,-3573,-3837,-4132,-4432,-4733,-5038 },
+				Holes = -159,
+				Points = 118,
+				//Combo = 73,
+				Combos = new int[] { 73, 37, 35, 22, 19, 16, 10, 8, 0, -2, -3, -5, -8, -15, -17, -26, -26, -42, -49, -70, -74, -88 },
+				Skips = 3,
+				DoublePotentialJLT = 43,
+				DoublePotentialTSZ = 66,
+				DoublePotentialO = 1,
+				DoublePotentialI = 11,
+				TriplePotentialJL = 10,
+				TriplePotentialI = 20,
+				TetrisPotential = 70,
+				TSpinPontential = 46,
+				SingleGroupBonus = new int[] { 95, 27, 49, 183 },
+				Groups = new int[] { 68, 61, 49, -48, -61, -74 },
+				//EmptyRowStaffle = 68,
+				EmptyRows = new int[] { 131, 119, 63, 60, 57, 55, 40, 38, 32, 27, 25, 23, 17, 16, 16, 15, 14, 11, 11, 6, 3, 1 },
+				Unreachables = new int[] { -1, -27, -39, -47, -49, -55, -66, -69, -74, -75, -79, -79, -80, -86, -99, -104, -105, -136, -141, -142, -146, -152 },
 			};
 			return pars.Calc();
 		}

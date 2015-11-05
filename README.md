@@ -3,6 +3,12 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 48
+----------
+Re-introduced combo-potential. Removed score for empty cells (not for empty rows).
+Use 'locks' instead of 'garbage' to simulate less space through time (due to
+actions of the opponent). Both faster and less random.
+
 Version 47
 ----------
 Removed unreachable distance detection, changed branching factor. Added 

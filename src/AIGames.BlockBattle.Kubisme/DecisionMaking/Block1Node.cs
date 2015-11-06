@@ -51,6 +51,13 @@ namespace AIGames.BlockBattle.Kubisme
 					Children.Apply(depth, pars, BranchingFactor);
 				}
 				Score = Children.GetScore(this);
+				
+				// if we where close to dying, we don't want to forget that, if can
+				// clean it up later.
+				if (Field.FirstFilled < 4)
+				{
+					Score += pars.Evaluator.Pars.EmptyRows[Field.FirstFilled];
+				}
 			}
 		}
 

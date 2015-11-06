@@ -16,6 +16,7 @@ namespace AIGames.BlockBattle.Kubisme
 			Groups = new int[6];
 			SingleGroupBonus = new int[4];
 			ComboPotential = new int[16, 32];
+			LosingChanges = new int[] { 1, 0, 0, 0, 0 };
 		}
 
 		public int[] EmptyRowsCalc { get { return m_EmptyRows; } }
@@ -29,7 +30,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Holes { get; set; }
 		[ParameterType(ParameterType.Positive)]
 		public int Points { get; set; }
-
 
 		/// <summary>Factor for current combo's.</summary>
 		public int Combo { get { return Combos[0]; } }
@@ -86,6 +86,9 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] Unreachables { get; set; }
 
+		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
+		public int[] LosingChanges { get; set; }
+
 		public EvaluatorParameters Calc()
 		{
 			m_EmptyRows = new int[EmptyRows.Length];
@@ -97,7 +100,14 @@ namespace AIGames.BlockBattle.Kubisme
 				m_EmptyRows[i] += EmptyRowStaffle;
 			}
 
-			m_UnreachableRows = new int[Unreachables.Length];
+			double Losing100 = LosingChanges[0];
+			for (var i = 0; i < 4; i++)
+			{
+				var change = (double)LosingChanges[i + 1] / Losing100;
+				m_EmptyRows[i] += (int)(change * (double)LosingScore);
+			}
+
+				m_UnreachableRows = new int[Unreachables.Length];
 			for (var i = 1; i < m_UnreachableRows.Length; i++)
 			{
 				m_UnreachableRows[i] = m_UnreachableRows[i - 1];

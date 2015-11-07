@@ -124,14 +124,12 @@ namespace AIGames.BlockBattle.Kubisme
 		public readonly int ColumnMinimum;
 		public readonly int ColumnMaximum;
 
-
 		public virtual int ChildCount { get { return 34; } }
+		
 		public virtual Position Start { get { return new Position(3, -1); } }
 
 		public virtual int BranchingFactor0 { get { return 14; } }
 		public virtual int BranchingFactor1 { get { return 10; } }
-
-		public readonly Position[] Touches;
 
 		public int Count { get { return Lines.Sum(l => Bits.Count(l)); } }
 

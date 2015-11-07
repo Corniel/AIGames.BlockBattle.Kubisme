@@ -5,10 +5,10 @@ To-do
 -----
 * Take reaching column 0 and 9 into account.
 * Add task to copy release output to genetics directory.
-* Remove not required left-right's.
 
 Done
 ----
+* 2015-11-07] Remove not required left-right's.
 
 Not done
 --------

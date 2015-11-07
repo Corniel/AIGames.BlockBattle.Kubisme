@@ -55,5 +55,25 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
 
 			Assert.AreEqual(exp, act);
 		}
+
+		[Test]
+		public void Ctor_TurnLeftLeftLeftLeftRightDown_TurnLeftLeftDrop()
+		{
+			var instruction = new MoveInstruction(ActionType.TurnLeft, ActionType.Left, ActionType.Left, ActionType.Left, ActionType.Right, ActionType.Right, ActionType.Down);
+			var act = instruction.ToString();
+			var exp = "turnleft,left,drop";
+
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void Ctor_TurnRightRightRightRightLeftDown_TurnRightRightDrop()
+		{
+			var instruction = new MoveInstruction(ActionType.TurnRight, ActionType.Right, ActionType.Right, ActionType.Right, ActionType.Left, ActionType.Left, ActionType.Down);
+			var act = instruction.ToString();
+			var exp = "turnright,right,drop";
+
+			Assert.AreEqual(exp, act);
+		}
 	}
 }

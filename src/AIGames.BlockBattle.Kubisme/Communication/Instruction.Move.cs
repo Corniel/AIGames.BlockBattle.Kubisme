@@ -34,6 +34,25 @@ namespace AIGames.BlockBattle.Kubisme.Communication
 					}
 				}
 			}
+			var found = true;
+			while (found)
+			{
+				found = false;
+				for (var i = 1; i < Actions.Count; i++)
+				{
+					var prev = Actions[i - 1];
+					var curr = Actions[i];
+
+					// Just remove useless left-rights.
+					if ((prev == ActionType.Right && curr == ActionType.Left) ||
+						(curr == ActionType.Right && prev == ActionType.Left))
+					{
+						found = true;
+						Actions.RemoveRange(i - 1, 2);
+						break;
+					}
+				}
+			}
 		}
 
 		private readonly List<ActionType> Actions;

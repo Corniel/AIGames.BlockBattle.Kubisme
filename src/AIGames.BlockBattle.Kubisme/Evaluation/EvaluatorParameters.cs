@@ -143,28 +143,29 @@ namespace AIGames.BlockBattle.Kubisme
 		public static EvaluatorParameters GetDefault()
 		{
 			var pars = new EvaluatorParameters()
-			// Elo: 1635, Avg: 0,500, Runs: 1311, ID: 3114, Parent: 3044
+			// Elo: 1628, Avg: 0,581, Runs: 4562, ID: 3815, Parent: 3677
 			{
-				//EmptyRowsCalc = new int[] { 0,199,386,517,645,770,893,1001,1107,1207,1302,1395,1486,1571,1655,1739,1822,1904,1983,2062,2136,2207 },
-				//UnreachableRowsCalc = new int[] { 0,-160,-346,-544,-750,-958,-1172,-1397,-1625,-1858,-2092,-2330,-2568,-2807,-3052,-3310,-3573,-3837,-4132,-4432,-4733,-5038 },
-				Holes = -159,
-				Points = 118,
-				//Combo = 73,
-				Combos = new int[] { 73, 37, 35, 22, 19, 16, 10, 8, 0, -2, -3, -5, -8, -15, -17, -26, -26, -42, -49, -70, -74, -88 },
-				Skips = 3,
-				DoublePotentialJLT = 43,
-				DoublePotentialTSZ = 66,
-				DoublePotentialO = 1,
-				DoublePotentialI = 11,
-				TriplePotentialJL = 10,
-				TriplePotentialI = 20,
-				TetrisPotential = 70,
-				TSpinPontential = 46,
-				SingleGroupBonus = new int[] { 95, 27, 49, 183 },
-				Groups = new int[] { 68, 61, 49, -48, -61, -74 },
-				//EmptyRowStaffle = 68,
-				EmptyRows = new int[] { 131, 119, 63, 60, 57, 55, 40, 38, 32, 27, 25, 23, 17, 16, 16, 15, 14, 11, 11, 6, 3, 1 },
-				Unreachables = new int[] { -1, -27, -39, -47, -49, -55, -66, -69, -74, -75, -79, -79, -80, -86, -99, -104, -105, -136, -141, -142, -146, -152 },
+				//EmptyRowsCalc = new int[] { -6428, -6126, 123, 242, 514, 626, 717, 797, 873, 940, 1006, 1069, 1131, 1190, 1248, 1304, 1359, 1414, 1459, 1503, 1547, 1588 },
+				//UnreachableRowsCalc = new int[] { 0, -163, -338, -518, -700, -891, -1082, -1278, -1478, -1683, -1889, -2101, -2313, -2526, -2740, -2959, -3183, -3411, -3641, -3873, -4116, -4380 },
+				Holes = -152,
+				Points = 65,
+				//Combo = 33,
+				Combos = new int[] { 33, 26, 18, 15, 10, 6, 5, 3, 2, 2, 0, -8, -11, -11, -20, -24, -32, -33, -37, -40, -42, -44 },
+				Skips = 77,
+				DoublePotentialJLT = 4,
+				DoublePotentialTSZ = 11,
+				DoublePotentialO = 39,
+				DoublePotentialI = 55,
+				TriplePotentialJL = 46,
+				TriplePotentialI = 9,
+				TetrisPotential = 109,
+				TSpinPontential = 24,
+				SingleGroupBonus = new int[] { 58, 37, 1, 115 },
+				Groups = new int[] { 36, 36, 19, -17, -25, -83 },
+				//EmptyRowStaffle = 36,
+				EmptyRows = new int[] { 109, 98, 83, 80, 76, 55, 44, 40, 31, 30, 27, 26, 23, 22, 20, 19, 19, 9, 8, 8, 5, 1 },
+				Unreachables = new int[] { -11, -23, -28, -30, -39, -39, -44, -48, -53, -54, -60, -60, -61, -62, -67, -72, -76, -78, -80, -91, -112, -129 },
+				LosingChanges = new int[] { 209, 41, 40, 1, 1 },
 			};
 			return pars.Calc();
 		}

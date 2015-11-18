@@ -27,7 +27,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public ApplyParameters Pars { get; protected set; }
 		public Field BestField { get; protected set; }
 
-		public virtual BlockPath GetMove(Field field, Block current, Block next, int round)
+		public virtual BlockPath GetMove(Field field, Field opponent, Block current, Block next, int round)
 		{
 			Logs.Clear();
 			Pars = new ApplyParameters(Rnd)
@@ -41,6 +41,9 @@ namespace AIGames.BlockBattle.Kubisme
 				Next = next,
 				FirstFilled = field.FirstFilled,
 			};
+			var oppo = new OpponentEvaluator() { Generator = Pars.Generator };
+			Pars.Opponent = oppo.Evaluate(opponent, current);
+
 			Root = new BlockRootNode(field);
 
 			while (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration)

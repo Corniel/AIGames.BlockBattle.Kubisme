@@ -61,6 +61,12 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 		}
 
+		public void SetFinalScore(int score)
+		{
+			this.Score = score;
+			this.Children = BlockNodes<BlockRndNode>.GetEmpty();
+		}
+
 		protected override BlockRndNode Create(Field field, ApplyParameters pars)
 		{
 			var score = pars.Evaluator.GetScore(field, Depth);

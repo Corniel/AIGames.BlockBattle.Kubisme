@@ -5,6 +5,13 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public class BlockNodes<T> : List<T> where T : IBlockNode
 	{
+		/// <summary>Gets an empty collection of Block nodes.</summary>
+		public static BlockNodes<T> GetEmpty()
+		{
+			return new BlockNodes<T>();
+		}
+		private BlockNodes() { }
+
 		public BlockNodes(Block block) : base(block.ChildCount + 2) { }
 
 		/// <summary>Gets the score of the best (first) node.</summary>

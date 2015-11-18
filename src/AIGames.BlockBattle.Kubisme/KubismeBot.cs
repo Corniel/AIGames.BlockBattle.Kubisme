@@ -57,7 +57,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 			((Evaluator)DecisionMaker.Evaluator).Initial = Field;
 
-			var path = DecisionMaker.GetMove(Field, Current, Next, State.Round);
+			var path = DecisionMaker.GetMove(Field, Opponent, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());
 
 			var response = new BotResponse()

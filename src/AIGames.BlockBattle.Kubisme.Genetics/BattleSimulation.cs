@@ -66,8 +66,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			while(s0 && s1)
 			{								  
-				out0 = b0.GetResponse(field0, current, next, turns);
-				out1 = b1.GetResponse(field1, current, next, turns);
+				out0 = b0.GetResponse(field0, field1, current, next, turns);
+				out1 = b1.GetResponse(field1, field0, current, next, turns);
 
 				field0 = out0;
 				field1 = out1;

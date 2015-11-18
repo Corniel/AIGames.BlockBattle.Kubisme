@@ -1,5 +1,4 @@
-﻿using AIGames.BlockBattle.Kubisme.UnitTests.Evaluation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
@@ -10,8 +9,12 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			: base(new MT19937Generator(17)) { }
 
 		public List<string> Logs = new List<string>();
-		
-		public override BlockPath GetMove(Field field, Block current, Block next, int round)
+
+		public BlockPath GetMove(Field field, Block current, Block next, int round)
+		{
+			return GetMove(field, Field.Empty, current, next, round);
+		}
+		public override BlockPath GetMove(Field field, Field opponent, Block current, Block next, int round)
 		{
 			Pars = new ApplyParameters(Rnd)
 			{

@@ -14,7 +14,6 @@ namespace AIGames.BlockBattle.Kubisme
 			const int size = 16;
 			sw = Stopwatch.StartNew();
 			MaximumDepth = int.MaxValue;
-			Points = new int[size];
 			Rnd = rnd;
 			Blocks = new Block[size][];
 
@@ -30,8 +29,9 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public Block[][] Blocks { get; protected set; }
 
-		public int[] Points { get; set; }
 		public int Round { get; set; }
+
+		public OpponentEvaluation Opponent { get; set; }
 
 		public int MaximumDepth { get; set; }
 		public bool HasTimeLeft { get { return Elapsed < MaximumDuration; } }

@@ -29,10 +29,23 @@ namespace AIGames.BlockBattle.Kubisme
 					BranchingFactor = pars.Current.BranchingFactor0;
 					var block = GetBlock(pars);
 					Children = new BlockNodes<Block1Node>(block);
+					
+					var garbageOld = Field.Points / 3;
+
 					foreach (var candidate in pars.Generator.GetMoves(Field, block, true))
 					{
 						if (!pars.HasTimeLeft) { return; }
 						Block1Node child = Create(candidate.Field, candidate.Path, pars);
+
+						// We're in trouble, the opponent will kill us with move.
+						if (child.Field .Points> Field.Points)
+						{
+							var garbageNew = child.Field.Points / 3;
+							if (garbageNew - garbageOld > pars.Opponent.MinimumFirstFilled)
+							{
+								child.SetFinalScore(EvaluatorParameters.WinningScore);
+							}
+						}
 						Children.InsertSorted(child);
 					}
 				}

@@ -93,6 +93,8 @@
     <Compile Include="DecisionMaking\NodeDecisionMaker.cs" />
     <Compile Include="Evaluation\EvaluatorParameters.cs" />
     <Compile Include="Evaluation\Evaluator.cs" />
+    <Compile Include="Evaluation\OpponentEvaluation.cs" />
+    <Compile Include="Evaluation\OpponentEvaluator.cs" />
     <Compile Include="Evaluation\ParameterType.cs" />
     <Compile Include="Generation\IFieldGenerator.cs" />
     <Compile Include="Generation\IMoveGenerator.cs" />

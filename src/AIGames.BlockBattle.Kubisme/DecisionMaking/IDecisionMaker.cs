@@ -8,6 +8,6 @@ namespace AIGames.BlockBattle.Kubisme
 		IMoveGenerator Generator { get; set; }
 		Field BestField { get; }
 
-		BlockPath GetMove(Field field, Block current, Block next, int round);
+		BlockPath GetMove(Field field, Field opponent, Block current, Block next, int round);
 	}
 }

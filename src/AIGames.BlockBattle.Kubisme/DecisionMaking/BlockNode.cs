@@ -9,7 +9,12 @@ namespace AIGames.BlockBattle.Kubisme
 			// Lock a row every 15 turns. 
 			if ((pars.Round + depth) % 15 == 0)
 			{
-				return field.LockRow();
+				field = field.LockRow();
+			}
+			if (depth == 1 && pars.Opponent.MaximumGarbage > 0)
+			{
+				var garbage = Row.GetGarbage(pars.Opponent.MaximumGarbage, pars.Opponent.PointsOld, pars.Rnd);
+				return field.Garbage(garbage);
 			}
 			return field;
 		}

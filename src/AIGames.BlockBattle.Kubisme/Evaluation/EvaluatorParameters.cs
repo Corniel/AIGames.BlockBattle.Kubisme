@@ -6,9 +6,6 @@ namespace AIGames.BlockBattle.Kubisme
 	[Serializable]
 	public class EvaluatorParameters
 	{
-		public const int LosingScore = short.MinValue;
-		public const int WinningScore = short.MaxValue;
-
 		public EvaluatorParameters()
 		{
 			Unreachables = new int[22];
@@ -104,8 +101,8 @@ namespace AIGames.BlockBattle.Kubisme
 			double Losing100 = LosingChanges[0];
 			for (var i = 0; i < 6; i++)
 			{
-				var change = (double)(LosingChanges[i + 1] - 1) / Losing100;
-				m_EmptyRows[i] += (int)(change * (double)LosingScore);
+				var change = Math.Max(0.0, (double)(LosingChanges[i + 1] - 1)) / Losing100;
+				m_EmptyRows[i] -= (int)(change * (double)Scores.Max);
 			}
 
 			m_UnreachableRows = new int[Unreachables.Length];

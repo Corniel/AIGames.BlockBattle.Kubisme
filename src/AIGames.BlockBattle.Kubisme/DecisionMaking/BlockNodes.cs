@@ -19,7 +19,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			if (Empty())
 			{
-				return EvaluatorParameters.LosingScore + (node.Depth << 3);
+				return  Scores.Loses(node.Depth);
 			}
 			return this[0].Score;
 		}

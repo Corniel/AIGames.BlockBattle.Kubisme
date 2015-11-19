@@ -44,32 +44,30 @@ namespace AIGames.BlockBattle.Kubisme
 			var oppo = new OpponentEvaluator() { Generator = Pars.Generator };
 			Pars.Opponent = oppo.Evaluate(opponent, current);
 
+			var move = BlockPath.None;
+
 			Root = new BlockRootNode(field);
 
 			while (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration)
 			{
 				Root.Apply(++Pars.Depth, Pars);
 
-				var parameters = Evaluator.Pars;
-				var log = string.Format("{0:0.00} {1}: {2}", Root.Score / (double)parameters.Points, Pars, Root.BestMove);
-				Logs.Add(log);
+				if (!Scores.IsLosing(Root.Score))
+				{
+					BestField = Root.BestField;
+					// we don't care if we're losing.
+					move = Root.BestMove;
+				}
+				Logs.Add(new PlyLog(Pars.Round, Root.BestMove, Root.Score, Pars.Depth, Pars.Elapsed, Pars.Evaluations));
 			}
-			BestField = Root.BestField;
-			return Root.BestMove;
+			return move;
 		}
 
 		[ExcludeFromCodeCoverage]
 		public string GetLog()
 		{
-			var parameters = Evaluator.Pars;
-
-			return string.Format(
-				CultureInfo.InvariantCulture,
-				"Round {0:00}, Points: {1:00}\r\n{2}",
-				Pars.Round,
-				BestField.Points,
-				String.Join("\r\n", Logs));
+			return String.Join("\r\n", Logs);
 		}
-		private List<String> Logs = new List<string>();
+		private List<PlyLog> Logs = new List<PlyLog>();
 	}
 }

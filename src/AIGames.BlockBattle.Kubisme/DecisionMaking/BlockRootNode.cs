@@ -43,7 +43,7 @@ namespace AIGames.BlockBattle.Kubisme
 							var garbageNew = child.Field.Points / 3;
 							if (garbageNew - garbageOld > pars.Opponent.MinimumFirstFilled)
 							{
-								child.SetFinalScore(EvaluatorParameters.WinningScore);
+								child.SetFinalScore(Scores.Wins(1));
 							}
 						}
 						Children.InsertSorted(child);

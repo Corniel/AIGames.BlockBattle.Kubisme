@@ -8,7 +8,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 		public NodeDecisionMakerTester()
 			: base(new MT19937Generator(17)) { }
 
-		public List<string> Logs = new List<string>();
+		public List<PlyLog> Logs = new List<PlyLog>();
 
 		public BlockPath GetMove(Field field, Block current, Block next, int round)
 		{
@@ -32,8 +32,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			while (Pars.Depth < Pars.MaximumDepth && Pars.HasTimeLeft)
 			{
 				Root.Apply(++Pars.Depth, Pars);
-				var log = string.Format("{0:0.00} {1}: {2}", Root.Children[0].Score/(double)100, Pars, Root.BestMove);
-				Logs.Add(log);
+				Logs.Add(new PlyLog(Pars.Round, Root.BestMove, Root.Score, Pars.Depth, Pars.Elapsed, Pars.Evaluations));
 			}
 			BestField = Root.BestField;
 			return Root.BestMove;

@@ -11,7 +11,7 @@ namespace AIGames.BlockBattle.Kubisme
 			Ply = round;
 			Move = move;
 			Score = score;
-			Depth = (byte)(round + depth);
+			Depth = depth;
 			Elapsed = elapsed;
 			Evaluations = evaluations;
 		}
@@ -29,7 +29,7 @@ namespace AIGames.BlockBattle.Kubisme
 				.AppendFormat(CultureInfo.InvariantCulture, "{0:00}/{1:00}. ", Ply, Depth)
 				.AppendFormat(CultureInfo.InvariantCulture, "{0} ", Scores.GetFormatted(Score))
 				.AppendFormat(CultureInfo.InvariantCulture, "{0:0.000}s ", Elapsed.TotalSeconds)
-				.AppendFormat(CultureInfo.InvariantCulture, "({0:#,##0.0}kN, {1:#,##0.0}kN/s): ", Evaluations, (double)Evaluations / Elapsed.TotalMilliseconds)
+				.AppendFormat(CultureInfo.InvariantCulture, "({0:#,##0.0}kN, {1:#,##0.0}kN/s): ", Evaluations/1000.0, (double)Evaluations / Elapsed.TotalMilliseconds)
 				.AppendFormat(CultureInfo.InvariantCulture, "{{{0}}}", Move);
 
 			return sb.ToString();

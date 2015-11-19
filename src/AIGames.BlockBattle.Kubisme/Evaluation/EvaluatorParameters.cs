@@ -141,29 +141,29 @@ namespace AIGames.BlockBattle.Kubisme
 		public static EvaluatorParameters GetDefault()
 		{
 			var pars = new EvaluatorParameters()
-			// Elo: 1617, Avg: 0.561, Runs: 1354, ID: 1084, Parent: 1074
+			// Elo: 1625, Avg: 0.566, Runs: 5766, ID: 2115, Parent: 2080
 			{
-				// EmptyRowsCalc = new int[] { -4706, -1345, 203, 484, 580, 676, 768, 856, 942, 1027, 1106, 1181, 1251, 1320, 1387, 1451, 1514, 1575, 1636, 1693, 1745, 1792 },
-				// UnreachableRowsCalc = new int[] { 0, -233, -484, -744, -1007, -1272, -1544, -1832, -2122, -2412, -2702, -2994, -3288, -3589, -3903, -4239, -4586, -4949, -5313, -5680, -6058, -6445 },
-				Holes = -230,
-				Points = 96,
-				// Combo = 45,
-				Combos = new int[] { 45, 33, 30, 23, 22, 21, 15, 10, 6, 2, -2, -2, -5, -17, -37, -38, -38, -57, -76, -102, -111, -145 },
-				Skips = 102,
-				DoublePotentialJLT = 97,
-				DoublePotentialTSZ = 62,
-				DoublePotentialO = 69,
-				DoublePotentialI = 44,
-				TriplePotentialJL = 57,
-				TriplePotentialI = 68,
-				TetrisPotential = 143,
-				TSpinPontential = 102,
-				SingleGroupBonus = new int[] { 76, 7, 11, 160 },
-				Groups = new int[] { 40, 40, -15, -58, -99, -110 },
-				// EmptyRowStaffle = 40,
-				EmptyRows = new int[] { 183, 114, 67, 56, 56, 52, 48, 46, 45, 39, 35, 30, 29, 27, 24, 23, 21, 21, 17, 12, 7, 6 },
-				Unreachables = new int[] { -3, -21, -30, -33, -35, -42, -58, -60, -60, -60, -62, -64, -71, -84, -106, -117, -133, -134, -137, -148, -157, -181 },
-				LosingChanges = new int[] { 188, 28, 10, 2, 1, 1, 1 },
+				//EmptyRowsCalc = new int[] { -6939, -2290, 359, 486, 580, 669, 750, 829, 903, 975, 1034, 1092, 1148, 1197, 1240, 1283, 1322, 1360, 1397, 1432, 1467, 1501 },
+				//UnreachableRowsCalc = new int[] { 0, -237, -484, -738, -994, -1254, -1519, -1806, -2097, -2396, -2700, -3005, -3313, -3633, -3953, -4288, -4625, -4974, -5344, -5716, -6089, -6466 },
+				Holes = -236,
+				Points = 90,
+				//Combo = 47,
+				Combos = new int[] { 47, 38, 31, 24, 23, 14, 13, 12, 7, 5, 5, -14, -23, -26, -32, -39, -44, -58, -62, -97, -112, -133 },
+				Skips = 85,
+				DoublePotentialJLT = 16,
+				DoublePotentialTSZ = 98,
+				DoublePotentialO = 86,
+				DoublePotentialI = 23,
+				TriplePotentialJL = 3,
+				TriplePotentialI = 63,
+				TetrisPotential = 152,
+				TSpinPontential = 137,
+				SingleGroupBonus = new int[] { 87, 21, 1, 171 },
+				Groups = new int[] { 27, 24, -18, -73, -90, -104 },
+				//EmptyRowStaffle = 27,
+				EmptyRows = new int[] { 188, 117, 100, 67, 62, 54, 52, 47, 45, 32, 31, 29, 22, 16, 16, 12, 11, 10, 8, 8, 7, 1 },
+				Unreachables = new int[] { -1, -11, -18, -20, -24, -29, -51, -55, -63, -68, -69, -72, -84, -84, -99, -101, -113, -134, -136, -137, -141, -166 },
+				LosingChanges = new int[] { 170, 37, 14, 1, 1, 1, 1 },
 			};
 			return pars.Calc();
 		}

@@ -36,6 +36,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public double KMinimum { get; set; }
 		public double KMultiplier { get; set; }
 		public int Rows { get; set; }
+		public int Garbage { get; set; }
 
 		public int BotCapacity { get; set; }
 		public int BotStable { get; set; }

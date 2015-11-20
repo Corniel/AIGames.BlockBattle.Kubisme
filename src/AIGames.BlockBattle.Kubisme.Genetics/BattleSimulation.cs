@@ -38,15 +38,22 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public BotData Bot1 { get; set; }
 		public int SearchDepth { get; set; }
 
-		public static Field GetInitial()
+		public static Field GetInitial(MT19937Generator rnd)
 		{
-			return new Field(0, 0, 0, (byte)AppConfig.Data.Rows, new ushort[AppConfig.Data.Rows]);
+			var garbage = AppConfig.Data.Garbage;
+			var field = new Field(0, 0, 0, (byte)AppConfig.Data.Rows, new ushort[AppConfig.Data.Rows]);
+			if (garbage > 0)
+			{
+				var rows = Row.GetGarbage(garbage, 3, rnd);
+				return field.Garbage(rows);
+			}
+			return field;
 		}
 
 		public Result Run(MT19937Generator rnd, bool logGames)
 		{
-			var field0 = GetInitial();
-			var field1 = GetInitial();
+			var field0 = GetInitial(rnd);
+			var field1 = GetInitial(rnd);
 			var out0 = Field.None;
 			var out1 = Field.None;
 

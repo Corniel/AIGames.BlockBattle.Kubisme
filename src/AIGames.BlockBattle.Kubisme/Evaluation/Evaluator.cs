@@ -58,14 +58,17 @@
 				var groups = Row.Groups[rowMirror];
 
 				// Get bonuses for lines that can potentially be cleared by one block.
-				if (groups == 1 && rowCount >= 6)
+				if (groups == 1)
 				{
-					score += Pars.SingleGroupBonus[rowCount - 6];
+					if (rowCount >= 6)
+					{
+						score += Pars.SingleGroupBonus[rowCount - 6];
+					}
 				}
 				else
 				{
 					// Add score for single empties.
-					var singleEmpties = Row.SingleEmpties[row & maskColumnOpen];
+					var singleEmpties = Row.SingleEmpties[row | maskColumnClosed];
 					score += Pars.SingleEmpties[singleEmpties] * singleEmpties;
 				}
 

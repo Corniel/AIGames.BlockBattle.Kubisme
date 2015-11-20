@@ -14,6 +14,9 @@
 		/// </remarks>
 		public int GetScore(Field field, int depth)
 		{
+#if !DEBUG
+			unchecked { // we trust this not to overflow.
+#endif
 			var score = 0;
 
 			// Points for static evaluation.
@@ -30,9 +33,12 @@
 			var comboPotential = 0;
 			var hasComboPotential = true;
 
+			// masks.
 			var maskColumnOpen = (int)Row.Filled;
 			var maskColumnClosed = 0;
 			var maskColumnClosedPrev = 0;
+
+			// row number.
 			var rowNr = field.FirstFilled;
 
 			// Loop through reachable rows.
@@ -66,7 +72,7 @@
 				if (hasComboPotential)
 				{
 					// If there is only one empty cell to go through, its over.
-					if (rowCount == 9 || Row.Count[rowMirror & maskColumnOpen] < 2) 
+					if (rowCount == 9 || Row.Count[rowMirror & maskColumnOpen] < 2)
 					{
 						hasComboPotential = false;
 					}
@@ -174,8 +180,10 @@
 			else if (tetrisCount == 3) { score += Pars.TriplePotentialI; }
 			else if (tetrisCount > 3) { score += Pars.TetrisPotential; }
 
-
 			return score;
+#if !DEBUG
+			} // end unchecked.
+#endif
 		}
 	}
 }

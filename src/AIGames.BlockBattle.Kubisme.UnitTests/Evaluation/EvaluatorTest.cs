@@ -554,7 +554,6 @@ XX..XXXXXX
 
 			Test(field, pars, expected);
 		}
-
 		[Test]
 		public void ComboPotential_Blockade_2()
 		{
@@ -570,6 +569,43 @@ XX..XXXXXX
 				Combos = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 			};
 			var expected = 2;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void SingleEmpties_TwoColomns_2x2()
+		{
+			var field = @"
+				..........
+				X......X..
+				X...XXXXX.
+				XX.XXX.XX.
+				XX..XXXXX.";
+
+			var pars = new EvaluatorParameters()
+			{
+				SingleEmpties = new int[] { 0, 0, 1, 0, 0, 0 }
+			};
+			var expected = 2 * 2;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void SingleEmpties_3Colomns_3x2()
+		{
+			var field = @"
+				..........
+				X......X..
+				X...X..X..
+				XX.XXX.XX.
+				XX..XX.XX.";
+
+			var pars = new EvaluatorParameters()
+			{
+				SingleEmpties = new int[] { 0, 0, 0, 1, 0, 0 }
+			};
+			var expected = 3 * 2;
 
 			Test(field, pars, expected);
 		}

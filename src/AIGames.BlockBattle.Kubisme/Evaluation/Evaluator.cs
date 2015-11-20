@@ -62,13 +62,19 @@
 				{
 					score += Pars.SingleGroupBonus[rowCount - 6];
 				}
+				else
+				{
+					// Add score for single empties.
+					var singleEmpties = Row.SingleEmpties[row & maskColumnOpen];
+					score += Pars.SingleEmpties[singleEmpties] * singleEmpties;
+				}
 
 				// Add points for grouping
 				score += Pars.Groups[groups];
 
 				// Count holes.
 				holes += rowHoles;
-
+				
 				if (hasComboPotential)
 				{
 					// If there is only one empty cell to go through, its over.

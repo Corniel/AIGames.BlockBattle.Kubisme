@@ -171,6 +171,37 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 			var act = Row.Groups.Max();
 			Assert.AreEqual(exp, act);
 		}
+		[Test]
+		public void SingleEmpties_ooXXoXXooX_1()
+		{
+			var row = Row.Create("..XX.XX..X");
+			var exp = 1;
+			var act = Row.SingleEmpties[row];
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void SingleEmpties_XoXXXXXooo_1()
+		{
+			var row = Row.Create("X.XXXXX...");
+			var exp = 1;
+			var act = Row.SingleEmpties[row];
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void SingleEmpties_XoXoXXXoXo_4()
+		{
+			var row = Row.Create("X.X.XXX.X.");
+			var exp = 4;
+			var act = Row.SingleEmpties[row];
+			Assert.AreEqual(exp, act);
+		}
+		[Test]
+		public void SingleEmpties_Max_5()
+		{
+			var exp = (byte)5;
+			var act = Row.SingleEmpties.Max();
+			Assert.AreEqual(exp, act);
+		}
 
 		[Test]
 		public void Row2BlocksConnected_All_Matches()

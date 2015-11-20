@@ -14,7 +14,7 @@ namespace AIGames.BlockBattle.Kubisme
 			Groups = new int[6];
 			SingleGroupBonus = new int[4];
 			ComboPotential = new int[16, 32];
-			LosingChanges = new int[] { 1, 0, 0, 0, 0, 0, 0 };
+			SingleEmpties = new int[5];
 		}
 
 		public int[] EmptyRowsCalc { get { return m_EmptyRows; } }
@@ -65,6 +65,9 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Positive)]
 		public int TSpinPontential { get; set; }
 
+		[ParameterType(ParameterType.Negative)]
+		public int[] SingleEmpties { get; set; }
+
 		/// <summary>Rows with a single (empty cell) group, of at least 6 cells filled,
 		/// get a bonus, as they can be cleared easily.
 		/// </summary>
@@ -84,9 +87,6 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] Unreachables { get; set; }
 
-		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
-		public int[] LosingChanges { get; set; }
-
 		public EvaluatorParameters Calc()
 		{
 			m_EmptyRows = new int[EmptyRows.Length];
@@ -97,14 +97,7 @@ namespace AIGames.BlockBattle.Kubisme
 				m_EmptyRows[i] += EmptyRows[i - 1];
 				m_EmptyRows[i] += EmptyRowStaffle;
 			}
-
-			double Losing100 = LosingChanges[0];
-			for (var i = 0; i < 6; i++)
-			{
-				var change = Math.Max(0.0, (double)(LosingChanges[i + 1] - 1)) / Losing100;
-				m_EmptyRows[i] -= (int)(change * (double)Scores.Max);
-			}
-
+			
 			m_UnreachableRows = new int[Unreachables.Length];
 			for (var i = 1; i < m_UnreachableRows.Length; i++)
 			{
@@ -163,7 +156,6 @@ namespace AIGames.BlockBattle.Kubisme
 				//EmptyRowStaffle = 27,
 				EmptyRows = new int[] { 188, 117, 100, 67, 62, 54, 52, 47, 45, 32, 31, 29, 22, 16, 16, 12, 11, 10, 8, 8, 7, 1 },
 				Unreachables = new int[] { -1, -11, -18, -20, -24, -29, -51, -55, -63, -68, -69, -72, -84, -84, -99, -101, -113, -134, -136, -137, -141, -166 },
-				LosingChanges = new int[] { 170, 37, 14, 1, 1, 1, 1 },
 			};
 			return pars.Calc();
 		}

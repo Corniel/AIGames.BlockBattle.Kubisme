@@ -48,19 +48,18 @@ namespace AIGames.BlockBattle.Kubisme
 
 			Root = new BlockRootNode(field);
 
-			while (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration)
+			// if not that much free space, don't search deep, it will not longer 
+			// improve apparently.
+			var maxDepth = field.FirstFilled < 6 ? 2 : Pars.MaximumDepth;
+
+			while (Pars.Depth < maxDepth && Pars.Elapsed < MinimumDuration)
 			{
 				Root.Apply(++Pars.Depth, Pars);
 
-				if (!Scores.IsLosing(Root.Score))
-				{
-					BestField = Root.BestField;
-					// we don't care if we're losing.
-					move = Root.BestMove;
-				}
+				BestField = Root.BestField;
 				Logs.Add(new PlyLog(Pars.Round, Root.BestMove, Root.Score, Pars.Depth, Pars.Elapsed, Pars.Evaluations));
 			}
-			return move;
+			return Root.BestMove;
 		}
 
 		[ExcludeFromCodeCoverage]

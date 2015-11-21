@@ -324,7 +324,8 @@ namespace AIGames.BlockBattle.Kubisme
 
 			for (var r = 0; r < rows.Length; r++)
 			{
-				var row = Row.Create(lines[r].Trim());
+				// allow formatting
+				var row = Row.Create(lines[r].Replace("\t", "").Trim());
 				rows[r] = row;
 			}
 			return new Field((short)pt, (byte)combo, (byte)skips, GetFirstNoneEmptyRow(rows), rows);

@@ -3,6 +3,11 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 54
+----------
+Fixed a painful block path finding bug. Updated parameters because of this bug.
+
+
 Version 53
 ----------
 Added penalties for single empties.

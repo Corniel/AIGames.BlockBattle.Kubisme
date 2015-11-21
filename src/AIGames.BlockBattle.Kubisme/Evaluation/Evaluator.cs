@@ -69,7 +69,7 @@
 				{
 					// Add score for single empties.
 					var singleEmpties = Row.SingleEmpties[row | maskColumnClosed];
-					score += Pars.SingleEmpties[singleEmpties] * singleEmpties;
+					score += Pars.SingleEmptiesCalc[singleEmpties];
 				}
 
 				// Add points for grouping

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
@@ -33,6 +35,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			{
 				Root.Apply(++Pars.Depth, Pars);
 				Logs.Add(new PlyLog(Pars.Round, Root.BestMove, Root.Score, Pars.Depth, Pars.Elapsed, Pars.Evaluations));
+				Console.WriteLine(Logs.Last());
 			}
 			BestField = Root.BestField;
 			return Root.BestMove;

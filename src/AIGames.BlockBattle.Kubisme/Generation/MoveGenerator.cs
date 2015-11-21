@@ -139,7 +139,7 @@ namespace AIGames.BlockBattle.Kubisme
 				if (test == Field.TestResult.False) { continue; }
 
 				var tr = temp.TurnRight();
-				if (tr.Position.Col >= 0 && tr.Position.Col < tr.Block.ColumnMaximum &&
+				if (tr.Position.Col >= 0 && tr.Position.Col <= tr.Block.ColumnMaximum &&
 					!dones[(int)tr.Block.Rotation, tr.Position.Row + 1, tr.Position.Col])
 				{
 					dones[(int)tr.Block.Rotation, tr.Position.Row + 1, tr.Position.Col] = true;
@@ -147,7 +147,7 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 
 				var tl = temp.TurnLeft();
-				if (tl.Position.Col >= 0 && tl.Position.Col < tl.Block.ColumnMaximum &&
+				if (tl.Position.Col >= 0 && tl.Position.Col <= tl.Block.ColumnMaximum &&
 					!dones[(int)tl.Block.Rotation, tl.Position.Row + 1, tl.Position.Col])
 				{
 					dones[(int)tl.Block.Rotation, tl.Position.Row + 1, tl.Position.Col] = true;

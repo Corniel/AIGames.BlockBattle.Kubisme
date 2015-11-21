@@ -111,8 +111,6 @@ XXXXXX.XX.
 			var exp = new List<MoveCandiate>();
 			CollectionAssert.AreEqual(exp, act);
 		}
-
-
 		[Test]
 		public void GetReachableHoles_HolesReachable_4()
 		{
@@ -134,7 +132,6 @@ XXXXXX..X.
 			};
 			CollectionAssert.AreEqual(exp, act);
 		}
-
 		[Test]
 		public void GetReachableHoles_HolesNotReachableBecauseTurn_False()
 		{
@@ -149,6 +146,40 @@ XXXXXX..X.
 ");
 			var act = MoveGenerator.GetReachableHoles(field, Block.O).ToList();
 			var exp = new List<MoveCandiate>();
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void GetReachebleHoles_TSpinAtTheRightBorder_OnePath()
+		{
+			var field = Field.Create(13, 0, 1, @"
+				..........
+				..........
+				..........
+				.XX.......
+				XXXX.XX...
+				XXXX.XX...
+				XXXXXXX...
+				XXXXXXX...
+				XXXXXXX...
+				XXXXXXX...
+				XXXXXXX...
+				XXXXXXX...
+				XXXXXXXX..
+				XXXXXXXX..
+				XXXXXXX...
+				XXXXXXXX.X
+				X.XXXX.XXX
+				XX.XXXXXXX");
+
+			var act = MoveGenerator.GetReachableHoles(field, Block.T).Select(move => move.ToString()).ToArray();
+			var exp = new string[]
+			{
+				"down,down,down,right,right,right,right,down,down,down,down,down,down,down,down,turnright,down,down,down,turnleft",
+				"down,down,down,right,right,right,right,down,down,down,down,down,down,down,down,turnright,down,down,down,turnleft,turnleft" ,
+				"down,down,down,right,right,right,right,down,down,down,down,down,down,down,down,turnright,down,down,down,turnright" 
+			};
+
 			CollectionAssert.AreEqual(exp, act);
 		}
 

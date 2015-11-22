@@ -55,13 +55,13 @@ namespace AIGames.BlockBattle.Kubisme
 			// improve apparently.
 			var maxDepth = field.FirstFilled < 6 ? 2 : Pars.MaximumDepth;
 
-			while (Pars.Depth < maxDepth && Pars.Elapsed < MinimumDuration)
+			// search at least two ply deep.
+			while (Pars.Depth < 2 || (Pars.Depth < maxDepth && Pars.Elapsed < MinimumDuration))
 			{
 				Root.Apply(++Pars.Depth, Pars);
-
-				BestField = Root.BestField;
 				Logs.Add(new PlyLog(Pars.Round, Root.BestMove, Root.Score, Pars.Depth, Pars.Elapsed, Pars.Evaluations));
 			}
+			BestField = Root.BestField;
 			return Root.BestMove;
 		}
 

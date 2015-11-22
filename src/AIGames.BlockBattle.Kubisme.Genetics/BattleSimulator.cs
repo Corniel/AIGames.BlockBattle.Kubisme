@@ -16,6 +16,28 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private static readonly object lockElo = new object();
 		private static readonly object lockList = new object();
 
+		public static EvaluatorParameters GetDef()
+		{
+			return new EvaluatorParameters()
+			{
+				Holes = -200,
+				Points = 75,
+				TriplePotentialI = 100,
+				TetrisPotential = 300,
+				TSpinPontential = 600,
+				Skips = 300,
+			}
+			.Calc();
+		}
+		public static EvaluatorParameters GetEnd()
+		{
+			return new EvaluatorParameters()
+			{
+				Holes = -200,
+				Points = 10,
+			}
+			.Calc();
+		}
 		private Stopwatch sw = Stopwatch.StartNew();
 
 		public BattleSimulator(MT19937Generator rnd)
@@ -53,9 +75,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				if (Bots.Count < 2)
 				{
-					Bots.Add(EvaluatorParameters.GetDefault(), EvaluatorParameters.GetEndGame());
+					Bots.Clear();
+					Bots.Add(GetDef(), GetEnd());
+					Bots.Add(GetDef(), GetEnd());
 					BestBot = Bots.GetHighestElo();
-					Bots.Add(BestBot, Randomizer);
 				}
 			}
 				

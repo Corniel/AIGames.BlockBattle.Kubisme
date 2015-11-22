@@ -22,7 +22,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			EndPars = end.Calc();
 		}
 		public BotData(int id, BotData parent, ParameterRandomizer rnd)
-			: this(id, rnd.Randomize(parent.DefPars), rnd.Randomize(parent.DefPars))
+			: this(id, rnd.Randomize(parent.DefPars), rnd.Randomize(parent.EndPars))
 		{
 			ParentId = parent.Id;
 			Generation = parent.Generation + 1;

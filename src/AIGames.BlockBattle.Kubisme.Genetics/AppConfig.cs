@@ -11,16 +11,17 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private AppConfig()
 		{
+			SearchDepth = 2;
 			EloInitial = 1600d;
-			EloBottom = 1500d;
+			EloBottom = 1550d;
 			KInitial = 12;
-			KMinimum = 2;
-			KMultiplier = 0.97;
+			KMinimum = 1;
+			KMultiplier = 0.98;
 
-			BotCapacity = 32;
+			BotCapacity = 48;
 			BotStable = 1024;
 
-			PairingsRandom = 100;
+			PairingsRandom = 128;
 
 			CopyHighestElo = 1;
 			CopyHighestScore = 1;

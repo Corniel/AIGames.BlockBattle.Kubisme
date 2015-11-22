@@ -21,8 +21,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 
 			var evalator = new OpponentEvaluator() { Generator = new MoveGenerator() };
 
-			var act = evalator.Evaluate(field, Block.I);
-			var exp = new OpponentEvaluation(6, 2, 13);
+			var act = evalator.Evaluate(field, Block.I, Block.O);
+			var exp = new OpponentEvaluation(13, 20, 20, 6, 4);
 
 			Assert.AreEqual(exp, act);
 		}
@@ -38,8 +38,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 
 			var evalator = new OpponentEvaluator() { Generator = new MoveGenerator() };
 
-			var act = evalator.Evaluate(field, Block.O);
-			var exp = new OpponentEvaluation(0, 0, 13);
+			var act = evalator.Evaluate(field, Block.O, Block.I);
+			var exp = new OpponentEvaluation(13, 13, 13, 0, 1);
 
 			Assert.AreEqual(exp, act);
 		}

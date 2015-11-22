@@ -47,6 +47,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public Block Next { get; set; }
 		public int Evaluations { get; set; }
 		public byte Depth { get; set; }
+		public int Garbage { get; set; }
 
 		/// <summary>The initial value of first filled.</summary>
 		/// <remarks>

@@ -11,9 +11,17 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				field = field.LockRow();
 			}
-			if (depth == 1 && pars.Opponent.MaximumGarbage > 0)
+			if (depth == 1)
 			{
-				var garbage = Row.GetGarbage(pars.Opponent.MaximumGarbage, pars.Opponent.PointsOld, pars.Rnd);
+				if (pars.Opponent.Garbage1 > 0)
+				{
+					var garbage = Row.GetGarbage(pars.Opponent.Garbage1, pars.Opponent.Points0, pars.Rnd);
+					return field.Garbage(garbage);
+				}
+			}
+			else if (depth == 2 && pars.Opponent.Garbage2 > 0)
+			{
+				var garbage = Row.GetGarbage(pars.Opponent.Garbage2, pars.Opponent.Points1, pars.Rnd);
 				return field.Garbage(garbage);
 			}
 			return field;

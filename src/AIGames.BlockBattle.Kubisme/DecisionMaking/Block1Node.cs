@@ -41,6 +41,16 @@ namespace AIGames.BlockBattle.Kubisme
 						{
 							if (!pars.HasTimeLeft) { return; }
 							var child = Create(field, pars);
+
+							// We can kill our opponent.
+							if (child.Field.Points > Field.Points)
+							{
+								var garbageNew = child.Field.Points / 3;
+								if (garbageNew - pars.Garbage > pars.Opponent.FirstFilled2)
+								{
+									child.SetFinalScore(Scores.Wins(2));
+								}
+							}
 							Children.InsertSorted(child);
 						}
 					}

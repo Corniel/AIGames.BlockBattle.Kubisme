@@ -34,6 +34,7 @@ namespace AIGames.BlockBattle.Kubisme
 			Logs.Clear();
 			Pars = new ApplyParameters(Rnd)
 			{
+				Garbage = field.Points / 3,
 				Round = round,
 				MaximumDuration = MaximumDuration,
 				MaximumDepth = MaximumDepth,
@@ -45,7 +46,7 @@ namespace AIGames.BlockBattle.Kubisme
 				Parameters = (field.FirstFilled < 7) ? EndGameEvaluation : DefaultEvaluation,
 			};
 			var oppo = new OpponentEvaluator() { Generator = Pars.Generator };
-			Pars.Opponent = oppo.Evaluate(opponent, current);
+			Pars.Opponent = oppo.Evaluate(opponent, current, next);
 
 			var move = BlockPath.None;
 

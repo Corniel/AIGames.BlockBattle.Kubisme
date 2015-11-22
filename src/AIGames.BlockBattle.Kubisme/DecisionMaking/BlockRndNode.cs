@@ -77,6 +77,12 @@ namespace AIGames.BlockBattle.Kubisme
 			return new BlockRndNode(field, Depth, score);
 		}
 
+		public void SetFinalScore(int score)
+		{
+			this.Score = score;
+			this.Children = new List<BlockNodes<BlockRndNode>>();
+		}
+
 		public byte Depth { get; protected set; }
 		public Field Field { get; protected set; }
 		public int Score { get; protected set; }

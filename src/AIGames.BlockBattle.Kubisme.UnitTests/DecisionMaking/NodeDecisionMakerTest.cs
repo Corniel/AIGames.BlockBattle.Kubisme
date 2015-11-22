@@ -33,10 +33,7 @@ XXXXXXXX.X
 XXXX.XXXXX");
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new Evaluator()
-				{
-					Pars = EvaluatorParameters.GetDefault(),
-				},
+				Evaluator = new Evaluator(),
 				Generator = new MoveGenerator(),
 				MaximumDepth = 7,
 			};
@@ -54,10 +51,6 @@ XXXX.XXXXX");
 XXXXX.....");
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new Evaluator()
-				{
-					Pars = EvaluatorParameters.GetDefault(),
-				},
 				Generator = new MoveGenerator(),
 				MaximumDepth = 10,
 			};
@@ -91,10 +84,7 @@ XXXXXXXX.X
 XXXX.XXXXX");
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new Evaluator()
-				{
-					Pars = EvaluatorParameters.GetDefault(),
-				},
+				Evaluator = new Evaluator(),
 				Generator = new MoveGenerator(),
 				MaximumDepth = 7,
 			};
@@ -115,10 +105,7 @@ XXXXXXXX.X
 XXXX.XXXXX");
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new Evaluator()
-				{
-					Pars = EvaluatorParameters.GetDefault(),
-				},
+				Evaluator = new Evaluator(),
 				Generator = new MoveGenerator(),
 				MaximumDepth = 11,
 			};
@@ -152,10 +139,7 @@ XXXX.XXXXX");
 ");
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new Evaluator()
-				{
-					Pars = EvaluatorParameters.GetDefault(),
-				},
+				Evaluator = new Evaluator(),
 				Generator = new MoveGenerator(),
 				MaximumDepth = 7,
 			};

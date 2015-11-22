@@ -162,5 +162,40 @@ namespace AIGames.BlockBattle.Kubisme
 			};
 			return pars.Calc();
 		}
+
+		/// <summary>Gets the default parameters.</summary>
+		/// <remarks>
+		/// Input for the genetics algorithm and used by the 'real' bot.
+		/// </remarks>
+		public static EvaluatorParameters GetEndGame()
+		{
+			var pars = new EvaluatorParameters()
+			// Elo: 1623, Avg: 0.591, Runs: 4078, ID: 612, Parent: 474
+			{
+				//EmptyRowsCalc = new int[] { 0, 96, 178, 250, 310, 369, 425, 476, 524, 569, 613, 655, 693, 730, 765, 800, 835, 864, 891, 918, 939, 960 },
+				//UnreachableRowsCalc = new int[] { 0, -175, -360, -546, -734, -927, -1131, -1335, -1540, -1749, -1961, -2174, -2390, -2607, -2824, -3043, -3264, -3495, -3739, -3985, -4234, -4483 },
+				//SingleEmptiesCalc = new int[] { 0, -8, -30, -102, -144, -235 },
+				Holes = -174,
+				Points = 66,
+				//Combo = 28,
+				Combos = new int[] { 28, 19, 17, 15, 12, 11, 9, 8, 8, 4, 4, 2, 0, 0, -2, -2, -3, -6, -14, -17, -23, -26 },
+				Skips = 25,
+				DoublePotentialJLT = 1,
+				DoublePotentialTSZ = 58,
+				DoublePotentialO = 5,
+				DoublePotentialI = 35,
+				TriplePotentialJL = 1,
+				TriplePotentialI = 23,
+				TetrisPotential = 76,
+				TSpinPontential = 498,
+				SingleEmpties = new int[] { -1, -8, -15, -34, -36, -47 },
+				SingleGroupBonus = new int[] { 28, 31, 28, 91 },
+				Groups = new int[] { 10, 8, -3, -10, -25, -37 },
+				//EmptyRowStaffle = 10,
+				EmptyRows = new int[] { 86, 72, 62, 50, 49, 46, 41, 38, 35, 34, 32, 28, 27, 25, 25, 25, 19, 17, 17, 11, 11, 5 },
+				Unreachables = new int[] { -1, -11, -12, -14, -19, -30, -30, -31, -35, -38, -39, -42, -43, -43, -45, -47, -57, -70, -72, -75, -75, -101 },
+			};
+			return pars.Calc();
+		}
 	}
 }

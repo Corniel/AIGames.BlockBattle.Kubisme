@@ -40,6 +40,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public IMoveGenerator Generator { get; set; }
 		public Evaluator Evaluator { get; set; }
+		public EvaluatorParameters Parameters { get; set; }
 		public MT19937Generator Rnd { get; set; }
 
 		public Block Current { get; set; }

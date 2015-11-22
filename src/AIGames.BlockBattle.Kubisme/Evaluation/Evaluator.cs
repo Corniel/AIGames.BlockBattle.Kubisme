@@ -2,17 +2,13 @@
 {
 	public class Evaluator
 	{
-		public EvaluatorParameters Pars { get; set; }
-
-		public Field Initial { get; set; }
-
 		/// <summary>Gets the (static) score of a field.</summary>
 		/// <remarks>
 		/// Normally, this function should be split in several sub methods. But as 
 		/// this is the most executed code of the all AI, speed is everything. The
 		/// penalty for calling a method is small, but here, we don't want to spoil it.
 		/// </remarks>
-		public int GetScore(Field field, int depth)
+		public int GetScore(Field field, int depth, EvaluatorParameters pars)
 		{
 #if !DEBUG
 			unchecked { // we trust this not to overflow.
@@ -20,12 +16,12 @@
 			var score = 0;
 
 			// Points for static evaluation.
-			score += field.Points * Pars.Points;
-			score += field.Combo * Pars.Combo;
-			score += field.Skips * Pars.Skips;
+			score += field.Points * pars.Points;
+			score += field.Combo * pars.Combo;
+			score += field.Skips * pars.Skips;
 
 			// Evaluation for free space.
-			score += Pars.EmptyRowsCalc[field.FirstFilled];
+			score += pars.EmptyRowsCalc[field.FirstFilled];
 
 			// counters
 			var holes = 0;
@@ -62,18 +58,18 @@
 				{
 					if (rowCount >= 6)
 					{
-						score += Pars.SingleGroupBonus[rowCount - 6];
+						score += pars.SingleGroupBonus[rowCount - 6];
 					}
 				}
 				else
 				{
 					// Add score for single empties.
 					var singleEmpties = Row.SingleEmpties[row | maskColumnClosed];
-					score += Pars.SingleEmptiesCalc[singleEmpties];
+					score += pars.SingleEmptiesCalc[singleEmpties];
 				}
 
 				// Add points for grouping
-				score += Pars.Groups[groups];
+				score += pars.Groups[groups];
 
 				// Count holes.
 				holes += rowHoles;
@@ -98,7 +94,7 @@
 					// holes are added (all reachable).
 					if (rowCount == 8 && groups == 1 && rowHoles == 0 && row == field[rowNr - 1])
 					{
-						score += Pars.DoublePotentialO;
+						score += pars.DoublePotentialO;
 					}
 					else if (rowCount == 9)
 					{
@@ -119,14 +115,14 @@
 								{
 									if ((prevMirror & maskColumnClosedPrev) == 0)
 									{
-										score += Pars.DoublePotentialTSZ;
+										score += pars.DoublePotentialTSZ;
 									}
 								}
 								else if (prevMirrorCount == 3)
 								{
 									if ((prevMirror & maskColumnClosedPrev) == 0)
 									{
-										score += Pars.DoublePotentialJLT;
+										score += pars.DoublePotentialJLT;
 									}
 									// Potential T-spin.
 									else if (rowNr > 2 && field.FirstFilled < rowNr - 1)
@@ -144,7 +140,7 @@
 													// If that was the case, the current line would be unreachable.
 													if (match != 0 && match != maskTSpinTop)
 													{
-														score += Pars.TSpinPontential;
+														score += pars.TSpinPontential;
 													}
 												}
 												break;
@@ -161,7 +157,7 @@
 							// One hole, and 8 filled cells.
 							if (Row.Groups[prevMirror] == 1 && Row.Count[prevMirror] == 2)
 							{
-								score += Pars.TriplePotentialJL;
+								score += pars.TriplePotentialJL;
 							}
 						}
 					}
@@ -179,15 +175,15 @@
 			var unreachables = field.RowCount - rowNr;
 
 			// Evaluation for unreachable.
-			score += Pars.UnreachableRowsCalc[unreachables];
+			score += pars.UnreachableRowsCalc[unreachables];
 
 			// Add scores based on counters.
-			score += holes * Pars.Holes;
-			score += Pars.ComboPotential[field.Combo, comboPotential];
+			score += holes * pars.Holes;
+			score += pars.ComboPotential[field.Combo, comboPotential];
 
-			if (tetrisCount == 2) { score += Pars.DoublePotentialI; }
-			else if (tetrisCount == 3) { score += Pars.TriplePotentialI; }
-			else if (tetrisCount > 3) { score += Pars.TetrisPotential; }
+			if (tetrisCount == 2) { score += pars.DoublePotentialI; }
+			else if (tetrisCount == 3) { score += pars.TriplePotentialI; }
+			else if (tetrisCount > 3) { score += pars.TetrisPotential; }
 
 			return score;
 #if !DEBUG

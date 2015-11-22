@@ -613,11 +613,8 @@ XX..XXXXXX
 		private static void Test(string str, EvaluatorParameters pars, int expected)
 		{
 			var field = Field.Create(0, 0, 0, str);
-			var evaluator = new Evaluator()
-			{
-				Pars = pars.Calc(),
-			};
-			var actual = evaluator.GetScore(field, 0);
+			var evaluator = new Evaluator();
+			var actual = evaluator.GetScore(field, 0, pars.Calc());
 			Assert.AreEqual(expected, actual);
 		}
 	}

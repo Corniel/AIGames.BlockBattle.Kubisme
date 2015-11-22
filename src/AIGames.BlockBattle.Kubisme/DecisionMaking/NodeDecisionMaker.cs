@@ -24,6 +24,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public Evaluator Evaluator { get; set; }
 		public IMoveGenerator Generator { get; set; }
 		public BlockRootNode Root { get; protected set; }
+		public EvaluatorParameters DefaultEvaluation { get; set; }
+		public EvaluatorParameters EndGameEvaluation { get; set; }
 		public ApplyParameters Pars { get; protected set; }
 		public Field BestField { get; protected set; }
 
@@ -40,6 +42,7 @@ namespace AIGames.BlockBattle.Kubisme
 				Current = current,
 				Next = next,
 				FirstFilled = field.FirstFilled,
+				Parameters = (field.FirstFilled < 7) ? EndGameEvaluation : DefaultEvaluation,
 			};
 			var oppo = new OpponentEvaluator() { Generator = Pars.Generator };
 			Pars.Opponent = oppo.Evaluate(opponent, current);

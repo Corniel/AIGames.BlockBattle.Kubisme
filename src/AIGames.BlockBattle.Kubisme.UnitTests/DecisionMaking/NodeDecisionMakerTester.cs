@@ -14,9 +14,13 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 
 		public BlockPath GetMove(Field field, Block current, Block next, int round)
 		{
-			return GetMove(field, Field.Empty, current, next, round);
+			return GetMove(field, current, next, round, EvaluatorParameters.GetDefault());
 		}
-		public override BlockPath GetMove(Field field, Field opponent, Block current, Block next, int round)
+		public BlockPath GetMove(Field field, Block current, Block next, int round, EvaluatorParameters pars)
+		{
+			return GetMove(field, Field.Empty, current, next, round, pars);
+		}
+		public BlockPath GetMove(Field field, Field opponent, Block current, Block next, int round, EvaluatorParameters pars)
 		{
 			Pars = new ApplyParameters(Rnd)
 			{
@@ -28,6 +32,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 				Current = current,
 				Next = next,
 				FirstFilled = field.FirstFilled,
+				Parameters = pars,
 			};
 			Root = new BlockRootNode(field);
 

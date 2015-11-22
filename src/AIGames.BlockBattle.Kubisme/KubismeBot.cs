@@ -15,13 +15,12 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			DecisionMaker = new NodeDecisionMaker(rnd)
 			{
-				Evaluator = new Evaluator()
-				{
-					Pars = EvaluatorParameters.GetDefault(),
-				},
+				Evaluator = new Evaluator(),
 				Generator = new MoveGenerator(),
 				MaximumDepth = 10,
 				MaximumDuration = TimeSpan.FromMilliseconds(700),
+				DefaultEvaluation = EvaluatorParameters.GetDefault(),
+				EndGameEvaluation = EvaluatorParameters.GetEndGame(),
 			};
 		}
 		public NodeDecisionMaker DecisionMaker { get; set; }
@@ -54,8 +53,6 @@ namespace AIGames.BlockBattle.Kubisme
 			
 			DecisionMaker.MaximumDuration = TimeSpan.FromMilliseconds(max);
 			DecisionMaker.MinimumDuration = TimeSpan.FromMilliseconds(min);
-
-			((Evaluator)DecisionMaker.Evaluator).Initial = Field;
 
 			var path = DecisionMaker.GetMove(Field, Opponent, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());

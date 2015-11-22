@@ -212,20 +212,19 @@ XXX...XXXX
 XXX...XXXX
 XXXX.XXXXX");
 
+			var pars = new  EvaluatorParameters()
+			{
+				Points = 100,
+			}.Calc();
+
 			var dm = new NodeDecisionMakerTester()
 			{
-				Evaluator = new Evaluator()
-				{
-					Pars = new  EvaluatorParameters()
-					{
-						Points = 100,
-					}.Calc(),
-				},
+				Evaluator = new Evaluator(),
 				Generator = new MoveGenerator(),
 				MaximumDepth = 3,
 			};
 
-			var act = dm.GetMove(field, Block.T, Block.Z, 1);
+			var act = dm.GetMove(field, Block.T, Block.Z, 1, pars);
 			var actField = dm.BestField.ToString();
 
 			var exp = BlockPath.Create(ActionType.Down, ActionType.TurnLeft, ActionType.Down, ActionType.Down, ActionType.TurnLeft);

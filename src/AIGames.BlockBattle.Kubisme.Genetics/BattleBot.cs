@@ -20,10 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				DecisionMaker = new NodeDecisionMaker(rnd)
 				{
 					MaximumDepth = maxDepth,
-					Evaluator = new Evaluator()
-					{
-						Pars = pars,
-					},
+					Evaluator = new Evaluator(),
 					Generator = new MoveGenerator(),
 				}
 			};

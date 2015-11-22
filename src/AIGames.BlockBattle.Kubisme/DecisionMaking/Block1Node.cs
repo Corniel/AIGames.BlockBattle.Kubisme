@@ -51,13 +51,6 @@ namespace AIGames.BlockBattle.Kubisme
 					Children.Apply(depth, pars, BranchingFactor);
 				}
 				Score = Children.GetScore(this);
-				
-				// if we where close to dying, we don't want to forget that, if can
-				// clean it up later.
-				if (Field.FirstFilled < 4)
-				{
-					Score += pars.Evaluator.Pars.EmptyRows[Field.FirstFilled];
-				}
 			}
 		}
 
@@ -69,7 +62,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		protected override BlockRndNode Create(Field field, ApplyParameters pars)
 		{
-			var score = pars.Evaluator.GetScore(field, Depth);
+			var score = pars.Evaluator.GetScore(field, Depth, pars.Parameters);
 			pars.Evaluations++;
 			return new BlockRndNode(field, Depth, score);
 		}

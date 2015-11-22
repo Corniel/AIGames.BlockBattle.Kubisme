@@ -53,7 +53,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				if (Bots.Count < 2)
 				{
-					Bots.Add(EvaluatorParameters.GetDefault());
+					Bots.Add(EvaluatorParameters.GetDefault(), EvaluatorParameters.GetEndGame());
 					BestBot = Bots.GetHighestElo();
 					Bots.Add(BestBot, Randomizer);
 				}
@@ -204,8 +204,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				foreach (var bot in sorted)
 				{
-					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg);
-					writer.WriteLine(bot.ParametersToString());
+					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}, Gen: {4}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, bot.Generation);
+					writer.WriteLine(bot.ParametersToString(bot.DefPars));
+					writer.WriteLine(bot.ParametersToString(bot.EndPars));
 					writer.WriteLine();
 				}
 			}

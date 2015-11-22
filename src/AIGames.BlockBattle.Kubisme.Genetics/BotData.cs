@@ -15,13 +15,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			K = AppConfig.Data.KInitial;
 		}
 
-		public BotData(int id, EvaluatorParameters pars) : this()
+		public BotData(int id, EvaluatorParameters def, EvaluatorParameters end) : this()
 		{
 			Id = id;
-			Pars = pars.Calc();
+			DefPars = def.Calc();
+			EndPars = end.Calc();
 		}
 		public BotData(int id, BotData parent, ParameterRandomizer rnd)
-			: this(id, rnd.Randomize(parent.Pars))
+			: this(id, rnd.Randomize(parent.DefPars), rnd.Randomize(parent.DefPars))
 		{
 			ParentId = parent.Id;
 			Generation = parent.Generation + 1;
@@ -48,7 +49,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public Elo Elo { get; set; }
 		public double K { get; set; }
 
-		public EvaluatorParameters Pars { get; set; }
+		public EvaluatorParameters DefPars { get; set; }
+		public EvaluatorParameters EndPars { get; set; }
 
 		public void UpdateK()
 		{
@@ -74,7 +76,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private static readonly PropertyInfo[] Props = typeof(EvaluatorParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
 		
-		public string ParametersToString()
+		public string ParametersToString(EvaluatorParameters pars)
 		{
 			var writer = new StringBuilder();
 			writer.AppendLine("{");
@@ -82,19 +84,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				if (prop.PropertyType == typeof(int))
 				{
-					int val = (int)prop.GetValue(Pars);
+					int val = (int)prop.GetValue(pars);
 					writer.AppendFormat("{0} = {1},", prop.Name, val);
 					writer.AppendLine();
 				}
 				else if (prop.PropertyType == typeof(bool))
 				{
-					bool val = (bool)prop.GetValue(Pars);
+					bool val = (bool)prop.GetValue(pars);
 					writer.AppendFormat("{0} = {1},", prop.Name, val.ToString().ToLowerInvariant());
 					writer.AppendLine();
 				}
 				else if (prop.PropertyType == typeof(int[]))
 				{
-					int[] vals = (int[])prop.GetValue(Pars);
+					int[] vals = (int[])prop.GetValue(pars);
 					writer.AppendFormat("{0} = new int[] {{ {1} }},", prop.Name, String.Join(",", vals));
 					writer.AppendLine();
 				}

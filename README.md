@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 56
+-----------
+Split parameters in default and endgame, and edded second ply for opponent evaluation.
+
 Version 55
 ----------
 Rolled back the parameter changes, as they performed shit.

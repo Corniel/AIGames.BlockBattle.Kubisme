@@ -8,6 +8,7 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public EvaluatorParameters()
 		{
+			UnreachableFactor = 150;
 			Unreachables = new int[22];
 			EmptyRows = new int[22];
 			Combos = new int[22];
@@ -91,6 +92,9 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] Unreachables { get; set; }
 
+		[ParameterType(ParameterType.Positive)]
+		public int UnreachableFactor { get; set; }
+
 		public EvaluatorParameters Calc()
 		{
 			m_EmptyRows = new int[EmptyRows.Length];
@@ -108,7 +112,7 @@ namespace AIGames.BlockBattle.Kubisme
 				m_UnreachableRows[i] = m_UnreachableRows[i - 1];
 				m_UnreachableRows[i] += Unreachables[i - 1];
 				// On average, 1.5 hole per unreachable.
-				m_UnreachableRows[i] += Holes + Holes >> 1;
+				m_UnreachableRows[i] += (Holes * UnreachableFactor) / 100;
 			}
 
 			m_SingleEmpties = new int[SingleEmpties.Length];

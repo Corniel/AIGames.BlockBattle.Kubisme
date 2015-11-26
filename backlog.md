@@ -3,6 +3,8 @@ Backlog
 
 To-do
 -----
+* Detect space left before row clearing is blocked.
+* Make switch between default and endgame params part of the genetics.
 * Take reaching column 0 and 9 into account.
 * Add task to copy release output to genetics directory.
 

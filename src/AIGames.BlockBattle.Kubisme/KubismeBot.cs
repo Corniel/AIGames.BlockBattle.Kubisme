@@ -53,7 +53,6 @@ namespace AIGames.BlockBattle.Kubisme
 			
 			DecisionMaker.MaximumDuration = TimeSpan.FromMilliseconds(max);
 			DecisionMaker.MinimumDuration = TimeSpan.FromMilliseconds(min);
-			DecisionMaker.MaximumDepth = 2;
 
 			var path = DecisionMaker.GetMove(Field, Opponent, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());

@@ -8,7 +8,6 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public EvaluatorParameters()
 		{
-			UnreachableFactor = 150;
 			Unreachables = new int[22];
 			EmptyRows = new int[22];
 			Combos = new int[22];
@@ -30,6 +29,8 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Factor for current combo's.</summary>
 		public int Combo { get { return Combos[0]; } }
 
+		public int EmptyRowStaffle { get { return Groups[0]; } }
+
 		/// <summary>Get the score per hole.</summary>
 		[ParameterType(ParameterType.Negative)]
 		public int Holes { get; set; }
@@ -39,8 +40,6 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Genetics input.</summary>
 		[ParameterType(ParameterType.Descending)]
 		public int[] Combos { get; set; }
-
-		public int EmptyRowStaffle { get { return Groups[0]; } }
 
 		/// <summary>Gets the combo potential given the current combo value (x) and the the counter (y).</summary>
 		/// <remarks>
@@ -84,16 +83,13 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Points for the different number of groups per reachable hole.</summary>
 		[ParameterType(ParameterType.Descending)]
 		public int[] Groups { get; set; }
-		
+
 		[ParameterType(ParameterType.Descending | ParameterType.Positive)]
 		public int[] EmptyRows { get; set; }
 
 		/// <summary>The less Unreachable.</summary>
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] Unreachables { get; set; }
-
-		[ParameterType(ParameterType.Positive)]
-		public int UnreachableFactor { get; set; }
 
 		public EvaluatorParameters Calc()
 		{
@@ -111,8 +107,8 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				m_UnreachableRows[i] = m_UnreachableRows[i - 1];
 				m_UnreachableRows[i] += Unreachables[i - 1];
-				// On average, 1.5 hole per unreachable.
-				m_UnreachableRows[i] += (Holes * UnreachableFactor) / 100;
+				// Take two holes for unreachables.
+				m_UnreachableRows[i] += Holes << 1;
 			}
 
 			m_SingleEmpties = new int[SingleEmpties.Length];
@@ -164,7 +160,6 @@ namespace AIGames.BlockBattle.Kubisme
 				Groups = new int[] { 2, -8, -60, -111, -113, -134 },
 				EmptyRows = new int[] { 128, 112, 84, 78, 76, 71, 71, 54, 51, 50, 45, 31, 31, 27, 22, 18, 18, 17, 10, 10, 5, 1 },
 				Unreachables = new int[] { -7, -15, -22, -33, -33, -42, -42, -52, -64, -77, -78, -85, -92, -95, -103, -103, -118, -128, -133, -138, -144, -156 },
-				UnreachableFactor = 57,
 			};
 			return pars.Calc();
 		}
@@ -199,7 +194,6 @@ namespace AIGames.BlockBattle.Kubisme
 				Groups = new int[] { 46, 2, -12, -43, -55, -60 },
 				EmptyRows = new int[] { 137, 121, 113, 107, 103, 100, 93, 90, 88, 87, 85, 80, 79, 74, 71, 66, 61, 51, 45, 45, 22, 4 },
 				Unreachables = new int[] { -29, -56, -61, -73, -75, -77, -78, -85, -87, -87, -98, -99, -99, -102, -109, -115, -119, -120, -133, -137, -154, -158 },
-				UnreachableFactor = 123,
 			};
 			return pars.Calc();
 		}

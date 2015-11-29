@@ -2,6 +2,11 @@
 {
 	public class Evaluator
 	{
+
+		/// <summary>A mask for a match on the 1st and the 8th column of a row.</summary>
+		public const ushort Mask1st8thColomn = 0x0102;
+
+
 		/// <summary>Gets the (static) score of a field.</summary>
 		/// <remarks>
 		/// Normally, this function should be split in several sub methods. But as 
@@ -20,8 +25,14 @@
 			score += field.Combo * pars.Combo;
 			score += field.Skips * pars.Skips;
 
+			// A block on the 1st and 8th will disallow the clearance of a row one turn earlier.
+			var firstFilled = field.FirstFilled;
+			if (firstFilled > 0 && (field[firstFilled] & Mask1st8thColomn) != 0)
+			{
+				firstFilled--;
+			}
 			// Evaluation for free space.
-			score += pars.EmptyRowsCalc[field.FirstFilled];
+			score += pars.EmptyRowsCalc[firstFilled];
 
 			// counters
 			var holes = 0;

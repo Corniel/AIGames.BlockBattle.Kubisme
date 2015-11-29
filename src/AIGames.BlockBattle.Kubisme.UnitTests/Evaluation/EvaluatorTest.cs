@@ -7,6 +7,78 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 	public class EvaluatorTest
 	{
 		[Test]
+		public void Mask1st8thColomn_None_oXooooooXo()
+		{
+			var act = Row.ToString(Evaluator.Mask1st8thColomn);
+			var exp = ".X......X.";
+			Assert.AreEqual(exp, act);
+		}
+
+		[Test]
+		public void FirstFilled_FieldWithCellOnRow1_1()
+		{
+			var field = @"
+..........
+...X......
+.X.XXXXXXX
+.XXXXXXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				EmptyRows = new[] { 1, 1, 1, 1, 1 },
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void FirstFilled_FieldWithCellOnRow2Col1_1()
+		{
+			var field = @"
+..........
+..........
+.X.XXXXX.X
+.XXXXXXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				EmptyRows = new[] { 1, 1, 1, 1, 1 },
+			};
+			var expected = 1;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void FirstFilled_FieldWithCellOnRow1Col8_0()
+		{
+			var field = @"
+..........
+...X....X.
+.X.XXXXXXX
+.XXXXXXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				EmptyRows = new[] { 1, 1, 1, 1, 1 },
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+		[Test]
+		public void FirstFilled_FieldWithCellOnRow0Col8_0()
+		{
+			var field = @"
+...X....X.
+.X.XXXXXXX
+.XXXXXXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				EmptyRows = new[] { 1, 1, 1, 1, 1 },
+			};
+			var expected = 0;
+
+			Test(field, pars, expected);
+		}
+
+		[Test]
 		public void Holes_FieldWithUnreachableRow_1()
 		{
 			var field = @"
@@ -17,7 +89,6 @@ XXX...X.XX";
 			var pars = new EvaluatorParameters()
 			{
 				Holes = 1,
-				Unreachables = new int[] { -1, -1, -1, -1, -1, -1 },
 			};
 			var expected = 1;
 
@@ -32,7 +103,6 @@ XXX...X.XX";
 			var pars = new EvaluatorParameters()
 			{
 				Holes = 1,
-				Unreachables = new int[] { -1, -1, -1, -1, -1, -1 },
 			};
 			var expected = 1;
 

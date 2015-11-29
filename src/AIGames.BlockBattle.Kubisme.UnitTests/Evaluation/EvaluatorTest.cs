@@ -6,6 +6,32 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 	[TestFixture, Category(Category.Evaluation)]
 	public class EvaluatorTest
 	{
+		private static int[] GetNeutralizeUnreachable(int holes)
+		{
+			var arr = new int[21];
+			for (var i = 0; i < arr.Length; i++)
+			{
+				arr[i] = -2 * holes;
+			}
+			return arr;
+		}
+
+		[Test]
+		public void GetNeutralizeUnreachableGet_min1_AllUnreachableRowCalcShouldBeZero()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				Holes = -1,
+				Unreachables = GetNeutralizeUnreachable(-1),
+			};
+			pars = pars.Calc();
+
+			var act = pars.UnreachableRowsCalc;
+			var exp = new int[21];
+
+			CollectionAssert.AreEqual(exp, act);
+		}
+
 		[Test]
 		public void Mask1st8thColomn_None_oXooooooXo()
 		{
@@ -89,6 +115,7 @@ XXX...X.XX";
 			var pars = new EvaluatorParameters()
 			{
 				Holes = 1,
+				Unreachables = GetNeutralizeUnreachable(1),
 			};
 			var expected = 1;
 

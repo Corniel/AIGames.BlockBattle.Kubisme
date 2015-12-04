@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Qowaiv, Version=2.0.0.164, Culture=neutral, PublicKeyToken=0e6640b5f269a3fc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Qowaiv.2.0.0.164\lib\net45\Qowaiv.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -49,9 +53,6 @@
     <Compile Include="BattleSimulation.cs" />
     <Compile Include="BattleSimulator.cs" />
     <Compile Include="Bots.cs" />
-    <Compile Include="Conversion\EloTypeConverter.cs" />
-    <Compile Include="Elo.cs" />
-    <Compile Include="EloExtensions.cs" />
     <Compile Include="FieldVisualizer.cs" />
     <Compile Include="ParameterRandomizer.cs" />
     <Compile Include="Program.cs" />

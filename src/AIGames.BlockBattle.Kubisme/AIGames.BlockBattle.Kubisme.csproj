@@ -57,6 +57,8 @@
     <Compile Include="Blocks\BlockZLeft.cs" />
     <Compile Include="Blocks\BlockZRight.cs" />
     <Compile Include="Blocks\BlockZUturn.cs" />
+    <Compile Include="Blocks\BlockTLeft.cs" />
+    <Compile Include="Blocks\BlockTRight.cs" />
     <Compile Include="Communication\BotResponse.cs" />
     <Compile Include="Communication\ActionType.cs" />
     <Compile Include="Communication\IBot.cs" />

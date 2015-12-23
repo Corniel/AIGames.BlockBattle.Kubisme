@@ -504,7 +504,7 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <remarks>
 		/// For all but T blocks this is false of course.
 		/// </remarks>
-		public virtual bool IsTSpin(ushort top, ushort bottom) { return false; }
+		public virtual bool IsTSpin(Position pos, ushort[] rows) { return false; }
 
 		/// <summary>Returns true if there is a possibility for the block to
 		/// reach the current row, given the previous one.

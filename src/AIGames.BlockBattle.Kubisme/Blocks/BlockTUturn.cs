@@ -65,5 +65,15 @@ namespace AIGames.BlockBattle.Kubisme
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.TurnRight, ActionType.TurnRight, ActionType.Drop),
 			BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.Right, ActionType.TurnRight, ActionType.TurnRight, ActionType.Drop),
 		};
+
+		/// <summary>Returns true if a T-spin was applied.</summary>
+		public override bool IsTSpin(Position pos, ushort[] rows)
+		{
+			return
+				pos.Row > 0 &&
+				(TSpinTopMask[pos.Col] & rows[pos.Row - 1]) != 0 &&
+				// The tail of the T should be a perfect fit.
+				(TSpinTopMask[pos.Col] & rows[pos.Row + 1]) == TSpinTopMask[pos.Col];
+		}
 	}
 }

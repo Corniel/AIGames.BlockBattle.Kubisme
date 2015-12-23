@@ -173,15 +173,7 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				else if (cleared > 0)
 				{
-					if (block.Name == "T" &&
-						// Not on the top row.
-						pos.Row > 0 &&
-						// At least one blockade
-						(BlockT.TSpinTopMask[pos.Col] & rows[pos.Row - 1]) != 0 &&
-						// The head of the T should be a perfect fit.
-						(BlockT.TSpinTopBorderMask[pos.Col] & rows[pos.Row]) == BlockT.TSpinTopBorderMask[pos.Col] &&
-						// The tail of the T should be a perfect fit.
-						(BlockT.TSpinTopMask[pos.Col] & rows[pos.Row + 1]) == BlockT.TSpinTopMask[pos.Col])
+					if (block.IsTSpin(pos, rows))
 					{
 						if (cleared == 1)
 						{

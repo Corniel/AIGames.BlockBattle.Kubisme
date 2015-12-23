@@ -136,26 +136,25 @@ XXX..XXXXX");
 		public void Apply_Row1ToMuchSpaceToMuchSpaceOnHead_NoTSpin()
 		{
 			var field = Field.Create(0, 0, 0, @"
-..X..XX...
-XX....XXXX
-XXXX.XXXXX");
+				..X..XX...
+				XX....XXXX
+				XXXX.XXXXX");
 
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
-			var expField = "..........|..X..XX...|XX.XXXXXXX";
-			var expPt = 0;
-
-			Assert.AreEqual(expField, act.ToString());
-			Assert.AreEqual(expPt, act.Points);
+			FieldAssert.AreEqual( @"
+				..........
+				..X..XX...
+				XX.XXXXXXX", 5, 1, 0 , act);
 		}
 
 		[Test]
 		public void Apply_Row1_WithDoubleTSpin()
 		{
 			var field = Field.Create(0, 0, 0, @"
-..X..XX...
-XXX...XXXX
-XXXX.XXXXX");
+				..X..XX...
+				XXX...XXXX
+				XXXX.XXXXX");
 
 			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
 
@@ -201,7 +200,7 @@ XXX...XXXX
 		}
 
 		[Test]
-		public void Apply_SingleTSpin_AddsPointsAndSkips()
+		public void Apply_SingleTSpinLeft_AddsPointsAndSkips()
 		{
 			var field = Field.Create(0, 0, 17, @"
 				..X..XX...
@@ -214,6 +213,39 @@ XXX...XXXX
 				..........
 				..X.XXX...
 				XXXXX.XXXX";
+			FieldAssert.AreEqual(exp, 5, 1, 17, act);
+		}
+
+		[Test]
+		public void Apply_SingleTSpinRight_AddsPointsAndSkips()
+		{
+			var field = Field.Create(0, 0, 17, @"
+				.....X....
+				XXX...XXXX
+				XXXX.XXXXX");
+
+			var act = field.Apply(Block.T[Block.RotationType.Right], new Position(4, 0));
+
+			var exp = @"
+				..........
+				....XX....
+				XXX.XXXXXX";
+			FieldAssert.AreEqual(exp, 5, 1, 17, act);
+		}
+		[Test]
+		public void Apply_SingleTSpinNone_AddsPointsAndSkips()
+		{
+			var field = Field.Create(0, 0, 17, @"
+				.....X....
+				XXX...XXXX
+				XXXX.XXXXX");
+
+			var act = field.Apply(Block.T, new Position(3, 0));
+
+			var exp = @"
+				..........
+				....XX....
+				XXXX.XXXXX";
 			FieldAssert.AreEqual(exp, 5, 1, 17, act);
 		}
 

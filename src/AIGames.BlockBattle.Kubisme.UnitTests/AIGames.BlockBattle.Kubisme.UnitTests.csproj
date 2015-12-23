@@ -53,6 +53,7 @@
     <Compile Include="Evaluation\OpponentEvaluatorTest.cs" />
     <Compile Include="Genetics\SimulationBotCollectionTest.cs" />
     <Compile Include="Genetics\ParameterRandomizerTest.cs" />
+    <Compile Include="ScoresTest.cs" />
     <Compile Include="TestData.cs" />
     <EmbeddedResource Include="Communication\input.version0016.txt" />
     <EmbeddedResource Include="Communication\input.version0017.txt" />

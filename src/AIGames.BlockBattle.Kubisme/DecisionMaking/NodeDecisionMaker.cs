@@ -52,12 +52,8 @@ namespace AIGames.BlockBattle.Kubisme
 
 			Root = new BlockRootNode(field);
 
-			// if not that much free space, don't search deep, it will not longer 
-			// improve apparently.
-			var maxDepth = field.FirstFilled < 6 ? 2 : Pars.MaximumDepth;
-
 			// search at least two ply deep.
-			while (Pars.Depth < 2 || (Pars.Depth < maxDepth && Pars.Elapsed < MinimumDuration))
+			while (Pars.Depth < 2 || (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration))
 			{
 				Root.Apply(++Pars.Depth, Pars);
 				Logs.Add(new PlyLog(Pars.Round, Root.BestMove, Root.Score, Pars.Depth, Pars.Elapsed, Pars.Evaluations));

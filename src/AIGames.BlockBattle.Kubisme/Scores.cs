@@ -7,13 +7,14 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public const int Draw = 0;
 
-		public const int Max = 1000000;
+		private const int Max = +1000000;
+		private const int Min = -1000000;
 
-		public static readonly int Win = Wins(512);
-		public static readonly int Loss = Loses(512);
+		private static readonly int Win = Wins(512);
+		private static readonly int Loss = Loses(512);
 
 		public static int Wins(int ply) { return Max - ply; }
-		public static int Loses(int ply) { return -Max + ply; }
+		public static int Loses(int ply) { return Min + ply; }
 
 		/// <summary>Return true if the score indicates a losing position.</summary>
 		public static bool IsLosing(int score)
@@ -30,7 +31,7 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 			if (score <= Scores.Loss)
 			{
-				var ply = (score - Scores.Max);
+				var ply = (score - Scores.Min);
 				return String.Format(CultureInfo.InvariantCulture, "-oo {0}", ply);
 			}
 

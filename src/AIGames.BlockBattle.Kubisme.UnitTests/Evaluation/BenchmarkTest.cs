@@ -8,17 +8,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 	[TestFixture, Category(Category.Benchmark)]
 	public class BenchmarkTest
 	{
-		[OneTimeSetUp]
-		public void SetUp()
-		{
-			RunBenchmark(
-				1, TimeSpan.FromSeconds(0), Block.O, Block.O,
-				0, 0, 0, Field.Empty.ToString(),
-				0, 0, 0, Field.Empty.ToString());
-		}
-
 		[Test]
-		public void Initial()
+		public void Benchmark_Initial()
 		{
 			RunBenchmark(
 				1, TimeSpan.FromSeconds(10), Block.J, Block.L,
@@ -27,7 +18,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		}
 
 		[Test]
-		public void FilledWith6EmptyRows()
+		public void Benchmark_FilledWith6EmptyRows()
 		{
 			RunBenchmark(
 				1, TimeSpan.FromSeconds(0.5), Block.J, Block.L,
@@ -61,7 +52,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		}
 
 		[Test]
-		public void FieldWithComplexPaths()
+		public void Benchmark_AlmostDieing()
 		{
 			RunBenchmark(
 				57, TimeSpan.FromSeconds(0.5), Block.J, Block.L,

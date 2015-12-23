@@ -65,8 +65,15 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					Score += nodes.GetScore(this);
 				}
-				// Divide by 2.
-				Score >>= 1;
+				if (Children.Count == 3)
+				{
+					Score /= 3;
+				}
+				else
+				{
+					// Divide by 2.
+					Score >>= 1;
+				}
 			}
 		}
 

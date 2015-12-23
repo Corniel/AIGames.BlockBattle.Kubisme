@@ -87,6 +87,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public override bool IsTSpin(Position pos, ushort[] rows)
 		{
 			return
+				rows.Length > pos.Row -1 &&
 				(TSpinTopMask[pos.Col] & rows[pos.Row]) != 0 &&
 				// The tail of the T should be a perfect fit.
 				(TSpinTopMask[pos.Col] & rows[pos.Row + 2]) == TSpinTopMask[pos.Col];

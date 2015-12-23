@@ -34,8 +34,9 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Returns true if a T-spin was applied.</summary>
 		public override bool IsTSpin(Position pos, ushort[] rows)
 		{
-			var col = pos.Col + 1;
+			var col = pos.Col - 1;
 			return
+				col >= 0 &&
 				(TSpinTopMask[col] & rows[pos.Row]) != 0 &&
 				// The tail of the T should be a perfect fit.
 				(TSpinTopMask[col] & rows[pos.Row + 2]) == TSpinTopMask[col];

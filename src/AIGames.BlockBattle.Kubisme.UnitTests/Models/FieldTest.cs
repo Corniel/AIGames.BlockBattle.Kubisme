@@ -1,7 +1,6 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using NUnit.Framework;
 using System;
-using System.Text;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 {

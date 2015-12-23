@@ -1,10 +1,5 @@
 ﻿using AIGames.BlockBattle.Kubisme.Genetics;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
@@ -20,12 +15,12 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
 
 			var parameters = new ParameterCollectionClass()
 			{
-				NegativeDescading = new int[]{100, 150},
+				NegativeDescading = new int[] { 100, 150 },
 			};
 
 			var act = rnd.Randomize(parameters).NegativeDescading;
 
-			var exp = new int[]{-1, -19};
+			var exp = new int[] { -1, -19 };
 
 			CollectionAssert.AreEqual(exp, act);
 		}

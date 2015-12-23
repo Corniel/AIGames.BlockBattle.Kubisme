@@ -29,8 +29,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public Field Field { get; set; }
 		public Field Opponent { get; set; }
 
-		public Block Current { get { return Block.Select(State.ThisPiece); } }
-		public Block Next { get { return Block.Select(State.NextPiece); } }
+		public virtual Block Current { get { return Block.Select(State.ThisPiece); } }
+		public virtual Block Next { get { return Block.Select(State.NextPiece); } }
 
 		public void ApplySettings(Settings settings)
 		{
@@ -46,13 +46,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public BotResponse GetResponse(TimeSpan time)
 		{
-			// Take 1/3 of the thinking time up to 1.2 seconds.
-			var max = Math.Min(time.TotalMilliseconds / 3, 1200);
-			// Take 500 ms or if you're really getting out of time 3/4 of the max.
-			var min = Math.Min(500, (max * 3) / 4);
-			
-			DecisionMaker.MaximumDuration = TimeSpan.FromMilliseconds(max);
-			DecisionMaker.MinimumDuration = TimeSpan.FromMilliseconds(min);
+			SetDuration(time);
 
 			var path = DecisionMaker.GetMove(Field, Opponent, Current, Next, State.Round);
 			var move = new MoveInstruction(path.Moves.ToArray());
@@ -63,6 +57,17 @@ namespace AIGames.BlockBattle.Kubisme
 				Log = DecisionMaker.GetLog(),
 			};
 			return response;
+		}
+
+		protected virtual void SetDuration(TimeSpan time)
+		{
+			// Take 1/3 of the thinking time up to 1.2 seconds.
+			var max = Math.Min(time.TotalMilliseconds / 3, 1200);
+			// Take 500 ms or if you're really getting out of time 3/4 of the max.
+			var min = Math.Min(500, (max * 3) / 4);
+
+			DecisionMaker.MaximumDuration = TimeSpan.FromMilliseconds(max);
+			DecisionMaker.MinimumDuration = TimeSpan.FromMilliseconds(min);
 		}
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never), ExcludeFromCodeCoverage]

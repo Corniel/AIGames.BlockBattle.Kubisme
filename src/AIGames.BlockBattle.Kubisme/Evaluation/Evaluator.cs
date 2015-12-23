@@ -27,7 +27,7 @@
 
 			// A block on the 1st and 8th will disallow the clearance of a row one turn earlier.
 			var firstFilled = field.FirstFilled;
-			if (firstFilled > 0 && (field[firstFilled] & Mask1st8thColomn) != 0)
+			if (firstFilled > 0 && firstFilled < field.RowCount && (field[firstFilled] & Mask1st8thColomn) != 0)
 			{
 				firstFilled--;
 			}

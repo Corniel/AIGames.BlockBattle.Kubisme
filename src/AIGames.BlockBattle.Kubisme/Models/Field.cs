@@ -173,15 +173,15 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				else if (cleared > 0)
 				{
-					if (block == Block.T[Block.RotationType.Uturn] &&
+					if (block.Name == "T" &&
 						// Not on the top row.
 						pos.Row > 0 &&
 						// At least one blockade
-						(BlockTUturn.TSpinTopMask[pos.Col] & rows[pos.Row - 1]) != 0 &&
+						(BlockT.TSpinTopMask[pos.Col] & rows[pos.Row - 1]) != 0 &&
 						// The head of the T should be a perfect fit.
-						(BlockTUturn.TSpinTopBorderMask[pos.Col] & rows[pos.Row]) == BlockTUturn.TSpinTopBorderMask[pos.Col] &&
+						(BlockT.TSpinTopBorderMask[pos.Col] & rows[pos.Row]) == BlockT.TSpinTopBorderMask[pos.Col] &&
 						// The tail of the T should be a perfect fit.
-						(BlockTUturn.TSpinTopMask[pos.Col] & rows[pos.Row + 1]) == BlockTUturn.TSpinTopMask[pos.Col])
+						(BlockT.TSpinTopMask[pos.Col] & rows[pos.Row + 1]) == BlockT.TSpinTopMask[pos.Col])
 					{
 						if (cleared == 1)
 						{

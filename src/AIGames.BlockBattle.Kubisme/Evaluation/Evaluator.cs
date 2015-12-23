@@ -140,12 +140,12 @@
 									{
 										for (var col = 0; col < 8; col++)
 										{
-											if (BlockTUturn.TSpinRow2Mask[col] == row)
+											if (BlockT.TSpinRow2Mask[col] == row)
 											{
-												if (BlockTUturn.TSpinRow1Mask[col] == prev)
+												if (BlockT.TSpinRow1Mask[col] == prev)
 												{
 													var top = field[rowNr - 2];
-													var maskTSpinTop = BlockTUturn.TSpinTopMask[col];
+													var maskTSpinTop = BlockT.TSpinTopMask[col];
 													var match = top & maskTSpinTop;
 													// Note, we don't have to check for the center blockade.
 													// If that was the case, the current line would be unreachable.

@@ -1,18 +1,16 @@
 ﻿using AIGames.BlockBattle.Kubisme.Communication;
 using AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking;
-using AIGames.BlockBattle.Kubisme.UnitTests.Evaluation;
 using NUnit.Framework;
-using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 {
 	[TestFixture]
-	public class BlockTUturnTest
+	public class BlockTTest
 	{
 		[Test]
 		public void TSpinTopMask_None_MasksMatch()
 		{
-			var act = BitsTest.Select(BlockTUturn.TSpinTopMask);
+			var act = BitsTest.Select(BlockT.TSpinTopMask);
 			var exp = new string[]
 			{
 				"X.X.......",
@@ -31,7 +29,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void TSpinTopBorderMask_None_MasksMatch()
 		{
-			var act = BitsTest.Select(BlockTUturn.TSpinTopBorderMask);
+			var act = BitsTest.Select(BlockT.TSpinTopBorderMask);
 			var exp = new string[]
 			{
 				"...X......",
@@ -50,7 +48,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void TSpinRow1Mask_All_Matches()
 		{
-			var act = BitsTest.Select(BlockTUturn.TSpinRow1Mask);
+			var act = BitsTest.Select(BlockT.TSpinRow1Mask);
 			var exp = new string[] 
 			{ 
 				"...XXXXXXX",
@@ -69,7 +67,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		[Test]
 		public void TSpinRow2Mask_All_Matches()
 		{
-			var act = BitsTest.Select(BlockTUturn.TSpinRow2Mask);
+			var act = BitsTest.Select(BlockT.TSpinRow2Mask);
 			var exp = new string[] 
 			{ 
 				"X.XXXXXXXX",
@@ -200,6 +198,37 @@ XXX...XXXX
 
 			Assert.AreEqual(expField, act.ToString());
 			Assert.AreEqual(expPt, act.Points);
+		}
+
+		[Test]
+		public void Apply_SingleTSpin_AddsPointsAndSkips()
+		{
+			var field = Field.Create(0, 0, 17, @"
+				..X..XX...
+				XXX...XXXX
+				XXXX.XXXXX");
+
+			var act = field.Apply(Block.T[Block.RotationType.Left], new Position(3, 0));
+
+			var exp = @"
+				..........
+				..X.XXX...
+				XXXXX.XXXX";
+			FieldAssert.AreEqual(exp, 5, 1, 17, act);
+		}
+
+		[Test]
+		public void Apply_DoubleTSpin_AddsPointsAndSkips()
+		{
+			var field = Field.Create(0, 0, 17, @"
+..X..XX...
+XXX...XXXX
+XXXX.XXXXX");
+
+			var act = field.Apply(Block.T[Block.RotationType.Uturn], new Position(3, 1));
+
+			var exp = "..........|..........|..X..XX...";
+			FieldAssert.AreEqual(exp, 10, 1, 18, act);
 		}
 
 		[Test, Category(Category.Evaluation)]

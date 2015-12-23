@@ -500,6 +500,12 @@ namespace AIGames.BlockBattle.Kubisme
 			return false;
 		}
 
+		/// <summary>Returns true if a T-spin was applied.</summary>
+		/// <remarks>
+		/// For all but T blocks this is false of course.
+		/// </remarks>
+		public virtual bool IsTSpin(ushort top, ushort bottom) { return false; }
+
 		/// <summary>Returns true if there is a possibility for the block to
 		/// reach the current row, given the previous one.
 		/// </summary>

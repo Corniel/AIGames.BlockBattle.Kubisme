@@ -12,58 +12,6 @@ namespace AIGames.BlockBattle.Kubisme
 	/// </remarks>
 	public class BlockTUturn : BlockT
 	{
-		public static readonly ushort[] TSpinTopMask = new ushort[]
-		{
-			0x0005,
-			0x000A,
-			0x0014,
-			0x0028,
-
-			0x0050,
-			0x00A0,
-			0x0140,
-			0x0280,
-		};
-
-		public static readonly ushort[] TSpinTopBorderMask = new ushort[]
-		{
-			0x0008,
-			0x0011,
-			0x0022,
-			0x0044,
-
-			0x0088,
-			0x0110,
-			0x0220,
-			0x0040,
-		};
-
-		public static readonly ushort[] TSpinRow1Mask = new ushort[]
-		{
-			0X03F8,
-			0X03F1,
-			0X03E3,
-			0X03C7,
-			
-			0X038F,
-			0X031F,
-			0X023F,
-			0X007F,
-		};
-
-		public static readonly ushort[] TSpinRow2Mask = new ushort[]
-		{
-			0X03FD,
-			0X03FB,
-			0X03F7,
-			0X03EF,
-			
-			0X03DF,
-			0X03BF,
-			0X037F,
-			0X02FF,
-		};
-
 		public override RotationType Rotation { get { return RotationType.Uturn; } }
 
 		public override byte[] Lines { get { return lines; } }

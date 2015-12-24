@@ -17,16 +17,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			KInitial = 12;
 			KMinimum = 1;
 			KMultiplier = 0.98;
-
 			BotCapacity = 48;
 			BotStable = 1024;
-
-			PairingsRandom = 128;
-
-			CopyHighestElo = 1;
-			CopyHighestScore = 1;
-			CopyHighestTurnsAvg = 1;
-
+			PairingsRandom = 0;
 			LockFactor = 10;
 			Rows = 20;
 		}
@@ -42,10 +35,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public int BotCapacity { get; set; }
 		public int BotStable { get; set; }
 		public int SearchDepth { get; set; }
-
-		public int CopyHighestElo { get; set; }
-		public int CopyHighestScore { get; set; }
-		public int CopyHighestTurnsAvg { get; set; }
 
 		public int PairingsRandom { get; set; }
 

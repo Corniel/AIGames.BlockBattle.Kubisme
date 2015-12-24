@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.Genetics
@@ -8,6 +10,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 	{
 		public static void Main(string[] args)
 		{
+			Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 			AppConfig.Data.UpdateFromConfig();
 			Console.ReadLine();
 			var simulator = new BattleSimulator(new MT19937Generator());

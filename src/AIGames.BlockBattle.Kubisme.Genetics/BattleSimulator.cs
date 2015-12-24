@@ -158,16 +158,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			
 			BestBot = Bots.GetHighestStableElo();
 
-			var bestAvg = Bots.GetHighestAvg();
-			var bestTurn = Bots.GetHighestTurnsAvg();
-
 			Console.Clear();
 			var max = Math.Min(Console.WindowHeight - 2, Bots.Count);
-			var bestId = BestBot == null ? -1 : BestBot.Id;
-			
-			var avgParent = bestAvg == null ? -1 : bestAvg.Id;
-			var turnParent = bestTurn == null ? -1 : bestTurn.Id;
-
+		
 			for (var pos = 1; pos <= max; pos++)
 			{
 				var bot = sorted[pos - 1];
@@ -175,24 +168,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					Console.ForegroundColor = ConsoleColor.Yellow;
 				}
-				else if (bot == bestAvg)
-				{
-					Console.ForegroundColor = ConsoleColor.Red;
-				}
-				else if (bot == bestTurn)
-				{
-					Console.ForegroundColor = ConsoleColor.Cyan;
-				}
-
-				else if (bot.ParentId == bestId)
-				{
-					Console.ForegroundColor = ConsoleColor.Green;
-				}
-				else if (bot.ParentId == avgParent)
-				{
-					Console.ForegroundColor = ConsoleColor.Magenta;
-				}
-				else if (bot.ParentId == turnParent)
+				else if (bot.IsStable)
 				{
 					Console.ForegroundColor = ConsoleColor.White;
 				}
@@ -200,18 +176,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					Console.ForegroundColor = ConsoleColor.Gray;
 				}
-				Console.WriteLine(
-					String.Format(
-						CultureInfo.InvariantCulture,
-						"{6,2} {0:0000.0} {4:0.0000}, Runs: {1,5} ({5:000.0}), ID: {2,5}{7}, Parent: {3,5}",
-						bot.Elo, 
-						bot.Runs, 
-						bot.Id,
-						bot.ParentId, 
-						bot.PointsAvg,
-						bot.TurnsAvg,
-						pos,
-						bot.Locked? "*" : " "));
+				Console.Write("{0,3}", pos);
+				Console.Write(" {0:0000.0}", bot.Elo);
+				Console.Write(", Runs: {0,6}", bot.Runs);
+				Console.Write(" ({0:0.000} pt {1:00.00} #)", bot.PointsAvg, bot.TurnsAvg);
+				Console.Write(", ID: {0,5}", bot.Id);
+				if (bot.Locked) { Console.Write("*"); }
+				Console.Write(" (par: {0}, gen: {1})", bot.ParentId, bot.Generation);
+				Console.WriteLine();
 			}
 			Console.ForegroundColor = ConsoleColor.Gray;
 			Console.WriteLine();

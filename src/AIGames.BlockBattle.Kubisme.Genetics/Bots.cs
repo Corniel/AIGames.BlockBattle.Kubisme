@@ -58,6 +58,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public void Shrink()
 		{
+			var best = GetHighestStableElo();
 			var ids = new List<int>();
 			lock (locker)
 			{
@@ -70,6 +71,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				ids = sorted
 					.Skip(Capacity)
+					.Where(item => item != best)
 					.Where(item => !item.Locked)
 					.Select(item => item.Id)
 					.ToList();
@@ -86,12 +88,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var highest = GetHighestElo();
 			if (highest.IsStable)
 			{
-				CloneBot(rnd, highest, AppConfig.Data.CopyHighestElo);
-				CloneBot(rnd, GetHighestAvg(), AppConfig.Data.CopyHighestScore);
-				CloneBot(rnd, GetHighestTurnsAvg(), AppConfig.Data.CopyHighestTurnsAvg);
+				foreach (var bot in GetStable())
+				{
+					CloneBot(rnd, bot);
+				}
 			}
 		}
-		private void CloneBot( ParameterRandomizer rnd, BotData bot, int copies)
+		private void CloneBot( ParameterRandomizer rnd, BotData bot, int copies = 1)
 		{
 			if (bot == null) { return; }
 			for (var i = 0; i < copies; i++)
@@ -108,18 +111,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				var stable = GetHighestStableElo();
 
 				var pairings = new List<BattlePairing>();
-				// Pair best.
-				pairings.AddRange(PairOther(best));
-				pairings.AddRange(PairOther(GetHighestTurnsAvg()));
-				pairings.AddRange(PairOther(GetHighestAvg()));
-
-				// if the best is not the best stable, only pair the best.
+				
+				// if the best is not the best stable, only pair the top unstable.
 				if (best != stable && stable != null)
 				{
-					pairings.AddRange(PairOther(best));
+					foreach (var bot in GetUnstable().Where(b => b.Elo > stable.Elo))
+					{
+						pairings.AddRange(PairOther(bot));
+					}
 				}
 				else
 				{
+					// Pair best.
+					pairings.AddRange(PairOther(best));
 					// Pair random.
 					pairings.AddRange(GetRandomPairings(rnd));
 
@@ -265,15 +269,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			return GetStable()
 				.OrderByDescending(item => item.Elo)
 				.FirstOrDefault();
-		}
-
-		public BotData GetHighestAvg()
-		{
-			return GetStable().OrderByDescending(bot => bot.PointsAvg).FirstOrDefault();
-		}
-		public BotData GetHighestTurnsAvg()
-		{
-			return GetStable().OrderByDescending(bot => bot.TurnsAvg).FirstOrDefault();
 		}
 		
 		private int GetNewId()

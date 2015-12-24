@@ -8,5 +8,5 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("58.0.0.0")]
-[assembly: AssemblyFileVersion("58.0.0.0")]
+[assembly: AssemblyVersion("59.0.0.0")]
+[assembly: AssemblyFileVersion("59.0.0.0")]

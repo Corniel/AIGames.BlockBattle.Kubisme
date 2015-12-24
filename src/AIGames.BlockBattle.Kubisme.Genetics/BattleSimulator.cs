@@ -227,7 +227,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				foreach (var bot in sorted)
 				{
-					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}, Gen: {4}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, bot.Generation);
+					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}, Gen: {5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, bot.Generation);
 					writer.WriteLine(bot.ParametersToString(bot.DefPars));
 					writer.WriteLine(bot.ParametersToString(bot.EndPars));
 					writer.WriteLine();

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 	<appSettings>
-		<add key="Bots.Dir" value="../deploy"/>
+		<add key="Bots.Dir" value="C:\Code\AIGames.BlockBattle.Kubisme\deploy"/>
 	</appSettings>
 </configuration>

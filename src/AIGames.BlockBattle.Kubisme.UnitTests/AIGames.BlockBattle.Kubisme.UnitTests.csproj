@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App.config.xample" />
     <EmbeddedResource Include="Communication\input.simple.txt" />
     <Compile Include="Communication\ConsolePlatformTester.cs" />
     <None Include="packages.config" />

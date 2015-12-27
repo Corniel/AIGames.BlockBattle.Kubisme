@@ -10,7 +10,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 		[Test]
 		public void Deploy_Cubism_CompileAndZip()
 		{
-			var collectDir = new DirectoryInfo(@"AIGames.BlockBattle.Kubisme");
+			var dir = new FileInfo(GetType().Assembly.Location).Directory;
+			var collectDir = new DirectoryInfo(Path.Combine(dir.FullName, @"../../../AIGames.BlockBattle.Kubisme"));
 			var full = collectDir.FullName;
 			var version = typeof(KubismeBot).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
 			var nr = int.Parse(version.Split('.')[0]);

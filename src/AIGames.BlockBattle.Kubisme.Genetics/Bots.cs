@@ -58,11 +58,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public void Shrink()
 		{
-			var best = GetHighestStableElo();
 			var ids = new List<int>();
 			lock (locker)
 			{
 				var sorted = ByElo().ToList();
+
+				var lowest = GetLowestStableElo();
 
 				// Lock if allowed.
 				if (sorted[0].ShouldBeLocked)
@@ -71,10 +72,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				ids = sorted
 					.Skip(Capacity)
-					.Where(item => item != best)
 					.Where(item => !item.Locked)
-					.Select(item => item.Id)
-					.ToList();
+					.Select(item => item.Id).ToList();
+
+				if (lowest != null)
+				{
+					ids.AddRange(sorted
+						.Where(item => !item.IsStable && item.Elo < lowest.Elo)
+						.Select(item => item.Id));
+				}
+			
 			}
 			foreach (var id in ids)
 			{
@@ -88,18 +95,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var highest = GetHighestElo();
 			if (highest.IsStable)
 			{
-				foreach (var bot in GetStable())
-				{
-					CloneBot(rnd, bot);
-				}
-			}
-		}
-		private void CloneBot( ParameterRandomizer rnd, BotData bot, int copies = 1)
-		{
-			if (bot == null) { return; }
-			for (var i = 0; i < copies; i++)
-			{
-				Add(bot, rnd);
+				var stable = GetStable().OrderBy(i => rnd.Rnd.Next()).FirstOrDefault();
+				Add(stable, rnd);
 			}
 		}
 
@@ -115,7 +112,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				// if the best is not the best stable, only pair the top unstable.
 				if (best != stable && stable != null)
 				{
-					foreach (var bot in GetUnstable().Where(b => b.Elo > stable.Elo))
+					foreach (var bot in GetUnstable().Where(b => b.Elo >= stable.Elo))
 					{
 						pairings.AddRange(PairOther(bot));
 					}
@@ -268,6 +265,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return GetStable()
 				.OrderByDescending(item => item.Elo)
+				.FirstOrDefault();
+		}
+		public BotData GetLowestStableElo()
+		{
+			return GetStable()
+				.OrderBy(item => item.Elo)
 				.FirstOrDefault();
 		}
 		

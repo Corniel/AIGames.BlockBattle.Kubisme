@@ -17,9 +17,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			KInitial = 12;
 			KMinimum = 1;
 			KMultiplier = 0.98;
-			BotCapacity = 48;
+			BotCapacity = 64;
 			BotStable = 1024;
-			PairingsRandom = 0;
+			PairingsRandom = 64;
 			LockFactor = 10;
 			Rows = 20;
 		}

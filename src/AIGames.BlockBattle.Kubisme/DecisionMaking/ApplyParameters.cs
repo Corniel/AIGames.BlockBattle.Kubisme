@@ -17,10 +17,8 @@ namespace AIGames.BlockBattle.Kubisme
 			Rnd = rnd;
 			Blocks = new Block[size][];
 
-			for (var i = 0; i < 4; i++)
-			{
-				Blocks[i] = Block.SubsetsOf3[Rnd.Next(Block.SubsetsOf3.Length)];
-			}
+			Blocks[2] = Block.All;
+			Blocks[3] = Block.SubsetsOf3[Rnd.Next(Block.SubsetsOf3.Length)];
 			for (var i = 4; i < size; i++)
 			{
 				Blocks[i] = Block.SubsetsOf2[Rnd.Next(Block.SubsetsOf2.Length)];

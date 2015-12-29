@@ -39,7 +39,7 @@ namespace AIGames.BlockBattle.Kubisme
 					foreach(var block in pars.Blocks[Depth])
 					{
 						var nodes = new BlockNodes<BlockRndNode>(block);
-						foreach (var field in pars.Generator.GetFields(Field, block, false))
+						foreach (var field in pars.Generator.GetFields(Field, block, Depth == 2))
 						{
 							if (!pars.HasTimeLeft) { return; }
 
@@ -65,14 +65,14 @@ namespace AIGames.BlockBattle.Kubisme
 				{
 					Score += nodes.GetScore(this);
 				}
-				if (Children.Count == 3)
-				{
-					Score /= 3;
-				}
-				else
+				if (Children.Count == 2)
 				{
 					// Divide by 2.
 					Score >>= 1;
+				}
+				else
+				{
+					Score /= Children.Count;
 				}
 			}
 		}

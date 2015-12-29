@@ -37,6 +37,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			return
 				pos.Col < 8 &&
+				Row.Count[rows[pos.Row + 1]] == 7 &&
 				(TSpinTopMask[pos.Col] & rows[pos.Row]) != 0 &&
 				// The tail of the T should be a perfect fit.
 				(TSpinTopMask[pos.Col] & rows[pos.Row + 2]) == TSpinTopMask[pos.Col];

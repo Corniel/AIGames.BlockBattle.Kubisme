@@ -134,6 +134,28 @@ XX.XXXXXXX");
 			var exp = "..........|..........|..........";
 			FieldAssert.AreEqual(exp, 24, 1, 17, act);
 		}
+
+
+		[Test]
+		public void Apply_TDoubleClear_NoTSpin()
+		{
+			var field = Field.Create(0, 0, 0, @"
+				X.........
+				X..XX.....
+				XXXXXX...X
+				XXXXXX..XX
+				XXXXXX.XXX");
+
+			var act = field.Apply(Block.T[Block.RotationType.Right], new Position(6, 2));
+
+			FieldAssert.AreEqual(@"
+				..........
+				..........
+				X.........
+				X..XX.....
+				XXXXXXX..X", 3, 1, 0, act);
+		}
+
 		[Test]
 		public void Apply_SingleClearWithCombo1_Adds0Points()
 		{

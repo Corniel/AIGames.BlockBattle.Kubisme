@@ -234,6 +234,25 @@ XXX..X.XX.";
 			X...XXXXXX
 			XX.XXXXXXX", pars, 1);
 		}
+		
+		[Test]
+		public void TSpinPontential_ClearWithT_0()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				TSpinPontential = 1,
+			};
+			Test(@"
+			..........
+			..........
+			..........
+			X.........
+			X..XX.....
+			XXXXXX...X
+			XXXXXX..XX
+			XXXXXX.XXX", pars, 0);
+		}
+
 
 		[Test]
 		public void SingleEmpties_TwoColomns_2x2()

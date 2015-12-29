@@ -27,38 +27,19 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Blocks
 		}
 
 		[Test]
-		public void TSpinTopBorderMask_None_MasksMatch()
-		{
-			var act = BitsTest.Select(BlockT.TSpinTopBorderMask);
-			var exp = new string[]
-			{
-				"...X......",
-				"X...X.....",
-				".X...X....",
-				"..X...X...",
-
-				"...X...X..",
-				"....X...X.",
-				".....X...X",
-				"......X...",
-			};
-			CollectionAssert.AreEqual(exp, act);
-		}
-
-		[Test]
 		public void TSpinRow1Mask_All_Matches()
 		{
 			var act = BitsTest.Select(BlockT.TSpinRow1Mask);
 			var exp = new string[] 
 			{ 
-				"...XXXXXXX",
-				"X...XXXXXX",
-				"XX...XXXXX",
-				"XXX...XXXX",
-				"XXXX...XXX",
-				"XXXXX...XX",
-				"XXXXXX...X",
-				"XXXXXXX...",
+				"XXX.......",
+				".XXX......",
+				"..XXX.....",
+				"...XXX....",
+				"....XXX...",
+				".....XXX..",
+				"......XXX.",
+				".......XXX",
 				
 			};
 			CollectionAssert.AreEqual(exp, act);

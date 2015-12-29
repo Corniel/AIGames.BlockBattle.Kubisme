@@ -156,6 +156,27 @@ XX.XXXXXXX");
 				XXXXXXX..X", 3, 1, 0, act);
 		}
 
+
+		[Test]
+		public void Apply_TSingleClear_NoTSpin()
+		{
+			var field = Field.Create(0, 0, 0, @"
+				X.........
+				X..XX.....
+				XXXXXX...X
+				XXXX.X..XX
+				XXXXXX.XXX");
+
+			var act = field.Apply(Block.T[Block.RotationType.Right], new Position(6, 2));
+
+			FieldAssert.AreEqual(@"
+				..........
+				X.........
+				X..XX.....
+				XXXXXXX..X
+				XXXX.XXXXX", 0, 0, 0, act);
+		}
+
 		[Test]
 		public void Apply_SingleClearWithCombo1_Adds0Points()
 		{

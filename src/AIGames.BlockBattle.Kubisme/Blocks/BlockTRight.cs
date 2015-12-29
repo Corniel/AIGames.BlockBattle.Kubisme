@@ -37,7 +37,8 @@ namespace AIGames.BlockBattle.Kubisme
 			var col = pos.Col - 1;
 			return
 				col >= 0 &&
-				Row.Count[rows[pos.Row + 1]] == 7 &&
+				// There were 3 concatenated holes at the expected place.
+				(~rows[pos.Row + 1] & TSpinRow1Mask[col]) == TSpinRow1Mask[col] &&
 				(TSpinTopMask[col] & rows[pos.Row]) != 0 &&
 				// The tail of the T should be a perfect fit.
 				(TSpinTopMask[col] & rows[pos.Row + 2]) == TSpinTopMask[col];

@@ -50,6 +50,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public Elo Elo { get; set; }
 		public double K { get; set; }
 
+		public double GetWeight(ParameterRandomizer rnd)
+		{
+			var score = rnd.Rnd.NextDouble();
+			score *= (double)Elo * (double)Elo;
+			return score;
+		}
+
 		public EvaluatorParameters DefPars { get; set; }
 		public EvaluatorParameters EndPars { get; set; }
 

@@ -19,10 +19,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new EvaluatorParameters()
 			{
-				Endgame = 5,
-				HolesUnreachable = -200,
-				Points = 10,
-				TSpinPontential = 400,
+				Endgame = 8,
+				HolesReachable = -100,
+				HolesUnreachable = -100,
+				Points = 100,
+				TSpinPontential = 600,
+				Groups = new int[] { 10, 0, -10, -20, -30, -40 },
+				SingleGroupBonus = new int[] { 30, 30, 30, 0 },
 				Skips = 300,
 			}
 			.Calc();
@@ -31,8 +34,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new EvaluatorParameters()
 			{
-				HolesUnreachable = -200,
-				Points = 10,
+				Endgame = 8,
+				HolesReachable = -100,
+				HolesUnreachable = -100,
+				Points = 100,
+				TSpinPontential = 600,
+				Groups = new int[] { 10, 0, -10, -20, -30, -40 },
+				SingleGroupBonus = new int[] { 30, 30, 30, 0 },
+				Skips = 300,
 			}
 			.Calc();
 		}
@@ -79,7 +88,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					BestBot = Bots.GetHighestElo();
 				}
 			}
-				
+
 			var keepRunning = true;
 
 			while (true)
@@ -138,7 +147,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Simulations,
 				Simulations / sw.Elapsed.TotalSeconds,
 				Bots.LastId);
-			
+
 			var simulation = new BattleSimulation(bot0, bot1, SearchDepth);
 			var result = simulation.Run(rnd, LogGames);
 
@@ -153,12 +162,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private void LogRankings()
 		{
 			var sorted = Bots.ByElo().ToList();
-			
+
 			BestBot = Bots.GetHighestStableElo();
+			var parentId = BestBot == null ? -1 : BestBot.Id;
 
 			Console.Clear();
 			var max = Math.Min(Console.WindowHeight - 2, Bots.Count);
-		
+
 			for (var pos = 1; pos <= max; pos++)
 			{
 				var bot = sorted[pos - 1];
@@ -168,11 +178,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				else if (bot.IsStable)
 				{
-					Console.ForegroundColor = ConsoleColor.White;
+					Console.ForegroundColor = bot.ParentId == parentId ? ConsoleColor.Green : ConsoleColor.White;
 				}
 				else
 				{
-					Console.ForegroundColor = ConsoleColor.Gray;
+					Console.ForegroundColor = bot.ParentId == parentId ? ConsoleColor.DarkGreen : ConsoleColor.Gray;
 				}
 				Console.Write("{0,3}", pos);
 				Console.Write(" {0:0000.0}", bot.Elo);

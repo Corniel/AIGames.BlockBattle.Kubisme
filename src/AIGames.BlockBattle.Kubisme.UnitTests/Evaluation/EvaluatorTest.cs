@@ -253,6 +253,120 @@ XXX..X.XX.";
 			XXXXXX.XXX", pars, 0);
 		}
 
+		[Test]
+		public void PerfectClearPontential_SingleLineWith4EmtyCells_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			XXX....XXX", pars, 1);
+		}
+		[Test]
+		public void PerfectClearPontential_SingleLine1_0()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			XX........", pars, 1);
+		}
+		[Test]
+		public void PerfectClearPontential_SingleLine1_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			....XX....", pars, 1);
+		}
+		[Test]
+		public void PerfectClearPontential_SingleLine2_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			........XX", pars, 1);
+		}
+
+		[Test]
+		public void PerfectClearPontential_WrongNumberOfBlocks_0()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			XXXXXX...X
+			XXXXXX..XX
+			XXXXXX.XXX", pars, 0);
+		}
+		[Test]
+		public void PerfectClearPontential_4Rows4EmptyCells_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			XXXXXX.XXX
+			XXXXXX.XXX
+			XXXXXX.XXX
+			XXXXXX.XXX", pars, 1);
+		}
+		[Test]
+		public void PerfectClearPontential_5Rows8EmptyCells_0()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			XXXXX...XX
+			XXXXXX..XX
+			XXXXXX.XXX
+			XXXXXX.XXX
+			XXXXXX.XXX", pars, 0);
+		}
+
+		[Test]
+		public void PerfectClearPontential_2Rows4EmptyCells_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			XXXXX..XXX
+			XXXXX..XXX", pars, 1);
+		}
+
+		[Test]
+		public void PerfectClearPontential_2Rows8EmptyCells_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPontential = 1,
+			};
+			Test(@"
+			..........
+			XXX......X
+			XXXXX..XXX", pars, 1);
+		}
+
 
 		[Test]
 		public void SingleEmpties_TwoColomns_2x2()

@@ -244,7 +244,7 @@ XXXX.XXXXX");
 			FieldAssert.AreEqual(exp, 10, 1, 18, act);
 		}
 
-		[Test, Category(Category.Evaluation)]
+		[Test]
 		public void GetMove_TForTSpin_ClearedField()
 		{
 			var field = Field.Create(0, 2, 0, @"

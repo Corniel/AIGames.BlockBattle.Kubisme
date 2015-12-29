@@ -58,7 +58,18 @@ namespace AIGames.BlockBattle.Kubisme
 			return (byte)rows.Length;
 		}
 
-		public int Count { get { return rows.Sum(r => Row.Count[r]); } }
+		public int Count
+		{
+			get
+			{
+				var cnt = 0;
+				for (byte r = 0; r < rows.Length; r++)
+				{
+					cnt += Row.Count[rows[r]];
+				}
+				return cnt;
+			}
+		}
 
 		public int RowCount { get { return rows.Length; } }
 

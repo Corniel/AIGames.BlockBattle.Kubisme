@@ -4,7 +4,14 @@
 	{
 
 		/// <summary>A mask for a match on the 1st and the 8th column of a row.</summary>
-		public const ushort Mask1st8thColomn = 0x0102;
+		public const ushort Mask1st8thColomn = 0x102;
+
+		// XX........
+		public const ushort PerfectClearOneRow0 = 0x003;
+		// ....XX....
+		public const ushort PerfectClearOneRow1 = 0x030;
+		// ........XX
+		public const ushort PerfectClearOneRow2 = 0x300;
 
 
 		/// <summary>Gets the (static) score of a field.</summary>
@@ -41,6 +48,7 @@
 			var row0 = 0;
 			var row1 = 0;
 			var row2 = 0;
+			var row3 = 0;
 			var row0Mirror = 0;
 			var row0Holes = 0;
 
@@ -203,6 +211,7 @@
 				row0Closed |= row0;
 				countRow1 = countRow0;
 				countRow1Group = countRow0Group;
+				row3 = row2;
 				row2 = row1;
 				row1 = row0;
 			}
@@ -234,6 +243,44 @@
 			}
 			#endregion
 
+			#region Perfect clear
+
+			if (countHoleReachable == 0 && countHoleUnreachable == 0)
+			{
+				var filled = field.RowCount - field.FirstFilled;
+				if (filled < 5)
+				{
+					var hasPerfectClearPontential = false;
+					if (filled == 1)
+					{
+						hasPerfectClearPontential =
+							row0 == PerfectClearOneRow0 ||
+							row0 == PerfectClearOneRow1 ||
+							row0 == PerfectClearOneRow2 ||
+							// 4 empty cells as one group.
+							(Row.Count[row0] == 6 && Row.Groups[row0Mirror] == 1);
+					}
+					else
+					{
+						var toFill = filled * 10 - field.Count;
+						hasPerfectClearPontential =
+							// Can be divided by 4.
+							(toFill & 3) == 0 &&
+							// Can be filled 'easily' because all space is connected.
+							Row.Groups[row0Mirror] == 1 &&
+							Row.Groups[row1 ^ Row.Filled] == 1 &&
+							Row.Groups[row2 ^ Row.Filled] == 1 &&
+							Row.Groups[row3 ^ Row.Filled] == 1;
+					}
+
+					if (hasPerfectClearPontential)
+					{
+						score += pars.PerfectClearPontential;
+					}
+				}
+			}
+			#endregion
+
 			score += countHoleReachable * pars.HolesReachable;
 			score += countHoleUnreachable * pars.HolesUnreachable;
 
@@ -244,3 +291,4 @@
 		}
 	}
 }
+

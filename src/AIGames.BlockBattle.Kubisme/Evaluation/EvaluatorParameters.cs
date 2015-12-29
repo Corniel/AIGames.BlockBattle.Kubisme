@@ -46,6 +46,9 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Positive)]
 		public int TSpinPontential { get; set; }
 
+		[ParameterType(ParameterType.Positive)]
+		public int PerfectClearPontential { get; set; }
+
 		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
 		[ParameterType(ParameterType.Ascending)]
 		public int[] TetrisPotential { get; set; }

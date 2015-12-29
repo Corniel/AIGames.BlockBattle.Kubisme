@@ -3,7 +3,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,11 +19,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new EvaluatorParameters()
 			{
-				Holes = -200,
-				Points = 75,
-				TriplePotentialI = 100,
-				TetrisPotential = 300,
-				TSpinPontential = 600,
+				Endgame = 5,
+				HolesUnreachable = -200,
+				Points = 10,
+				TSpinPontential = 400,
 				Skips = 300,
 			}
 			.Calc();
@@ -33,7 +31,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new EvaluatorParameters()
 			{
-				Holes = -200,
+				HolesUnreachable = -200,
 				Points = 10,
 			}
 			.Calc();

@@ -24,9 +24,9 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Row { get { return row; } }
 
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private sbyte row;
+		private readonly sbyte row;
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private sbyte col;
+		private readonly sbyte col;
 
 		public Position Left { get { return new Position(col - 1, row); } }
 		public Position Right { get { return new Position(col + 1, row); } }

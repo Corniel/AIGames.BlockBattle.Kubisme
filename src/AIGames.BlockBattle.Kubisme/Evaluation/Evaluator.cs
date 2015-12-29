@@ -25,7 +25,8 @@
 			score += field.Combo * pars.Combo;
 			score += field.Skips * pars.Skips;
 
-			// A block on the 1st and 8th will disallow the clearance of a row one turn earlier.
+			#region A block on the 1st and 8th will disallow the clearance of a row one turn earlier.
+
 			var firstFilled = field.FirstFilled;
 			if (firstFilled > 0 && firstFilled < field.RowCount && (field[firstFilled] & Mask1st8thColomn) != 0)
 			{
@@ -34,167 +35,207 @@
 			// Evaluation for free space.
 			score += pars.EmptyRowsCalc[firstFilled];
 
-			// counters
-			var holes = 0;
-			var tetrisCount = 0;
-			var comboPotential = 0;
-			var hasComboPotential = true;
+			#endregion
 
-			// masks.
-			var maskColumnOpen = (int)Row.Filled;
-			var maskColumnClosed = 0;
-			var maskColumnClosedPrev = 0;
+			var rowIndex = field.FirstFilled;
+			var row0 = 0;
+			var row1 = 0;
+			var row2 = 0;
+			var row0Mirror = 0;
+			var row0Holes = 0;
 
-			// row number.
-			var rowNr = field.FirstFilled;
+			int row0Open = Row.Filled;
+			int row0Closed = 0;
 
-			// Loop through reachable rows.
-			while (rowNr < field.RowCount)
+			var countHoleReachable = 0;
+			var countHoleUnreachable = 0;
+
+			var countRow0 = 0;
+			var countRow0Holes = 0;
+			var countRow0Group = 0;
+			var countRow1 = 0;
+			var countRow1Group = 0;
+			
+			#region Reachable Area
+			
+			for (; rowIndex < field.RowCount; rowIndex++)
 			{
-				var row = field[rowNr];
-				var rowMirror = row ^ Row.Filled;
+				row0 = field[rowIndex];
+				row0Mirror = row0 ^ Row.Filled;
 
-				var reachbleEmptyCells = rowMirror & maskColumnOpen;
-
-				// No reachable cells left.
-				if (reachbleEmptyCells == 0) { break; }
-
-				var rowHoles = Row.Count[maskColumnClosed & rowMirror];
-				var rowCount = Row.Count[row];
-				// Groups of empty cells.
-				var groups = Row.Groups[rowMirror];
-
-				// Get bonuses for lines that can potentially be cleared by one block.
-				if (groups == 1)
+				// Not reachable, redo as unreachable.
+				if ((row0Open & row0Mirror) == 0)
 				{
-					if (rowCount >= 6)
+					rowIndex--;
+					break;
+				}
+
+				row0Holes = row0Mirror & row0Closed;
+				countRow0 = Row.Count[row0];
+				countRow0Group = Row.Groups[row0Mirror];
+
+				#region  Add points for grouping
+				score += pars.Groups[countRow0Group];
+
+				if (countRow0Group == 1)
+				{
+					// Get bonuses for lines that can potentially be cleared by one block.
+					if (countRow0 >= 6)
 					{
-						score += pars.SingleGroupBonus[rowCount - 6];
+						score += pars.SingleGroupBonus[countRow0 - 6];
 					}
 				}
 				else
 				{
 					// Add score for single empties.
-					var singleEmpties = Row.SingleEmpties[row | maskColumnClosed];
+					var singleEmpties = Row.SingleEmpties[row0 | row0Closed];
 					score += pars.SingleEmptiesCalc[singleEmpties];
 				}
+				#endregion
 
-				// Add points for grouping
-				score += pars.Groups[groups];
+				#region Handle holes
 
-				// Count holes.
-				holes += rowHoles;
-				
-				if (hasComboPotential)
+				if (row0Holes != 0)
 				{
-					// If there is only one empty cell to go through, its over.
-					if (rowCount == 9 || Row.Count[rowMirror & maskColumnOpen] < 2)
+					countRow0Holes = Row.Count[row0Holes];
+
+					if (countRow0Holes == 1)
 					{
-						hasComboPotential = false;
+						switch (row0Holes)
+						{
+							// X.........
+							case 0x001:
+								//.XX.......
+								if ((row0Mirror & 0x006) == 0x006) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// .X........
+							case 0x002:
+								//..XX......
+								if ((row0Mirror & 0x00C) == 0x00C) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// ..X.......
+							case 0x004:
+								//XX........ OR ...XX.....
+								if ((row0Mirror & 0x003) == 0x003 || (row0Mirror & 0x018) == 0x018) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// ...X......
+							case 0x008:
+								//.XX....... OR ....XX....
+								if ((row0Mirror & 0x006) == 0x006 || (row0Mirror & 0x030) == 0x030) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// ....X.....
+							case 0x010:
+								//..XX...... OR .....XX...
+								if ((row0Mirror & 0x00C) == 0x00C || (row0Mirror & 0x060) == 0x060) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// .....X....
+							case 0x020:
+								//...XX..... OR ......XX..
+								if ((row0Mirror & 0x018) == 0x018 || (row0Mirror & 0x0C0) == 0x0C0) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// ......X...
+							case 0x040:
+								//....XX.... OR .......XX.
+								if ((row0Mirror & 0x030) == 0x030 || (row0Mirror & 0x180) == 0x180) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// .......X..
+							case 0x080:
+								//.....XX... OR ........XX
+								if ((row0Mirror & 0x060) == 0x060 || (row0Mirror & 0x300) == 0x300) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// ........X.
+							case 0x100:
+								//......XX..
+								if ((row0Mirror & 0x0C0) == 0x0C0) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+							// .........X
+							case 0x200:
+								//.......XX.
+								if ((row0Mirror & 0x180) == 0x180) { countHoleReachable++; }
+								else { countHoleUnreachable++; }
+								break;
+						}
 					}
-					else if (rowCount > 6 && groups == 1)
+
+					else
 					{
-						comboPotential++;
+						countHoleUnreachable += countRow0Holes;
+					}
+				}
+				#endregion
+
+				#region T-spin potential
+
+				// X...XXXXXX
+				// XX.XXXXXXX
+				else if (countRow0 == 9 && countRow1 == 7 && countRow1Group == 1)
+				{
+					// X...XXXXXX
+					// XX.XXXXXXX
+					// ----------
+					// .X.X...... (2 groups)
+					if (Row.Groups[(row1 ^ Row.Filled) ^ row0Mirror] == 2)
+					{
+						// ...X......
+						// X...XXXXXX
+						// ----------
+						// X..XXXXXXX (count 8)
+						if (Row.Count[row1 | row2] == 8)
+						{
+							score += pars.TSpinPontential;
+						}
 					}
 				}
 
-				// Detect T-spin and double clearance (T, L, J) potential.
-				if (rowNr > 1)
-				{
-					// if 1 group, and 8, and the previous row is identical and no
-					// holes are added (all reachable).
-					if (rowCount == 8 && groups == 1 && rowHoles == 0 && row == field[rowNr - 1])
-					{
-						score += pars.DoublePotentialO;
-					}
-					else if (rowCount == 9)
-					{
-						// Detect Tetris-score.
-						// It should end with at least 4 reachable nine-rows.
-						tetrisCount++;
+				#endregion
 
-						// If Tetris count is 2 of bigger, the previous one was 9.
-						if (tetrisCount == 1)
-						{
-							var prev = field[rowNr - 1];
-							var prevMirror = field[rowNr - 1] ^ Row.Filled;
-
-							if (Row.Groups[prevMirror] == 1)
-							{
-								var prevMirrorCount = Row.Count[prevMirror];
-								if (prevMirrorCount == 2)
-								{
-									if ((prevMirror & maskColumnClosedPrev) == 0)
-									{
-										score += pars.DoublePotentialTSZ;
-									}
-								}
-								else if (prevMirrorCount == 3)
-								{
-									if ((prevMirror & maskColumnClosedPrev) == 0)
-									{
-										score += pars.DoublePotentialJLT;
-									}
-									// Potential T-spin.
-									else if (rowNr > 2 && field.FirstFilled < rowNr - 1)
-									{
-										for (var col = 0; col < 8; col++)
-										{
-											if (BlockT.TSpinRow2Mask[col] == row)
-											{
-												if (BlockT.TSpinRow1Mask[col] == prev)
-												{
-													var top = field[rowNr - 2];
-													var maskTSpinTop = BlockT.TSpinTopMask[col];
-													var match = top & maskTSpinTop;
-													// Note, we don't have to check for the center blockade.
-													// If that was the case, the current line would be unreachable.
-													if (match != 0 && match != maskTSpinTop)
-													{
-														score += pars.TSpinPontential;
-													}
-												}
-												break;
-											}
-										}
-									}
-								}
-							}
-						}
-						// We'd like to detect a J/L triple.
-						else if (tetrisCount > 1)
-						{
-							var prevMirror = field[rowNr - tetrisCount] ^ Row.Filled;
-							// One hole, and 8 filled cells.
-							if (Row.Groups[prevMirror] == 1 && Row.Count[prevMirror] == 2)
-							{
-								score += pars.TriplePotentialJL;
-							}
-						}
-					}
-				}
-
-				// reset Tetris count.
-				if (rowCount != 9) { tetrisCount = 0; }
-
-				// apply row to closed and open columns.
-				maskColumnClosedPrev = maskColumnClosed;
-				maskColumnClosed |= row;
-				maskColumnOpen = maskColumnClosed ^ Row.Filled;
-				rowNr++;
+				// Update history.
+				row0Open &= row0Mirror;
+				row0Closed |= row0;
+				countRow1 = countRow0;
+				countRow1Group = countRow0Group;
+				row2 = row1;
+				row1 = row0;
 			}
-			var unreachables = field.RowCount - rowNr;
+				#endregion
 
-			// Evaluation for unreachable.
-			score += pars.UnreachableRowsCalc[unreachables];
+			#region Vertical I potential
 
-			// Add scores based on counters.
-			score += holes * pars.Holes;
-			score += pars.ComboPotential[field.Combo, comboPotential];
+			if (rowIndex >= 4)
+			{
+				var cearenceI = 0;
+				// If we're on the floor, -1, -4, instead 0, -3.
+				if (Row.Count[field[rowIndex - (rowIndex == field.RowCount ? 4 : 0)]] == 9) { cearenceI++; }
+				if (Row.Count[field[rowIndex - 1]] == 9) { cearenceI++; }
+				if (Row.Count[field[rowIndex - 2]] == 9) { cearenceI++; }
+				if (Row.Count[field[rowIndex - 3]] == 9) { cearenceI++; }
+				score += pars.TetrisPotential[cearenceI];
+			}
+			#endregion
 
-			if (tetrisCount == 2) { score += pars.DoublePotentialI; }
-			else if (tetrisCount == 3) { score += pars.TriplePotentialI; }
-			else if (tetrisCount > 3) { score += pars.TetrisPotential; }
+			#region Unreachable area
+
+			for (; rowIndex < field.RowCount; rowIndex++)
+			{
+				row0Mirror = field[rowIndex] ^ Row.Filled;
+				// Points for groups.
+				score += pars.Groups[Row.Groups[row0Mirror]];
+				// Points for holes.
+				countHoleUnreachable += Row.Count[row0Mirror];
+			}
+			#endregion
+
+			score += countHoleReachable * pars.HolesReachable;
+			score += countHoleUnreachable * pars.HolesUnreachable;
 
 			return score;
 #if !DEBUG

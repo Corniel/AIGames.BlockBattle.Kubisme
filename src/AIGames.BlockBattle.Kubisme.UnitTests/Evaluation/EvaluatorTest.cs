@@ -6,184 +6,32 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 	[TestFixture, Category(Category.Evaluation)]
 	public class EvaluatorTest
 	{
-		private static int[] GetNeutralizeUnreachable(int holes)
-		{
-			var arr = new int[21];
-			for (var i = 0; i < arr.Length; i++)
-			{
-				arr[i] = -2 * holes;
-			}
-			return arr;
-		}
-
-		[Test]
-		public void GetNeutralizeUnreachableGet_min1_AllUnreachableRowCalcShouldBeZero()
+		private EvaluatorParameters GetHolePars()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				Holes = -1,
-				Unreachables = GetNeutralizeUnreachable(-1),
+				HolesReachable = 1,
+				HolesUnreachable = 100,
 			};
-			pars = pars.Calc();
-
-			var act = pars.UnreachableRowsCalc;
-			var exp = new int[21];
-
-			CollectionAssert.AreEqual(exp, act);
+			return pars;
+		}
+		
+		[Test]
+		public void Holes_SingleReachable_1()
+		{
+			Test(@"
+			..........
+			...XX.....
+			...X...X..", GetHolePars(), 1);
 		}
 
 		[Test]
-		public void Mask1st8thColomn_None_oXooooooXo()
+		public void Holes_SingleUnreachable_100()
 		{
-			var act = Row.ToString(Evaluator.Mask1st8thColomn);
-			var exp = ".X......X.";
-			Assert.AreEqual(exp, act);
-		}
-
-		[Test]
-		public void FirstFilled_FieldWithCellOnRow1_1()
-		{
-			var field = @"
-..........
-...X......
-.X.XXXXXXX
-.XXXXXXXXX";
-			var pars = new EvaluatorParameters()
-			{
-				EmptyRows = new[] { 1, 1, 1, 1, 1 },
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void FirstFilled_FieldWithCellOnRow2Col1_1()
-		{
-			var field = @"
-..........
-..........
-.X.XXXXX.X
-.XXXXXXXXX";
-			var pars = new EvaluatorParameters()
-			{
-				EmptyRows = new[] { 1, 1, 1, 1, 1 },
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void FirstFilled_FieldWithCellOnRow1Col8_0()
-		{
-			var field = @"
-..........
-...X....X.
-.X.XXXXXXX
-.XXXXXXXXX";
-			var pars = new EvaluatorParameters()
-			{
-				EmptyRows = new[] { 1, 1, 1, 1, 1 },
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void FirstFilled_FieldWithCellOnRow0Col8_0()
-		{
-			var field = @"
-...X....X.
-.X.XXXXXXX
-.XXXXXXXXX";
-			var pars = new EvaluatorParameters()
-			{
-				EmptyRows = new[] { 1, 1, 1, 1, 1 },
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Holes_FieldWithUnreachableRow_1()
-		{
-			var field = @"
-..........
-..X.......
-.X.XXXXXXX
-XXX...X.XX";
-			var pars = new EvaluatorParameters()
-			{
-				Holes = 1,
-				Unreachables = GetNeutralizeUnreachable(1),
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Holes_SimpleField_1()
-		{
-			var field = @"
-.XX.......
-.X.X......";
-			var pars = new EvaluatorParameters()
-			{
-				Holes = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void Unreachables_0Rows_0()
-		{
-			var field = @"
-..........
-...X.XXXXX
-XXX.......";
-			var pars = new EvaluatorParameters()
-			{
-				Holes = 0,
-				Unreachables = new int[] { 1, 1, 1, 1, 1, 1 },
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Unreachables_1Rows_1()
-		{
-			var field = @"
-..........
-...X.XXXXX
-XXX.XXX...";
-			var pars = new EvaluatorParameters()
-			{
-				Holes = 0,
-				Unreachables = new int[] { 1, 1, 1, 1, 1, 1 },
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void Unreachables_2Rows_2()
-		{
-			var field = @"
-..........
-XXXX.XXXXX
-...XXXXXXX
-XXX.......";
-			var pars = new EvaluatorParameters()
-			{
-				Holes = 0,
-				Unreachables = new int[] { 1, 1, 1, 1, 1, 1 },
-			};
-			var expected = 2;
-
-			Test(field, pars, expected);
+			Test(@"
+			..........
+			...XX.....
+			...X..X...", GetHolePars(), 100);
 		}
 
 		[Test]
@@ -211,187 +59,7 @@ XXXXXXXX..";
 		}
 
 		[Test]
-		public void DoublePotentialJLT_JFitWithHole_0()
-		{
-			var field = @"
-..........
-...XXXXXXX
-XX.XXXXXX.
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialJLT = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialJLT_JFit_1()
-		{
-			var field = @"
-..........
-...XXXXXXX
-XX.XXXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialJLT = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialJLT_LFitWithHole_0()
-		{
-			var field = @"
-..........
-XX...XXXXX
-XX.XXXXXX.
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialJLT = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialJLT_LFit_1()
-		{
-			var field = @"
-..........
-XX...XXXXX
-XX.XXXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialJLT = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialJLT_TFitWithHole_0()
-		{
-			var field = @"
-..........
-X...XXXXXX
-XX.XXXXXX.
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialJLT = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialJLT_TFit_1()
-		{
-			var field = @"
-..........
-X...XXXXXX
-XX.XXXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialJLT = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void DoublePotentialTSZ_TFitWithHole_0()
-		{
-			var field = @"
-..........
-XX..XXXXXX
-XX.XXXXXX.
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialTSZ = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialTSZ_TFit_1()
-		{
-			var field = @"
-..........
-XX..XXXXXX
-XX.XXXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialTSZ = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void DoublePotentialO_OWithHole_0()
-		{
-			var field = @"
-..........
-X..XXXXXXX
-X..XXXXXX.
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialO = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialO_OWithBlocade_0()
-		{
-			var field = @"
-.X........
-X..XXXXXXX
-X..XXXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialO = 1,
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void DoublePotentialO_OFit_1()
-		{
-			var field = @"
-..........
-X..XXXXXXX
-X..XXXXXXX
-XX.XXXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				DoublePotentialO = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void DoublePotentialI_TunnelOf5WithHickup_0()
+		public void TetrisPotential_TunnelOf5WithHickup_2()
 		{
 			var field = @"
 ..........
@@ -399,18 +67,16 @@ XX.XXXXXXX
 XX.XXXXXXX
 XX.XXXXXXX
 XX.XXXX.XX
-XX.XXXXXXX
+XX.XX.XXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				DoublePotentialI = 1,
+				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
 			};
-			var expected = 0;
-
-			Test(field, pars, expected);
+			Test(field, pars, 2);
 		}
 		[Test]
-		public void DoublePotentialI_TunnelOf3_1()
+		public void TetrisPotential_TunnelOf3_2()
 		{
 			var field = @"
 ..........
@@ -422,15 +88,13 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				DoublePotentialI = 1,
+				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
 			};
-			var expected = 1;
-
-			Test(field, pars, expected);
+			Test(field, pars, 2);
 		}
 
 		[Test]
-		public void TriplePotentialI_TunnelOf5WithHickup_0()
+		public void TetrisPotential_TunnelOf5WithHickup_3()
 		{
 			var field = @"
 ..........
@@ -442,14 +106,12 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TriplePotentialI = 1,
+				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
 			};
-			var expected = 0;
-
-			Test(field, pars, expected);
+			Test(field, pars, 3);
 		}
 		[Test]
-		public void TriplePotentialI_TunnelOf3_1()
+		public void TetrisPotential_TunnelOf3_3()
 		{
 			var field = @"
 ..........
@@ -461,16 +123,14 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TriplePotentialI = 1,
+				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
 			};
-			var expected = 1;
-
-			Test(field, pars, expected);
+			Test(field, pars, 3);
 		}
 
 
 		[Test]
-		public void TriplePotentialJL_TunnelOf4WithHickup_0()
+		public void TetrisPotential_TunnelOf4WithHickup_2()
 		{
 			var field = @"
 ..........
@@ -482,47 +142,9 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TriplePotentialJL = 1,
+				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
 			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void TriplePotentialJL_TunnelOf3WithJ_1()
-		{
-			var field = @"
-..........
-..........
-XX..XXXXXX
-XX.XXXXXXX
-XX.XXXXXXX
-XXX..X.XX.";
-			var pars = new EvaluatorParameters()
-			{
-				TriplePotentialJL = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void TriplePotentialJL_TunnelOf3WithL_1()
-		{
-			var field = @"
-..........
-..........
-XXX..XXXXX
-XXXX.XXXXX
-XXXX.XXXXX
-XXX..X.XX.";
-			var pars = new EvaluatorParameters()
-			{
-				TriplePotentialJL = 1,
-			};
-			var expected = 1;
-
-			Test(field, pars, expected);
+			Test(field, pars, 2);
 		}
 
 		[Test]
@@ -538,11 +160,9 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = 1,
+				TetrisPotential = new int[]{0, 1, 2, 3, 4},
 			};
-			var expected = 0;
-
-			Test(field, pars, expected);
+			Test(field, pars, 3);
 		}
 		[Test]
 		public void TetrisPotential_TunnelOf4_1()
@@ -557,136 +177,77 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = 1,
+				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
 			};
-			var expected = 1;
-
-			Test(field, pars, expected);
+			Test(field, pars, 4);
 		}
 
 		[Test]
 		public void TSpinPontential_TFitWithHole_0()
 		{
-			var field = @"
-..........
-.X........
-X...XXXXXX
-XX.XXXXXX.
-";
 			var pars = new EvaluatorParameters()
 			{
 				TSpinPontential = 1,
 			};
-			var expected = 0;
-
-			Test(field, pars, expected);
+			Test(@"
+			..........
+			.X........
+			X...XXXXXX
+			XX.XXXXXX.", pars, 0);
 		}
 		[Test]
 		public void TSpinPontential_TFitWithToBlocades_0()
 		{
-			var field = @"
-..........
-.X.X......
-X...XXXXXX
-XX.XXXXXXX
-";
 			var pars = new EvaluatorParameters()
 			{
 				TSpinPontential = 1,
 			};
-			var expected = 0;
-
-			Test(field, pars, expected);
+			Test(@"
+				..........
+				.X.X......
+				X...XXXXXX
+				XX.XXXXXXX", pars, 0);
 		}
 		[Test]
 		public void TSpinPontential_TFitWithCenterBlocades_0()
 		{
-			var field = @"
-..........
-.XX.......
-X...XXXXXX
-XX.XXXXXXX
-";
 			var pars = new EvaluatorParameters()
 			{
 				TSpinPontential = 1,
 			};
-			var expected = 0;
-
-			Test(field, pars, expected);
+			Test(@"
+			..........
+			.XX.......
+			X...XXXXXX
+			XX.XXXXXXX", pars, 0);
 		}
 		[Test]
 		public void TSpinPontential_TFit_1()
 		{
-			var field = @"
-..........
-...X......
-X...XXXXXX
-XX.XXXXXXX
-";
 			var pars = new EvaluatorParameters()
 			{
 				TSpinPontential = 1,
 			};
-			var expected = 1;
-
-			Test(field, pars, expected);
-		}
-
-		[Test]
-		public void ComboPotential_NotReachable_0()
-		{
-			var field = @"
-..........
-XX.X......
-X...XXXXXX
-XX..XXXXXX
-XX..XXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				Combos = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-			};
-			var expected = 0;
-
-			Test(field, pars, expected);
-		}
-		[Test]
-		public void ComboPotential_Blockade_2()
-		{
-			var field = @"
-..........
-X......X..
-X...XXXXXX
-XX.XXX.XXX
-XX..XXXXXX
-";
-			var pars = new EvaluatorParameters()
-			{
-				Combos = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-			};
-			var expected = 2;
-
-			Test(field, pars, expected);
+			Test(@"
+			..........
+			...X......
+			X...XXXXXX
+			XX.XXXXXXX", pars, 1);
 		}
 
 		[Test]
 		public void SingleEmpties_TwoColomns_2x2()
 		{
-			var field = @"
-				..........
-				X......X..
-				X...XXXXX.
-				XX.XXX.XX.
-				XX..XXXXX.";
-
 			var pars = new EvaluatorParameters()
 			{
 				SingleEmpties = new int[] { 0, 0, 1, 0, 0, 0 }
 			};
-			var expected = 2 * 2;
-
-			Test(field, pars, expected);
+			Test(@"
+			..........
+			X......X..
+			X...XXXXX.
+			XX.XXX.XX.
+			XX..XXXXX.", pars, 2*2);
 		}
 		[Test]
 		public void SingleEmpties_3Colomns_3x2()

@@ -38,7 +38,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var str = "";
 			if (score > 0) { str = "+"; }
 			else if (score == 0) { str = "="; }
-			str += ((double)score / -(double)EvaluatorParameters.GetDefault().Holes).ToString("0.00", CultureInfo.InvariantCulture);
+			str += ((double)score / -(double)EvaluatorParameters.GetDefault().HolesUnreachable).ToString("0.00", CultureInfo.InvariantCulture);
 			return str;
 		}
 	}

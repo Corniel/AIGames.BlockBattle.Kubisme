@@ -47,7 +47,8 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public static readonly byte[] Count = GetCount();
 		public static readonly byte[] Groups = GetGroups();
-		public static readonly byte[] SingleEmpties = GetSingleEmpties();
+		public static readonly byte[] SingleEmpties = GetConnectedEmpties(1, 1);
+		public static readonly byte[] ReachableHoleGroups = GetConnectedEmpties(3, 16);
 	
 		public static ushort Create(GameState state, PlayerName name, int r)
 		{
@@ -152,15 +153,12 @@ namespace AIGames.BlockBattle.Kubisme
 			return bytes;
 		}
 
-		private static byte[] GetSingleEmpties()
+		private static byte[] GetConnectedEmpties(int min, int max)
 		{
 			var bytes = new byte[Row.Filled + 1];
 
 			for (ushort row = 1; row < bytes.Length; row++)
 			{
-				if (row == 620)
-				{
-				}
 				int length = 0;
 				byte count = 0;
 
@@ -174,14 +172,14 @@ namespace AIGames.BlockBattle.Kubisme
 					}
 					else
 					{
-						if (length == 1)
+						if (length >= min && length <= max)
 						{
 							count++;
 						}
 						length = 0;
 					}
 				}
-				if (length == 1)
+				if (length >= min && length <= max)
 				{
 					count++;
 				}

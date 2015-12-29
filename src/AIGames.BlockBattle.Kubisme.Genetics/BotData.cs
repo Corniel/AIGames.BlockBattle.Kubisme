@@ -16,14 +16,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			K = AppConfig.Data.KInitial;
 		}
 
-		public BotData(int id, EvaluatorParameters def, EvaluatorParameters end) : this()
+		public BotData(int id, EvaluatorParameters def) : this()
 		{
 			Id = id;
 			DefPars = def.Calc();
-			EndPars = end.Calc();
 		}
 		public BotData(int id, BotData parent, ParameterRandomizer rnd)
-			: this(id, rnd.Randomize(parent.DefPars), rnd.Randomize(parent.EndPars))
+			: this(id, rnd.Randomize(parent.DefPars))
 		{
 			ParentId = parent.Id;
 			Generation = parent.Generation + 1;
@@ -58,7 +57,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		}
 
 		public EvaluatorParameters DefPars { get; set; }
-		public EvaluatorParameters EndPars { get; set; }
 
 		public void UpdateK()
 		{

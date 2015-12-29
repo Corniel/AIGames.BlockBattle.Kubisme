@@ -60,8 +60,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var current = Block.All[rnd.Next(Block.All.Length)];
 			var next = Block.All[rnd.Next(Block.All.Length)];
 
-			var b0 = BattleBot.Create(rnd, Bot0.DefPars, Bot0.EndPars, SearchDepth);
-			var b1 = BattleBot.Create(rnd, Bot1.DefPars, Bot1.EndPars, SearchDepth);
+			var b0 = BattleBot.Create(rnd, Bot0.DefPars, SearchDepth);
+			var b1 = BattleBot.Create(rnd, Bot1.DefPars, SearchDepth);
 
 			var s0 = true;
 			var s1 = true;

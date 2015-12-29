@@ -22,10 +22,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		protected int PairingsRandom { get { return AppConfig.Data.PairingsRandom; } }
 		protected Elo Bottom { get { return AppConfig.Data.EloBottom; } }
 
-		public BotData Add(EvaluatorParameters defPars, EvaluatorParameters endPars)
+		public BotData Add(EvaluatorParameters defPars)
 		{
 			var id = GetNewId();
-			var bot = new BotData(id, defPars, endPars);
+			var bot = new BotData(id, defPars);
 			TryAdd(id, bot);
 			return bot;
 		}
@@ -43,7 +43,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			foreach (var item in items)
 			{
 				item.DefPars.Calc();
-				item.EndPars.Calc();
 				TryAdd(item.Id, item);
 			}
 			lock (locker)

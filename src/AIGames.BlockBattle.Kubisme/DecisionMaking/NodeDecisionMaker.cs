@@ -43,7 +43,7 @@ namespace AIGames.BlockBattle.Kubisme
 				Current = current,
 				Next = next,
 				FirstFilled = field.FirstFilled,
-				Parameters = (field.FirstFilled < DefaultEvaluation.Endgame) ? EndGameEvaluation : DefaultEvaluation,
+				Parameters = DefaultEvaluation,
 			};
 			var oppo = new OpponentEvaluator() { Generator = Pars.Generator };
 			Pars.Opponent = oppo.Evaluate(opponent, current, next);

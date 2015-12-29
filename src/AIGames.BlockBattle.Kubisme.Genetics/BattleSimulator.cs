@@ -19,32 +19,18 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new EvaluatorParameters()
 			{
-				Endgame = 8,
 				HolesReachable = -100,
 				HolesUnreachable = -100,
 				Points = 100,
 				TSpinPontential = 600,
+				PerfectClearPontential = 700,
 				Groups = new int[] { 10, 0, -10, -20, -30, -40 },
 				SingleGroupBonus = new int[] { 30, 30, 30, 0 },
 				Skips = 300,
 			}
 			.Calc();
 		}
-		public static EvaluatorParameters GetEnd()
-		{
-			return new EvaluatorParameters()
-			{
-				Endgame = 8,
-				HolesReachable = -100,
-				HolesUnreachable = -100,
-				Points = 100,
-				TSpinPontential = 600,
-				Groups = new int[] { 10, 0, -10, -20, -30, -40 },
-				SingleGroupBonus = new int[] { 30, 30, 30, 0 },
-				Skips = 300,
-			}
-			.Calc();
-		}
+		
 		private Stopwatch sw = Stopwatch.StartNew();
 
 		public BattleSimulator(MT19937Generator rnd)
@@ -83,8 +69,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				if (Bots.Count < 2)
 				{
 					Bots.Clear();
-					Bots.Add(GetDef(), GetEnd());
-					Bots.Add(GetDef(), GetEnd());
+					Bots.Add(GetDef());
+					Bots.Add(GetDef());
 					BestBot = Bots.GetHighestElo();
 				}
 			}
@@ -209,7 +195,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}, Gen: {5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, bot.Generation);
 					writer.WriteLine(bot.ParametersToString(bot.DefPars));
-					writer.WriteLine(bot.ParametersToString(bot.EndPars));
 					writer.WriteLine();
 				}
 			}

@@ -13,7 +13,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			return DecisionMaker.BestField;
 		}
 
-		public static BattleBot Create(MT19937Generator rnd, EvaluatorParameters defPars, EvaluatorParameters endPars, int maxDepth)
+		public static BattleBot Create(MT19937Generator rnd, EvaluatorParameters defPars, int maxDepth)
 		{
 			return new BattleBot()
 			{
@@ -23,7 +23,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					Evaluator = new Evaluator(),
 					Generator = new MoveGenerator(),
 					DefaultEvaluation = defPars,
-					EndGameEvaluation = endPars,
+					EndGameEvaluation = defPars,
 				}
 			};
 		}

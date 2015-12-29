@@ -20,11 +20,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] SingleEmptiesCalc { get { return m_SingleEmpties; } }
 		private int[] m_SingleEmpties;
-
-		/// <summary>When to use the endgame instead of the default parameters.</summary>
-		/// <remarks>Only the value for default parameters are taken into account.</remarks>
-		public int Endgame { get; set; }
-
+				
 		/// <summary>Factor for current combo's.</summary>
 		public int Combo { get; set; }
 

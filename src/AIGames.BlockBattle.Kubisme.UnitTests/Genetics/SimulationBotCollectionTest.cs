@@ -18,7 +18,6 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
 					Id = 17,
 					Locked = true,
 					DefPars = EvaluatorParameters.GetDefault(),
-					EndPars = EvaluatorParameters.GetEndGame(),
 				},
 			};
 

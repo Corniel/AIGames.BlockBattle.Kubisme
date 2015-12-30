@@ -92,22 +92,23 @@ namespace AIGames.BlockBattle.Kubisme
 		public static EvaluatorParameters GetDefault()
 		{
 			var pars = new EvaluatorParameters()
-			// Elo: 1615, Avg: 0.755, Runs: 2798, ID: 13084, Parent: 12961, Gen: 151
+			// Elo: 1613, Avg: 0.601, Runs: 1363, ID: 3301, Parent: 3284, Gen: 43
 			{
-				//EmptyRowsCalc = new int[] { 0, 185, 348, 452, 539, 614, 687, 750, 794, 836, 875, 912, 947, 981, 1013, 1035, 1051, 1064, 1074, 1083, 1091, 1098 },
-				//UnreachableRowsCalc = new int[] { 0, -237, -483, -733, -987, -1245, -1509, -1780, -2063, -2351, -2646, -2949, -3253, -3566, -3880, -4210, -4547, -4887, -5236, -5608, -5999, -6395 },
-				//SingleEmptiesCalc = new int[] { 0, -34, -94, -399, -600, -900 },
-				//Combo = 69,
-				//EmptyRowStaffle = 0,
-				HolesUnreachable = -118,
-				HolesReachable = -118,
-				Points = 161,
-				Skips = 373,
-				TSpinPontential = 548,
-				SingleEmpties = new int[] { -26, -34, -47, -133, -150, -180 },
-				SingleGroupBonus = new int[] { 131, 31, 1, 216 },
-				Groups = new int[] { 0, -4, -83, -163, -168, -173 },
-				EmptyRows = new int[] { 185, 163, 104, 87, 75, 73, 63, 44, 42, 39, 37, 35, 34, 32, 22, 16, 13, 10, 9, 8, 7, 5 },
+				//EmptyRowsCalc = new int[] { 0, 106, 179, 242, 295, 346, 383, 419, 452, 484, 516, 548, 579, 607, 635, 660, 685, 708, 730, 751, 770, 788 },
+				//SingleEmptiesCalc = new int[] { 0, -11, -60, -90, -180, -490 },
+				//Combo = 1,
+				//EmptyRowStaffle = 15,
+				HolesReachable = -47,
+				HolesUnreachable = -104,
+				Points = 130,
+				Skips = 313,
+				TSpinPontential = 586,
+				PerfectClearPontential = 727,
+				TetrisPotential = new int[] { -68, -52, 17, 19, 59 },
+				SingleEmpties = new int[] { -2, -11, -30, -30, -45, -98 },
+				SingleGroupBonus = new int[] { 36, 41, 54, 1 },
+				Groups = new int[] { 15, 12, -24, -50, -52, -60 },
+				EmptyRows = new int[] { 91, 58, 48, 38, 36, 22, 21, 18, 17, 17, 17, 16, 13, 13, 10, 10, 8, 7, 6, 4, 3, 3 },
 			};
 
 			return pars.Calc();

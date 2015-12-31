@@ -5,10 +5,10 @@ using Troschuetz.Random.Generators;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 {
-	[TestFixture, Category(Category.Benchmark)]
+	[TestFixture]
 	public class BenchmarkTest
 	{
-		[Test]
+		[Test, Category(Category.Benchmark)]
 		public void Benchmark_Initial()
 		{
 			RunBenchmark(
@@ -17,7 +17,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 				0, 0, 0, Field.Empty.ToString());
 		}
 
-		[Test]
+		[Test, Category(Category.Benchmark)]
 		public void Benchmark_FilledWith6EmptyRows()
 		{
 			RunBenchmark(
@@ -51,8 +51,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 				XXXXXXXXX.");
 		}
 
-		[Test]
-		public void Benchmark_AlmostDieing()
+		[Test, Category(Category.Bug)]
+		public void AlmostDieing_ChoosingToLose()
 		{
 			RunBenchmark(
 				57, TimeSpan.FromSeconds(0.5), Block.J, Block.L,
@@ -94,8 +94,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 				XX.XXXXXXX");
 		}
 
-		[Test]
-		public void Benchmark_MissingIDrop_()
+		[Test, Category(Category.Bug)]
+		public void MissingIDrop_()
 		{
 			RunBenchmark(
 				54, TimeSpan.FromSeconds(1.0), Block.I, Block.T,
@@ -135,6 +135,47 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 				XX.XXXXXXX
 				XX..XXXXXX
 				XXXX.XXXXX");
+		}
+
+		[Test, Category(Category.Bug)]
+		public void DivideByZeroException_()
+		{
+			RunBenchmark(
+				69, TimeSpan.FromSeconds(1.0), Block.T, Block.T,
+				47, 1, 2, @"
+				..........
+				..........
+				..........
+				X.....XX..
+				X.X...XXXX
+				XXXX.XXXXX
+				X.XXXXXXXX
+				XXXX.XXXXX
+				XXXXX..XXX
+				XXXX.XXXXX
+				XX.XX.XXXX
+				XXXXXXX.XX
+				XX.XXX.XXX
+				X.XXXXXXXX
+				.XXXXXX.XX
+				XXXXXXX.XX",
+				38, 0, 0, @"
+				..........
+				XXXXX.....
+				.X.XXXXXXX
+				XX.XXXXXXX
+				XX.XXXXXXX
+				XXXXXXXX.X
+				XXXXXXXX.X
+				..XXXXXXXX
+				XXXXXXX.XX
+				XXX.X.XXXX
+				X.XXXXXXXX
+				XXXXXX..XX
+				XXXXXXX.XX
+				X.XXXXXXX.
+				XX.XXXXXXX
+				XXXXX..XXX");
 		}
 
 		private static void RunBenchmark(

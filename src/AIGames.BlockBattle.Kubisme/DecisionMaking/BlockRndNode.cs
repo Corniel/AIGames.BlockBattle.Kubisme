@@ -70,6 +70,10 @@ namespace AIGames.BlockBattle.Kubisme
 					// Divide by 2.
 					Score >>= 1;
 				}
+				else if (Children.Count == 0)
+				{
+					Score = Scores.Wins(Depth + 1);
+				}
 				else
 				{
 					Score /= Children.Count;

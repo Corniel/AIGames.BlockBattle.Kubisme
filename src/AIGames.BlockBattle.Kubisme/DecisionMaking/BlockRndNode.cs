@@ -70,9 +70,10 @@ namespace AIGames.BlockBattle.Kubisme
 					// Divide by 2.
 					Score >>= 1;
 				}
+				// We can not find valid responses. We will lose next turn.
 				else if (Children.Count == 0)
 				{
-					Score = Scores.Wins(Depth + 1);
+					Score = Scores.Loses(Depth + 1);
 				}
 				else
 				{

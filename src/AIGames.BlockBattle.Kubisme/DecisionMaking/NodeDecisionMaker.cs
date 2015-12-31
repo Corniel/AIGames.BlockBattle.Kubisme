@@ -53,7 +53,9 @@ namespace AIGames.BlockBattle.Kubisme
 			Root = new BlockRootNode(field);
 
 			// search at least two ply deep.
-			while (Pars.Depth < 2 || (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration))
+			while ((Pars.Depth < 2 || (Pars.Depth < Pars.MaximumDepth && Pars.Elapsed < MinimumDuration))
+				// Cut if we have a win in 1 or two.
+				&&  Root.Score != Scores.Wins(Pars.Depth))
 			{
 				Root.Apply(++Pars.Depth, Pars);
 				Logs.Add(new PlyLog(Pars.Round, Root.BestMove, Root.Score, Pars.Depth, Pars.Elapsed, Pars.Evaluations));

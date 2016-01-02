@@ -1,21 +1,23 @@
-﻿//using NUnit.Framework;
+﻿using AIGames.BlockBattle.Kubisme.Genetics;
+using NUnit.Framework;
+using System;
+using System.IO;
 
-//namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
-//{
-//	[TestFixture]
-//	public class EvaluatorParametersTest
-//	{
-//		[Test]
-//		public void Calc_ComboPotential_SomeChecks()
-//		{
-//			var pars = new EvaluatorParameters()
-//			{
-//				Combos = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-//			};
-//			pars.Calc();
+namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
+{
+	[TestFixture]
+	public class EvaluatorParametersTest
+	{
+		[Test]
+		public void GetDefault_None_ParametersToString()
+		{
+			var pars = EvaluatorParameters.GetDefault();
+			var act = BotData.ParametersToString(pars);
+			Console.Write(act);
 
-//			Assert.AreEqual(0, pars.ComboPotential[12, 0], "[12, 0]");
-//			Assert.AreEqual(3 + 4 + 5, pars.ComboPotential[1, 3], "[1, 3]");
-//		}
-//	}
-//}
+			var bots = new Bots();
+			bots.Add(pars);
+			bots.Save(new FileInfo("default.xml"));
+		}
+	}
+}

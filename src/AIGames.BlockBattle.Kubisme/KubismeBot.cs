@@ -20,7 +20,6 @@ namespace AIGames.BlockBattle.Kubisme
 				MaximumDepth = 10,
 				MaximumDuration = TimeSpan.FromMilliseconds(700),
 				DefaultEvaluation = EvaluatorParameters.GetDefault(),
-				EndGameEvaluation = EvaluatorParameters.GetEndGame(),
 			};
 		}
 		public NodeDecisionMaker DecisionMaker { get; set; }

@@ -25,7 +25,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public IMoveGenerator Generator { get; set; }
 		public BlockRootNode Root { get; protected set; }
 		public EvaluatorParameters DefaultEvaluation { get; set; }
-		public EvaluatorParameters EndGameEvaluation { get; set; }
 		public ApplyParameters Pars { get; protected set; }
 		public Field BestField { get; protected set; }
 

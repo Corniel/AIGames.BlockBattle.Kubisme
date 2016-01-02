@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
 
 			var act = rnd.Randomize(parameters).NegativeDescading;
 
-			var exp = new int[] { -1, -19 };
+			var exp = new int[] { -1, -41 };
 
 			CollectionAssert.AreEqual(exp, act);
 		}

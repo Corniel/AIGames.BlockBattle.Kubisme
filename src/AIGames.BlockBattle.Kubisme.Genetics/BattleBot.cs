@@ -23,7 +23,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					Evaluator = new Evaluator(),
 					Generator = new MoveGenerator(),
 					DefaultEvaluation = defPars,
-					EndGameEvaluation = defPars,
 				}
 			};
 		}

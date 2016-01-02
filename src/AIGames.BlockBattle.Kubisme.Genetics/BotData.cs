@@ -82,7 +82,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private static readonly PropertyInfo[] Props = typeof(EvaluatorParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
 		
-		public string ParametersToString(EvaluatorParameters pars)
+		public static string ParametersToString(EvaluatorParameters pars)
 		{
 			var writer = new StringBuilder();
 			writer.AppendLine("{");
@@ -104,6 +104,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				{
 					int[] vals = (int[])prop.GetValue(pars);
 					writer.AppendFormat("{0} = new int[] {{ {1} }},", prop.Name, String.Join(",", vals));
+					writer.AppendLine();
+				}
+				else if (prop.PropertyType == typeof(ParamCurve))
+				{
+					ParamCurve val = (ParamCurve)prop.GetValue(pars);
+					writer.AppendFormat("{0} = {1},", prop.Name, val);
 					writer.AppendLine();
 				}
 			}

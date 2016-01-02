@@ -8,6 +8,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class ParameterRandomizer
 	{
+		public const int Threshold = 3;
+
 		public ParameterRandomizer(MT19937Generator rnd)
 		{
 			Rnd = rnd;
@@ -37,31 +39,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public sbyte[] Distribution { get; set; }
 		public MT19937Generator Rnd { get; set; }
-
-		public T Copy<T>(T org)
-		{
-			var target = Activator.CreateInstance<T>();
-			foreach (var prop in GetProperties<T>())
-			{
-				if (prop.PropertyType == typeof(int))
-				{
-					var val = (int)prop.GetValue(org);
-					prop.SetValue(target, val);
-				}
-				else if (prop.PropertyType == typeof(bool))
-				{
-					var val = (bool)prop.GetValue(org);
-					prop.SetValue(target, val);
-				}
-				else if (prop.PropertyType == typeof(int[]))
-				{
-					int[] vals = (int[])prop.GetValue(org);
-					var copy = vals.ToArray();
-					prop.SetValue(target, copy);
-				}
-			}
-			return target;
-		}
+				
 		public void Generate<T>(T org, Queue<T> queue, int count)
 		{
 			for (var c = 0; c < count; c++)
@@ -142,8 +120,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 							}
 						}
 					}
-
 					prop.SetValue(target, copy.ToArray());
+				}
+				else if (prop.PropertyType == typeof(ParamCurve))
+				{
+					prop.SetValue(target, Randomize((ParamCurve)prop.GetValue(org)));
 				}
 			}
 			return target;
@@ -151,7 +132,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private int Randomize(int value)
 		{
-			if (Rnd.Next(5) == 0)
+			if (Rnd.Next(Threshold) == 0)
 			{
 				var val = value + Distribution[Rnd.Next(Distribution.Length)] * Rnd.Next(1, 3);
 				return val;
@@ -160,11 +141,24 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		}
 		private bool Randomize(bool value)
 		{
-			if (Rnd.Next(5) == 0)
+			if (Rnd.Next(Threshold) == 0)
 			{
 				return Rnd.NextBoolean();
 			}
 			return value;
+		}
+
+		private ParamCurve Randomize(ParamCurve value)
+		{
+			var start = Randomize(value.Start);
+			var end = Randomize(value.End);
+			var factor = value.Factor;
+			if (Rnd.Next(Threshold) == 0)
+			{
+				var mp = Rnd.NextDouble(0.9, 1.1);
+				factor *= mp;
+			}
+			return new ParamCurve(start, end, factor);
 		}
 
 		private static readonly Dictionary<Type, PropertyInfo[]> Properties = new Dictionary<Type, PropertyInfo[]>();

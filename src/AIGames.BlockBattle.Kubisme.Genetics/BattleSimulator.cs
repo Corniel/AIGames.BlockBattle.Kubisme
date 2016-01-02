@@ -19,14 +19,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new EvaluatorParameters()
 			{
-				HolesReachable = -100,
-				HolesUnreachable = -100,
+				Combo = 10,
+				HolesReachable = new ParamCurve(-75),
+				HolesUnreachable = new ParamCurve(-150),
 				Points = 100,
-				TSpinPontential = 600,
-				PerfectClearPontential = 700,
-				Groups = new int[] { 10, 0, -10, -20, -30, -40 },
-				SingleGroupBonus = new int[] { 30, 30, 30, 0 },
-				Skips = 300,
+				Skips = new ParamCurve(0, 300, 1),
+				PerfectClearPontential = 600,
+				TetrisPotential = new int[] { -20, -15, -10, 5, 25 },
+				SingleEmpties = new int[] { 0,-5,-15,-20,-25,-35 },
+				SingleGroupBonus = new int[] { 40, 40, 20, 10 },
+				Groups = new int[] { 31,20,-10,-30,-40,-65 },
+				UnreachableRow = -1,
+				TSpinPontential = new ParamCurve(0, 600, 1.2),
+				EmptyRows = new ParamCurve(0, 951, 1.5),
 			}
 			.Calc();
 		}
@@ -194,7 +199,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				foreach (var bot in sorted)
 				{
 					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}, Gen: {5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, bot.Generation);
-					writer.WriteLine(bot.ParametersToString(bot.DefPars));
+					writer.WriteLine(BotData.ParametersToString(bot.DefPars));
 					writer.WriteLine();
 				}
 			}

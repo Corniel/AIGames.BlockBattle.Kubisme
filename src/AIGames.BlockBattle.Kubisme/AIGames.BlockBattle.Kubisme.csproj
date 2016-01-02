@@ -97,6 +97,7 @@
     <Compile Include="Evaluation\Evaluator.cs" />
     <Compile Include="Evaluation\OpponentEvaluation.cs" />
     <Compile Include="Evaluation\OpponentEvaluator.cs" />
+    <Compile Include="Evaluation\ParamCurve.cs" />
     <Compile Include="Evaluation\ParameterType.cs" />
     <Compile Include="Generation\IFieldGenerator.cs" />
     <Compile Include="Generation\IMoveGenerator.cs" />

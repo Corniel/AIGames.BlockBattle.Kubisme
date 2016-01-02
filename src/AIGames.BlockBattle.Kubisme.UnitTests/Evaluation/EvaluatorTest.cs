@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
@@ -10,12 +11,12 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		{
 			var pars = new EvaluatorParameters()
 			{
-				HolesReachable = 1,
-				HolesUnreachable = 100,
+				HolesReachable = new ParamCurve(1),
+				HolesUnreachable = new ParamCurve(100),
 			};
 			return pars;
 		}
-		
+
 		[Test]
 		public void Holes_SingleReachable_1()
 		{
@@ -160,7 +161,7 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[]{0, 1, 2, 3, 4},
+				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
 			};
 			Test(field, pars, 3);
 		}
@@ -187,7 +188,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = 1,
+				TSpinPontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -200,7 +201,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = 1,
+				TSpinPontential = new ParamCurve(1),
 			};
 			Test(@"
 				..........
@@ -213,7 +214,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = 1,
+				TSpinPontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -226,7 +227,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = 1,
+				TSpinPontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -234,13 +235,13 @@ XXX..X.XX.";
 			X...XXXXXX
 			XX.XXXXXXX", pars, 1);
 		}
-		
+
 		[Test]
 		public void TSpinPontential_ClearWithT_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = 1,
+				TSpinPontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -380,7 +381,7 @@ XXX..X.XX.";
 			X......X..
 			X...XXXXX.
 			XX.XXX.XX.
-			XX..XXXXX.", pars, 2*2);
+			XX..XXXXX.", pars, 2 * 2);
 		}
 		[Test]
 		public void SingleEmpties_3Colomns_3x2()

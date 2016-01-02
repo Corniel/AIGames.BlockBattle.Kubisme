@@ -268,6 +268,8 @@
 						hasPerfectClearPontential =
 							// Can be divided by 4.
 							(toFill & 3) == 0 &&
+							// two or one block left only.
+							toFill <= 8 && 
 							// Can be filled 'easily' because all space is connected.
 							Row.Groups[row0Mirror] == 1 &&
 							Row.Groups[row1 ^ Row.Filled] == 1 &&

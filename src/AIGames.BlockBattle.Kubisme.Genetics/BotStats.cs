@@ -42,9 +42,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public double TurnsAvg { get { return Runs == 0 ? 0 : (double)Turns / (double)Runs; } }
 
 		public Percentage ScoreAvg { get { return Runs == 0 ? 0 : (double)(Wins + Draws * 0.5) / (double)Runs; } }
-		public Percentage PerfectClearAvg { get { return Turns == 0 ? 0 : (double)PerfectClear / (double)Turns; } }
-		public Percentage DoubleTSpinAvg { get { return Turns == 0 ? 0 : (double)DoubleTSpin / (double)Turns; } }
-		public Percentage TetrisAvg { get { return Turns == 0 ? 0 : (double)QuadrupleLineClear / (double)Turns; } }
+		public Percentage PerfectClearAvg { get { return Runs == 0 ? 0 : (double)PerfectClear / (double)Runs; } }
+		public Percentage SingleTSpinAvg { get { return Turns == 0 ? 0 : 7.0 * (double)SingleTSpin / (double)Turns; } }
+		public Percentage DoubleTSpinAvg { get { return Turns == 0 ? 0 : 7.0 * (double)DoubleTSpin / (double)Turns; } }
+		public Percentage TetrisAvg { get { return Turns == 0 ? 0 : 7.0 * (double)QuadrupleLineClear / (double)Turns; } }
 
 		public override string ToString()
 		{
@@ -54,9 +55,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			sb.AppendFormat(CultureInfo.InvariantCulture, "{0:0.0%}, ", ScoreAvg);
 			sb.AppendFormat(CultureInfo.InvariantCulture, "PT: {0:0.000}, ", PointsAvg);
 			sb.AppendFormat(CultureInfo.InvariantCulture, "#: {0:0.0}, ", TurnsAvg);
+			sb.AppendFormat(CultureInfo.InvariantCulture, "T1: {0:0.00%}, ", SingleTSpinAvg);
 			sb.AppendFormat(CultureInfo.InvariantCulture, "T2: {0:0.00%}, ", DoubleTSpinAvg);
 			sb.AppendFormat(CultureInfo.InvariantCulture, "I4: {0:0.00%}, ", TetrisAvg);
-			sb.AppendFormat(CultureInfo.InvariantCulture, "CL: {0:0.00‰}", PerfectClearAvg);
+			sb.AppendFormat(CultureInfo.InvariantCulture, "CL: {0:0.00%}", PerfectClearAvg);
 			sb.Append(')');
 			return sb.ToString();
 		}

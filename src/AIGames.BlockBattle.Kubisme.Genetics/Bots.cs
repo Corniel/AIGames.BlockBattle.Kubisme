@@ -186,20 +186,14 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 							elo1 = bot1.Elo + (1.0 - z1) * bot1.K;
 							break;
 					}
-					if (bot1.IsStable)
+					
+					bot0.Elo = elo0;
+					bot1.Elo = elo1;
+
+					if (bot0.IsStable || bot1.IsStable)
 					{
-						bot0.Elo = elo0;
 						bot0.UpdateK();
-					}
-					if (bot0.IsStable)
-					{
-						bot1.Elo = elo1;
 						bot1.UpdateK();
-					}
-					if (!bot0.IsStable && !bot1.IsStable)
-					{
-						bot0.Elo = elo0;
-						bot1.Elo = elo1;
 					}
 				}
 				var avg = AverageElo;

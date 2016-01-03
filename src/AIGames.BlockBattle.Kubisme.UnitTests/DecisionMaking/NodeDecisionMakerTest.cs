@@ -51,8 +51,9 @@ XXXX.XXXXX");
 XXXXX.....");
 			var dm = new NodeDecisionMakerTester()
 			{
+				Evaluator = new Evaluator(),
 				Generator = new MoveGenerator(),
-				MaximumDepth = 10,
+				MaximumDepth = 6,
 			};
 
 			dm.GetMove(field, Block.O, Block.Z, 1);

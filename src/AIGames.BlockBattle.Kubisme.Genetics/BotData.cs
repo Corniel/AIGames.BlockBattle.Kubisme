@@ -14,9 +14,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			Elo = AppConfig.Data.EloInitial;
 			K = AppConfig.Data.KInitial;
+			Stats = new BotStats();
 		}
 
-		public BotData(int id, EvaluatorParameters def) : this()
+		public BotData(int id, EvaluatorParameters def)
+			: this()
 		{
 			Id = id;
 			DefPars = def.Calc();
@@ -32,17 +34,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public int ParentId { get; set; }
 		[XmlElement("Gen")]
 		public int Generation { get; set; }
-		public int Runs { get; set; }
 
-		[XmlElement("Pt")]
-		public long Points { get; set; }
-		public long Turns { get; set; }
+		public BotStats Stats { get; set; }
 
-		public bool IsStable { get { return Runs >= AppConfig.Data.BotStable; } }
-		public bool ShouldBeLocked { get { return Runs >= AppConfig.Data.BotStable * AppConfig.Data.LockFactor; } }
-
-		public double PointsAvg { get { return Turns == 0 ? 0 : (double)Points / (double)Turns; } }
-		public double TurnsAvg { get { return Runs == 0 ? 0 : (double)Turns / (double)Runs; } }
+		public bool IsStable { get { return Stats.Runs >= AppConfig.Data.BotStable; } }
+		public bool ShouldBeLocked { get { return Stats.Runs >= AppConfig.Data.BotStable * AppConfig.Data.LockFactor; } }
 
 		public bool Locked { get; set; }
 
@@ -77,11 +73,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return String.Format(CultureInfo.InvariantCulture,
 				"ID: {0}, Parent: {1}, Elo: {2:0} {3:#,###0} (5:0.0) runs, Avg: {4:0.000}",
-				Id, ParentId, Elo, Runs, PointsAvg, TurnsAvg);
+				Id, ParentId, Elo, Stats.Runs, Stats.PointsAvg, Stats.TurnsAvg);
 		}
 
 		private static readonly PropertyInfo[] Props = typeof(EvaluatorParameters).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
-		
+
 		public static string ParametersToString(EvaluatorParameters pars)
 		{
 			var writer = new StringBuilder();

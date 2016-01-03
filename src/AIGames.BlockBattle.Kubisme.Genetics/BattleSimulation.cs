@@ -20,6 +20,32 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			public int Turns { get; set; }
 			public int Points0 { get; set; }
 			public int Points1 { get; set; }
+
+			public Result Mirror()
+			{
+				var res = new Result()
+				{
+					Turns = this.Turns,
+					Points0 = this.Points1,
+					Points1 = this.Points0,
+					Stats0 = this.Stats1,
+					Stats1 = this.Stats0,
+					Outcome = BattleSimulation.Outcome.Draw,
+				};
+				if (this.Outcome == BattleSimulation.Outcome.Win)
+				{
+					res.Outcome = BattleSimulation.Outcome.Loss;
+				}
+				else if (this.Outcome == BattleSimulation.Outcome.Loss)
+				{
+					res.Outcome = BattleSimulation.Outcome.Win;
+				}
+				return res;
+			}
+
+			public BotStats Stats0 { get; set; }
+
+			public BotStats Stats1 { get; set; }
 		}
 
 		public BattleSimulation(BotData bot0, BotData bot1, int depth)
@@ -71,10 +97,16 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 			int turns = 1;
 
-			while(s0 && s1)
-			{								  
+			var stats0 = new BotStats();
+			var stats1 = new BotStats();
+
+			while (s0 && s1)
+			{
 				out0 = b0.GetResponse(field0, field1, current, next, turns);
 				out1 = b1.GetResponse(field1, field0, current, next, turns);
+
+				stats0.Update(field0, out0, current);
+				stats1.Update(field1, out1, current);
 
 				field0 = out0;
 				field1 = out1;
@@ -122,6 +154,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				Turns = Turns0.Count,
 				Points0 = Turns0[Turns0.Count - 1].IsNone ? Turns0[Turns0.Count - 2].Points : Turns0[Turns0.Count - 1].Points,
 				Points1 = Turns1[Turns1.Count - 1].IsNone ? Turns1[Turns1.Count - 2].Points : Turns1[Turns1.Count - 1].Points,
+				Stats0 = stats0,
+				Stats1 = stats1,
 				Outcome = Outcome.Draw,
 			};
 

@@ -15,8 +15,8 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		/// <summary>Gets the average Elo.</summary>
 		public Elo AverageElo { get { return Values.Select(bot => bot.Elo).Avarage(); } }
 
-		public int LastId { get { return m_LastId; } }
-		private int m_LastId;
+		/// <summary>Gets the last (highest) ID.</summary>
+		public int LastId { get; private set; } 
 
 		protected int Capacity { get { return AppConfig.Data.BotCapacity; } }
 		protected int PairingsRandom { get { return AppConfig.Data.PairingsRandom; } }
@@ -48,9 +48,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			lock (locker)
 			{
 				var max = Keys.Max();
-				if (max > m_LastId)
+				if (max > LastId)
 				{
-					m_LastId = max;
+					LastId = max;
 				}
 			}
 		}
@@ -91,12 +91,26 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public void CloneBots(ParameterRandomizer rnd)
 		{
+			var count = 0;
+			var test = Capacity;
+			while (test >= Count)
+			{
+				count++;
+				test >>= 1;
+			}
+
 			var highest = GetHighestElo();
 			if (highest.IsStable)
 			{
-				Add(highest, rnd);
-				var stable = GetStable().Skip(1).OrderByDescending(bot => bot.GetWeight(rnd)).FirstOrDefault();
-				Add(stable, rnd);
+				for (var i = 0; i < count; i++)
+				{
+					Add(highest, rnd);
+					var stable = GetStable().Skip(1).OrderByDescending(bot => bot.GetWeight(rnd)).FirstOrDefault();
+					if (stable != null)
+					{
+						Add(stable, rnd);
+					}
+				}
 			}
 		}
 
@@ -145,15 +159,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 					var bot0 = pairing.Bot0;
 					var bot1 = pairing.Bot1;
 					var result = pairing.Result;
-					bot0.Runs++;
-					bot1.Runs++;
-
-					bot0.Turns += result.Turns;
-					bot1.Turns += result.Turns;
-
-					bot0.Points += result.Points0;
-					bot1.Points += result.Points1;
-
+					
+					bot0.Stats.Update(result);
+					bot1.Stats.Update(result.Mirror());
+					
 					var elo0 = bot0.Elo;
 					var elo1 = bot1.Elo;
 
@@ -278,7 +287,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			lock (locker)
 			{
-				return ++m_LastId;
+				return ++LastId;
 			}
 		}
 

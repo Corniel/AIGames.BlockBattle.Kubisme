@@ -177,11 +177,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				}
 				Console.Write("{0,3}", pos);
 				Console.Write(" {0:0000.0}", bot.Elo);
-				Console.Write(", Runs: {0,6}", bot.Runs);
-				Console.Write(" ({0:0.000} pt {1:00.00} #)", bot.PointsAvg, bot.TurnsAvg);
+				Console.Write(", {0}", bot.Stats);
 				Console.Write(", ID: {0,5}", bot.Id);
-				if (bot.Locked) { Console.Write("*"); }
-				Console.Write(" (par: {0}, gen: {1})", bot.ParentId, bot.Generation);
+				Console.Write(bot.Locked ? '*' : ' ');
+				Console.Write("(par: {0}, gen: {1})", bot.ParentId, bot.Generation);
 				Console.WriteLine();
 			}
 			Console.ForegroundColor = ConsoleColor.Gray;
@@ -198,7 +197,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				foreach (var bot in sorted)
 				{
-					writer.WriteLine("// Elo: {0:0}, Avg: {4:0.000}, Runs: {1}, ID: {2}, Parent: {3}, Gen: {5}", bot.Elo, bot.Runs, bot.Id, bot.ParentId, bot.PointsAvg, bot.Generation);
+					writer.WriteLine("// Elo: {0:0}, {1}, ID: {2}, Parent: {3}, Gen: {4}", bot.Elo, bot.Stats, bot.Id, bot.ParentId, bot.Generation);
 					writer.WriteLine(BotData.ParametersToString(bot.DefPars));
 					writer.WriteLine();
 				}

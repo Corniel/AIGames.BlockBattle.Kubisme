@@ -95,7 +95,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		}
 
 		[Test, Category(Category.Bug)]
-		public void MissingIDrop_()
+		public void MissingIDrop()
 		{
 			RunBenchmark(
 				54, TimeSpan.FromSeconds(1.0), Block.I, Block.T,
@@ -179,7 +179,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		}
 
 		[Test, Category(Category.Bug)]
-		public void CreatesABigHole_()
+		public void CreatesABigHole()
 		{
 			RunBenchmark(
 				17, TimeSpan.FromSeconds(1.0), Block.Z, Block.Z,

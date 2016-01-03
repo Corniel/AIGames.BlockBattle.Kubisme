@@ -53,6 +53,7 @@
     <Compile Include="Evaluation\OpponentEvaluatorTest.cs" />
     <Compile Include="FieldAssert.cs" />
     <Compile Include="Genetics\ParamCurveTest.cs" />
+    <Compile Include="Genetics\ScoreDetectorTest.cs" />
     <Compile Include="Genetics\SimulationBotCollectionTest.cs" />
     <Compile Include="Genetics\ParameterRandomizerTest.cs" />
     <Compile Include="ScoresTest.cs" />

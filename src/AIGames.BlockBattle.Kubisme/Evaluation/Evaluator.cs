@@ -197,9 +197,14 @@
 						// X...XXXXXX
 						// ----------
 						// X..XXXXXXX (count 8)
-						if (Row.Count[row1 | row2] == 8)
+						var merged = Row.Count[row1 | row2];
+						if (merged == 8)
 						{
 							score += pars.TSpinDoublePontentialCalc[rowIndex];
+						}
+						else if (merged == 7)
+						{
+							score += pars.TDoubleClearPotentialCalc[rowIndex];
 						}
 					}
 				}

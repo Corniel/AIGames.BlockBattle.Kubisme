@@ -235,6 +235,32 @@ XXX..X.XX.";
 			X...XXXXXX
 			XX.XXXXXXX", pars, 1);
 		}
+		[Test]
+		public void TSpinDoublePontential_DoubleBlock_0()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				TSpinDoublePontential = new ParamCurve(1),
+			};
+			Test(@"
+			..........
+			.X.X......
+			X...XXXXXX
+			XX.XXXXXXX", pars, 0);
+		}
+		[Test]
+		public void TDoubleClearPontential_NoBlock_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				TDoubleClearPotential = new ParamCurve(1),
+			};
+			Test(@"
+			..........
+			......X...
+			X...XXXXXX
+			XX.XXXXXXX", pars, 1);
+		}
 
 		[Test]
 		public void TSpinDoublePontential_ClearWithT_0()

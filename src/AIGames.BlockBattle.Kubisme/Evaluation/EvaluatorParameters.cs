@@ -10,6 +10,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			TetrisPotential = new int[5];
 			TSpinDoublePontential = new ParamCurve();
+			TDoubleClearPotential = new ParamCurve();
 			EmptyRows = new ParamCurve();
 			HolesReachable = new ParamCurve();
 			HolesUnreachable = new ParamCurve();
@@ -22,6 +23,10 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] TSpinDoublePontentialCalc { get { return m_TSpinDoublePontential; } }
 		private int[] m_TSpinDoublePontential;
+
+
+		public int[] TDoubleClearPotentialCalc { get { return m_TDoubleClearPotential; } }
+		private int[] m_TDoubleClearPotential;
 
 		public int[] EmptyRowsCalc { get { return m_EmptyRows; } }
 		private int[] m_EmptyRows;
@@ -76,13 +81,15 @@ namespace AIGames.BlockBattle.Kubisme
 		public ParamCurve HolesUnreachable { get; set; }
 
 		public ParamCurve TSpinDoublePontential { get; set; }
+		public ParamCurve TDoubleClearPotential { get; set; }
 		public ParamCurve EmptyRows { get; set; }
 		public ParamCurve Skips { get; set; }
-
+		
 		public EvaluatorParameters Calc()
 		{
 			m_EmptyRows = EmptyRows.Calculate(22);
 			m_TSpinDoublePontential = TSpinDoublePontential.Calculate(22);
+			m_TDoubleClearPotential = TDoubleClearPotential.Calculate(22);
 			m_HolesReachable = HolesReachable.Calculate(22);
 			m_HolesUnreachable = HolesUnreachable.Calculate(22);
 			m_SkipsCalc = Skips.Calculate(22);

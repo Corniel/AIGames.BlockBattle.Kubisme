@@ -184,11 +184,11 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void TSpinPontential_TFitWithHole_0()
+		public void TSpinDoublePontential_TFitWithHole_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = new ParamCurve(1),
+				TSpinDoublePontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -197,11 +197,11 @@ XXX..X.XX.";
 			XX.XXXXXX.", pars, 0);
 		}
 		[Test]
-		public void TSpinPontential_TFitWithToBlocades_0()
+		public void TSpinDoublePontential_TFitWithToBlocades_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = new ParamCurve(1),
+				TSpinDoublePontential = new ParamCurve(1),
 			};
 			Test(@"
 				..........
@@ -210,11 +210,11 @@ XXX..X.XX.";
 				XX.XXXXXXX", pars, 0);
 		}
 		[Test]
-		public void TSpinPontential_TFitWithCenterBlocades_0()
+		public void TSpinDoublePontential_TFitWithCenterBlocades_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = new ParamCurve(1),
+				TSpinDoublePontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -223,11 +223,11 @@ XXX..X.XX.";
 			XX.XXXXXXX", pars, 0);
 		}
 		[Test]
-		public void TSpinPontential_TFit_1()
+		public void TSpinDoublePontential_TFit_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = new ParamCurve(1),
+				TSpinDoublePontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -237,11 +237,11 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void TSpinPontential_ClearWithT_0()
+		public void TSpinDoublePontential_ClearWithT_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinPontential = new ParamCurve(1),
+				TSpinDoublePontential = new ParamCurve(1),
 			};
 			Test(@"
 			..........

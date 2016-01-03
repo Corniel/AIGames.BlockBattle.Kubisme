@@ -199,7 +199,7 @@
 						// X..XXXXXXX (count 8)
 						if (Row.Count[row1 | row2] == 8)
 						{
-							score += pars.TSpinPontentialCalc[rowIndex];
+							score += pars.TSpinDoublePontentialCalc[rowIndex];
 						}
 					}
 				}

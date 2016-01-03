@@ -30,7 +30,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				SingleGroupBonus = new int[] { 40, 40, 20, 10 },
 				Groups = new int[] { 31,20,-10,-30,-40,-65 },
 				UnreachableRow = -1,
-				TSpinPontential = new ParamCurve(0, 600, 1.2),
+				TSpinDoublePontential = new ParamCurve(0, 600, 1.2),
 				EmptyRows = new ParamCurve(0, 951, 1.5),
 			}
 			.Calc();

@@ -63,6 +63,7 @@
 			var countRow0Group = 0;
 			var countRow1 = 0;
 			var countRow1Group = 0;
+			var countRow2Group = 0;
 			
 			#region Reachable Area
 			
@@ -178,11 +179,23 @@
 					{
 						countHoleUnreachable += countRow0Holes * pars.HolesUnreachableCalc[rowIndex];
 					}
+
+					#region Single T-spin upper
+
+					if (countRow1 == 7 && countRow1Group == 1)
+					{
+						// .X.X...... (2 groups)
+						if (Row.Groups[(row1 ^ Row.Filled) ^ row0Mirror] == 2)
+						{
+							score += pars.TSpinSinglePotentialCalc[rowIndex];
+						}
+					}
 				}
 				#endregion
 
 				#region T-spin potential
 
+				#region Double T-spin
 				// X...XXXXXX
 				// XX.XXXXXXX
 				else if (countRow0 == 9 && countRow1 == 7 && countRow1Group == 1)
@@ -200,7 +213,7 @@
 						var merged = Row.Count[row1 | row2];
 						if (merged == 8)
 						{
-							score += pars.TSpinDoublePontentialCalc[rowIndex];
+							score += pars.TSpinDoublePotentialCalc[rowIndex];
 						}
 						else if (merged == 7)
 						{
@@ -208,6 +221,32 @@
 						}
 					}
 				}
+				#endregion
+
+				#region Single T-spin lower
+				// X...XXX??X
+				// XX.XXXXXXX
+				else if (countRow0 == 9 && countRow1 < 7)
+				{
+					// X...XXXXX?
+					// XX.XXXXXXX
+					// ----------
+					// .X.X...... (1 group more than before)
+					if (Row.Groups[row1 | row0Mirror] == Row.Groups[row1] + 1)
+					{
+						// the hole on row zero should stitch to 1 group, not to 2.
+						var merged = row2 | row0Mirror;
+						if (Row.Groups[merged] == Row.Groups[row2])
+						{
+							score += pars.TSpinSinglePotentialCalc[rowIndex];
+						}
+					}
+				}
+				#endregion
+
+				#endregion
+
+				// With 7 in row1 see hole part.
 
 				#endregion
 
@@ -215,6 +254,7 @@
 				row0Open &= row0Mirror;
 				row0Closed |= row0;
 				countRow1 = countRow0;
+				countRow2Group = countRow1Group;
 				countRow1Group = countRow0Group;
 				row3 = row2;
 				row2 = row1;
@@ -257,10 +297,10 @@
 				var filled = field.RowCount - field.FirstFilled;
 				if (filled < 5)
 				{
-					var hasPerfectClearPontential = false;
+					var hasPerfectClearPotential = false;
 					if (filled == 1)
 					{
-						hasPerfectClearPontential =
+						hasPerfectClearPotential =
 							row0 == PerfectClearOneRow0 ||
 							row0 == PerfectClearOneRow1 ||
 							row0 == PerfectClearOneRow2 ||
@@ -270,7 +310,7 @@
 					else
 					{
 						var toFill = filled * 10 - field.Count;
-						hasPerfectClearPontential =
+						hasPerfectClearPotential =
 							// Can be divided by 4.
 							(toFill & 3) == 0 &&
 							// two or one block left only.
@@ -282,9 +322,9 @@
 							Row.Groups[row3 ^ Row.Filled] == 1;
 					}
 
-					if (hasPerfectClearPontential)
+					if (hasPerfectClearPotential)
 					{
-						score += pars.PerfectClearPontential;
+						score += pars.PerfectClearPotential;
 					}
 				}
 			}

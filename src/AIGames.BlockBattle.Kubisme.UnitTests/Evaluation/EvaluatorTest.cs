@@ -184,11 +184,11 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void TSpinDoublePontential_TFitWithHole_0()
+		public void TSpinDoublePotential_TFitWithHole_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinDoublePontential = new ParamCurve(1),
+				TSpinDoublePotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -197,11 +197,11 @@ XXX..X.XX.";
 			XX.XXXXXX.", pars, 0);
 		}
 		[Test]
-		public void TSpinDoublePontential_TFitWithToBlocades_0()
+		public void TSpinDoublePotential_TFitWithToBlocades_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinDoublePontential = new ParamCurve(1),
+				TSpinDoublePotential = new ParamCurve(1),
 			};
 			Test(@"
 				..........
@@ -210,11 +210,11 @@ XXX..X.XX.";
 				XX.XXXXXXX", pars, 0);
 		}
 		[Test]
-		public void TSpinDoublePontential_TFitWithCenterBlocades_0()
+		public void TSpinDoublePotential_TFitWithCenterBlocades_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinDoublePontential = new ParamCurve(1),
+				TSpinDoublePotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -223,11 +223,11 @@ XXX..X.XX.";
 			XX.XXXXXXX", pars, 0);
 		}
 		[Test]
-		public void TSpinDoublePontential_TFit_1()
+		public void TSpinDoublePotential_TFit_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinDoublePontential = new ParamCurve(1),
+				TSpinDoublePotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -236,11 +236,11 @@ XXX..X.XX.";
 			XX.XXXXXXX", pars, 1);
 		}
 		[Test]
-		public void TSpinDoublePontential_DoubleBlock_0()
+		public void TSpinDoublePotential_DoubleBlock_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinDoublePontential = new ParamCurve(1),
+				TSpinDoublePotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -249,25 +249,11 @@ XXX..X.XX.";
 			XX.XXXXXXX", pars, 0);
 		}
 		[Test]
-		public void TDoubleClearPontential_NoBlock_1()
+		public void TSpinDoublePotential_ClearWithT_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TDoubleClearPotential = new ParamCurve(1),
-			};
-			Test(@"
-			..........
-			......X...
-			X...XXXXXX
-			XX.XXXXXXX", pars, 1);
-		}
-
-		[Test]
-		public void TSpinDoublePontential_ClearWithT_0()
-		{
-			var pars = new EvaluatorParameters()
-			{
-				TSpinDoublePontential = new ParamCurve(1),
+				TSpinDoublePotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -281,44 +267,118 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void PerfectClearPontential_SingleLineWith4EmtyCells_1()
+		public void TSpinSinglePotential_HasScoreBecauseLowerRow_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				TSpinSinglePotential = new ParamCurve(1),
+			};
+			Test(@"
+			..........
+			..........
+			X..XX.....
+			XXXXXX...X
+			X.XXX...XX
+			XXXXXX.XXX", pars, 1);
+		}
+		[Test]
+		public void TSpinSinglePotential_NoScoreBecauseTwoBlocks_0()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				TSpinSinglePotential = new ParamCurve(1),
+			};
+			Test(@"
+			..........
+			..........
+			X..XX.....
+			XXXXXX.X.X
+			X.XXX...XX
+			XXXXXX.XXX", pars, 0);
+		}
+		[Test]
+		public void TSpinSinglePotential_NoBlockade_0()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				TSpinSinglePotential = new ParamCurve(1),
+			};
+			Test(@"
+			..........
+			..........
+			X..XX.....
+			XXXXX....X
+			X..XX...XX
+			XXXXXX.XXX", pars, 0);
+		}
+
+		[Test]
+		public void TSpinSinglePotential_Row1Score_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				TSpinSinglePotential = new ParamCurve(1),
+			};
+			Test(@"
+			..........
+			....XX....
+			XXXXX...XX
+			.....X.XXX", pars, 1);
+		}
+
+		[Test]
+		public void TDoubleClearPotential_NoBlock_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				TDoubleClearPotential = new ParamCurve(1),
+			};
+			Test(@"
+			..........
+			......X...
+			X...XXXXXX
+			XX.XXXXXXX", pars, 1);
+		}
+
+		[Test]
+		public void PerfectClearPotential_SingleLineWith4EmtyCells_1()
+		{
+			var pars = new EvaluatorParameters()
+			{
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
 			XXX....XXX", pars, 1);
 		}
 		[Test]
-		public void PerfectClearPontential_SingleLine1_0()
+		public void PerfectClearPotential_SingleLine1_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
 			XX........", pars, 1);
 		}
 		[Test]
-		public void PerfectClearPontential_SingleLine1_1()
+		public void PerfectClearPotential_SingleLine1_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
 			....XX....", pars, 1);
 		}
 		[Test]
-		public void PerfectClearPontential_SingleLine2_1()
+		public void PerfectClearPotential_SingleLine2_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
@@ -326,11 +386,11 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void PerfectClearPontential_WrongNumberOfBlocks_0()
+		public void PerfectClearPotential_WrongNumberOfBlocks_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
@@ -339,11 +399,11 @@ XXX..X.XX.";
 			XXXXXX.XXX", pars, 0);
 		}
 		[Test]
-		public void PerfectClearPontential_4Rows4EmptyCells_1()
+		public void PerfectClearPotential_4Rows4EmptyCells_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
@@ -353,11 +413,11 @@ XXX..X.XX.";
 			XXXXXX.XXX", pars, 1);
 		}
 		[Test]
-		public void PerfectClearPontential_5Rows8EmptyCells_0()
+		public void PerfectClearPotential_5Rows8EmptyCells_0()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
@@ -369,11 +429,11 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void PerfectClearPontential_2Rows4EmptyCells_1()
+		public void PerfectClearPotential_2Rows4EmptyCells_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........
@@ -382,11 +442,11 @@ XXX..X.XX.";
 		}
 
 		[Test]
-		public void PerfectClearPontential_2Rows8EmptyCells_1()
+		public void PerfectClearPotential_2Rows8EmptyCells_1()
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPontential = 1,
+				PerfectClearPotential = 1,
 			};
 			Test(@"
 			..........

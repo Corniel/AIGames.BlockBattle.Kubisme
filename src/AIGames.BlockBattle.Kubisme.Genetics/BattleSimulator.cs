@@ -24,13 +24,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				HolesUnreachable = new ParamCurve(-150),
 				Points = 100,
 				Skips = new ParamCurve(0, 300, 1),
-				PerfectClearPontential = 600,
+				PerfectClearPotential = 600,
 				TetrisPotential = new int[] { -20, -15, -10, 5, 25 },
 				SingleEmpties = new int[] { 0,-5,-15,-20,-25,-35 },
 				SingleGroupBonus = new int[] { 40, 40, 20, 10 },
 				Groups = new int[] { 31,20,-10,-30,-40,-65 },
 				UnreachableRow = -1,
-				TSpinDoublePontential = new ParamCurve(0, 600, 1.2),
+				TSpinDoublePotential = new ParamCurve(0, 600, 1.2),
 				EmptyRows = new ParamCurve(0, 951, 1.5),
 			}
 			.Calc();

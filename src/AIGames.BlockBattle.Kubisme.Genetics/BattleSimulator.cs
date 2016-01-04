@@ -29,7 +29,6 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				SingleEmpties = new int[] { 0,-5,-15,-20,-25,-35 },
 				SingleGroupBonus = new int[] { 40, 40, 20, 10 },
 				Groups = new int[] { 31,20,-10,-30,-40,-65 },
-				UnreachableRow = -1,
 				TSpinDoublePotential = new ParamCurve(0, 600, 1.2),
 				EmptyRows = new ParamCurve(0, 951, 1.5),
 			}

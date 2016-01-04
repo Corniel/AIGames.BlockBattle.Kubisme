@@ -73,10 +73,6 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending)]
 		public int[] Groups { get; set; }
 
-		[ParameterType(ParameterType.Negative)]
-		public int UnreachableRow { get; set; }
-
-
 		/// <summary>Get the score per reachable hole.</summary>
 		public ParamCurve HolesReachable { get; set; }
 		/// <summary>Get the score per unreachable hole.</summary>

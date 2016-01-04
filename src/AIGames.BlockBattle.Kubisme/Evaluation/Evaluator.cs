@@ -285,8 +285,6 @@
 				score += pars.Groups[Row.Groups[row0Mirror]];
 				// Points for holes.
 				countHoleUnreachable += Row.Count[row0Mirror] * pars.HolesUnreachableCalc[rowIndex];
-
-				score += pars.UnreachableRow;
 			}
 			#endregion
 

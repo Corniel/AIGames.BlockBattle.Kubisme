@@ -9,7 +9,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public EvaluatorParameters()
 		{
 			TetrisPotential = new int[5];
-			TSpinSinglePotential = new ParamCurve();
+			TSpinSingle0Potential = new ParamCurve();
+			TSpinSingle1Potential = new ParamCurve();
 			TSpinDoublePotential = new ParamCurve();
 			TDoubleClearPotential = new ParamCurve();
 			EmptyRows = new ParamCurve();
@@ -22,8 +23,10 @@ namespace AIGames.BlockBattle.Kubisme
 		}
 
 
-		public int[] TSpinSinglePotentialCalc { get { return m_TSpinSinglePotential; } }
-		private int[] m_TSpinSinglePotential;
+		public int[] TSpinSingle0PotentialCalc { get { return m_TSpinSingle0Potential; } }
+		private int[] m_TSpinSingle0Potential;
+		public int[] TSpinSingle1PotentialCalc { get { return m_TSpinSingle1Potential; } }
+		private int[] m_TSpinSingle1Potential;
 		public int[] TSpinDoublePotentialCalc { get { return m_TSpinDoublePotential; } }
 		private int[] m_TSpinDoublePotential;
 
@@ -78,7 +81,8 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Get the score per unreachable hole.</summary>
 		public ParamCurve HolesUnreachable { get; set; }
 
-		public ParamCurve TSpinSinglePotential { get; set; }
+		public ParamCurve TSpinSingle0Potential { get; set; }
+		public ParamCurve TSpinSingle1Potential { get; set; }
 		public ParamCurve TSpinDoublePotential { get; set; }
 		public ParamCurve TDoubleClearPotential { get; set; }
 		public ParamCurve EmptyRows { get; set; }
@@ -87,7 +91,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public EvaluatorParameters Calc()
 		{
 			m_EmptyRows = EmptyRows.Calculate(22);
-			m_TSpinSinglePotential = TSpinSinglePotential.Calculate(22);
+			m_TSpinSingle0Potential = TSpinSingle0Potential.Calculate(22);
+			m_TSpinSingle1Potential = TSpinSingle1Potential.Calculate(22);
 			m_TSpinDoublePotential = TSpinDoublePotential.Calculate(22);
 			m_TDoubleClearPotential = TDoubleClearPotential.Calculate(22);
 			m_HolesReachable = HolesReachable.Calculate(22);

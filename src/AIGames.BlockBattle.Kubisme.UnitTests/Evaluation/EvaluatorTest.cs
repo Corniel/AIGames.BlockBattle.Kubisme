@@ -271,7 +271,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinSinglePotential = new ParamCurve(1),
+				TSpinSingle0Potential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -286,7 +286,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinSinglePotential = new ParamCurve(1),
+				TSpinSingle0Potential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -301,7 +301,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinSinglePotential = new ParamCurve(1),
+				TSpinSingle0Potential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -317,7 +317,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				TSpinSinglePotential = new ParamCurve(1),
+				TSpinSingle1Potential = new ParamCurve(1),
 			};
 			Test(@"
 			..........

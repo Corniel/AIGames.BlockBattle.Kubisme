@@ -187,7 +187,7 @@
 						// .X.X...... (2 groups)
 						if (Row.Groups[(row1 ^ Row.Filled) ^ row0Mirror] == 2)
 						{
-							score += pars.TSpinSinglePotentialCalc[rowIndex];
+							score += pars.TSpinSingle1PotentialCalc[rowIndex];
 						}
 					}
 				}
@@ -238,7 +238,7 @@
 						var merged = row2 | row0Mirror;
 						if (Row.Groups[merged] == Row.Groups[row2])
 						{
-							score += pars.TSpinSinglePotentialCalc[rowIndex];
+							score += pars.TSpinSingle0PotentialCalc[rowIndex];
 						}
 					}
 				}

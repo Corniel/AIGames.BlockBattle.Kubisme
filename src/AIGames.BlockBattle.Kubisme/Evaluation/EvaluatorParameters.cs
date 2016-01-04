@@ -114,22 +114,33 @@ namespace AIGames.BlockBattle.Kubisme
 		public static EvaluatorParameters GetDefault()
 		{
 			var pars = new EvaluatorParameters()
-			// Elo: 1613, Avg: 0.601, Runs: 1363, ID: 3301, Parent: 3284, Gen: 43
+			// Elo: 1626, Runs:  1150 (52.8%, PT: 0.676, #: 50.5, T1: 4.81%, T2: 21.04%, I4: 1.07%, CL: 0.52%), ID: 4703, Parent: 4697, Gen: 98
 			{
-				Combo = 26,
-				HolesReachable = new ParamCurve(- 47),
-				HolesUnreachable = new ParamCurve(-104),
-				Points = 130,
-				Skips = new ParamCurve(-313),
-				TSpinDoublePotential = new ParamCurve(500, 600, 1),
-				PerfectClearPotential = 727,
-				TetrisPotential = new int[] { -68, -52, 17, 19, 59 },
-				SingleEmpties = new int[] { -2, -11, -30, -30, -45, -98 },
-				SingleGroupBonus = new int[] { 36, 41, 54, 1 },
-				Groups = new int[] { 15, 12, -24, -50, -52, -60 },
-				EmptyRows = new ParamCurve(0, 1000, 1.8),
+				//TSpinSingle0PotentialCalc = new int[] { -9, 15, 27, 38, 47, 55, 63, 70, 77, 83, 89, 95, 101, 106, 112, 117, 122, 127, 132, 137, 141, 146 },
+				//TSpinSingle1PotentialCalc = new int[] { 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -10, -11, -12, -13, -14 },
+				//TSpinDoublePotentialCalc = new int[] { 205, 245, 280, 315, 348, 381, 413, 445, 477, 509, 540, 571, 601, 632, 662, 693, 723, 752, 782, 812, 842, 871 },
+				//TDoubleClearPotentialCalc = new int[] { 74, 110, 133, 153, 172, 190, 206, 222, 237, 252, 266, 280, 294, 307, 320, 333, 345, 357, 370, 382, 393, 405 },
+				//EmptyRowsCalc = new int[] { 118, 286, 360, 418, 466, 510, 549, 585, 619, 651, 682, 711, 738, 765, 791, 815, 839, 863, 885, 907, 929, 950 },
+				//HolesReachableCalc = new int[] { -214, -191, -176, -164, -153, -142, -132, -123, -114, -105, -96, -88, -80, -72, -65, -57, -50, -43, -36, -29, -22, -15 },
+				//HolesUnreachableCalc = new int[] { -226, -190, -178, -168, -160, -154, -148, -142, -137, -133, -128, -124, -120, -116, -113, -109, -106, -103, -100, -97, -94, -91 },
+				//SingleEmptiesCalc = new int[] { 0, -25, -52, -276, -376, -1275 },
+				//SkipsCalc = new int[] { -18, 17, 42, 64, 85, 105, 124, 143, 160, 178, 195, 211, 227, 243, 259, 274, 290, 305, 319, 334, 349, 363 },
+				Combo = -6,
+				Points = 199,
+				PerfectClearPotential = 739,
+				TetrisPotential = new int[] { -142, -90, -48, -17, 166 },
+				SingleEmpties = new int[] { -1, -25, -26, -92, -94, -255 },
+				SingleGroupBonus = new int[] { 23, 10, 53, 66 },
+				Groups = new int[] { 58, 36, -21, -107, -130, -157 },
+				HolesReachable = new ParamCurve(-214, -15, 0.709493574002696),
+				HolesUnreachable = new ParamCurve(-226, -91, 0.436054888096868),
+				TSpinSingle0Potential = new ParamCurve(-9, 146, 0.615300814240982),
+				TSpinSingle1Potential = new ParamCurve(6, -14, 0.918633534642757),
+				TSpinDoublePotential = new ParamCurve(205, 871, 0.927206740185875),
+				TDoubleClearPotential = new ParamCurve(74, 405, 0.733161952127343),
+				EmptyRows = new ParamCurve(118, 950, 0.524794427281711),
+				Skips = new ParamCurve(-18, 363, 0.78646622322278),
 			};
-
 			return pars.Calc();
 		}
 	}

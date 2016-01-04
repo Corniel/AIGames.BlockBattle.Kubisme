@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 64
+----------
+Introduced curved parameters, and single T-spin dectection. Score 0.67.
+
 Version 63
 ----------
 Divide by zero exception bug fix for winning on ply 2 and 1, and losing on the next turn.

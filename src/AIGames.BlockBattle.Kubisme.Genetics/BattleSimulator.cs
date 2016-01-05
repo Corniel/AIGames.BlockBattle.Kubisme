@@ -19,17 +19,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		{
 			return new EvaluatorParameters()
 			{
-				Combo = 2,
+				Combo = new ParamCurve(),
 				HolesReachable = new ParamCurve(-20),
 				HolesUnreachable = new ParamCurve(-40),
 				Points = 20,
 				Skips = new ParamCurve(0, 40, 1),
 				PerfectClearPotential = new ParamCurve(60),
-				TetrisPotential = new int[] { -20, -15, -10, 5, 25 },
+				TetrisPotential = new int[] { -20, -15, -10, 5, 50 },
 				SingleEmpties = new int[] { 0,-5,-15,-20,-25,-35 },
 				SingleGroupBonus = new int[] { 4, 4, 2, 1 },
 				Groups = new int[] { 3, 2, -1, -3, -4, -6 },
-				TSpinDoublePotential = new ParamCurve(0, 60, 0.6),
+				TSpinDoublePotential = new ParamCurve(0, 150, 0.6),
+				TDoubleClearPotential = new ParamCurve(0, 50, 0.6),
+				UnreachableRows = new ParamCurve(0, -600, 1),
 				EmptyRows = new ParamCurve(0, 90, 0.5),
 			}
 			.Calc();

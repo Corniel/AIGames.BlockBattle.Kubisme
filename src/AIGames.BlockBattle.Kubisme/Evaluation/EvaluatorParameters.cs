@@ -9,6 +9,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public EvaluatorParameters()
 		{
 			TetrisPotential = new int[5];
+			Combo = new ParamCurve();
 			TSpinSingle0Potential = new ParamCurve();
 			TSpinSingle1Potential = new ParamCurve();
 			TSpinDoublePotential = new ParamCurve();
@@ -23,6 +24,16 @@ namespace AIGames.BlockBattle.Kubisme
 			SingleGroupBonus = new int[4];
 			SingleEmpties = new int[6];
 		}
+
+		public int[] ComboCalc { get { return m_Combo; } }
+		private int[] m_Combo;
+
+
+		public int[] HolesReachableCalc { get { return m_HolesReachable; } }
+		private int[] m_HolesReachable;
+
+		public int[] HolesUnreachableCalc { get { return m_HolesUnreachable; } }
+		private int[] m_HolesUnreachable;
 
 		public int[] UnreachableRowsCalc { get { return m_UnreachableRows; } }
 		private int[] m_UnreachableRows;
@@ -40,11 +51,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int[] EmptyRowsCalc { get { return m_EmptyRows; } }
 		private int[] m_EmptyRows;
 
-		public int[] HolesReachableCalc { get { return m_HolesReachable; } }
-		private int[] m_HolesReachable;
-
-		public int[] HolesUnreachableCalc { get { return m_HolesUnreachable; } }
-		private int[] m_HolesUnreachable;
 
 		public int[] SingleEmptiesCalc { get { return m_SingleEmpties; } }
 		private int[] m_SingleEmpties;
@@ -54,14 +60,10 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] PerfectClearPotentialCalc { get { return m_PerfectClearPotential; } }
 		private int[] m_PerfectClearPotential;
-		/// <summary>Factor for current combo's.</summary>
-		public int Combo { get; set; }
 		
 		[ParameterType(ParameterType.Positive)]
 		public int Points { get; set; }
-
 		
-
 		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
 		[ParameterType(ParameterType.Ascending)]
 		public int[] TetrisPotential { get; set; }
@@ -79,6 +81,8 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending)]
 		public int[] Groups { get; set; }
 
+		/// <summary>Factor for current combo's.</summary>
+		public ParamCurve Combo { get; set; }
 		/// <summary>Get the score per reachable hole.</summary>
 		public ParamCurve HolesReachable { get; set; }
 		/// <summary>Get the score per unreachable hole.</summary>
@@ -96,6 +100,7 @@ namespace AIGames.BlockBattle.Kubisme
 		
 		public EvaluatorParameters Calc()
 		{
+			m_Combo = Combo.Calculate();
 			m_UnreachableRows = UnreachableRows.Calculate();
 			m_EmptyRows = EmptyRows.Calculate();
 			m_TSpinSingle0Potential = TSpinSingle0Potential.Calculate();
@@ -133,7 +138,7 @@ namespace AIGames.BlockBattle.Kubisme
 				//HolesUnreachableCalc = new int[] { -226, -190, -178, -168, -160, -154, -148, -142, -137, -133, -128, -124, -120, -116, -113, -109, -106, -103, -100, -97, -94, -91 },
 				//SingleEmptiesCalc = new int[] { 0, -25, -52, -276, -376, -1275 },
 				//SkipsCalc = new int[] { -18, 17, 42, 64, 85, 105, 124, 143, 160, 178, 195, 211, 227, 243, 259, 274, 290, 305, 319, 334, 349, 363 },
-				Combo = -6,
+				Combo = new ParamCurve(-6),
 				Points = 199,
 				PerfectClearPotential = new ParamCurve(739),
 				TetrisPotential = new int[] { -142, -90, -48, -17, 166 },

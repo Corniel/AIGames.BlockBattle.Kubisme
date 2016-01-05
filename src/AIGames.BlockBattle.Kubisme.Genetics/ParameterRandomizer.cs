@@ -8,36 +8,13 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 {
 	public class ParameterRandomizer
 	{
-		public const int Threshold = 3;
+		public const double Threshold = 0.4;
+		public const int MinimumVariation = 20;
 
 		public ParameterRandomizer(MT19937Generator rnd)
 		{
 			Rnd = rnd;
-
-			var list = new List<sbyte>()
-			{
-				20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10,
-				9, 9,
-				8, 8,
-				7, 7, 7,
-				6, 6, 6, 6,
-				5, 5, 5, 5, 5,
-				4, 4, 4, 4, 4, 4,
-				3, 3, 3, 3, 3, 3, 3, 3,
-				2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-				1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-			};
-
-			var ls2 = list.ToList();
-			foreach (var l in list)
-			{
-				ls2.Add((sbyte)-l);
-			}
-
-			Distribution = ls2.ToArray();
 		}
-
-		public sbyte[] Distribution { get; set; }
 		public MT19937Generator Rnd { get; set; }
 				
 		public void Generate<T>(T org, Queue<T> queue, int count)
@@ -132,16 +109,18 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		private int Randomize(int value)
 		{
-			if (Rnd.Next(Threshold) == 0)
+			if (Rnd.NextDouble() < Threshold)
 			{
-				var val = value + Distribution[Rnd.Next(Distribution.Length)] * Rnd.Next(1, 3);
-				return val;
+				var factor = Rnd.NextDouble(-1, 1) * Rnd.NextDouble();
+				var mp = Math.Max(MinimumVariation, Math.Abs(value) / 2);
+				var val = value + mp * factor;
+				return (int)Math.Round(val);
 			}
 			return value;
 		}
 		private bool Randomize(bool value)
 		{
-			if (Rnd.Next(Threshold) == 0)
+			if (Rnd.NextDouble() < Threshold)
 			{
 				return Rnd.NextBoolean();
 			}
@@ -153,11 +132,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var start = Randomize(value.Start);
 			var end = Randomize(value.End);
 			var factor = value.Factor;
-			if (Rnd.Next(Threshold) == 0)
-			{
-				var mp = Rnd.NextDouble(0.9, 1.1);
-				factor *= mp;
-			}
+		
+			var mp = Math.Sqrt(Rnd.NextDouble(0.95, 1.05));
+			factor *= mp;
 			return new ParamCurve(start, end, factor);
 		}
 

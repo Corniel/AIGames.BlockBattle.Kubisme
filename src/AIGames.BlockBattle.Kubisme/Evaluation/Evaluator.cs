@@ -41,7 +41,7 @@
 
 			// Points for static evaluation.
 			score += field.Points * pars.Points;
-			score += field.Combo * pars.Combo;
+			score += field.Combo * pars.ComboCalc[firstFilled];
 			score += field.Skips * pars.SkipsCalc[firstFilled];
 
 			var rowIndex = field.FirstFilled;

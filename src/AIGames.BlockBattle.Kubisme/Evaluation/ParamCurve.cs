@@ -28,7 +28,7 @@ namespace AIGames.BlockBattle.Kubisme
 			return String.Format(CultureInfo.InvariantCulture, "new ParamCurve({0}, {1}, {2})", Start, End, Factor);
 		}
 
-		public int[] Calculate(int length)
+		public int[] Calculate(int length = 22)
 		{
 			var values = new int[length];
 			values[0] = Start;

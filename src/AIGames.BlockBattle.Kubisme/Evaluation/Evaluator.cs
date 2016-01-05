@@ -278,6 +278,8 @@
 
 			#region Unreachable area
 
+			score += pars.UnreachableRowsCalc[field.RowCount - rowIndex];
+
 			for (; rowIndex < field.RowCount; rowIndex++)
 			{
 				row0Mirror = field[rowIndex] ^ Row.Filled;
@@ -311,8 +313,8 @@
 						hasPerfectClearPotential =
 							// Can be divided by 4.
 							(toFill & 3) == 0 &&
-							// two or one block left only.
-							toFill <= 8 && 
+							// maximum block left only.
+							toFill <= 12 && 
 							// Can be filled 'easily' because all space is connected.
 							Row.Groups[row0Mirror] == 1 &&
 							Row.Groups[row1 ^ Row.Filled] == 1 &&
@@ -322,7 +324,7 @@
 
 					if (hasPerfectClearPotential)
 					{
-						score += pars.PerfectClearPotential;
+						score += pars.PerfectClearPotentialCalc[field.RowCount];
 					}
 				}
 			}

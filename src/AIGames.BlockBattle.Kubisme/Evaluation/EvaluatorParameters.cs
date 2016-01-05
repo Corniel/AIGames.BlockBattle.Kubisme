@@ -14,14 +14,18 @@ namespace AIGames.BlockBattle.Kubisme
 			TSpinDoublePotential = new ParamCurve();
 			TDoubleClearPotential = new ParamCurve();
 			EmptyRows = new ParamCurve();
+			UnreachableRows = new ParamCurve();
 			HolesReachable = new ParamCurve();
 			HolesUnreachable = new ParamCurve();
 			Skips = new ParamCurve();
+			PerfectClearPotential = new ParamCurve();
 			Groups = new int[6];
 			SingleGroupBonus = new int[4];
 			SingleEmpties = new int[6];
 		}
 
+		public int[] UnreachableRowsCalc { get { return m_UnreachableRows; } }
+		private int[] m_UnreachableRows;
 
 		public int[] TSpinSingle0PotentialCalc { get { return m_TSpinSingle0Potential; } }
 		private int[] m_TSpinSingle0Potential;
@@ -48,6 +52,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public int[] SkipsCalc { get { return m_SkipsCalc; } }
 		private int[] m_SkipsCalc;
 
+		public int[] PerfectClearPotentialCalc { get { return m_PerfectClearPotential; } }
+		private int[] m_PerfectClearPotential;
 		/// <summary>Factor for current combo's.</summary>
 		public int Combo { get; set; }
 		
@@ -55,9 +61,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int Points { get; set; }
 
 		
-
-		[ParameterType(ParameterType.Positive)]
-		public int PerfectClearPotential { get; set; }
 
 		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
 		[ParameterType(ParameterType.Ascending)]
@@ -81,23 +84,28 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Get the score per unreachable hole.</summary>
 		public ParamCurve HolesUnreachable { get; set; }
 
+		public ParamCurve UnreachableRows { get; set; }
+
 		public ParamCurve TSpinSingle0Potential { get; set; }
 		public ParamCurve TSpinSingle1Potential { get; set; }
 		public ParamCurve TSpinDoublePotential { get; set; }
 		public ParamCurve TDoubleClearPotential { get; set; }
 		public ParamCurve EmptyRows { get; set; }
 		public ParamCurve Skips { get; set; }
+		public ParamCurve PerfectClearPotential { get; set; }
 		
 		public EvaluatorParameters Calc()
 		{
-			m_EmptyRows = EmptyRows.Calculate(22);
-			m_TSpinSingle0Potential = TSpinSingle0Potential.Calculate(22);
-			m_TSpinSingle1Potential = TSpinSingle1Potential.Calculate(22);
-			m_TSpinDoublePotential = TSpinDoublePotential.Calculate(22);
-			m_TDoubleClearPotential = TDoubleClearPotential.Calculate(22);
-			m_HolesReachable = HolesReachable.Calculate(22);
-			m_HolesUnreachable = HolesUnreachable.Calculate(22);
-			m_SkipsCalc = Skips.Calculate(22);
+			m_UnreachableRows = UnreachableRows.Calculate();
+			m_EmptyRows = EmptyRows.Calculate();
+			m_TSpinSingle0Potential = TSpinSingle0Potential.Calculate();
+			m_TSpinSingle1Potential = TSpinSingle1Potential.Calculate();
+			m_TSpinDoublePotential = TSpinDoublePotential.Calculate();
+			m_TDoubleClearPotential = TDoubleClearPotential.Calculate();
+			m_HolesReachable = HolesReachable.Calculate();
+			m_HolesUnreachable = HolesUnreachable.Calculate();
+			m_SkipsCalc = Skips.Calculate();
+			m_PerfectClearPotential = PerfectClearPotential.Calculate();
 
 			m_SingleEmpties = new int[SingleEmpties.Length];
 			for (var i = 0; i < m_SingleEmpties.Length; i++)
@@ -127,7 +135,7 @@ namespace AIGames.BlockBattle.Kubisme
 				//SkipsCalc = new int[] { -18, 17, 42, 64, 85, 105, 124, 143, 160, 178, 195, 211, 227, 243, 259, 274, 290, 305, 319, 334, 349, 363 },
 				Combo = -6,
 				Points = 199,
-				PerfectClearPotential = 739,
+				PerfectClearPotential = new ParamCurve(739),
 				TetrisPotential = new int[] { -142, -90, -48, -17, 166 },
 				SingleEmpties = new int[] { -1, -25, -26, -92, -94, -255 },
 				SingleGroupBonus = new int[] { 23, 10, 53, 66 },

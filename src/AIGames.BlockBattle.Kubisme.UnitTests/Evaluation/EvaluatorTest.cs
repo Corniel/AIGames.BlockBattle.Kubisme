@@ -345,7 +345,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -356,7 +356,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -367,7 +367,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -378,7 +378,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -390,7 +390,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -403,7 +403,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -417,7 +417,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -433,7 +433,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........
@@ -446,7 +446,7 @@ XXX..X.XX.";
 		{
 			var pars = new EvaluatorParameters()
 			{
-				PerfectClearPotential = 1,
+				PerfectClearPotential = new ParamCurve(1),
 			};
 			Test(@"
 			..........

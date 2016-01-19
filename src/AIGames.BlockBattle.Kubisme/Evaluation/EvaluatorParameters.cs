@@ -184,14 +184,14 @@ namespace AIGames.BlockBattle.Kubisme
 				SingleEmpties = new int[] { -1, -25, -26, -92, -94, -255 },
 				SingleGroupBonus = new int[] { 23, 10, 53, 66 },
 				Groups = new int[] { 58, 36, -21, -107, -130, -157 },
-				HolesReachable = new ParamCurve(-214, -15, 0.709493574002696),
-				HolesUnreachable = new ParamCurve(-226, -91, 0.436054888096868),
-				TSpinSingle0Potential = new ParamCurve(-9, 146, 0.615300814240982),
-				TSpinSingle1Potential = new ParamCurve(6, -14, 0.918633534642757),
-				TSpinDoublePotential = new ParamCurve(205, 871, 0.927206740185875),
-				TDoubleClearPotential = new ParamCurve(74, 405, 0.733161952127343),
-				EmptyRows = new ParamCurve(118, 950, 0.524794427281711),
-				Skips = new ParamCurve(-18, 363, 0.78646622322278),
+				HolesReachable = new ParamCurve(-214, -15, 0.709493574002696, 1),
+				HolesUnreachable = new ParamCurve(-226, -91, 0.436054888096868, 1),
+				TSpinSingle0Potential = new ParamCurve(-9, 146, 0.615300814240982, 1),
+				TSpinSingle1Potential = new ParamCurve(6, -14, 0.918633534642757, 1),
+				TSpinDoublePotential = new ParamCurve(205, 871, 0.927206740185875, 1),
+				TDoubleClearPotential = new ParamCurve(74, 405, 0.733161952127343, 1),
+				EmptyRows = new ParamCurve(118, 950, 0.524794427281711, 1),
+				Skips = new ParamCurve(-18, 363, 0.78646622322278, 1),
 			};
 			return pars.Calc();
 		}

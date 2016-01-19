@@ -132,10 +132,15 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var start = Randomize(value.Start);
 			var end = Randomize(value.End);
 			var factor = value.Factor;
+			var power = value.Power;
 		
-			var mp = Math.Sqrt(Rnd.NextDouble(0.95, 1.05));
-			factor *= mp;
-			return new ParamCurve(start, end, factor);
+			var mpf = Math.Sqrt(Rnd.NextDouble(0.95, 1.05));
+			factor *= mpf;
+
+			var mpp = Math.Sqrt(Rnd.NextDouble(0.95, 1.05));
+			power *= mpp;
+
+			return new ParamCurve(start, end, factor, power);
 		}
 
 		private static readonly Dictionary<Type, PropertyInfo[]> Properties = new Dictionary<Type, PropertyInfo[]>();

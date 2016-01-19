@@ -8,12 +8,13 @@ namespace AIGames.BlockBattle.Kubisme
 	public class ParamCurve
 	{
 		public ParamCurve() : this(0) { }
-		public ParamCurve(int value) : this(value, value, 1) { }
-		public ParamCurve(int start, int end, double factor)
+		public ParamCurve(int value) : this(value, value, 1, 1) { }
+		public ParamCurve(int start, int end, double factor, double power)
 		{
 			Start = start;
 			End = end;
 			Factor = factor;
+			Power = power;
 		}
 
 		[XmlAttribute("start")]
@@ -22,6 +23,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public int End { get; set; }
 		[XmlAttribute("factor")]
 		public double Factor { get; set; }
+		[XmlAttribute("power")]
+		public double Power { get; set; }
 
 		public override string ToString()
 		{
@@ -37,7 +40,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 			for (var i = 1; i < length; i++)
 			{
-				var f = i / (length - 1.0);
+				var f = Math.Pow(i, Power) / (length - 1.0);
 				var val = Start + delta * Math.Pow(f, Factor);
 				values[i] = (int)Math.Round(val);
 			}

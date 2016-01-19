@@ -21,7 +21,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			// Elo: 1615, Runs:  1549 (53.4%, PT: 0.630, #: 49.7, T1: 4.70%, T2: 12.97%, I4: 1.98%, CL: 0.90%), ID: 573, Parent: 430, Gen: 21
 			{
 				Points = new ParamCurve(32),
-				TetrisPotential = new int[] { -60, -39, -33, 20, 66 },
+				I0 = new ParamCurve(-60),
+				I1 = new ParamCurve(-40),
+				I2 = new ParamCurve(-35),
+				I3 = new ParamCurve(-20),
+				I4 = new ParamCurve(65),
 				SingleEmpties = new int[] { -1, -2, -4, -7, -48, -49 },
 				SingleGroupBonus = new int[] { 3, 18, 25, 27 },
 				Groups = new int[] { 6, 3, -15, -18, -32, -33 },

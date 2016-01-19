@@ -72,7 +72,11 @@ XX.XX.XXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
 			};
 			Test(field, pars, 2);
 		}
@@ -89,7 +93,11 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
 			};
 			Test(field, pars, 2);
 		}
@@ -107,7 +115,11 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
 			};
 			Test(field, pars, 3);
 		}
@@ -124,7 +136,11 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
 			};
 			Test(field, pars, 3);
 		}
@@ -143,7 +159,11 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
 			};
 			Test(field, pars, 2);
 		}
@@ -161,7 +181,11 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
 			};
 			Test(field, pars, 3);
 		}
@@ -178,7 +202,11 @@ XX.XXXXXXX
 XXX..X.XX.";
 			var pars = new EvaluatorParameters()
 			{
-				TetrisPotential = new int[] { 0, 1, 2, 3, 4 },
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
 			};
 			Test(field, pars, 4);
 		}

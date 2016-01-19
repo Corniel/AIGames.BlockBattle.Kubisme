@@ -8,9 +8,15 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public EvaluatorParameters()
 		{
-			TetrisPotential = new int[5];
 			Points = new ParamCurve();
 			Combo = new ParamCurve();
+
+			I0 = new ParamCurve();
+			I1 = new ParamCurve();
+			I2 = new ParamCurve();
+			I3 = new ParamCurve();
+			I4 = new ParamCurve();
+
 			TSpinSingle0Potential = new ParamCurve();
 			TSpinSingle1Potential = new ParamCurve();
 			TSpinDoublePotential = new ParamCurve();
@@ -32,6 +38,18 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] ComboCalc { get { return m_Combo; } }
 		private int[] m_Combo;
+
+		public int[] I0Calc { get { return m_I0; } }
+		public int[] I1Calc { get { return m_I1; } }
+		public int[] I2Calc { get { return m_I2; } }
+		public int[] I3Calc { get { return m_I3; } }
+		public int[] I4Calc { get { return m_I4; } }
+		
+		private int[] m_I0;
+		private int[] m_I1;
+		private int[] m_I2;
+		private int[] m_I3;
+		private int[] m_I4;
 
 
 		public int[] HolesReachableCalc { get { return m_HolesReachable; } }
@@ -66,10 +84,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int[] PerfectClearPotentialCalc { get { return m_PerfectClearPotential; } }
 		private int[] m_PerfectClearPotential;
 		
-		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
-		[ParameterType(ParameterType.Ascending)]
-		public int[] TetrisPotential { get; set; }
-
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] SingleEmpties { get; set; }
 
@@ -95,6 +109,14 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public ParamCurve UnreachableRows { get; set; }
 
+		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
+		[ParameterType(ParameterType.Ascending)]
+		public ParamCurve I0 { get; set; }
+		public ParamCurve I1 { get; set; }
+		public ParamCurve I2 { get; set; }
+		public ParamCurve I3 { get; set; }
+		public ParamCurve I4 { get; set; }
+
 		public ParamCurve TSpinSingle0Potential { get; set; }
 		public ParamCurve TSpinSingle1Potential { get; set; }
 		public ParamCurve TSpinDoublePotential { get; set; }
@@ -107,6 +129,13 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			m_Points = Points.Calculate();
 			m_Combo = Combo.Calculate();
+
+			m_I0 = I0.Calculate();
+			m_I1 = I1.Calculate();
+			m_I2 = I2.Calculate();
+			m_I3 = I3.Calculate();
+			m_I4 = I4.Calculate();
+
 			m_UnreachableRows = UnreachableRows.Calculate();
 			m_EmptyRows = EmptyRows.Calculate();
 			m_TSpinSingle0Potential = TSpinSingle0Potential.Calculate();
@@ -147,7 +176,11 @@ namespace AIGames.BlockBattle.Kubisme
 				Points = new ParamCurve(199),
 				Combo = new ParamCurve(-6),
 				PerfectClearPotential = new ParamCurve(739),
-				TetrisPotential = new int[] { -142, -90, -48, -17, 166 },
+				I0 = new ParamCurve(-142),
+				I1 = new ParamCurve(-90),
+				I2 = new ParamCurve(-48),
+				I3 = new ParamCurve(-17),
+				I4 = new ParamCurve(166),
 				SingleEmpties = new int[] { -1, -25, -26, -92, -94, -255 },
 				SingleGroupBonus = new int[] { 23, 10, 53, 66 },
 				Groups = new int[] { 58, 36, -21, -107, -130, -157 },

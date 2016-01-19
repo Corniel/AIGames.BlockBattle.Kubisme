@@ -266,13 +266,21 @@
 
 			if (rowIndex >= 4)
 			{
-				var cearenceI = 0;
+				var clearenceI = 0;
 				// If we're on the floor, -1, -4, instead 0, -3.
-				if (Row.Count[field[rowIndex - (rowIndex == field.RowCount ? 4 : 0)]] == 9) { cearenceI++; }
-				if (Row.Count[field[rowIndex - 1]] == 9) { cearenceI++; }
-				if (Row.Count[field[rowIndex - 2]] == 9) { cearenceI++; }
-				if (Row.Count[field[rowIndex - 3]] == 9) { cearenceI++; }
-				score += pars.TetrisPotential[cearenceI];
+				if (Row.Count[field[rowIndex - (rowIndex == field.RowCount ? 4 : 0)]] == 9) { clearenceI++; }
+				if (Row.Count[field[rowIndex - 1]] == 9) { clearenceI++; }
+				if (Row.Count[field[rowIndex - 2]] == 9) { clearenceI++; }
+				if (Row.Count[field[rowIndex - 3]] == 9) { clearenceI++; }
+
+				switch (clearenceI)
+				{
+					case 0: score += pars.I0Calc[firstFilled]; break;
+					case 1: score += pars.I1Calc[firstFilled]; break;
+					case 2: score += pars.I2Calc[firstFilled]; break;
+					case 3: score += pars.I3Calc[firstFilled]; break;
+					case 4: score += pars.I4Calc[firstFilled]; break;
+				}
 			}
 			#endregion
 

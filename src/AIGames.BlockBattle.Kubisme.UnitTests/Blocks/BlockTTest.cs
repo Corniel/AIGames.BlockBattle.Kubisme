@@ -256,7 +256,7 @@ XXXX.XXXXX");
 
 			var pars = new  EvaluatorParameters()
 			{
-				Points = 100,
+				Points = new ParamCurve(100),
 			}.Calc();
 
 			var dm = new NodeDecisionMakerTester()

@@ -40,7 +40,7 @@
 			#endregion
 
 			// Points for static evaluation.
-			score += field.Points * pars.Points;
+			score += field.Points * pars.PointsCalc[firstFilled];
 			score += field.Combo * pars.ComboCalc[firstFilled];
 			score += field.Skips * pars.SkipsCalc[firstFilled];
 

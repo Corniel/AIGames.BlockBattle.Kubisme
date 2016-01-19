@@ -40,7 +40,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 			var threshold = this[Math.Min(Count, branchingFactor) - 1].Score;
 			var depthMin1 = (byte)(depth - 1);
-			var dephtMin1Threshold = threshold - pars.Parameters.Points;
+			var dephtMin1Threshold = threshold - 100;
 
 			foreach (var child in this)
 			{

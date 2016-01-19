@@ -8,7 +8,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
 	public class ParameterRandomizerTest
 	{
 		[Test]
-		public void Randomize_NegativeDescading_Min1Min19()
+		public void Randomize_NegativeDescading_RandomValues()
 		{
 			var random = new MT19937Generator(17);
 			var rnd = new ParameterRandomizer(random);
@@ -20,7 +20,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
 
 			var act = rnd.Randomize(parameters).NegativeDescading;
 
-			var exp = new int[] { -1, -41 };
+			var exp = new int[] { -1, -68 };
 
 			CollectionAssert.AreEqual(exp, act);
 		}

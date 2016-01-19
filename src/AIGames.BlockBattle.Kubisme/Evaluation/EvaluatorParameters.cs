@@ -9,6 +9,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public EvaluatorParameters()
 		{
 			TetrisPotential = new int[5];
+			Points = new ParamCurve();
 			Combo = new ParamCurve();
 			TSpinSingle0Potential = new ParamCurve();
 			TSpinSingle1Potential = new ParamCurve();
@@ -24,6 +25,10 @@ namespace AIGames.BlockBattle.Kubisme
 			SingleGroupBonus = new int[4];
 			SingleEmpties = new int[6];
 		}
+
+
+		public int[] PointsCalc { get { return m_Points; } }
+		private int[] m_Points;
 
 		public int[] ComboCalc { get { return m_Combo; } }
 		private int[] m_Combo;
@@ -61,9 +66,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int[] PerfectClearPotentialCalc { get { return m_PerfectClearPotential; } }
 		private int[] m_PerfectClearPotential;
 		
-		[ParameterType(ParameterType.Positive)]
-		public int Points { get; set; }
-		
 		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
 		[ParameterType(ParameterType.Ascending)]
 		public int[] TetrisPotential { get; set; }
@@ -80,6 +82,9 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <summary>Points for the different number of groups per reachable hole.</summary>
 		[ParameterType(ParameterType.Descending)]
 		public int[] Groups { get; set; }
+
+		/// <summary>Factor for current points.</summary>
+		public ParamCurve Points { get; set; }
 
 		/// <summary>Factor for current combo's.</summary>
 		public ParamCurve Combo { get; set; }
@@ -100,6 +105,7 @@ namespace AIGames.BlockBattle.Kubisme
 		
 		public EvaluatorParameters Calc()
 		{
+			m_Points = Points.Calculate();
 			m_Combo = Combo.Calculate();
 			m_UnreachableRows = UnreachableRows.Calculate();
 			m_EmptyRows = EmptyRows.Calculate();
@@ -138,8 +144,8 @@ namespace AIGames.BlockBattle.Kubisme
 				//HolesUnreachableCalc = new int[] { -226, -190, -178, -168, -160, -154, -148, -142, -137, -133, -128, -124, -120, -116, -113, -109, -106, -103, -100, -97, -94, -91 },
 				//SingleEmptiesCalc = new int[] { 0, -25, -52, -276, -376, -1275 },
 				//SkipsCalc = new int[] { -18, 17, 42, 64, 85, 105, 124, 143, 160, 178, 195, 211, 227, 243, 259, 274, 290, 305, 319, 334, 349, 363 },
+				Points = new ParamCurve(199),
 				Combo = new ParamCurve(-6),
-				Points = 199,
 				PerfectClearPotential = new ParamCurve(739),
 				TetrisPotential = new int[] { -142, -90, -48, -17, 166 },
 				SingleEmpties = new int[] { -1, -25, -26, -92, -94, -255 },

@@ -28,7 +28,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public override string ToString()
 		{
-			return String.Format(CultureInfo.InvariantCulture, "new ParamCurve({0}, {1}, {2})", Start, End, Factor);
+			return String.Format(CultureInfo.InvariantCulture, "new ParamCurve({0}, {1}, {2}, {3})", Start, End, Factor, Power);
 		}
 
 		public int[] Calculate(int length = 22)

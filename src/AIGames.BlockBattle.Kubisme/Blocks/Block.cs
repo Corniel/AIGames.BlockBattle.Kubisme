@@ -515,5 +515,13 @@ namespace AIGames.BlockBattle.Kubisme
 			var count = Row.Count[merged];
 			return Row.HasRow2BlocksConnected(merged, count);
 		}
+
+		public TempPath GetFirstTempPath(int firstFilled)
+		{
+			var skip = firstFilled < 2 ? 0 : firstFilled - 2;
+			var row = Start.Row + skip;
+			var path = new TempPath(this, new Position(Start.Col, row), BlockPath.Init[skip]);
+			return path;
+		}
 	}
 }

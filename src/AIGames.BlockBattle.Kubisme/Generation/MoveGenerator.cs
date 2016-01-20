@@ -123,9 +123,12 @@ namespace AIGames.BlockBattle.Kubisme
 		public static IEnumerable<MoveCandiate> GetPaths(Field field, Block current, int[] targets, int maxRow)
 		{
 			var dones = new bool[current.RotationVariations.Length, field.RowCount + 1, 10];
-			dones[0, current.Start.Row + 1, current.Start.Col] = true;
+
+			TempPath first = current.GetFirstTempPath(field.FirstFilled);
+			dones[0, first.Position.Row + 1, first.Position.Col] = true;
+
 			var stack = new Stack<TempPath>();
-			stack.Push(new TempPath(current, current.Start, BlockPath.None));
+			stack.Push(first);
 
 			while (stack.Count != 0)
 			{

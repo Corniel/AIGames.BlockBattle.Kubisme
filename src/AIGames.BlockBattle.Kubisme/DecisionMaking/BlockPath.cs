@@ -11,6 +11,32 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		private const UInt64 Mask = 0x0FFFFFFFFFFFFFFF;
 
+		public static readonly BlockPath[] Init = new BlockPath[]
+		{
+			BlockPath.None,
+			BlockPath.Create(ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+			BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down, ActionType.Down),
+		};
+
 		public static readonly BlockPath None = default(BlockPath);
 		public static readonly BlockPath Skip = BlockPath.Create(ActionType.Skip);
 

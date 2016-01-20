@@ -63,5 +63,39 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			CollectionAssert.AreEqual(exp, act.Moves.ToArray());
 			Assert.AreEqual("left,right,down,turnleft,turnright,left,right,down,turnleft,turnright,left,right,down,turnleft,turnright,left,right,down,turnleft,turnright,left,right,down,turnright,turnright", act.ToString());
 		}
+
+		[Test]
+		public void Init_All_AreEqual()
+		{
+			var act = BlockPath.Init.Select(path => path.ToString()).ToArray();
+			var exp = new string[]{
+				"no_moves",
+				"down",
+				"down,down",
+				"down,down,down",
+				"down,down,down,down",
+				"down,down,down,down,down",
+				"down,down,down,down,down,down",
+				"down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+				"down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down,down",
+			};
+
+			CollectionAssert.AreEqual(exp, act);
+		}
+
+		
 	}
 }

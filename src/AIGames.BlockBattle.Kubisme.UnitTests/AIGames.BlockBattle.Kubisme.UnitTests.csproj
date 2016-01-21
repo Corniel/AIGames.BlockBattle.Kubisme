@@ -49,7 +49,6 @@
     <Compile Include="Blocks\BlockTTest.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMakerTester.cs" />
     <Compile Include="Evaluation\BenchmarkTest.cs" />
-    <Compile Include="Evaluation\EvaluatorParametersTest.cs" />
     <Compile Include="Evaluation\OpponentEvaluatorTest.cs" />
     <Compile Include="FieldAssert.cs" />
     <Compile Include="Genetics\ParamCurveTest.cs" />

@@ -8,14 +8,14 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
 	[TestFixture]
 	public class SimulationBotCollectionTest
 	{
-		[Test]
+		[Test, Category(Category.Deployment)]
 		public void Save_OneBot_ToFile()
 		{
 			var collection = new SimulationBotCollection()
 			{
 				new BotData()
 				{
-					Id = 17,
+					Id = 3,
 					Locked = true,
 					DefPars = EvaluatorParameters.GetDefault(),
 				},

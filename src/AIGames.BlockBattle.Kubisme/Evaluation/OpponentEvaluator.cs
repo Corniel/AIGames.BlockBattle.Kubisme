@@ -90,9 +90,6 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 			}
 
-			Console.WriteLine(count);
-			Console.WriteLine(sw.Elapsed);
-
 			return new OpponentEvaluation(points0, maxPoints1, maxPoints2, minFilled1, minFilled2, minFilled3, maxPoints3)
 			{
 				Count = count,

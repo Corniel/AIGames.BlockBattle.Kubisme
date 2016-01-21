@@ -36,6 +36,10 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
 			};
 			Root = new BlockRootNode(field);
 
+			var oppo = new OpponentEvaluator() { Generator = Pars.Generator };
+			Pars.Opponent = oppo.Evaluate(opponent, current, next, MaximumDepth > 2);
+			Logs.Add(new PlyLog(Pars.Round, BlockPath.None, 0, 0, Pars.Elapsed, Pars.Opponent.Count));
+
 			while (Pars.Depth < Pars.MaximumDepth && Pars.HasTimeLeft)
 			{
 				Root.Apply(++Pars.Depth, Pars);

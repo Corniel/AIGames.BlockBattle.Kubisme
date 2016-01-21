@@ -45,8 +45,8 @@ namespace AIGames.BlockBattle.Kubisme
 				Parameters = DefaultEvaluation,
 			};
 			var oppo = new OpponentEvaluator() { Generator = Pars.Generator };
-			Pars.Opponent = oppo.Evaluate(opponent, current, next);
-
+			Pars.Opponent = oppo.Evaluate(opponent, current, next, MaximumDepth > 2);
+			Logs.Add(new PlyLog(Pars.Round, BlockPath.None, 0, 0, Pars.Elapsed, Pars.Opponent.Count));
 			var move = BlockPath.None;
 
 			Root = new BlockRootNode(field);

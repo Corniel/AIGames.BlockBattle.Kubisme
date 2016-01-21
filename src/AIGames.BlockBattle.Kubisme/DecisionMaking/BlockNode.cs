@@ -4,7 +4,7 @@ namespace AIGames.BlockBattle.Kubisme
 	public static class BlockNode
 	{
 		/// <summary>Applies garbage and locks to the field.</summary>
-		public static Field Apply(Field field, int depth, ApplyParameters pars)
+		public static Field Apply(Field field, int depth, ApplyParameters pars, Block block)
 		{
 			// Lock a row every 15 turns. 
 			if ((pars.Round + depth) % 15 == 0)
@@ -22,6 +22,11 @@ namespace AIGames.BlockBattle.Kubisme
 			else if (depth == 2 && pars.Opponent.Garbage2 > 0)
 			{
 				var garbage = Row.GetGarbage(pars.Opponent.Garbage2, pars.Opponent.Points1, pars.Rnd);
+				return field.Garbage(garbage);
+			}
+			else if (depth == 3 && pars.Opponent.Garbage3[block] > 0)
+			{
+				var garbage = Row.GetGarbage(pars.Opponent.Garbage3[block], pars.Opponent.Points2, pars.Rnd);
 				return field.Garbage(garbage);
 			}
 			return field;

@@ -32,7 +32,6 @@ namespace AIGames.BlockBattle.Kubisme
 				
 					foreach (var candidate in pars.Generator.GetMoves(Field, block, true))
 					{
-						if (!pars.HasTimeLeft) { return; }
 						Block1Node child = Create(candidate.Field, candidate.Path, pars);
 
 						// We can kill our opponent.

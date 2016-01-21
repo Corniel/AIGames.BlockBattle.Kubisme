@@ -34,12 +34,11 @@ namespace AIGames.BlockBattle.Kubisme
 					var block = GetBlock(pars);
 					Children = new BlockNodes<BlockRndNode>(block);
 
-					var applied = BlockNode.Apply(Field, Depth, pars);
+					var applied = BlockNode.Apply(Field, Depth, pars, null);
 					if (!applied.IsNone)
 					{
 						foreach (var field in pars.Generator.GetFields(applied, block, true))
 						{
-							if (!pars.HasTimeLeft) { return; }
 							var child = Create(field, pars);
 
 							// We can kill our opponent.

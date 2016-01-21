@@ -43,10 +43,20 @@ namespace AIGames.BlockBattle.Kubisme
 						{
 							if (!pars.HasTimeLeft) { return; }
 
-							var applied = BlockNode.Apply(field, Depth, pars);
+							var applied = BlockNode.Apply(field, Depth, pars, block);
 							if (!applied.IsNone)
 							{
 								var child = Create(applied, pars);
+
+								// We can kill our opponent.
+								if (Depth == 2 && child.Field.Points > Field.Points)
+								{
+									var garbageNew = child.Field.Points / 3;
+									if (garbageNew - pars.Garbage > pars.Opponent.FirstFilled3[block])
+									{
+										child.SetFinalScore(Scores.Wins(3));
+									}
+								}
 								nodes.InsertSorted(child);
 							}
 						}

@@ -520,7 +520,8 @@ XXX..X.XX.";
 		{
 			var field = Field.Create(0, 0, 0, str);
 			var evaluator = new Evaluator();
-			var actual = evaluator.GetScore(field, pars.Calc());
+			var oppo = new OpponentEvaluation(0, 0, 0, field.FirstFilled, 0, null, null);
+			var actual = evaluator.GetScore(field, pars.Calc(), 0, oppo, null);
 			Assert.AreEqual(expected, actual);
 		}
 	}

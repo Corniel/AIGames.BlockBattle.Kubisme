@@ -27,6 +27,7 @@ namespace AIGames.BlockBattle.Kubisme
 			HolesUnreachable = new ParamCurve();
 			Skips = new ParamCurve();
 			PerfectClearPotential = new ParamCurve();
+			Delta = new ParamCurve();
 			Groups = new int[6];
 			SingleGroupBonus = new int[4];
 			SingleEmpties = new int[6];
@@ -83,6 +84,9 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] PerfectClearPotentialCalc { get { return m_PerfectClearPotential; } }
 		private int[] m_PerfectClearPotential;
+
+		public int[] DeltaCalc { get { return m_DeltaCalc; } }
+		private int[] m_DeltaCalc;
 		
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] SingleEmpties { get; set; }
@@ -124,7 +128,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public ParamCurve EmptyRows { get; set; }
 		public ParamCurve Skips { get; set; }
 		public ParamCurve PerfectClearPotential { get; set; }
-		
+		public ParamCurve Delta { get; set; }
+
 		public EvaluatorParameters Calc()
 		{
 			m_Points = Points.Calculate();
@@ -146,6 +151,7 @@ namespace AIGames.BlockBattle.Kubisme
 			m_HolesUnreachable = HolesUnreachable.Calculate();
 			m_SkipsCalc = Skips.Calculate();
 			m_PerfectClearPotential = PerfectClearPotential.Calculate();
+			m_DeltaCalc = Delta.Calculate();
 
 			m_SingleEmpties = new int[SingleEmpties.Length];
 			for (var i = 0; i < m_SingleEmpties.Length; i++)

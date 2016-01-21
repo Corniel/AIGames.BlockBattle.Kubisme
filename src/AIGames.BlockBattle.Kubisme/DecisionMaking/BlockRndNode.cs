@@ -46,7 +46,7 @@ namespace AIGames.BlockBattle.Kubisme
 							var applied = BlockNode.Apply(field, Depth, pars, block);
 							if (!applied.IsNone)
 							{
-								var child = Create(applied, pars);
+								var child = Create(applied, pars, block);
 
 								// We can kill our opponent.
 								if (Depth == 2 && child.Field.Points > Field.Points)
@@ -92,9 +92,9 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 		}
 
-		protected BlockRndNode Create(Field field, ApplyParameters pars)
+		protected BlockRndNode Create(Field field, ApplyParameters pars, Block block)
 		{
-			var score = pars.Evaluator.GetScore(field, pars.Parameters);
+			var score = pars.Evaluator.GetScore(field, pars.Parameters, Depth, pars.Opponent, block);
 			pars.Evaluations++;
 			return new BlockRndNode(field, Depth, score);
 		}

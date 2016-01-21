@@ -520,7 +520,7 @@ XXX..X.XX.";
 		{
 			var field = Field.Create(0, 0, 0, str);
 			var evaluator = new Evaluator();
-			var actual = evaluator.GetScore(field, 0, pars.Calc());
+			var actual = evaluator.GetScore(field, pars.Calc());
 			Assert.AreEqual(expected, actual);
 		}
 	}

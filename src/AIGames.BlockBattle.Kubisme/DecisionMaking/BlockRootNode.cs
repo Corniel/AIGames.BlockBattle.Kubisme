@@ -56,7 +56,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		protected Block1Node Create(Field field, BlockPath path, ApplyParameters pars)
 		{
-			var score = pars.Evaluator.GetScore(field, Depth, pars.Parameters);
+			var score = pars.Evaluator.GetScore(field, pars.Parameters);
 			pars.Evaluations++;
 			return new Block1Node(field, path, score, pars.Next.BranchingFactor1);
 		}

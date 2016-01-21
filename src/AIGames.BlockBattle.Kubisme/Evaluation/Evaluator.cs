@@ -20,7 +20,7 @@
 		/// this is the most executed code of the all AI, speed is everything. The
 		/// penalty for calling a method is small, but here, we don't want to spoil it.
 		/// </remarks>
-		public int GetScore(Field field, int depth, EvaluatorParameters pars)
+		public int GetScore(Field field, EvaluatorParameters pars)
 		{
 #if !DEBUG
 			unchecked { // we trust this not to overflow.
@@ -64,9 +64,9 @@
 			var countRow1 = 0;
 			var countRow1Group = 0;
 			var countRow2Group = 0;
-			
+
 			#region Reachable Area
-			
+
 			for (; rowIndex < field.RowCount; rowIndex++)
 			{
 				row0 = field[rowIndex];
@@ -191,7 +191,7 @@
 						}
 					}
 				}
-				#endregion
+					#endregion
 
 				#region T-spin potential
 
@@ -260,7 +260,7 @@
 				row2 = row1;
 				row1 = row0;
 			}
-				#endregion
+			#endregion
 
 			#region Vertical I potential
 
@@ -322,7 +322,7 @@
 							// Can be divided by 4.
 							(toFill & 3) == 0 &&
 							// maximum block left only.
-							toFill <= 12 && 
+							toFill <= 12 &&
 							// Can be filled 'easily' because all space is connected.
 							Row.Groups[row0Mirror] == 1 &&
 							Row.Groups[row1 ^ Row.Filled] == 1 &&

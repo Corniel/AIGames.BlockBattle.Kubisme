@@ -61,7 +61,11 @@
 
 			var delta = firstFilled - oppoFilled;
 
-			score += delta * pars.DeltaCalc[firstFilled];
+			// If our position is potential worse, add a score.
+			if (delta < 0)
+			{
+				score += delta * pars.DeltaCalc[firstFilled];
+			}
 
 			#endregion
 

@@ -60,13 +60,8 @@
 			}
 
 			var delta = firstFilled - oppoFilled;
-
-			// If our position is potential worse, add a score.
-			if (delta < 0)
-			{
-				score += delta * pars.DeltaCalc[firstFilled];
-			}
-
+			score += delta * pars.DeltaCalc[firstFilled];
+			
 			#endregion
 
 			// Points for static evaluation.
@@ -94,6 +89,8 @@
 			var countRow1 = 0;
 			var countRow1Group = 0;
 			var countRow2Group = 0;
+
+			var iPotential = 0;
 
 			#region Reachable Area
 
@@ -289,12 +286,19 @@
 				row3 = row2;
 				row2 = row1;
 				row1 = row0;
+
+				// If we face it before, or if there is just a single entrance the first 
+				// time, we start counting.
+				if (iPotential != 0 || Row.Count[row0Open] == 1)
+				{
+					iPotential++;
+				}
 			}
 			#endregion
 
 			#region Vertical I potential
 
-			if (rowIndex >= 4)
+			if (rowIndex >= 4 && iPotential >= 3)
 			{
 				var clearenceI = 0;
 				// If we're on the floor, -1, -4, instead 0, -3.

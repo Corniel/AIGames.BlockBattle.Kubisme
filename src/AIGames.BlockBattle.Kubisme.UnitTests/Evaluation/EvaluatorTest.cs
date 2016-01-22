@@ -212,6 +212,50 @@ XXX..X.XX.";
 		}
 
 		[Test]
+		public void TetrisPotential_NotDeepEnough_0()
+		{
+			var field = @"
+			..........
+			..........
+			XX..XX.XXX
+			XX..X.XXXX
+			XX.XXXXXXX
+			XX.XXXXXXX
+			XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
+			};
+			Test(field, pars, 0);
+		}
+
+
+		[Test]
+		public void TetrisPotential_NotHighEnough_0()
+		{
+			var field = @"
+			..........
+			..........
+			..........
+			XX.XXXXXXX
+			XX.XXXXXXX
+			XXX..X.XX.";
+			var pars = new EvaluatorParameters()
+			{
+				I0 = new ParamCurve(0),
+				I1 = new ParamCurve(1),
+				I2 = new ParamCurve(2),
+				I3 = new ParamCurve(3),
+				I4 = new ParamCurve(4),
+			};
+			Test(field, pars, 0);
+		}
+
+		[Test]
 		public void TSpinDoublePotential_TFitWithHole_0()
 		{
 			var pars = new EvaluatorParameters()

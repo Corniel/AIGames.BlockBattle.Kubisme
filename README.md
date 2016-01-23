@@ -3,6 +3,12 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 66
+----------
+Increased opponent analysis to 3 ply. Only search for I-potential with 'deep tunnels'.
+Take first filled of opponent into account for the score of a field. Improved 
+speed of path finding enormously.
+
 Version 65
 ----------
 Extended curved parameters.

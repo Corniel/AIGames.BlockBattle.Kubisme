@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 67
+----------
+New parameters and exclude delta score for more than 3 ply.
+
 Version 66
 ----------
 Increased opponent analysis to 3 ply. Only search for I-potential with 'deep tunnels'.
@@ -15,7 +19,7 @@ Extended curved parameters.
 
 Version 64
 ----------
-Introduced curved parameters, and single T-spin dectection. Score 0.67.
+Introduced curved parameters, and single T-spin detection. Score 0.67.
 
 Version 63
 ----------

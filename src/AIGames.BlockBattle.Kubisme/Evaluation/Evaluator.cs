@@ -56,7 +56,7 @@
 			}
 			else
 			{
-				oppoFilled = oppo.FirstFilled4;
+				oppoFilled = firstFilled;
 			}
 
 			var delta = firstFilled - oppoFilled;

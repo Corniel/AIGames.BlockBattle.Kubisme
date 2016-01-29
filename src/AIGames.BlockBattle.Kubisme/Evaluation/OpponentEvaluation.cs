@@ -36,10 +36,6 @@ namespace AIGames.BlockBattle.Kubisme
 				foreach (var block in Block.All)
 				{
 					var fill = FirstFilled3[block];
-					if (fill > FirstFilled4)
-					{
-						FirstFilled4 = fill;
-					}
 					var garbage3 = fill / 3;
 					Garbage3[block] = garbage3 - garbage2;
 				}
@@ -56,7 +52,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public int FirstFilled1 { get; private set; }
 		public int FirstFilled2 { get; private set; }
 		public Dictionary<Block, int> FirstFilled3 { get; private set; }
-		public int FirstFilled4 { get; private set; }
 
 		public int Garbage1 { get; private set; }
 		public int Garbage2 { get; private set; }

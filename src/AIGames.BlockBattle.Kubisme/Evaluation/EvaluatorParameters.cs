@@ -27,7 +27,6 @@ namespace AIGames.BlockBattle.Kubisme
 			HolesUnreachable = new ParamCurve();
 			Skips = new ParamCurve();
 			PerfectClearPotential = new ParamCurve();
-			Delta = new ParamCurve();
 			Groups = new int[6];
 			SingleGroupBonus = new int[4];
 			SingleEmpties = new int[6];
@@ -84,9 +83,6 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] PerfectClearPotentialCalc { get { return m_PerfectClearPotential; } }
 		private int[] m_PerfectClearPotential;
-
-		public int[] DeltaCalc { get { return m_DeltaCalc; } }
-		private int[] m_DeltaCalc;
 		
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] SingleEmpties { get; set; }
@@ -128,7 +124,6 @@ namespace AIGames.BlockBattle.Kubisme
 		public ParamCurve EmptyRows { get; set; }
 		public ParamCurve Skips { get; set; }
 		public ParamCurve PerfectClearPotential { get; set; }
-		public ParamCurve Delta { get; set; }
 
 		public EvaluatorParameters Calc()
 		{
@@ -151,7 +146,6 @@ namespace AIGames.BlockBattle.Kubisme
 			m_HolesUnreachable = HolesUnreachable.Calculate();
 			m_SkipsCalc = Skips.Calculate();
 			m_PerfectClearPotential = PerfectClearPotential.Calculate();
-			m_DeltaCalc = Delta.Calculate();
 
 			m_SingleEmpties = new int[SingleEmpties.Length];
 			for (var i = 0; i < m_SingleEmpties.Length; i++)
@@ -188,7 +182,6 @@ namespace AIGames.BlockBattle.Kubisme
 				//SingleEmptiesCalc = new int[] { 0, -3, -8, -99, -232, -530 },
 				//SkipsCalc = new int[] { 16, 15, 13, 12, 11, 9, 8, 7, 6, 5, 4, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -9 },
 				//PerfectClearPotentialCalc = new int[] { -27, -24, -22, -19, -16, -13, -10, -7, -4, -1, 1, 4, 7, 10, 13, 16, 19, 22, 26, 29, 32, 35 },
-				//DeltaCalc = new int[] { 2, 1, 0, 0, -1, -1, -2, -2, -3, -4, -4, -5, -5, -6, -6, -6, -7, -7, -8, -8, -9, -9 },
 				SingleEmpties = new int[] { -3, -3, -4, -33, -58, -106 },
 				SingleGroupBonus = new int[] { 20, 30, 29, 43 },
 				Groups = new int[] { 50, 4, -22, -47, -62, -182 },
@@ -209,7 +202,6 @@ namespace AIGames.BlockBattle.Kubisme
 				EmptyRows = new ParamCurve(19, 31, 1.02858524676715, 0.792250941629362),
 				Skips = new ParamCurve(16, -11, 0.955798926237415, 0.967247369135811),
 				PerfectClearPotential = new ParamCurve(-27, 23, 0.973177443404497, 1.07076601949121),
-				Delta = new ParamCurve(2, -13, 0.929580807001583, 0.896832377666578),
 			};
 			return pars.Calc();
 		}

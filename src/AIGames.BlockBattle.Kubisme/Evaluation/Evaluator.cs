@@ -20,7 +20,7 @@
 		/// this is the most executed code of the all AI, speed is everything. The
 		/// penalty for calling a method is small, but here, we don't want to spoil it.
 		/// </remarks>
-		public int GetScore(Field field, EvaluatorParameters pars, int depth, OpponentEvaluation oppo, Block block)
+		public int GetScore(Field field, EvaluatorParameters pars)
 		{
 #if !DEBUG
 			unchecked { // we trust this not to overflow.
@@ -37,31 +37,6 @@
 			// Evaluation for free space.
 			score += pars.EmptyRowsCalc[firstFilled];
 
-			#endregion
-
-			#region Opponent
-
-			var oppoFilled = 0;
-			if (depth == 0)
-			{
-				oppoFilled = oppo.FirstFilled1;
-			}
-			else if (depth == 1)
-			{
-				oppoFilled = oppo.FirstFilled2;
-			}
-			else if (depth == 2)
-			{
-				oppoFilled = oppo.FirstFilled3[block];
-			}
-			else
-			{
-				oppoFilled = firstFilled;
-			}
-
-			var delta = firstFilled - oppoFilled;
-			score += delta * pars.DeltaCalc[firstFilled];
-			
 			#endregion
 
 			// Points for static evaluation.

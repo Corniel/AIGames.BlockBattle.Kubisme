@@ -565,7 +565,7 @@ XXX..X.XX.";
 			var field = Field.Create(0, 0, 0, str);
 			var evaluator = new Evaluator();
 			var oppo = new OpponentEvaluation(0, 0, 0, field.FirstFilled, 0, null, null);
-			var actual = evaluator.GetScore(field, pars.Calc(), 0, oppo, null);
+			var actual = evaluator.GetScore(field, pars.Calc());
 			Assert.AreEqual(expected, actual);
 		}
 	}

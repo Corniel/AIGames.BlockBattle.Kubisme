@@ -44,7 +44,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public int[] I2Calc { get { return m_I2; } }
 		public int[] I3Calc { get { return m_I3; } }
 		public int[] I4Calc { get { return m_I4; } }
-		
+
 		private int[] m_I0;
 		private int[] m_I1;
 		private int[] m_I2;
@@ -83,7 +83,7 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] PerfectClearPotentialCalc { get { return m_PerfectClearPotential; } }
 		private int[] m_PerfectClearPotential;
-		
+
 		[ParameterType(ParameterType.Descending | ParameterType.Negative)]
 		public int[] SingleEmpties { get; set; }
 
@@ -162,46 +162,46 @@ namespace AIGames.BlockBattle.Kubisme
 		public static EvaluatorParameters GetDefault()
 		{
 			var pars = new EvaluatorParameters()
-			// Elo: 1620, Runs:   810 (54.9%, PT: 0.748, #: 47.9, T1: 5.18%, T2: 24.48%, I4: 2.00%, CL: 0.74%), ID: 15340, Parent: 15295, Gen: 128, Ply: 3
+			// Elo: 1615, Runs:  2335 (53.0%, PT: 0.724, #: 46.1, T1: 4.57%, T2: 28.85%, I4: 0.88%, CL: 0.77%), ID: 6649, Parent: 6520, Gen: 37
 			{
-				//PointsCalc = new int[] { 46, 47, 47, 48, 48, 49, 49, 50, 50, 51, 51, 52, 52, 53, 53, 54, 54, 55, 55, 55, 56, 56 },
-				//ComboCalc = new int[] { -4, -4, -3, -3, -2, -1, -1, 0, 0, 1, 2, 2, 3, 3, 4, 5, 5, 6, 7, 7, 8, 9 },
-				//I0Calc = new int[] { 64, 58, 53, 48, 44, 39, 35, 31, 27, 23, 20, 16, 12, 9, 5, 2, -2, -5, -9, -12, -16, -19 },
-				//I1Calc = new int[] { -23, -18, -16, -14, -12, -10, -8, -7, -5, -4, -2, -1, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10 },
-				//I2Calc = new int[] { 30, 28, 24, 20, 14, 8, 1, -6, -14, -22, -31, -40, -50, -60, -71, -81, -93, -104, -116, -128, -141, -154 },
-				//I3Calc = new int[] { 0, 3, 5, 7, 9, 10, 12, 14, 15, 17, 18, 20, 21, 22, 24, 25, 26, 28, 29, 30, 31, 33 },
-				//I4Calc = new int[] { 31, 29, 27, 26, 25, 24, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 8 },
-				//HolesReachableCalc = new int[] { -64, -61, -59, -56, -54, -52, -49, -47, -45, -43, -41, -39, -37, -35, -33, -31, -29, -27, -25, -23, -21, -19 },
-				//HolesUnreachableCalc = new int[] { -67, -64, -62, -61, -59, -58, -56, -55, -54, -52, -51, -50, -49, -48, -47, -45, -44, -43, -42, -41, -40, -39 },
-				//UnreachableRowsCalc = new int[] { -60, -8, 37, 79, 121, 161, 200, 239, 277, 314, 351, 388, 425, 461, 497, 532, 568, 603, 638, 672, 707, 741 },
-				//TSpinSingle0PotentialCalc = new int[] { 14, 13, 12, 12, 11, 10, 10, 9, 8, 8, 7, 7, 6, 5, 5, 4, 4, 3, 3, 2, 1, 1 },
-				//TSpinSingle1PotentialCalc = new int[] { -32, -32, -32, -32, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33, -33 },
-				//TSpinDoublePotentialCalc = new int[] { 10, 17, 27, 37, 47, 59, 70, 82, 94, 106, 119, 131, 144, 157, 170, 184, 197, 211, 225, 239, 253, 267 },
-				//TDoubleClearPotentialCalc = new int[] { 56, 54, 53, 51, 50, 49, 48, 46, 45, 44, 43, 42, 41, 40, 38, 37, 36, 35, 34, 33, 32, 31 },
-				//EmptyRowsCalc = new int[] { 19, 20, 20, 20, 21, 21, 21, 22, 22, 22, 22, 23, 23, 23, 23, 24, 24, 24, 25, 25, 25, 25 },
-				//SingleEmptiesCalc = new int[] { 0, -3, -8, -99, -232, -530 },
-				//SkipsCalc = new int[] { 16, 15, 13, 12, 11, 9, 8, 7, 6, 5, 4, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -9 },
-				//PerfectClearPotentialCalc = new int[] { -27, -24, -22, -19, -16, -13, -10, -7, -4, -1, 1, 4, 7, 10, 13, 16, 19, 22, 26, 29, 32, 35 },
-				SingleEmpties = new int[] { -3, -3, -4, -33, -58, -106 },
-				SingleGroupBonus = new int[] { 20, 30, 29, 43 },
-				Groups = new int[] { 50, 4, -22, -47, -62, -182 },
-				Points = new ParamCurve(46, 59, 0.982464273658126, 0.923865588473537),
-				Combo = new ParamCurve(-4, 12, 1.17931873106475, 0.931724573249337),
-				HolesReachable = new ParamCurve(-64, 1, 1.01779355459707, 0.880127609895466),
-				HolesUnreachable = new ParamCurve(-67, -15, 0.964614208435645, 0.787239021236976),
-				UnreachableRows = new ParamCurve(-60, 519, 0.791688003323969, 1.13480606727193),
-				I0 = new ParamCurve(64, -13, 0.821491520087516, 1.03024631174621),
-				I1 = new ParamCurve(-23, 39, 0.848418802935529, 0.756226554546666),
-				I2 = new ParamCurve(30, -22, 1.07058355598567, 1.38699799980154),
-				I3 = new ParamCurve(0, 39, 0.851792399093953, 0.930326619511863),
-				I4 = new ParamCurve(31, -7, 0.964958965411296, 0.835642914806356),
-				TSpinSingle0Potential = new ParamCurve(14, -13, 1.0953695677393, 0.781692313346563),
-				TSpinSingle1Potential = new ParamCurve(-32, -35, 0.831301937725097, 0.704934481905502),
-				TSpinDoublePotential = new ParamCurve(10, 188, 1.0404560030663, 1.11573564793918),
-				TDoubleClearPotential = new ParamCurve(56, 37, 0.784760977555421, 1.11526331817929),
-				EmptyRows = new ParamCurve(19, 31, 1.02858524676715, 0.792250941629362),
-				Skips = new ParamCurve(16, -11, 0.955798926237415, 0.967247369135811),
-				PerfectClearPotential = new ParamCurve(-27, 23, 0.973177443404497, 1.07076601949121),
+				//PointsCalc = new int[] { 39, 39, 39, 39, 39, 38, 38, 38, 38, 38, 38, 38, 38, 37, 37, 37, 37, 37, 37, 37, 37, 36 },
+				//ComboCalc = new int[] { -2, 0, 2, 5, 7, 10, 12, 14, 17, 19, 21, 24, 26, 29, 31, 34, 36, 38, 41, 43, 46, 48 },
+				//I0Calc = new int[] { 8, 4, 1, -2, -4, -7, -9, -11, -14, -16, -18, -20, -22, -24, -26, -28, -30, -32, -34, -35, -37, -39 },
+				//I1Calc = new int[] { -52, -51, -50, -49, -48, -46, -45, -44, -42, -41, -40, -38, -37, -35, -34, -32, -31, -29, -28, -26, -25, -23 },
+				//I2Calc = new int[] { -31, -32, -32, -33, -34, -35, -36, -36, -37, -38, -39, -39, -40, -41, -42, -42, -43, -44, -45, -45, -46, -47 },
+				//I3Calc = new int[] { 11, 12, 12, 13, 13, 14, 14, 15, 15, 15, 16, 16, 17, 17, 17, 18, 18, 19, 19, 19, 20, 20 },
+				//I4Calc = new int[] { 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 },
+				//HolesReachableCalc = new int[] { -22, -19, -18, -18, -17, -16, -16, -15, -15, -15, -14, -14, -14, -13, -13, -13, -12, -12, -12, -12, -11, -11 },
+				//HolesUnreachableCalc = new int[] { -53, -45, -41, -38, -35, -33, -31, -29, -28, -26, -25, -23, -22, -20, -19, -18, -17, -15, -14, -13, -12, -11 },
+				//UnreachableRowsCalc = new int[] { -14, -14, -14, -13, -13, -13, -13, -13, -13, -13, -13, -12, -12, -12, -12, -12, -12, -12, -12, -12, -11, -11 },
+				//TSpinSingle0PotentialCalc = new int[] { 4, 5, 6, 7, 8, 8, 9, 10, 10, 11, 12, 12, 13, 14, 14, 15, 16, 16, 17, 18, 18, 19 },
+				//TSpinSingle1PotentialCalc = new int[] { -29, -27, -26, -24, -23, -21, -19, -18, -16, -15, -13, -12, -10, -9, -7, -6, -4, -3, -1, 0, 2, 3 },
+				//TSpinDoublePotentialCalc = new int[] { -28, 13, 32, 47, 60, 71, 82, 91, 100, 109, 117, 125, 132, 139, 146, 153, 160, 166, 172, 178, 184, 190 },
+				//TDoubleClearPotentialCalc = new int[] { -18, 21, 34, 43, 51, 57, 63, 68, 73, 78, 82, 86, 90, 94, 97, 100, 103, 107, 110, 112, 115, 118 },
+				//EmptyRowsCalc = new int[] { -61, -13, 6, 21, 33, 43, 53, 62, 70, 78, 85, 92, 98, 104, 110, 116, 122, 127, 132, 137, 142, 147 },
+				//SingleEmptiesCalc = new int[] { 0, -8, -46, -105, -328, -560 },
+				//SkipsCalc = new int[] { 14, 18, 22, 25, 28, 31, 34, 36, 39, 41, 44, 46, 49, 51, 54, 56, 58, 61, 63, 65, 67, 70 },
+				//PerfectClearPotentialCalc = new int[] { 19, 20, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 24, 25, 25, 26, 26, 26, 27, 27, 28, 28 },
+				SingleEmpties = new int[] { -4, -8, -23, -35, -82, -112 },
+				SingleGroupBonus = new int[] { 9, 15, 13, 19 },
+				Groups = new int[] { 25, 9, -25, -40, -43, -52 },
+				Points = new ParamCurve(39, 37, 0.978751950550506, 1.0872901634181),
+				Combo = new ParamCurve(-2, 54, 1.06239757236192, 0.965990135534836),
+				HolesReachable = new ParamCurve(-22, -10, 0.495423531301773, 0.934261354296262),
+				HolesUnreachable = new ParamCurve(-53, -12, 0.518868607592336, 1.01455373253663),
+				UnreachableRows = new ParamCurve(-14, -11, 0.876383032829627, 0.960272202883828),
+				I0 = new ParamCurve(8, -44, 0.835291351514647, 0.959971191778264),
+				I1 = new ParamCurve(-52, -29, 1.05313681783702, 1.06808225640425),
+				I2 = new ParamCurve(-31, -51, 1.08212834573541, 0.930424773987383),
+				I3 = new ParamCurve(11, 24, 0.993132630081788, 0.888425761477171),
+				I4 = new ParamCurve(16, 16, 0.959745035270708, 0.857341108564648),
+				TSpinSingle0Potential = new ParamCurve(4, 26, 0.997375629202244, 0.870630344590973),
+				TSpinSingle1Potential = new ParamCurve(-29, 11, 1.04241327457591, 0.932774796883662),
+				TSpinDoublePotential = new ParamCurve(-28, 194, 0.553907927652281, 0.98846162484164),
+				TDoubleClearPotential = new ParamCurve(-18, 155, 0.49046582143932, 0.838144749686831),
+				EmptyRows = new ParamCurve(-61, 154, 0.491188092007989, 0.978213989442313),
+				Skips = new ParamCurve(14, 73, 0.853096937292526, 0.977814281274923),
+				PerfectClearPotential = new ParamCurve(19, 27, 0.884144165743302, 1.04151839690489),
 			};
 			return pars.Calc();
 		}

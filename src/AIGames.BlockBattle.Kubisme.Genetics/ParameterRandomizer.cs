@@ -162,7 +162,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private static ParameterType GetType(PropertyInfo prop)
 		{
 			var attr = prop.GetCustomAttribute<ParameterTypeAttribute>();
-			return attr == null ? ParameterType.Default : attr.ParameterType;
+			return attr == null ? ParameterType.None : attr.ParameterType;
 		}
 	}
 }

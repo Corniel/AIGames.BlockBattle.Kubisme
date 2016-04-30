@@ -16,7 +16,7 @@ namespace AIGames.BlockBattle.Kubisme
 	[Flags]
 	public enum ParameterType
 	{
-		Default = 0,
+		None = 0,
 		Ascending = 1,
 		Descending = 2,
 		Positive = 4,

@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 71
+----------
+Take height of reachables into account when valuation unreachbles.
+
 Version 70
 ----------
 Rolled 3ply stuff back too.
@@ -32,7 +36,7 @@ Extended curved parameters.
 
 Version 64
 ----------
-Introduced curved parameters, and single T-spin dectection. Score 0.67.
+Introduced curved parameters, and single T-spin detection. Score 0.67.
 
 Version 63
 ----------

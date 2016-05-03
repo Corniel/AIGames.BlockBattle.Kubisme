@@ -65,7 +65,7 @@
 			var countRow1Group = 0;
 			var countRow2Group = 0;
 
-				#region Reachable Area
+			#region Reachable Area
 
 			var rowIndexHoles = -1;
 			for (; rowIndex < field.RowCount; rowIndex++)
@@ -289,15 +289,31 @@
 
 			#region Unreachable area
 
+			var unreachbleGroups = 0;
+			var row1Mirror = row0Mirror;
+
 			score += pars.UnreachableRowsCalc[field.RowCount - rowIndex];
-			
+
 			for (; rowIndex < field.RowCount; rowIndex++)
 			{
 				row0Mirror = field[rowIndex] ^ Row.Filled;
+				unreachbleGroups = Row.Groups[row0Mirror];
 				// Points for groups.
-				score += pars.Groups[Row.Groups[row0Mirror]];
+				score += pars.Groups[unreachbleGroups];
 				// Points for holes.
-				countHoleUnreachable += Row.Count[row0Mirror] * pars.HolesUnreachableCalc[rowIndexHoles++];
+				countRow0Holes = Row.Count[row0Mirror];
+				countHoleUnreachable += countRow0Holes * pars.HolesUnreachableCalc[rowIndexHoles];
+				// Points for multiples.
+				if (unreachbleGroups == 1 && countRow0Holes > 1)
+				{
+					score += countRow0Holes * pars.UnreachableMultiplesCalc[rowIndexHoles];
+				}
+
+				// Points for 'deep' holes.
+				score += Row.Count[row0Mirror & row1Mirror] * pars.UnreachableColumnsCalc[rowIndexHoles];
+
+				rowIndexHoles++;
+				row1Mirror = row0Mirror;
 			}
 			#endregion
 

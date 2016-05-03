@@ -36,6 +36,37 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		}
 
 		[Test]
+		public void UnreachableColumns_TunnelOf3_3()
+		{
+			var field = @"
+..........
+..........
+XXXXXX.XXX
+XX.XXXXXXX
+XX.XXXXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				UnreachableColumns = new ParamCurve(1),
+			};
+			Test(field, pars, 1);
+		}
+		[Test]
+		public void UnreachableMultiples_TunnelOf3_3()
+		{
+			var field = @"
+..........
+..........
+XXXXXX..XX
+XX....XXXX
+XX.XXXXXXX";
+			var pars = new EvaluatorParameters()
+			{
+				UnreachableMultiples = new ParamCurve(1),
+			};
+			Test(field, pars, 4);
+		}
+
+		[Test]
 		public void SingleGroupBonus_AllKindOfRows_1111()
 		{
 			var field = @"

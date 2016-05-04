@@ -82,6 +82,38 @@ XXXXXX.XXX");
 		}
 
 		[Test]
+		public void GetReachableHoles_FullFieldWithTetris_()
+		{
+			var field = Field.Create(58, 0, 2, @"
+				..........
+				..........
+				...X......
+				XXXXXXXXX.
+				XXXXXXXXX.
+				XXXXXXXXX.
+				XXXXXXXXX.
+				XX..XXXXXX
+				XXXXXXXX.X
+				XXX.XXXXX.
+				.XXXXXXXXX
+				XX.XXXXXX.
+				X.XXXXXXXX
+				XXXXX.XX.X
+				XXXXXXXXX.
+				XXXXXXXX..
+				XXXXXXXXX.");
+			var act = MoveGenerator.GetReachableHoles(field, Block.I).Select(move => move.Path).ToArray();
+			var exp = new BlockPath[]
+			{
+				BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.TurnRight, ActionType.Right, ActionType.Drop),
+			};
+
+			CollectionAssert.AreEqual(exp, act);
+
+
+		}
+
+		[Test]
 		public void GetPath_HolesReachable_PathEndingWithDownLeft()
 		{
 			var field = Field.Create(0, 0, 0, @"

@@ -22,7 +22,10 @@ namespace AIGames.BlockBattle.Kubisme
 			TSpinDoublePotential = new ParamCurve();
 			TDoubleClearPotential = new ParamCurve();
 			EmptyRows = new ParamCurve();
+
 			UnreachableRows = new ParamCurve();
+			UnreachableMultiples = new ParamCurve();
+			UnreachableColumns = new ParamCurve();
 			HolesReachable = new ParamCurve();
 			HolesUnreachable = new ParamCurve();
 			Skips = new ParamCurve();
@@ -60,6 +63,11 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] UnreachableRowsCalc { get { return m_UnreachableRows; } }
 		private int[] m_UnreachableRows;
+		public int[] UnreachableMultiplesCalc { get { return m_UnreachableMultiples; } }
+		private int[] m_UnreachableMultiples;
+
+		public int[] UnreachableColumnsCalc { get { return m_UnreachableColumns; } }
+		private int[] m_UnreachableColumns;
 
 		public int[] TSpinSingle0PotentialCalc { get { return m_TSpinSingle0Potential; } }
 		private int[] m_TSpinSingle0Potential;
@@ -108,6 +116,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public ParamCurve HolesUnreachable { get; set; }
 
 		public ParamCurve UnreachableRows { get; set; }
+		public ParamCurve UnreachableMultiples { get; set; }
+		public ParamCurve UnreachableColumns { get; set; }
 
 		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
 		[ParameterType(ParameterType.Ascending)]
@@ -137,6 +147,8 @@ namespace AIGames.BlockBattle.Kubisme
 			m_I4 = I4.Calculate();
 
 			m_UnreachableRows = UnreachableRows.Calculate();
+			m_UnreachableMultiples = UnreachableMultiples.Calculate();
+			m_UnreachableColumns = UnreachableColumns.Calculate();
 			m_EmptyRows = EmptyRows.Calculate();
 			m_TSpinSingle0Potential = TSpinSingle0Potential.Calculate();
 			m_TSpinSingle1Potential = TSpinSingle1Potential.Calculate();

@@ -67,8 +67,11 @@
 
 			#region Reachable Area
 
+			var rowIndexHoles = -1;
 			for (; rowIndex < field.RowCount; rowIndex++)
 			{
+				// For holes use an index based on the first filled.
+				rowIndexHoles++;
 				row0 = field[rowIndex];
 				row0Mirror = row0 ^ Row.Filled;
 
@@ -115,69 +118,69 @@
 							// X.........
 							case 0x001:
 								//.XX.......
-								if ((row0Mirror & 0x006) == 0x006) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x006) == 0x006) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// .X........
 							case 0x002:
 								//..XX......
-								if ((row0Mirror & 0x00C) == 0x00C) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x00C) == 0x00C) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// ..X.......
 							case 0x004:
 								//XX........ OR ...XX.....
-								if ((row0Mirror & 0x003) == 0x003 || (row0Mirror & 0x018) == 0x018) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x003) == 0x003 || (row0Mirror & 0x018) == 0x018) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// ...X......
 							case 0x008:
 								//.XX....... OR ....XX....
-								if ((row0Mirror & 0x006) == 0x006 || (row0Mirror & 0x030) == 0x030) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x006) == 0x006 || (row0Mirror & 0x030) == 0x030) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// ....X.....
 							case 0x010:
 								//..XX...... OR .....XX...
-								if ((row0Mirror & 0x00C) == 0x00C || (row0Mirror & 0x060) == 0x060) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x00C) == 0x00C || (row0Mirror & 0x060) == 0x060) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// .....X....
 							case 0x020:
 								//...XX..... OR ......XX..
-								if ((row0Mirror & 0x018) == 0x018 || (row0Mirror & 0x0C0) == 0x0C0) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x018) == 0x018 || (row0Mirror & 0x0C0) == 0x0C0) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// ......X...
 							case 0x040:
 								//....XX.... OR .......XX.
-								if ((row0Mirror & 0x030) == 0x030 || (row0Mirror & 0x180) == 0x180) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x030) == 0x030 || (row0Mirror & 0x180) == 0x180) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// .......X..
 							case 0x080:
 								//.....XX... OR ........XX
-								if ((row0Mirror & 0x060) == 0x060 || (row0Mirror & 0x300) == 0x300) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x060) == 0x060 || (row0Mirror & 0x300) == 0x300) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// ........X.
 							case 0x100:
 								//......XX..
-								if ((row0Mirror & 0x0C0) == 0x0C0) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x0C0) == 0x0C0) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 							// .........X
 							case 0x200:
 								//.......XX.
-								if ((row0Mirror & 0x180) == 0x180) { countHoleReachable += pars.HolesReachableCalc[rowIndex]; }
-								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndex]; }
+								if ((row0Mirror & 0x180) == 0x180) { countHoleReachable += pars.HolesReachableCalc[rowIndexHoles]; }
+								else { countHoleReachable += pars.HolesUnreachableCalc[rowIndexHoles]; }
 								break;
 						}
 					}
 
 					else
 					{
-						countHoleUnreachable += countRow0Holes * pars.HolesUnreachableCalc[rowIndex];
+						countHoleUnreachable += countRow0Holes * pars.HolesUnreachableCalc[rowIndexHoles];
 					}
 
 					#region Single T-spin upper
@@ -286,18 +289,31 @@
 
 			#region Unreachable area
 
-			var unreachableRowIndex = rowIndex - firstFilled;
+			var unreachbleGroups = 0;
+			var row1Mirror = row0Mirror;
 
-			score += pars.UnreachableRowsCalc[field.RowCount - firstFilled];
-			score-= pars.UnreachableRowsCalc[unreachableRowIndex];
-			
+			score += pars.UnreachableRowsCalc[field.RowCount - rowIndex];
+
 			for (; rowIndex < field.RowCount; rowIndex++)
 			{
 				row0Mirror = field[rowIndex] ^ Row.Filled;
+				unreachbleGroups = Row.Groups[row0Mirror];
 				// Points for groups.
-				score += pars.Groups[Row.Groups[row0Mirror]];
+				score += pars.Groups[unreachbleGroups];
 				// Points for holes.
-				countHoleUnreachable += Row.Count[row0Mirror] * pars.HolesUnreachableCalc[unreachableRowIndex++];
+				countRow0Holes = Row.Count[row0Mirror];
+				countHoleUnreachable += countRow0Holes * pars.HolesUnreachableCalc[rowIndexHoles];
+				// Points for multiples.
+				if (unreachbleGroups == 1 && countRow0Holes > 1)
+				{
+					score += countRow0Holes * pars.UnreachableMultiplesCalc[rowIndexHoles];
+				}
+
+				// Points for 'deep' holes.
+				score += Row.Count[row0Mirror & row1Mirror] * pars.UnreachableColumnsCalc[rowIndexHoles];
+
+				rowIndexHoles++;
+				row1Mirror = row0Mirror;
 			}
 			#endregion
 

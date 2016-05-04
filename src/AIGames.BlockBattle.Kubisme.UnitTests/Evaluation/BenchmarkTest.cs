@@ -225,7 +225,50 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 				XXX.XXXXXX");
 		}
 
-		private static void RunBenchmark(
+		[Test, Category(Category.Bug)]
+		public void Skip_Instead_Of_Tetris()
+		{
+			RunBenchmark(
+				58, TimeSpan.FromSeconds(100.0), Block.I, Block.J,
+				47, 0, 2, @"
+				..........
+				..........
+				...X......
+				XXXXXXXXX.
+				XXXXXXXXX.
+				XXXXXXXXX.
+				XXXXXXXXX.
+				XX..XXXXXX
+				XXXXXXXX.X
+				XXX.XXXXX.
+				.XXXXXXXXX
+				XX.XXXXXX.
+				X.XXXXXXXX
+				XXXXX.XX.X
+				XXXXXXXXX.
+				XXXXXXXX..
+				XXXXXXXXX.",
+				36, 0, 0, @"
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				....X.....
+				XXXXX.....
+				XXXXXXX.X.
+				XXXXXXX.X.
+				XXXXXX.XX.
+				XXXXXXXX.X
+				XXXX.XXX.X
+				XXXXXXXX.X
+				XXXXX.XX.X
+				XXXXXXX.XX
+				XX.XXXXX.X");
+		}
+		
+		private static MoveInstruction RunBenchmark(
 			int round, TimeSpan duration, Block current, Block next,
 			int pt0, int combo0, int skips0, string field0,
 			int pt1, int combo1, int skips1, string field1)
@@ -239,6 +282,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 			var response = bot.GetResponse(duration);
 			Console.WriteLine(response.Move);
 			Console.WriteLine(response.Log);
+			return response.Move;
 		}
 	}
 	public class BenchmarkBot : KubismeBot

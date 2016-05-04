@@ -3,6 +3,10 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 72
+----------
+
+
 Version 71
 ----------
 Take height of reachables into account when valuation unreachbles.

@@ -245,8 +245,8 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		private static void AssertGetFields(string[] exp, Block block)
 		{
 			var generator = new MoveGenerator();
-			var candidateFields = generator.GetMoves(TestData.Small, block, false).Select(candidate => candidate.Field.ToString()).ToArray();
-			var fields = generator.GetFields(TestData.Small, block, false).Select(field => field.ToString()).ToArray();
+			var candidateFields = generator.GetMoves(TestData.Small, block).Select(candidate => candidate.Field.ToString()).ToArray();
+			var fields = generator.GetFields(TestData.Small, block).Select(field => field.ToString()).ToArray();
 
 			foreach (var field in candidateFields)
 			{

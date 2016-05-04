@@ -5,15 +5,13 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public class MoveGenerator : IMoveGenerator
 	{
-		public IEnumerable<Field> GetFields(Field field, Block current, bool searchNoDrops)
+		public IEnumerable<Field> GetFields(Field field, Block current)
 		{
-			if (searchNoDrops)
+			foreach (var candidate in GetReachableHoles(field, current))
 			{
-				foreach (var candidate in GetReachableHoles(field, current))
-				{
-					yield return candidate.Field;
-				}
+				yield return candidate.Field;
 			}
+
 			foreach (var block in current.Variations)
 			{
 				int minRow = block.GetMinRow(field);
@@ -43,14 +41,11 @@ namespace AIGames.BlockBattle.Kubisme
 			}
 		}
 
-		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current, bool searchNoDrops)
+		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current)
 		{
-			if (searchNoDrops)
+			foreach (var candidate in GetReachableHoles(field, current))
 			{
-				foreach (var candidate in GetReachableHoles(field, current))
-				{
-					yield return candidate;
-				}
+				yield return candidate;
 			}
 			foreach (var block in current.Variations)
 			{

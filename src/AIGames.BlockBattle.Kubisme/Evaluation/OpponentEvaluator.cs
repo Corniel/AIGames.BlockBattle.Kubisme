@@ -15,7 +15,7 @@
 			var minFilled2 = -1;
 			var maxPoints2 = points0;
 
-			foreach (var response1 in Generator.GetFields(field, current, true))
+			foreach (var response1 in Generator.GetFields(field, current))
 			{
 				if (response1.IsNone) { continue; }
 
@@ -28,7 +28,7 @@
 					minFilled1 = response1.FirstFilled;
 				}
 
-				foreach (var response2 in Generator.GetFields(response1, next, true))
+				foreach (var response2 in Generator.GetFields(response1, next))
 				{
 					if (response2.IsNone) { continue; }
 

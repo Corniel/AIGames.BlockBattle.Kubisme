@@ -28,7 +28,7 @@ XXX.XXXXXX
 XXXXX.XXXX
 .XXXX.XXXX");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.J,  true).ToList();
+			var candiates = generator.GetMoves(field, Block.J).ToList();
 
 			Assert.AreEqual(8 + 8 + 3 + 2, candiates.Count);
 		}
@@ -41,7 +41,7 @@ XXXXX.XXXX
 XX........
 ");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.S, true).ToList();
+			var candiates = generator.GetMoves(field, Block.S).ToList();
 
 			var act = candiates.Select(c => c.ToString()).ToArray();
 			var exp = new string[]
@@ -78,7 +78,7 @@ XXXXXX.XXX
 X.XXXXXXXX
 XXXXXX.XXX");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.I,  true).ToList();
+			var candiates = generator.GetMoves(field, Block.I).ToList();
 		}
 
 		[Test]

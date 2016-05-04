@@ -245,7 +245,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 		private static void AssertGetMoves(string[] exp, Block block)
 		{
 			var generator = new MoveGenerator();
-			var moves = generator.GetMoves(TestData.Small, block, false).Select(candidate => candidate.Path.ToString()).ToArray();
+			var moves = generator.GetMoves(TestData.Small, block).Select(candidate => candidate.Path.ToString()).ToArray();
 
 			foreach (var move in moves)
 			{

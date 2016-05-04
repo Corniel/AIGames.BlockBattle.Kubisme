@@ -30,7 +30,7 @@ namespace AIGames.BlockBattle.Kubisme
 					var block = GetBlock(pars);
 					Children = new BlockNodes<Block1Node>(block);
 				
-					foreach (var candidate in pars.Generator.GetMoves(Field, block, true))
+					foreach (var candidate in pars.Generator.GetMoves(Field, block))
 					{
 						if (!pars.HasTimeLeft) { return; }
 						Block1Node child = Create(candidate.Field, candidate.Path, pars);

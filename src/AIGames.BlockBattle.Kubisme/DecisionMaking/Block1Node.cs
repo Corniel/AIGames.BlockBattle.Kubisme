@@ -37,7 +37,7 @@ namespace AIGames.BlockBattle.Kubisme
 					var applied = BlockNode.Apply(Field, Depth, pars);
 					if (!applied.IsNone)
 					{
-						foreach (var field in pars.Generator.GetFields(applied, block, true))
+						foreach (var field in pars.Generator.GetFields(applied, block))
 						{
 							if (!pars.HasTimeLeft) { return; }
 							var child = Create(field, pars);

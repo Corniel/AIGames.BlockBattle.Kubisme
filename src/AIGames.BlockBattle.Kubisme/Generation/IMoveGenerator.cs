@@ -4,6 +4,6 @@ namespace AIGames.BlockBattle.Kubisme
 {
 	public interface IMoveGenerator : IFieldGenerator
 	{
-		IEnumerable<MoveCandiate> GetMoves(Field field, Block current, bool searchNoDrops);
+		IEnumerable<MoveCandiate> GetMoves(Field field, Block current);
 	}
 }

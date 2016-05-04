@@ -43,6 +43,15 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current)
 		{
+			if (field.FirstFilled < 4)
+			{
+				foreach (var candidate in GetEndgamePaths(field, current))
+				{
+					yield return candidate;
+				}
+				yield break;	
+			}
+
 			foreach (var candidate in GetReachableHoles(field, current))
 			{
 				yield return candidate;
@@ -73,6 +82,41 @@ namespace AIGames.BlockBattle.Kubisme
 			if (field.Skips > 0)
 			{
 				yield return new MoveCandiate(BlockPath.Skip, field.SkipBlock());
+			}
+		}
+		public static IEnumerable<MoveCandiate> GetEndgamePaths(Field field, Block current)
+		{
+			int filterTopColomns = 0;
+			int prevMirrored = Row.Filled;
+
+			var targets = new int[field.RowCount];
+			var maxRow = 0;
+
+			for (var r = 0; r < field.FirstFilled; r++)
+			{
+				targets[r] = Row.Filled;
+			}
+
+			// loop through the rows.
+			for (var r = field.FirstFilled; r < field.RowCount; r++)
+			{
+				var row = field[r];
+				var rowMirrored = Row.Filled ^ row;
+
+				// We can not enter any empty spot of this row, so stop searching.
+				if (!current.IsReachable(rowMirrored, prevMirrored))
+				{
+					break;
+				}
+				prevMirrored = rowMirrored;
+				filterTopColomns |= row;
+				targets[r] = rowMirrored;
+				maxRow = r;
+			}
+
+			foreach (var path in GetPaths(field, current, targets, maxRow))
+			{
+				yield return path;
 			}
 		}
 

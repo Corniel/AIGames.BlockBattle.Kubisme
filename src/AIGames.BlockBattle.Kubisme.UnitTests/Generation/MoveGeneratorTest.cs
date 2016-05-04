@@ -41,18 +41,23 @@ XXXXX.XXXX
 XX........
 ");
 			var generator = new MoveGenerator();
-			var candiates = generator.GetMoves(field, Block.S).ToList();
+			var candiates = generator.GetMoves(field, Block.S).Select(m=> new MoveInstruction(m.Path.Moves.ToArray())).ToList();
 
 			var act = candiates.Select(c => c.ToString()).ToArray();
 			var exp = new string[]
 			{
-				"down,left",
 				"drop",
-				"right,drop",
-				"right,right,drop",
-				"right,right,right,drop",
-				"right,right,right,right,drop",
+				"down,left,drop",
+				"down,right,drop",
+				"down,right,right,drop",
+				"down,right,right,right,drop",
+				"down,right,right,right,right,drop",
 			};
+
+			foreach (var a in act)
+			{
+				Console.WriteLine(a);
+			}
 
 			CollectionAssert.AreEqual(exp, act);
 		}
@@ -82,7 +87,7 @@ XXXXXX.XXX");
 		}
 
 		[Test]
-		public void GetReachableHoles_FullFieldWithTetris_()
+		public void GetEndgamePaths_FullFieldWithTetris_()
 		{
 			var field = Field.Create(58, 0, 2, @"
 				..........
@@ -102,15 +107,25 @@ XXXXXX.XXX");
 				XXXXXXXXX.
 				XXXXXXXX..
 				XXXXXXXXX.");
-			var act = MoveGenerator.GetReachableHoles(field, Block.I).Select(move => move.Path).ToArray();
-			var exp = new BlockPath[]
+			var act = MoveGenerator.GetEndgamePaths(field, Block.I).Select(move => new MoveInstruction(move.Path.Moves.ToArray()).ToString()).ToArray();
+			var exp = new string[]
 			{
-				BlockPath.Create(ActionType.Right, ActionType.Right, ActionType.Right, ActionType.TurnRight, ActionType.Right, ActionType.Drop),
+				"drop",
+				"down,left,drop",
+				"down,left,left,drop",
+				"down,left,left,left,drop",
+				"down,right,drop",
+				"down,right,down,right,drop",
+				"down,right,down,right,right,drop",
+				"left,left,left,turnleft,turnleft,right,right,right,right,right,right,turnleft,right,drop",
 			};
 
+			foreach (var a in act)
+			{
+				Console.WriteLine(a);
+			}
+
 			CollectionAssert.AreEqual(exp, act);
-
-
 		}
 
 		[Test]

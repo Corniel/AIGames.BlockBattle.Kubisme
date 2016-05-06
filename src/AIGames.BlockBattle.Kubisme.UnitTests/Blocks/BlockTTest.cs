@@ -243,42 +243,5 @@ XXXX.XXXXX");
 			var exp = "..........|..........|..X..XX...";
 			FieldAssert.AreEqual(exp, 10, 1, 18, act);
 		}
-
-		[Test]
-		public void GetMove_TForTSpin_ClearedField()
-		{
-			var field = Field.Create(0, 2, 0, @"
-..........
-..........
-..X..XX...
-XXX...XXXX
-XXXX.XXXXX");
-
-			var pars = new  EvaluatorParameters()
-			{
-				Points = new ParamCurve(100),
-			}.Calc();
-
-			var dm = new NodeDecisionMakerTester()
-			{
-				Evaluator = new Evaluator(),
-				Generator = new MoveGenerator(),
-				MaximumDepth = 3,
-			};
-
-			var act = dm.GetMove(field, Block.T, Block.Z, 1, pars);
-			var actField = dm.BestField.ToString();
-
-			var exp = BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.TurnLeft, ActionType.Down, ActionType.Down, ActionType.TurnLeft);
-			var expField = @"
-				..........
-				..........
-				..........
-				..........
-				..X..XX...";
-
-			Assert.AreEqual(expField, actField);
-			Assert.AreEqual(exp, act);
-		}
 	}
 }

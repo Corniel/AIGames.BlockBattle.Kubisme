@@ -242,6 +242,35 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Generation
 			AssertGetFields(exp, Block.T);
 		}
 
+		[Test]
+		public void GetMove_O_3Fields()
+		{
+			var field = Field.Create(0, 0, 0, @"
+				......X...
+				XXX....XXX
+				XXXX...XXX");
+
+			var generator = new MoveGenerator();
+			var act = generator.GetFields(field, Block.O).ToArray();
+
+			var exp = new [] 
+			{
+				 Field.Create(0, 0, 0, @"
+					......X...
+					XXX..XXXXX
+					XXXX.XXXXX"),
+				Field.Create(0, 0, 0, @"
+					...XX.X...
+					XXXXX..XXX
+					XXXX...XXX"),
+				 Field.Create(0, 0, 0, @"
+					......X...
+					XXX.XX.XXX
+					XXXXXX.XXX"),
+			};
+			CollectionAssert.AreEqual(exp, act);
+		}
+
 		private static void AssertGetFields(string[] exp, Block block)
 		{
 			var generator = new MoveGenerator();

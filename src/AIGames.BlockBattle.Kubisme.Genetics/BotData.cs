@@ -99,7 +99,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 				else if (prop.PropertyType == typeof(int[]))
 				{
 					int[] vals = (int[])prop.GetValue(pars);
-					writer.AppendFormat("{0} = new int[] {{ {1} }},", prop.Name, String.Join(",", vals));
+					writer.AppendFormat("{0} = new [] {{ {1} }},", prop.Name, String.Join(",", vals));
 					writer.AppendLine();
 				}
 				else if (prop.PropertyType == typeof(ParamCurve))

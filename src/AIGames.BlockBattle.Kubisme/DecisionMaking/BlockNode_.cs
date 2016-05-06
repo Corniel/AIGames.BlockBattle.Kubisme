@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace AIGames.BlockBattle.Kubisme
 {
@@ -11,9 +8,9 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		protected BlockNode(Field field, int score)
 		{
-			this.Field = field;
-			this.Score = score;
-			this.ScoreField = score;
+			Field = field;
+			Score = score;
+			ScoreField = score;
 			BranchingFactor = 2;
 		}
 
@@ -46,7 +43,10 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			get
 			{
-				return String.Format("{0:#,##0}, Depth: {1}, Children: {2}", Score, Depth, Children == null ? 0 : Children.Count);
+				return string.Format("{0:#,##0}, Depth: {1}, Children: {2}", 
+					Scores.GetFormatted(Score), 
+					Depth, 
+					Children == null ? 0 : Children.Count);
 			}
 		}
 	}

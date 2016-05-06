@@ -13,10 +13,10 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public BlockRndNode(Field field, byte depth, int score)
 		{
-			this.Field = field;
-			this.Depth = ++depth;
-			this.Score = score;
-			this.ScoreField = score;
+			Field = field;
+			Depth = ++depth;
+			Score = score;
+			ScoreField = score;
 		}
 
 		public List<BlockNodes<BlockRndNode>> Children { get; protected set; }
@@ -91,8 +91,8 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public void SetFinalScore(int score)
 		{
-			this.Score = score;
-			this.Children = new List<BlockNodes<BlockRndNode>>();
+			Score = score;
+			Children = new List<BlockNodes<BlockRndNode>>();
 		}
 
 		public byte Depth { get; protected set; }
@@ -108,7 +108,11 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			get
 			{
-				return String.Format("{0:#,##0}, Depth: {1}, Children: {2}", Score, Depth, Children == null ? 0 : Children.SelectMany(ch => ch).Count());
+				return string.Format("{0}, Depth: {1}, Children: {2}",
+					Scores.GetFormatted(Score),
+					Depth,
+					Children == null ? 0 :
+					Children.SelectMany(ch => ch).Count());
 			}
 		}
 	}

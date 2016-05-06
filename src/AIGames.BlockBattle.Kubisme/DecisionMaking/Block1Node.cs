@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AIGames.BlockBattle.Kubisme
@@ -10,8 +9,8 @@ namespace AIGames.BlockBattle.Kubisme
 		public Block1Node(Field field, BlockPath path, int score, int branchingfactor)
 			: base(field, score) 
 		{
-			this.Path = path;
-			this.BranchingFactor = branchingfactor;
+			Path = path;
+			BranchingFactor = branchingfactor;
 		}
 
 		public override byte Depth { get { return 1; } }
@@ -66,8 +65,8 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public void SetFinalScore(int score)
 		{
-			this.Score = score;
-			this.Children = BlockNodes<BlockRndNode>.GetEmpty();
+			Score = score;
+			Children = BlockNodes<BlockRndNode>.GetEmpty();
 		}
 
 		protected override BlockRndNode Create(Field field, ApplyParameters pars)
@@ -84,7 +83,11 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			get
 			{
-				return String.Format("{0:#,##0}, Depth: {1}, Children: {2}, Path: {3}", Score, Depth, Children == null ? 0 : Children.Count, Path);
+				return string.Format("{0}, Depth: {1}, Children: {2}, Path: {3}",
+					Scores.GetFormatted(Score), 
+					Depth,
+					Children == null ? 0 : Children.Count, 
+					Path);
 			}
 		}
 	}

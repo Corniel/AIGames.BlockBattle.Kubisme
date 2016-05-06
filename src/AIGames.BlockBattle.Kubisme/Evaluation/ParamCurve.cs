@@ -4,45 +4,48 @@ using System.Xml.Serialization;
 
 namespace AIGames.BlockBattle.Kubisme
 {
+	/// <summary>Represents a curve that can be used to get a range of parameter values.</summary>
+	/// <remarks>
+	/// A curve of the form.
+	/// 
+	/// <code>Score(firstFilled) = a * Math.Pow(firstFilled, power) + delta</code>
+	/// </remarks>
 	[Serializable]
 	public class ParamCurve
 	{
 		public ParamCurve() : this(0) { }
-		public ParamCurve(int value) : this(value, value, 1, 1) { }
-		public ParamCurve(int start, int end, double factor, double power)
+		public ParamCurve(int value) : this(0, 0, value) { }
+		public ParamCurve(double a, double power, double delta)
 		{
-			Start = start;
-			End = end;
-			Factor = factor;
+			A = a;
 			Power = power;
+			Delta = delta;
 		}
 
-		[XmlAttribute("start")]
-		public int Start { get; set; }
-		[XmlAttribute("end")]
-		public int End { get; set; }
-		[XmlAttribute("factor")]
-		public double Factor { get; set; }
+		[XmlAttribute("a")]
+		public double A { get; set; }
+
 		[XmlAttribute("power")]
 		public double Power { get; set; }
 
+
+		[XmlAttribute("delta")]
+		public double Delta { get; set; }
+
 		public override string ToString()
 		{
-			return String.Format(CultureInfo.InvariantCulture, "new ParamCurve({0}, {1}, {2}, {3})", Start, End, Factor, Power);
+			return string.Format(CultureInfo.InvariantCulture, "new ParamCurve({0}, {1}, {2})", A, Power, Delta);
 		}
 
-		public int[] Calculate(int length = 22)
+		public int[] Calculate() { return Calculate(22); }
+		public int[] Calculate(int length)
 		{
 			var values = new int[length];
-			values[0] = Start;
-
-			double delta = End - Start;	
-
-			for (var i = 1; i < length; i++)
+			
+			for (var firstFilled = 0; firstFilled < length; firstFilled++)
 			{
-				var f = Math.Pow(i, Power) / (length - 1.0);
-				var val = Start + delta * Math.Pow(f, Factor);
-				values[i] = (int)Math.Round(val);
+				var score = A * Math.Pow(firstFilled, Power) + Delta;
+				values[firstFilled] = (int)Math.Round(score);
 			}
 			return values;
 		}

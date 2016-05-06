@@ -127,20 +127,19 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			return value;
 		}
 
+		private double Randomize(double value)
+		{
+			var min = Math.Min(value * 0.95, value - 0.1);
+			var max = Math.Max(value * 1.05, value + 0.1);
+			return Rnd.NextDouble(min, max);
+		}
+
 		private ParamCurve Randomize(ParamCurve value)
 		{
-			var start = Randomize(value.Start);
-			var end = Randomize(value.End);
-			var factor = value.Factor;
-			var power = value.Power;
-		
-			var mpf = Math.Sqrt(Rnd.NextDouble(0.95, 1.05));
-			factor *= mpf;
-
-			var mpp = Math.Sqrt(Rnd.NextDouble(0.95, 1.05));
-			power *= mpp;
-
-			return new ParamCurve(start, end, factor, power);
+			var a = Randomize(value.A);
+			var power = Randomize(value.Power);
+			var delta = Randomize(value.Delta);
+			return new ParamCurve(a, power, delta);
 		}
 
 		private static readonly Dictionary<Type, PropertyInfo[]> Properties = new Dictionary<Type, PropertyInfo[]>();

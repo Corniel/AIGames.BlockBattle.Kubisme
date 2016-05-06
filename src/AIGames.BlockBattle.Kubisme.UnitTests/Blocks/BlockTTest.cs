@@ -269,8 +269,13 @@ XXXX.XXXXX");
 			var act = dm.GetMove(field, Block.T, Block.Z, 1, pars);
 			var actField = dm.BestField.ToString();
 
-			var exp = BlockPath.Create(ActionType.Down, ActionType.TurnLeft, ActionType.Down, ActionType.Down, ActionType.TurnLeft);
-			var expField = "..........|..........|..........|..........|..X..XX...";
+			var exp = BlockPath.Create(ActionType.Down, ActionType.Down, ActionType.TurnLeft, ActionType.Down, ActionType.Down, ActionType.TurnLeft);
+			var expField = @"
+				..........
+				..........
+				..........
+				..........
+				..X..XX...";
 
 			Assert.AreEqual(expField, actField);
 			Assert.AreEqual(exp, act);

@@ -17,34 +17,10 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 
 		public static EvaluatorParameters GetDef()
 		{
-			return new EvaluatorParameters()
-			// Elo: 1615, Runs:  1549 (53.4%, PT: 0.630, #: 49.7, T1: 4.70%, T2: 12.97%, I4: 1.98%, CL: 0.90%), ID: 573, Parent: 430, Gen: 21
-			{
-				Points = new ParamCurve(32),
-				I0 = new ParamCurve(-60),
-				I1 = new ParamCurve(-40),
-				I2 = new ParamCurve(-35),
-				I3 = new ParamCurve(-20),
-				I4 = new ParamCurve(65),
-				SingleEmpties = new int[] { -1, -2, -4, -7, -48, -49 },
-				SingleGroupBonus = new int[] { 3, 18, 25, 27 },
-				Groups = new int[] { 6, 3, -15, -18, -32, -33 },
-				Combo = new ParamCurve(0, 10, 1, 1),
-				HolesReachable = new ParamCurve(-64, -16, 0.5, 1),
-				HolesUnreachable = new ParamCurve(-100, -32, 0.5, 1),
-				UnreachableRows = new ParamCurve(5, -300, 0.95, 1),
-				TSpinSingle0Potential = new ParamCurve(0, 9, 0.95, 1),
-				TSpinSingle1Potential = new ParamCurve(-22, -3, 1, 1),
-				TSpinDoublePotential = new ParamCurve(-14, 169, 0.55, 1),
-				TDoubleClearPotential = new ParamCurve(-8, 50, 0.57, 1),
-				EmptyRows = new ParamCurve(-120, 55, 0.55, 1),
-				Skips = new ParamCurve(0, 30, 1, 1),
-				PerfectClearPotential = new ParamCurve(20, 91, 0.9, 1),
-			}
-			.Calc();
+			return EvaluatorParameters.GetDefault().Calc();
 		}
 		
-		private Stopwatch sw = Stopwatch.StartNew();
+		private readonly Stopwatch sw = Stopwatch.StartNew();
 
 		public BattleSimulator(MT19937Generator rnd)
 		{

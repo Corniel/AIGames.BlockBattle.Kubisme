@@ -24,21 +24,21 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public static string GetFormatted(int score)
 		{
-			if (score >= Scores.Win)
+			if (score >= Win)
 			{
-				var ply = (Scores.Max - score);
-				return String.Format(CultureInfo.InvariantCulture, "+oo {0}", ply);
+				var ply = (Max - score);
+				return string.Format(CultureInfo.InvariantCulture, "+oo {0}", ply);
 			}
-			if (score <= Scores.Loss)
+			if (score <= Loss)
 			{
-				var ply = (score - Scores.Min);
-				return String.Format(CultureInfo.InvariantCulture, "-oo {0}", ply);
+				var ply = (score - Min);
+				return string.Format(CultureInfo.InvariantCulture, "-oo {0}", ply);
 			}
 
 			var str = "";
 			if (score > 0) { str = "+"; }
 			else if (score == 0) { str = "="; }
-			str += ((double)score / -100.0).ToString("0.00", CultureInfo.InvariantCulture);
+			str += (score / 100.0).ToString("0.00", CultureInfo.InvariantCulture);
 			return str;
 		}
 	}

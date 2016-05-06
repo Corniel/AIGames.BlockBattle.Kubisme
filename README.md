@@ -5,7 +5,8 @@ Kubisme (Cubism) is an AI trying to play Tetris.
 
 Version 72
 ----------
-
+Always check on unreable holes. Check paths in endgame. Added evaluation for to
+penalize unreachble rows with potential.
 
 Version 71
 ----------

@@ -42,7 +42,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Genetics
 		{
 			var curve = new ParamCurve(0.5, 3, -10);
 			var act = curve.Calculate(4);
-			var exp = new int[] { -10, -9, -5, 22 };
+			var exp = new int[] { -10, -10, -6, 4 };
 
 			CollectionAssert.AreEqual(exp, act);
 		}

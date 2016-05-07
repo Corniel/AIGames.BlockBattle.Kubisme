@@ -102,10 +102,12 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			var highest = GetHighestElo();
 			if (highest.IsStable)
 			{
+				Add(highest, rnd);
+
+				if (count <= 0) { count = 1; }
 				for (var i = 0; i < count; i++)
 				{
-					Add(highest, rnd);
-					var stable = GetStable().Skip(1).OrderByDescending(bot => bot.GetWeight(rnd)).FirstOrDefault();
+					var stable = GetStable().OrderByDescending(bot => bot.GetWeight(rnd)).FirstOrDefault();
 					if (stable != null)
 					{
 						Add(stable, rnd);

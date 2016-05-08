@@ -67,7 +67,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public static Field GetInitial(MT19937Generator rnd)
 		{
 			var garbage = AppConfig.Data.Garbage;
-			var field = new Field(0, 0, 0, (byte)AppConfig.Data.Rows, new ushort[AppConfig.Data.Rows]);
+			var field = new Field(0, 0, 0, (byte)AppConfig.Data.Rows, (byte)AppConfig.Data.Rows, new ushort[AppConfig.Data.Rows]);
 			if (garbage > 0)
 			{
 				var rows = Row.GetGarbage(garbage, 3, rnd);
@@ -104,6 +104,9 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 			{
 				out0 = b0.GetResponse(field0, field1, current, next, turns);
 				out1 = b1.GetResponse(field1, field0, current, next, turns);
+
+				out0 = out0.UpdateOpponent(out1.FirstFilled);
+				out1 = out1.UpdateOpponent(out0.FirstFilled);
 
 				stats0.Update(field0, out0, current);
 				stats1.Update(field1, out1, current);

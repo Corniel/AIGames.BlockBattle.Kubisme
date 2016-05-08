@@ -80,6 +80,7 @@
     <Compile Include="Communication\PieceType.cs" />
     <Compile Include="Communication\PlayerName.cs" />
     <Compile Include="Communication\GameState.cs" />
+    <Compile Include="Communication\PlayerNames.cs" />
     <Compile Include="Communication\Settings.cs" />
     <Compile Include="Communication\ConsolePlatform.cs" />
     <Compile Include="DecisionMaking\ApplyParameters.cs" />

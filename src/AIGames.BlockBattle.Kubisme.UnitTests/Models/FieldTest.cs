@@ -33,6 +33,18 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Models
 						{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
 					},
 				},
+				Player1 = new GameState.Player()
+				{
+					Combo = 0,
+					Points = 0,
+					Field = new int[,]
+					{
+						{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+						{ 0, 0, 0, 0, 0, 0, 0, 0, 2, 0 },
+						{ 0, 0, 0, 0, 0, 0, 0, 2, 2, 0 },
+						{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 },
+					},
+				},
 			};
 			var act = Field.Create(state, PlayerName.Player2);
 			FieldAssert.AreEqual("..........|........X.|.......XX.", 10, 12, 0, act);

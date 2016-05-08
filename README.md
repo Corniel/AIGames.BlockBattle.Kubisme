@@ -3,6 +3,11 @@ Kubisme
 
 Kubisme (Cubism) is an AI trying to play Tetris.
 
+Version 75
+----------
+Take first filled of the opponent into account. Removed evaluation of tunnels
+and other unreachable potential. Is seems not to work.
+
 Version 74
 ----------
 New parameters.
@@ -13,12 +18,12 @@ New way of handling curves in parameter generation.
 
 Version 72
 ----------
-Always check on unreable holes. Check paths in endgame. Added evaluation for to
-penalize unreachble rows with potential.
+Always check on unreachable holes. Check paths in endgame. Added evaluation for to
+penalize unreachable rows with potential.
 
 Version 71
 ----------
-Take height of reachables into account when valuation unreachbles.
+Take height of unreachables into account when valuation unreachables.
 
 Version 70
 ----------

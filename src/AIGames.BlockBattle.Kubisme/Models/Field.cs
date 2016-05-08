@@ -244,7 +244,8 @@ namespace AIGames.BlockBattle.Kubisme
 			var rs = new ushort[rows.Length - 1];
 			Array.Copy(rows, 1, rs, 0, rs.Length);
 			var free = FirstFilled - 1;
-			return new Field(Points, Combo, Skips, (byte)free, (byte)(Opponent -1), rs);
+			var oppo = Opponent == 0 ? 0 : (Opponent - 1);
+			return new Field(Points, Combo, Skips, (byte)free, (byte)oppo, rs);
 		}
 
 		/// <summary>Skips a block.</summary>

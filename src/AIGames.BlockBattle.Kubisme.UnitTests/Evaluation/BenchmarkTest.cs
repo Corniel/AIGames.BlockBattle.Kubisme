@@ -319,6 +319,55 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 			Assert.AreNotEqual("drop", actual.ToString());
 		}
 
+		[Test, Category(Category.Bug)]
+		public void IndexOufOfArrayException_Evaluation_GetScore()
+		{
+			var actual = RunBenchmark(
+				27, TimeSpan.FromSeconds(1), Block.J, Block.I,
+				10, 0, 1, @"
+				.......X.X
+				XX....XXXX
+				XX....XXXX
+				XX....XXXX
+				XX...XXXXX
+				XX..XXXXXX
+				XX..XX.XXX
+				X...XXXXXX
+				XXX.XXX.XX
+				XXX.XXXXXX
+				XXX.XXXXXX
+				XXX.XXXXXX
+				X.XXXXX.XX
+				XXXXXX.XXX
+				.XX.XXXXXX
+				XXXX.XXXXX
+				XXXXXXX..X
+				XXX.XXXXXX
+				.XXXXX.XXX",
+				23, 1, 2, @"
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				.X........
+				.X........
+				XXX.......
+				XXXX......
+				XXXXX..X..
+				XXXXX.XXXX
+				..XXXXXXXX
+				XX.XXXXXXX
+				X.XXX.XXXX");
+
+			Assert.AreNotEqual("no_moves", actual.ToString());
+		}
+
 		private static MoveInstruction RunBenchmark(
 			int round, TimeSpan duration, Block current, Block next,
 			int pt0, int combo0, int skips0, string field0,

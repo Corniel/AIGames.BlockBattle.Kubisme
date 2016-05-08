@@ -40,9 +40,19 @@
 			#endregion
 
 			// Points for static evaluation.
-			score += field.Points * pars.PointsCalc[firstFilled];
+			score += field.Points * pars.PointsCalc[field.Opponent];
 			score += field.Combo * pars.ComboCalc[firstFilled];
 			score += field.Skips * pars.SkipsCalc[firstFilled];
+
+			#region rows delta
+
+			// So positive delta's a actually bad. ;)
+			var delta = field.Opponent - firstFilled + 4;
+			if (delta < 0) { delta = 0; }
+
+			score += pars.RowsDeltaCalc[delta];
+
+			#endregion
 
 			var rowIndex = field.FirstFilled;
 			var row0 = 0;
@@ -290,8 +300,7 @@
 			#region Unreachable area
 
 			var unreachbleGroups = 0;
-			var row1Mirror = row0Mirror;
-
+		
 			score += pars.UnreachableRowsCalc[field.RowCount - rowIndex];
 
 			for (; rowIndex < field.RowCount; rowIndex++)
@@ -303,17 +312,8 @@
 				// Points for holes.
 				countRow0Holes = Row.Count[row0Mirror];
 				countHoleUnreachable += countRow0Holes * pars.HolesUnreachableCalc[rowIndexHoles];
-				// Points for multiples.
-				if (unreachbleGroups == 1 && countRow0Holes > 1)
-				{
-					score += countRow0Holes * pars.UnreachableMultiplesCalc[rowIndexHoles];
-				}
-
-				// Points for 'deep' holes.
-				score += Row.Count[row0Mirror & row1Mirror] * pars.UnreachableColumnsCalc[rowIndexHoles];
-
+				
 				rowIndexHoles++;
-				row1Mirror = row0Mirror;
 			}
 			#endregion
 

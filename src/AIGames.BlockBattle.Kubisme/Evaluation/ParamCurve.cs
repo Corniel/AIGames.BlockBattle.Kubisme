@@ -13,6 +13,8 @@ namespace AIGames.BlockBattle.Kubisme
 	[Serializable]
 	public class ParamCurve
 	{
+		public const int DefaultLength = 22;
+
 		public ParamCurve() : this(0) { }
 		public ParamCurve(int value) : this(0, 1, value) { }
 		public ParamCurve(double a, double power, int delta)
@@ -37,7 +39,7 @@ namespace AIGames.BlockBattle.Kubisme
 			return string.Format(CultureInfo.InvariantCulture, "new ParamCurve({0}, {1}, {2})", A, Power, Delta);
 		}
 
-		public int[] Calculate() { return Calculate(22); }
+		public int[] Calculate() { return Calculate(DefaultLength); }
 		public int[] Calculate(int length)
 		{
 			var values = new int[length];

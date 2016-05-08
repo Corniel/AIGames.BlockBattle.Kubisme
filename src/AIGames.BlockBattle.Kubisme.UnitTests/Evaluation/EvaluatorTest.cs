@@ -36,37 +36,6 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		}
 
 		[Test]
-		public void UnreachableColumns_TunnelOf3_3()
-		{
-			var field = @"
-..........
-..........
-XXXXXX.XXX
-XX.XXXXXXX
-XX.XXXXXXX";
-			var pars = new EvaluatorParameters()
-			{
-				UnreachableColumns = new ParamCurve(1),
-			};
-			Test(field, pars, 1);
-		}
-		[Test]
-		public void UnreachableMultiples_TunnelOf3_3()
-		{
-			var field = @"
-..........
-..........
-XXXXXX..XX
-XX....XXXX
-XX.XXXXXXX";
-			var pars = new EvaluatorParameters()
-			{
-				UnreachableMultiples = new ParamCurve(1),
-			};
-			Test(field, pars, 4);
-		}
-
-		[Test]
 		public void SingleGroupBonus_AllKindOfRows_1111()
 		{
 			var field = @"
@@ -547,9 +516,119 @@ XXX..X.XX.";
 			Test(field, pars, expected);
 		}
 
+		[Test]
+		public void RowsDelta_6Vs1_0()
+		{
+			var field = Field.Create(0, 0, 0, 1,
+				@"
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				XX..XX.XX.");
+
+			var pars = new EvaluatorParameters()
+			{
+				// 0, 1, 2, 3, 4, ect..
+				RowsDelta = new ParamCurve(1, 1, -1),
+			};
+			var expected = 0;
+
+			Assert.AreEqual(0, pars.Calc().RowsDeltaCalc[0], "ars.RowsDeltaCalc[0]");
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void RowsDelta_4Vs1_1()
+		{
+			var field = Field.Create(0, 0, 0, 1,
+				@"
+				..........
+				..........
+				..........
+				..........
+				..........
+				XX..XX.XX.");
+
+			var pars = new EvaluatorParameters()
+			{
+				// 0, 1, 2, 3, 4, ect..
+				RowsDelta = new ParamCurve(1, 1, -1),
+			};
+			var expected = 1;
+
+			Assert.AreEqual(0, pars.Calc().RowsDeltaCalc[0], "ars.RowsDeltaCalc[0]");
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void RowsDelta_1Vs1_5()
+		{
+			var field = Field.Create(0, 0, 0, 1,
+				@"
+				..........
+				XX..XX.XX.");
+
+			var pars = new EvaluatorParameters()
+			{
+				// 0, 1, 2, 3, 4, ect..
+				RowsDelta = new ParamCurve(1, 1, -1),
+			};
+			var expected = 5;
+
+			Assert.AreEqual(0, pars.Calc().RowsDeltaCalc[0], "ars.RowsDeltaCalc[0]");
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void RowsDelta_1Vs4_8()
+		{
+			var field = Field.Create(0, 0, 0, 4,
+				@"
+				..........
+				XX..XX.XX.");
+
+			var pars = new EvaluatorParameters()
+			{
+				// 0, 1, 2, 3, 4, ect..
+				RowsDelta = new ParamCurve(1, 1, -1),
+			};
+			var expected = 8;
+
+			Assert.AreEqual(0, pars.Calc().RowsDeltaCalc[0], "ars.RowsDeltaCalc[0]");
+			Test(field, pars, expected);
+		}
+
+		[Test]
+		public void RowsDelta_1Vs6_10()
+		{
+			var field = Field.Create(0, 0, 0, 6,
+				@"
+				..........
+				XX..XX.XX.");
+
+			var pars = new EvaluatorParameters()
+			{
+				// 0, 1, 2, 3, 4, ect..
+				RowsDelta = new ParamCurve(1, 1, -1),
+			};
+			var expected = 10;
+
+			Assert.AreEqual(0, pars.Calc().RowsDeltaCalc[0], "ars.RowsDeltaCalc[0]");
+			Test(field, pars, expected);
+		}
+
 		private static void Test(string str, EvaluatorParameters pars, int expected)
 		{
 			var field = Field.Create(0, 0, 0, str);
+			Test(field, pars, expected);
+		}
+
+		private static void Test(Field field, EvaluatorParameters pars, int expected)
+		{
 			var evaluator = new Evaluator();
 			var actual = evaluator.GetScore(field, 0, pars.Calc());
 			Assert.AreEqual(expected, actual);

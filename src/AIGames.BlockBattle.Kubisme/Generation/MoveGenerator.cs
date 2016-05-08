@@ -7,30 +7,41 @@ namespace AIGames.BlockBattle.Kubisme
 	{
 		public IEnumerable<Field> GetFields(Field field, Block current)
 		{
-			foreach (var candidate in GetReachableHoles(field, current))
+			// If not enough space, try these too.
+			if (field.FirstFilled < 4)
 			{
-				yield return candidate.Field;
-			}
-
-			foreach (var block in current.Variations)
-			{
-				int minRow = block.GetMinRow(field);
-				int maxRow = block.GetMaxRow(field);
-
-				foreach (var col in block.GetColumns(field))
+				foreach (var candidate in GetEndgamePaths(field, current))
 				{
-					for (var row = minRow; row <= maxRow; row++)
+					yield return candidate.Field;
+				}
+			}
+			else
+			{
+				foreach (var candidate in GetReachableHoles(field, current))
+				{
+					yield return candidate.Field;
+				}
+
+				foreach (var block in current.Variations)
+				{
+					int minRow = block.GetMinRow(field);
+					int maxRow = block.GetMaxRow(field);
+
+					foreach (var col in block.GetColumns(field))
 					{
-						var test = field.Test(block, col, row);
-						if (test == Field.TestResult.True)
+						for (var row = minRow; row <= maxRow; row++)
 						{
-							var target = new Position(col, row);
-							var applied = field.Apply(block, target);
-							yield return applied;
-						}
-						if (test != Field.TestResult.Retry)
-						{
-							row = short.MaxValue;
+							var test = field.Test(block, col, row);
+							if (test == Field.TestResult.True)
+							{
+								var target = new Position(col, row);
+								var applied = field.Apply(block, target);
+								yield return applied;
+							}
+							if (test != Field.TestResult.Retry)
+							{
+								row = short.MaxValue;
+							}
 						}
 					}
 				}
@@ -43,38 +54,39 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public IEnumerable<MoveCandiate> GetMoves(Field field, Block current)
 		{
+			// If not enough space, try these too.
 			if (field.FirstFilled < 4)
 			{
 				foreach (var candidate in GetEndgamePaths(field, current))
 				{
 					yield return candidate;
 				}
-				yield break;	
 			}
-
-			foreach (var candidate in GetReachableHoles(field, current))
-			{
-				yield return candidate;
-			}
-			foreach (var block in current.Variations)
-			{
-				int minRow = block.GetMinRow(field);
-				int maxRow = block.GetMaxRow(field);
-
-				foreach (var col in block.GetColumns(field))
+			else {
+				foreach (var candidate in GetReachableHoles(field, current))
 				{
-					for (var row = minRow; row <= maxRow; row++)
+					yield return candidate;
+				}
+				foreach (var block in current.Variations)
+				{
+					int minRow = block.GetMinRow(field);
+					int maxRow = block.GetMaxRow(field);
+
+					foreach (var col in block.GetColumns(field))
 					{
-						var test = field.Test(block, col, row);
-						if (test == Field.TestResult.True)
+						for (var row = minRow; row <= maxRow; row++)
 						{
-							var target = new Position(col, row);
-							var applied = field.Apply(block, target);
-							yield return new MoveCandiate(block.GetPath(field, col), applied);
-						}
-						if (test != Field.TestResult.Retry)
-						{
-							row = short.MaxValue;
+							var test = field.Test(block, col, row);
+							if (test == Field.TestResult.True)
+							{
+								var target = new Position(col, row);
+								var applied = field.Apply(block, target);
+								yield return new MoveCandiate(block.GetPath(field, col), applied);
+							}
+							if (test != Field.TestResult.Retry)
+							{
+								row = short.MaxValue;
+							}
 						}
 					}
 				}

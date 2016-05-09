@@ -15,15 +15,14 @@ namespace AIGames.BlockBattle.Kubisme
 		public const short DoubleTSpin = 10;
 		public const short PerfectClear = 18;
 
-		public static readonly Field None = new Field(-1, 0, 0, 0, 0, new ushort[0]);
-		public static readonly Field Empty = new Field(0, 0, 0, 20, 20, new ushort[20]);
+		public static readonly Field None = new Field(-1, 0, 0, 0, new ushort[0]);
+		public static readonly Field Empty = new Field(0, 0, 0, 20, new ushort[20]);
 
 		private readonly ushort[] rows;
 		public readonly short Points;
 		public readonly byte Combo;
 		public readonly byte Skips;
 		public readonly byte FirstFilled;
-		public readonly byte Opponent;
 
 		/// <summary>Initiates a new instance of a Block Battle Field.</summary>
 		/// <param name="points">
@@ -44,13 +43,12 @@ namespace AIGames.BlockBattle.Kubisme
 		/// <param name="rs">
 		/// An array of UInt16's representing the rows.
 		/// </param>
-		public Field(short points, byte combo, byte skips, byte firstFilled, byte opponent, params ushort[] rs)
+		public Field(short points, byte combo, byte skips, byte firstFilled, params ushort[] rs)
 		{
 			Points = points;
 			Combo = combo;
 			Skips = skips;
 			FirstFilled = firstFilled;
-			Opponent = opponent;
 			rows = rs;
 		}
 		
@@ -218,7 +216,7 @@ namespace AIGames.BlockBattle.Kubisme
 					pt += combo++;
 				}
 			}
-			return new Field(pt, combo, skips, free, Opponent, rs);
+			return new Field(pt, combo, skips, free, rs);
 		}
 
 		/// <summary>Returns a field, with garbage rows.</summary>
@@ -234,7 +232,7 @@ namespace AIGames.BlockBattle.Kubisme
 			Array.Copy(rows, count, rs, 0, copyCount);
 
 			var free = FirstFilled - count;
-			return new Field(Points, Combo, Skips, (byte)free, Opponent, rs);
+			return new Field(Points, Combo, Skips, (byte)free, rs);
 		}
 
 		/// <summary>Returns a field, with a locked row.</summary>
@@ -244,8 +242,7 @@ namespace AIGames.BlockBattle.Kubisme
 			var rs = new ushort[rows.Length - 1];
 			Array.Copy(rows, 1, rs, 0, rs.Length);
 			var free = FirstFilled - 1;
-			var oppo = Opponent == 0 ? 0 : (Opponent - 1);
-			return new Field(Points, Combo, Skips, (byte)free, (byte)oppo, rs);
+			return new Field(Points, Combo, Skips, (byte)free, rs);
 		}
 
 		/// <summary>Skips a block.</summary>
@@ -253,13 +250,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			var rs = new ushort[rows.Length];
 			Array.Copy(rows, 0, rs, 0, rs.Length);
-			return new Field(Points, 0, (byte)(Skips - 1), FirstFilled, Opponent, rs);
-		}
-
-		/// <summary>Set the first filled for the opponent.</summary>
-		public Field UpdateOpponent(byte opponent)
-		{
-			return new Field(Points, Combo, Skips, FirstFilled, opponent, rows);
+			return new Field(Points, 0, (byte)(Skips - 1), FirstFilled, rs);
 		}
 
 		public override string ToString() { return string.Join("|", Rows); }
@@ -316,8 +307,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public static Field Create(GameState state, PlayerName name)
 		{
 			var rowsOwn = new ushort[state[name].Field.GetLength(0)];
-			var rowsOpp = new ushort[state[name.Other()].Field.GetLength(0)];
-
+			
 			for (var r = 0; r < rowsOwn.GetLength(0); r++)
 			{
 				var row = Row.Create(state, name, r);
@@ -328,34 +318,18 @@ namespace AIGames.BlockBattle.Kubisme
 				}
 				rowsOwn[r] = row;
 			}
-			for (var r = 0; r < rowsOpp.GetLength(0); r++)
-			{
-				var row = Row.Create(state, name, r);
-				if (row == Row.Locked)
-				{
-					Array.Resize(ref rowsOpp, r);
-					break;
-				}
-				rowsOpp[r] = row;
-			}
-
+			
 			var field = new Field(
 				(short)state[name].Points,
 				(byte)state[name].Combo,
 				(byte)state[name].Skips,
 				GetFirstNoneEmptyRow(rowsOwn),
-				GetFirstNoneEmptyRow(rowsOpp),
 				rowsOwn);
 
 			return field;
 		}
 
 		public static Field Create(int pt, int combo, int skips, string str)
-		{
-			return Create(pt, combo, skips, 20, str);
-		}
-
-		public static Field Create(int pt, int combo, int skips, int oppo, string str)
 		{
 			var lines = str.Split(new string[] { "|", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 			var rows = new ushort[lines.Length];
@@ -366,7 +340,7 @@ namespace AIGames.BlockBattle.Kubisme
 				var row = Row.Create(lines[r].Replace("\t", "").Trim());
 				rows[r] = row;
 			}
-			return new Field((short)pt, (byte)combo, (byte)skips, GetFirstNoneEmptyRow(rows), (byte)oppo, rows);
+			return new Field((short)pt, (byte)combo, (byte)skips, GetFirstNoneEmptyRow(rows), rows);
 		}
 	}
 }

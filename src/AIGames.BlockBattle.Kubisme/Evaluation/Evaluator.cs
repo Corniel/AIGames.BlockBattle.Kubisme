@@ -40,19 +40,9 @@
 			#endregion
 
 			// Points for static evaluation.
-			score += field.Points * pars.PointsCalc[field.Opponent];
+			score += field.Points * pars.PointsCalc[firstFilled];
 			score += field.Combo * pars.ComboCalc[firstFilled];
 			score += field.Skips * pars.SkipsCalc[firstFilled];
-
-			#region rows delta
-
-			// So positive delta's a actually bad. ;)
-			var delta = field.Opponent - firstFilled + 4;
-			if (delta < 0) { delta = 0; }
-
-			score += pars.RowsDeltaCalc[delta];
-
-			#endregion
 
 			var rowIndex = field.FirstFilled;
 			var row0 = 0;

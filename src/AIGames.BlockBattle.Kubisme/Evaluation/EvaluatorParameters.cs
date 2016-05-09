@@ -17,7 +17,6 @@ namespace AIGames.BlockBattle.Kubisme
 			I3 = new ParamCurve();
 			I4 = new ParamCurve();
 
-			RowsDelta = new ParamCurve();
 			TSpinSingle0Potential = new ParamCurve();
 			TSpinSingle1Potential = new ParamCurve();
 			TSpinDoublePotential = new ParamCurve();
@@ -33,10 +32,7 @@ namespace AIGames.BlockBattle.Kubisme
 			SingleGroupBonus = new int[4];
 			SingleEmpties = new int[6];
 		}
-
-		public int[] RowsDeltaCalc { get { return m_RowsDelta; } }
-		private int[] m_RowsDelta;
-
+		
 		public int[] PointsCalc { get { return m_Points; } }
 		private int[] m_Points;
 
@@ -101,12 +97,6 @@ namespace AIGames.BlockBattle.Kubisme
 		[ParameterType(ParameterType.Descending)]
 		public int[] Groups { get; set; }
 
-		/// <summary>The difference between the first filled of own and opponent.</summary>
-		/// <remarks>
-		/// When we are more then 4 ahead, we use the value of +4;
-		/// </remarks>
-		public ParamCurve RowsDelta { get; set; }
-
 		/// <summary>Factor for current points.</summary>
 		public ParamCurve Points { get; set; }
 
@@ -137,8 +127,6 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public EvaluatorParameters Calc()
 		{
-			m_RowsDelta = RowsDelta.Calculate(ParamCurve.DefaultLength + 4);
-
 			m_Points = Points.Calculate();
 			m_Combo = Combo.Calculate();
 
@@ -176,7 +164,6 @@ namespace AIGames.BlockBattle.Kubisme
 			var pars = new EvaluatorParameters()
 			// Elo: 1622, Runs:  1438 (53.2%, PT: 0.668, #: 51.5, T1: 4.42%, T2: 18.83%, I4: 2.11%, CL: 0.21%), ID: 22945, Parent: 22738, Gen: 132
 			{
-				//RowsDeltaCalc = new[] { -55, -58, -61, -63, -64, -66, -67, -69, -70, -71, -72, -73, -74, -75, -76, -77, -78, -79, -79, -80, -81, -82, -82, -83, -84, -84 },
 				//PointsCalc = new[] { 59, 58, 57, 56, 54, 53, 51, 49, 46, 44, 41, 39, 36, 33, 30, 26, 23, 19, 16, 12, 8, 4 },
 				//ComboCalc = new[] { -29, -30, -31, -32, -33, -34, -35, -37, -38, -39, -41, -42, -44, -45, -47, -48, -50, -52, -53, -55, -57, -59 },
 				//I0Calc = new[] { -20, -19, -19, -19, -18, -18, -18, -17, -17, -17, -17, -16, -16, -16, -15, -15, -15, -15, -14, -14, -14, -13 },
@@ -198,7 +185,6 @@ namespace AIGames.BlockBattle.Kubisme
 				SingleEmpties = new[] { -1, -5, -10, -41, -151, -223 },
 				SingleGroupBonus = new[] { 8, 11, 21, 16 },
 				Groups = new[] { 33, 10, -6, -44, -50, -58 },
-				RowsDelta = new ParamCurve(-9.7857523271814, 0.426691958867014, -45),
 				Points = new ParamCurve(-0.331773455161601, 1.65499373776286, 59),
 				Combo = new ParamCurve(-0.448103449493647, 1.3563450188376, -29),
 				HolesReachable = new ParamCurve(-0.723594194930047, -0.153819699399173, -26),

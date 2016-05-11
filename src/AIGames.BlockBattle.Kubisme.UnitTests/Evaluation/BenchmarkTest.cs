@@ -419,7 +419,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 		public void Creates_a_hole_where_filling_a_gap_was_possible()
 		{
 			var actual = RunBenchmark(
-				10, TimeSpan.FromSeconds(100), Block.L, Block.S,
+				10, TimeSpan.FromSeconds(1), Block.L, Block.S,
 				0, 0, 0, @"
 				..........
 				..........

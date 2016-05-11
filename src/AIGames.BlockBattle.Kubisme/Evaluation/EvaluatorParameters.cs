@@ -11,12 +11,6 @@ namespace AIGames.BlockBattle.Kubisme
 			Points = new ParamCurve();
 			Combo = new ParamCurve();
 
-			I0 = new ParamCurve();
-			I1 = new ParamCurve();
-			I2 = new ParamCurve();
-			I3 = new ParamCurve();
-			I4 = new ParamCurve();
-
 			TSpinSingle0Potential = new ParamCurve();
 			TSpinSingle1Potential = new ParamCurve();
 			TSpinDoublePotential = new ParamCurve();
@@ -38,19 +32,6 @@ namespace AIGames.BlockBattle.Kubisme
 
 		public int[] ComboCalc { get { return m_Combo; } }
 		private int[] m_Combo;
-
-		public int[] I0Calc { get { return m_I0; } }
-		public int[] I1Calc { get { return m_I1; } }
-		public int[] I2Calc { get { return m_I2; } }
-		public int[] I3Calc { get { return m_I3; } }
-		public int[] I4Calc { get { return m_I4; } }
-
-		private int[] m_I0;
-		private int[] m_I1;
-		private int[] m_I2;
-		private int[] m_I3;
-		private int[] m_I4;
-
 
 		public int[] HolesReachableCalc { get { return m_HolesReachable; } }
 		private int[] m_HolesReachable;
@@ -108,15 +89,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public ParamCurve HolesUnreachable { get; set; }
 
 		public ParamCurve UnreachableRows { get; set; }
-
-		/// <summary>Points for a potential Tetris, triple, double and single.</summary>
-		[ParameterType(ParameterType.Ascending)]
-		public ParamCurve I0 { get; set; }
-		public ParamCurve I1 { get; set; }
-		public ParamCurve I2 { get; set; }
-		public ParamCurve I3 { get; set; }
-		public ParamCurve I4 { get; set; }
-
+		
 		public ParamCurve TSpinSingle0Potential { get; set; }
 		public ParamCurve TSpinSingle1Potential { get; set; }
 		public ParamCurve TSpinDoublePotential { get; set; }
@@ -129,13 +102,7 @@ namespace AIGames.BlockBattle.Kubisme
 		{
 			m_Points = Points.Calculate();
 			m_Combo = Combo.Calculate();
-
-			m_I0 = I0.Calculate();
-			m_I1 = I1.Calculate();
-			m_I2 = I2.Calculate();
-			m_I3 = I3.Calculate();
-			m_I4 = I4.Calculate();
-
+			
 			m_UnreachableRows = UnreachableRows.Calculate();
 			m_EmptyRows = EmptyRows.Calculate();
 			m_TSpinSingle0Potential = TSpinSingle0Potential.Calculate();
@@ -166,11 +133,6 @@ namespace AIGames.BlockBattle.Kubisme
 			{
 				//PointsCalc = new[] { 63, 63, 63, 64, 64, 64, 64, 64, 65, 65, 65, 65, 65, 65, 66, 66, 66, 66, 66, 67, 67, 67 },
 				//ComboCalc = new[] { 3, 3, 4, 5, 5, 6, 7, 7, 8, 9, 9, 10, 11, 11, 12, 13, 13, 14, 15, 15, 16, 17 },
-				//I0Calc = new[] { -44, -44, -44, -44, -43, -43, -43, -43, -43, -43, -43, -42, -42, -42, -42, -42, -42, -42, -41, -41, -41, -41 },
-				//I1Calc = new[] { -48, -47, -47, -46, -45, -45, -44, -44, -43, -42, -42, -41, -40, -40, -39, -39, -38, -37, -37, -36, -36, -35 },
-				//I2Calc = new[] { -21, -21, -20, -20, -19, -18, -18, -17, -16, -15, -14, -13, -11, -10, -9, -7, -6, -4, -3, -1, 1, 2 },
-				//I3Calc = new[] { 20, 17, 14, 10, 6, 3, -2, -6, -10, -14, -18, -23, -27, -32, -36, -41, -46, -50, -55, -60, -65, -70 },
-				//I4Calc = new[] { 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25 },
 				//HolesReachableCalc = new[] { -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40, -40 },
 				//HolesUnreachableCalc = new[] { -56, -56, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57, -57 },
 				//UnreachableRowsCalc = new[] { -38, -40, -41, -43, -44, -44, -45, -46, -47, -47, -48, -48, -49, -49, -50, -50, -51, -51, -51, -52, -52, -52 },
@@ -190,11 +152,6 @@ namespace AIGames.BlockBattle.Kubisme
 				HolesReachable = new ParamCurve(-0.805072444956752, 0.0422822702676064, -39),
 				HolesUnreachable = new ParamCurve(-1.27927398113534, 0.168173085618765, -55),
 				UnreachableRows = new ParamCurve(-9.55754565764219, 0.303653192240746, -28),
-				I0 = new ParamCurve(0.102988159097731, 1.08626936264336, -44),
-				I1 = new ParamCurve(0.790443618688733, 0.929363574646415, -49),
-				I2 = new ParamCurve(0.126962998695672, 1.68755730520934, -21),
-				I3 = new ParamCurve(-2.55701059568674, 1.16132939746604, 23),
-				I4 = new ParamCurve(0.361637411732227, -0.0352843928150827, 25),
 				TSpinSingle0Potential = new ParamCurve(-0.135393512807786, 0.330154416337611, 60),
 				TSpinSingle1Potential = new ParamCurve(-0.425548685435206, 0.232812980841847, -1),
 				TSpinDoublePotential = new ParamCurve(1.14277370208875, 2.01046245816184, -35),

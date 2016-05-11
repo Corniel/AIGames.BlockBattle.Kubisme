@@ -368,6 +368,52 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Evaluation
 			Assert.AreNotEqual("no_moves", actual.ToString());
 		}
 
+		[Test, Category(Category.Bug)]
+		public void Does_not_play_a_clearing_move()
+		{
+			var actual = RunBenchmark(
+				45, TimeSpan.FromSeconds(1), Block.I, Block.S,
+				31, 0, 0, @"
+				..........
+				..........
+				..X.......
+				XXXX......
+				XXXXX...XX
+				XXXXX..XXX
+				XXXXX..XXX
+				XXXXXX.XXX
+				XXXXXX.XXX
+				X.XXX.XXXX
+				.XXXXXXXXX
+				XXXX.XXX.X
+				XXXXXX.XXX
+				XXXXX.XX.X
+				.XXXXXXXXX
+				XX.XX.XXXX
+				XXXXXX.XXX
+				X.XX.XXXXX",
+				39, 1, 2, @"
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				..........
+				X.XX...XX.
+				XXXX...XX.
+				XXXXXX.XXX
+				XXXXXX.XX.
+				XXXXX.XXXX
+				XXXXXX.X.X
+				XXXXXX.XXX
+				XXXXXX..XX
+				XXX.XXXXXX");
+
+			Assert.AreEqual("down,down,right,down,right,turnleft,drop", actual.ToString());
+		}
 		private static MoveInstruction RunBenchmark(
 			int round, TimeSpan duration, Block current, Block next,
 			int pt0, int combo0, int skips0, string field0,

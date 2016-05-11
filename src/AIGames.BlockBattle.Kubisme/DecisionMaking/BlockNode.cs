@@ -7,7 +7,7 @@ namespace AIGames.BlockBattle.Kubisme
 		public static Field Apply(Field field, int depth, ApplyParameters pars)
 		{
 			// Lock a row every 15 turns. 
-			if ((pars.Round + depth) % 15 == 0)
+			if ((pars.Round + depth) % 15 == 1)
 			{
 				field = field.LockRow();
 			}

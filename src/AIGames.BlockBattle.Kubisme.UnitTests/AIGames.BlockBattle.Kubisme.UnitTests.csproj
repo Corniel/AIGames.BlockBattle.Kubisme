@@ -47,6 +47,7 @@
     <Compile Include="Blocks\BlockOTest.cs" />
     <Compile Include="Blocks\BlockRotationTest.cs" />
     <Compile Include="Blocks\BlockTTest.cs" />
+    <Compile Include="DecisionMaking\BlockNodeTest.cs" />
     <Compile Include="DecisionMaking\NodeDecisionMakerTester.cs" />
     <Compile Include="Evaluation\BenchmarkTest.cs" />
     <Compile Include="Evaluation\EvaluatorParametersTest.cs" />

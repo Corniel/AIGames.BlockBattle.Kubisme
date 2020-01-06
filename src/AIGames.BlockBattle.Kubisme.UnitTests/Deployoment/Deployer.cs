@@ -14,7 +14,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 	public class Deployer
 	{
 		/// <summary>The main entry point of the application.</summary>
-		public static void Main(string[] args)
+		public static void MainX(string[] args)
 		{
 			if (args == null || args.Length < 2)
 			{
@@ -35,7 +35,7 @@ namespace AIGames.BlockBattle.Kubisme.UnitTests.Deployoment
 			}
 		}
 
-		/// <summary>Runs te program.</summary>
+		/// <summary>Runs the program.</summary>
 		public static void Run(DirectoryInfo source, string botname, string version, bool debug)
 		{
 			var bot = GetVersionedBotName(botname, version);

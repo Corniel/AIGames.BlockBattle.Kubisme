@@ -1,124 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8088D99E-94BE-4E93-B0E1-77E04536B7AA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AIGames.BlockBattle.Kubisme.UnitTests</RootNamespace>
-    <AssemblyName>AIGames.BlockBattle.Kubisme.UnitTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Description>Copyright © Corniel Nobel, 2015</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Xml" />
+    <None Remove="Communication\input.*.txt" />
+    <EmbeddedResource Include="Communication\input.*.txt" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Blocks\BlockILeftTest.cs" />
-    <Compile Include="Blocks\BlockITest.cs" />
-    <Compile Include="Blocks\BlockOTest.cs" />
-    <Compile Include="Blocks\BlockRotationTest.cs" />
-    <Compile Include="Blocks\BlockTTest.cs" />
-    <Compile Include="DecisionMaking\BlockNodeTest.cs" />
-    <Compile Include="DecisionMaking\NodeDecisionMakerTester.cs" />
-    <Compile Include="Evaluation\BenchmarkTest.cs" />
-    <Compile Include="Evaluation\EvaluatorParametersTest.cs" />
-    <Compile Include="Evaluation\OpponentEvaluatorTest.cs" />
-    <Compile Include="FieldAssert.cs" />
-    <Compile Include="Genetics\ParamCurveTest.cs" />
-    <Compile Include="Genetics\ScoreDetectorTest.cs" />
-    <Compile Include="Genetics\SimulationBotCollectionTest.cs" />
-    <Compile Include="Genetics\ParameterRandomizerTest.cs" />
-    <Compile Include="ScoresTest.cs" />
-    <Compile Include="TestData.cs" />
-    <Compile Include="TestField.cs" />
-    <EmbeddedResource Include="Communication\input.version0016.txt" />
-    <EmbeddedResource Include="Communication\input.version0017.txt" />
-    <Compile Include="BitsTest.cs" />
-    <Compile Include="Category.cs" />
-    <Compile Include="Communication\ConsolePlatformTest.cs" />
-    <EmbeddedResource Include="Communication\input.version0018.txt" />
-    <Compile Include="Communication\InstructionTest.cs" />
-    <Compile Include="Communication\MoveInstructionTest.cs" />
-    <Compile Include="DecisionMaking\BlockPathTest.cs" />
-    <Compile Include="DecisionMaking\NodeDecisionMakerTest.cs" />
-    <Compile Include="DecisionMaking\PerformanceTest.cs" />
-    <Compile Include="Deployoment\Deployer.cs" />
-    <Compile Include="Deployoment\DeployerTest.cs" />
-    <Compile Include="Evaluation\EvaluatorTest.cs" />
-    <Compile Include="Generation\MoveGeneratorGetFieldsTest.cs" />
-    <Compile Include="Generation\MoveGeneratorGetMovesTest.cs" />
-    <Compile Include="Generation\MoveGeneratorTest.cs" />
-    <Compile Include="Blocks\BlockTest.cs" />
-    <Compile Include="Models\FieldTest.cs" />
-    <Compile Include="Models\RowTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="App.config.xample" />
-    <EmbeddedResource Include="Communication\input.simple.txt" />
-    <Compile Include="Communication\ConsolePlatformTester.cs" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\AIGames.BlockBattle.Kubisme.Genetics\AIGames.BlockBattle.Kubisme.Genetics.csproj" />
+    <ProjectReference Include="..\AIGames.BlockBattle.Kubisme\AIGames.BlockBattle.Kubisme.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AIGames.BlockBattle.Kubisme.Genetics\AIGames.BlockBattle.Kubisme.Genetics.csproj">
-      <Project>{e0f41239-b11b-4f64-905c-a9fa7121bb67}</Project>
-      <Name>AIGames.BlockBattle.Kubisme.Genetics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AIGames.BlockBattle.Kubisme\AIGames.BlockBattle.Kubisme.csproj">
-      <Project>{c0b84d98-8285-4a46-ba15-911597172a9a}</Project>
-      <Name>AIGames.BlockBattle.Kubisme</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Communication\input.version0007.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Communication\input.version0020.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Communication\input.version0021.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Communication\input.version0039.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Communication\input.version0040.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Communication\input.version0041.txt" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

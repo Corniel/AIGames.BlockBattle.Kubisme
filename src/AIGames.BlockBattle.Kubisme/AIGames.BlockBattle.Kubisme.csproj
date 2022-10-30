@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Version>83.0.0</Version>
     <Copyright>Copyright © Corniel Nobel, 2015</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

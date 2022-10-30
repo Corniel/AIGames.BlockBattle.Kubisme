@@ -1,16 +1,14 @@
-﻿using AIGames.BlockBattle.Kubisme.UnitTests.Evaluation;
-using NUnit.Framework;
-using System;
+﻿using NUnit.Framework;
 
-namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking
+namespace AIGames.BlockBattle.Kubisme.UnitTests.DecisionMaking;
+
+[TestFixture, Category(Category.IntegrationTest), Ignore(reason: "takes a while.")]
+public class NodeDecisionMakerTest
 {
-	[TestFixture, Category(Category.IntegrationTest)]
-	public class NodeDecisionMakerTest
+	[Test]
+	public void GetMove_With_LogResults()
 	{
-		[Test]
-		public void GetMove_With_LogResults()
-		{
-			var field = Field.Create(0, 0, 1, @"
+		var field = Field.Create(0, 0, 1, @"
 ..........
 ..........
 ..........
@@ -31,38 +29,38 @@ XXXX.XXXXX
 X.XXXXXXXX
 XXXXXXXX.X
 XXXX.XXXXX");
-			var dm = new NodeDecisionMakerTester()
-			{
-				Evaluator = new Evaluator(),
-				Generator = new MoveGenerator(),
-				MaximumDepth = 7,
-			};
-
-			dm.GetMove(field, Block.T, Block.Z, 1);
-		}
-
-		[Test]
-		public void GetMove_SmallBoard_LogResults()
+		var dm = new NodeDecisionMakerTester()
 		{
-			var field = Field.Create(8, 1, 1, @"
+			Evaluator = new Evaluator(),
+			Generator = new MoveGenerator(),
+			MaximumDepth = 7,
+		};
+
+		dm.GetMove(field, Block.T, Block.Z, 1);
+	}
+
+	[Test]
+	public void GetMove_SmallBoard_LogResults()
+	{
+		var field = Field.Create(8, 1, 1, @"
 ..........
 ..........
 ..........
 XXXXX.....");
-			var dm = new NodeDecisionMakerTester()
-			{
-				Evaluator = new Evaluator(),
-				Generator = new MoveGenerator(),
-				MaximumDepth = 6,
-			};
-
-			dm.GetMove(field, Block.O, Block.Z, 1);
-		}
-
-		[Test]
-		public void GetMove_6LinesGarbage_LogResults()
+		var dm = new NodeDecisionMakerTester()
 		{
-			var field = Field.Create(0, 0, 0, @"
+			Evaluator = new Evaluator(),
+			Generator = new MoveGenerator(),
+			MaximumDepth = 6,
+		};
+
+		dm.GetMove(field, Block.O, Block.Z, 1);
+	}
+
+	[Test]
+	public void GetMove_6LinesGarbage_LogResults()
+	{
+		var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........
@@ -83,20 +81,20 @@ XXXX.XXXXX
 X.XXXXXXXX
 XXXXXXXX.X
 XXXX.XXXXX");
-			var dm = new NodeDecisionMakerTester()
-			{
-				Evaluator = new Evaluator(),
-				Generator = new MoveGenerator(),
-				MaximumDepth = 7,
-			};
-
-			dm.GetMove(field, Block.T, Block.T, 1);
-		}
-
-		[Test]
-		public void GetMove_1LinesLeft_LogResults()
+		var dm = new NodeDecisionMakerTester()
 		{
-			var field = Field.Create(0, 0, 0, @"
+			Evaluator = new Evaluator(),
+			Generator = new MoveGenerator(),
+			MaximumDepth = 7,
+		};
+
+		dm.GetMove(field, Block.T, Block.T, 1);
+	}
+
+	[Test]
+	public void GetMove_1LinesLeft_LogResults()
+	{
+		var field = Field.Create(0, 0, 0, @"
 ..........
 XXXX.XXXXX
 XXXXX.XXXX
@@ -104,20 +102,20 @@ XXXX.XXXXX
 X.XXXXXXXX
 XXXXXXXX.X
 XXXX.XXXXX");
-			var dm = new NodeDecisionMakerTester()
-			{
-				Evaluator = new Evaluator(),
-				Generator = new MoveGenerator(),
-				MaximumDepth = 11,
-			};
-
-			dm.GetMove(field, Block.T, Block.T, 1);
-		}
-
-		[Test]
-		public void GetMove_DontCreateHole_LogResults()
+		var dm = new NodeDecisionMakerTester()
 		{
-			var field = Field.Create(0, 0, 0, @"
+			Evaluator = new Evaluator(),
+			Generator = new MoveGenerator(),
+			MaximumDepth = 11,
+		};
+
+		dm.GetMove(field, Block.T, Block.T, 1);
+	}
+
+	[Test]
+	public void GetMove_DontCreateHole_LogResults()
+	{
+		var field = Field.Create(0, 0, 0, @"
 ..........
 ..........
 ..........
@@ -138,14 +136,13 @@ XXXX.XXXXX");
 ..........
 ...XX..XX.
 ");
-			var dm = new NodeDecisionMakerTester()
-			{
-				Evaluator = new Evaluator(),
-				Generator = new MoveGenerator(),
-				MaximumDepth = 7,
-			};
+		var dm = new NodeDecisionMakerTester()
+		{
+			Evaluator = new Evaluator(),
+			Generator = new MoveGenerator(),
+			MaximumDepth = 7,
+		};
 
-			dm.GetMove(field, Block.T, Block.T, 17);
-		}
+		dm.GetMove(field, Block.T, Block.T, 17);
 	}
 }

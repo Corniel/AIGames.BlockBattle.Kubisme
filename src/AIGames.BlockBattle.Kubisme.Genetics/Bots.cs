@@ -1,7 +1,7 @@
 ﻿using AIGames.BlockBattle.Kubisme.Genetics.Serialization;
 using Qowaiv.Statistics;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
 using Troschuetz.Random.Generators;
@@ -13,7 +13,7 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		private static readonly object locker = new object();
 
 		/// <summary>Gets the average Elo.</summary>
-		public Elo AverageElo { get { return Values.Select(bot => bot.Elo).Avarage(); } }
+		public Elo AverageElo { get { return (Elo)Values.Average(bot => (double)bot.Elo); } }
 
 		/// <summary>Gets the last (highest) ID.</summary>
 		public int LastId { get; private set; } 

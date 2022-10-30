@@ -41,11 +41,11 @@ namespace AIGames.BlockBattle.Kubisme.Genetics
 		public double PointsAvg { get { return Turns == 0 ? 0 : (double)Points / (double)Turns; } }
 		public double TurnsAvg { get { return Runs == 0 ? 0 : (double)Turns / (double)Runs; } }
 
-		public Percentage ScoreAvg { get { return Runs == 0 ? 0 : (double)(Wins + Draws * 0.5) / (double)Runs; } }
-		public Percentage PerfectClearAvg { get { return Runs == 0 ? 0 : (double)PerfectClear / (double)Runs; } }
-		public Percentage SingleTSpinAvg { get { return Turns == 0 ? 0 : 7.0 * (double)SingleTSpin / (double)Turns; } }
-		public Percentage DoubleTSpinAvg { get { return Turns == 0 ? 0 : 7.0 * (double)DoubleTSpin / (double)Turns; } }
-		public Percentage TetrisAvg { get { return Turns == 0 ? 0 : 7.0 * (double)QuadrupleLineClear / (double)Turns; } }
+		public Percentage ScoreAvg { get { return Runs == 0 ? 0.Percent() : Percentage.Create((double)(Wins + Draws * 0.5) / (double)Runs); } }
+		public Percentage PerfectClearAvg { get { return Runs == 0 ? 0.Percent() : Percentage.Create((double)PerfectClear / (double)Runs); } }
+		public Percentage SingleTSpinAvg { get { return Turns == 0 ? 0.Percent() : Percentage.Create(7.0 * (double)SingleTSpin / (double)Turns); } }
+		public Percentage DoubleTSpinAvg { get { return Turns == 0 ? 0.Percent() : Percentage.Create(7.0 * (double)DoubleTSpin / (double)Turns); } }
+		public Percentage TetrisAvg { get { return Turns == 0 ? 0.Percent() : Percentage.Create(7.0 * (double)QuadrupleLineClear / (double)Turns); } }
 
 		public override string ToString()
 		{

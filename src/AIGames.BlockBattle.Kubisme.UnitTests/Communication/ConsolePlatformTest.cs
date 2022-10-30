@@ -1,99 +1,97 @@
 ﻿using NUnit.Framework;
-using Troschuetz.Random.Generators;
 
-namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication
+namespace AIGames.BlockBattle.Kubisme.UnitTests.Communication;
+
+[TestFixture, Category(Category.IntegrationTest), Ignore(reason: "Takes a while")]
+public class ConsolePlatformTest
 {
-	[TestFixture, Category(Category.IntegrationTest)]
-	public class ConsolePlatformTest
+	[Test]
+	public void DoRun_KubismeSimple_NoExceptions()
 	{
-		[Test]
-		public void DoRun_KubismeSimple_NoExceptions()
+		using(var platform = new ConsolePlatformTester("input.simple.txt"))
 		{
-			using(var platform = new ConsolePlatformTester("input.simple.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0007_NoExceptions()
+	[Test]
+	public void DoRun_Round0007_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0007.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0007.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0016_NoExceptions()
+	[Test]
+	public void DoRun_Round0016_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0016.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0016.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0017_NoExceptions()
+	[Test]
+	public void DoRun_Round0017_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0017.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0017.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0018_NoExceptions()
+	[Test]
+	public void DoRun_Round0018_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0018.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0018.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0020_NoExceptions()
+	[Test]
+	public void DoRun_Round0020_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0020.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0020.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0021_NoExceptions()
+	[Test]
+	public void DoRun_Round0021_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0021.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0021.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0039_NoExceptions()
+	[Test]
+	public void DoRun_Round0039_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0039.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0039.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0040_NoExceptions()
+	[Test]
+	public void DoRun_Round0040_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0040.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0040.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
+	}
 
-		[Test]
-		public void DoRun_Round0041_NoExceptions()
+	[Test]
+	public void DoRun_Round0041_NoExceptions()
+	{
+		using (var platform = new ConsolePlatformTester("input.version0041.txt"))
 		{
-			using (var platform = new ConsolePlatformTester("input.version0041.txt"))
-			{
-				platform.DoRun(new KubismeBot());
-			}
+			platform.DoRun(new KubismeBot());
 		}
 	}
 }
